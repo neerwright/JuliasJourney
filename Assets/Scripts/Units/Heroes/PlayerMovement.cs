@@ -10,8 +10,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float horizontalSpeed = 2;
 
     Vector2 perpendicularToNormalOfSlope;
-    BoxCollider2D myFeetCollider;
-    CapsuleCollider2D myCollider;
+    CapsuleCollider2D myFeetCollider;
+    BoxCollider2D myCollider;
     Vector2 colliderSize;
     Rigidbody2D myRigidbody;
     Animator myAnimator;
@@ -32,9 +32,9 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
-        myFeetCollider = GetComponent<BoxCollider2D>();
+        myFeetCollider = GetComponent<CapsuleCollider2D>();
         myAnimator = GetComponent<Animator>();
-        myCollider = GetComponent<CapsuleCollider2D>();
+        myCollider = GetComponent<BoxCollider2D>();
         colliderSize = myCollider.size;
     }
 

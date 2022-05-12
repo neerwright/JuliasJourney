@@ -11,7 +11,7 @@ public class PlayerMoveUpSlopes : MonoBehaviour
     float slopeDownAngleOld;
     bool isTouchingGround = false;
     bool isOnSlope;
-    BoxCollider2D myFeetCollider;
+    CapsuleCollider2D myFeetCollider;
     Vector2 colliderSize;
     Vector2 colliderOffset;
     Vector2 PerpendicularToNormalOfSlope;
@@ -20,7 +20,7 @@ public class PlayerMoveUpSlopes : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        myFeetCollider = GetComponent<BoxCollider2D>();
+        myFeetCollider = GetComponent<CapsuleCollider2D>();
         colliderSize = myFeetCollider.size; 
         colliderOffset = myFeetCollider.offset;
         myRenderer = GetComponent<Renderer>();
