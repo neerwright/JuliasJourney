@@ -1197,7 +1197,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 632227281}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: d5d3ea533b209354ea069a63a2de7a9c, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -1213,7 +1213,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 632227281}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: d5d3ea533b209354ea069a63a2de7a9c, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -1246,6 +1246,8 @@ MonoBehaviour:
   horizontalSpeed: 12
   horizontalAirSpeed: 0.3
   maxXSpeed: 12
+  noFriction: {fileID: 6200000, guid: acffaa7c4a9874843a09ef1c85864b7c, type: 2}
+  fullFriction: {fileID: 6200000, guid: fdd755328cd2ffe4ca01bc7defa07120, type: 2}
 --- !u!114 &632227289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1288,7 +1290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9d2acb50da436340a81da9d5ef6241b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slopeCheckDistance: 50.29
+  slopeCheckDistance: 0.75
 --- !u!1 &637024401
 GameObject:
   m_ObjectHideFlags: 0

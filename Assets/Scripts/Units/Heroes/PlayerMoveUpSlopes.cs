@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerMoveUpSlopes : MonoBehaviour
 {
     
-    [SerializeField] float slopeCheckDistance = 0.2f;
+    [SerializeField] float slopeCheckDistance = 0.75f;
+    
 
     float slopeDownAngle;
     float slopeDownAngleOld;
@@ -40,7 +41,7 @@ public class PlayerMoveUpSlopes : MonoBehaviour
     {
         
         Vector2 checkPos = transform.position + CalculatePositionOfFeet();
-        //SlopeCheckHorizontal(checkPos);
+        SlopeCheckHorizontal(checkPos);
         SlopeCheckVertical(checkPos);
     }
     private Vector3 CalculatePosition()
@@ -52,24 +53,31 @@ public class PlayerMoveUpSlopes : MonoBehaviour
     {
         float xPositionAfterRotation = Mathf.Sin(transform.rotation.eulerAngles.z* Mathf.Deg2Rad) * (myRenderer.bounds.size.x / 2  );
         //float yPositionAfterRotation = -colliderSize.y / 2;
-        float yPositionAfterRotation = Mathf.Cos(transform.rotation.eulerAngles.z* Mathf.Deg2Rad)* -(myRenderer.bounds.size.y / 2 -1.6f );
+        float yPositionAfterRotation = Mathf.Cos(transform.rotation.eulerAngles.z* Mathf.Deg2Rad)* -(myRenderer.bounds.size.y / 2  );
         return new Vector3(xPositionAfterRotation, yPositionAfterRotation);
     }
 
     private void SlopeCheckHorizontal(Vector2 checkPosition)
     {
+        //ajust position of beam a little bit more upwards
+        checkPosition.y -= -0.2f;
         RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPosition, transform.right, slopeCheckDistance, LayerMask.GetMask("Ground"));
         RaycastHit2D slopeHitBack = Physics2D.Raycast(checkPosition, -transform.right, slopeCheckDistance, LayerMask.GetMask("Ground"));
-
+        Debug.DrawRay(checkPosition, transform.right , Color.green);
+        
         if (slopeHitFront)
         {
-            
+            PerpendicularToNormalOfSlope = Vector2.Perpendicular(slopeHitFront.normal).normalized;
+            myMovementScript.SetSlopeVector(PerpendicularToNormalOfSlope);
+            Debug.Log("HitFront");
             myMovementScript.SetIsOnSlope(true);
             slopeSideAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
         }
         else if (slopeHitBack)
         {
-            
+            PerpendicularToNormalOfSlope = Vector2.Perpendicular(slopeHitBack.normal).normalized;
+            myMovementScript.SetSlopeVector(PerpendicularToNormalOfSlope);
+            Debug.Log("HitBack");
             myMovementScript.SetIsOnSlope(true);
             slopeSideAngle = Vector2.Angle(slopeHitBack.normal, Vector2.up);
         }
@@ -81,8 +89,9 @@ public class PlayerMoveUpSlopes : MonoBehaviour
     }
     private void SlopeCheckVertical(Vector2 checkPosition)
     {
-       
-        RaycastHit2D hit = Physics2D.Raycast(checkPosition, Vector2.down, slopeCheckDistance, LayerMask.GetMask("Ground"));
+        //ajust position of beam a little bit more upwards
+        checkPosition.y -= -1.6f;
+        RaycastHit2D hit = Physics2D.Raycast(checkPosition, Vector2.down, slopeCheckDistance * 8, LayerMask.GetMask("Ground"));
         
         
         if (hit)
