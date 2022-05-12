@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 486694651}
   - component: {fileID: 486694650}
   - component: {fileID: 486694649}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SlopeTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -943,7 +943,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 632227281}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -1054,9 +1054,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9d2acb50da436340a81da9d5ef6241b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testX: 1
-  testY: 1
   slopeCheckDistance: 50.29
+  test: 0.2
 --- !u!1 &637024401
 GameObject:
   m_ObjectHideFlags: 0
