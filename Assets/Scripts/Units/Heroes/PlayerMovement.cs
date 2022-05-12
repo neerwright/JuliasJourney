@@ -6,9 +6,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour 
 {
-    [SerializeField] float jumpSpeed = 2;
-    [SerializeField] float horizontalSpeed = 2;
-
+    [SerializeField] float jumpSpeed = 5;
+    [SerializeField] float horizontalSpeed = 10;
+    [SerializeField] float horizontalAirSpeed = 1.2f;
+    [SerializeField]float maxXSpeed = 12;
     Vector2 perpendicularToNormalOfSlope;
     CapsuleCollider2D myFeetCollider;
     BoxCollider2D myCollider;
@@ -23,10 +24,13 @@ public class PlayerMovement : MonoBehaviour
     bool isOnSlope = false;
     bool isOnGround = false;
     // Start is called before the first frame update
-    public void OnSlope(Vector2 normal)
+    public void SetSlopeVector(Vector2 normal)
     {
-        isOnSlope = true;
         perpendicularToNormalOfSlope = normal;
+    }
+    public void SetIsOnSlope(bool isOnSlope)
+    {
+        this.isOnSlope = isOnSlope;
     }
     
     void Start()
@@ -36,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
         myAnimator = GetComponent<Animator>();
         myCollider = GetComponent<BoxCollider2D>();
         colliderSize = myCollider.size;
+        myRigidbody.freezeRotation = true;
     }
 
     // Update is called once per frame
@@ -45,9 +50,10 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
-        checkGrounded();
+        
         Run();
         FlipSprite();
+        checkGrounded();
     }
 
     private void checkGrounded()
@@ -55,9 +61,11 @@ public class PlayerMovement : MonoBehaviour
         if (myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
         {
             isOnGround = true;
+            
         }
         else
         {
+            
             isOnGround = false;
         }
     }
@@ -68,21 +76,40 @@ public class PlayerMovement : MonoBehaviour
 
         myAnimator.SetBool("isRunning", PlayerHasHorizontalSpeed);
 
-        
+        if(!isOnGround)
+        {
+            Debug.Log("in the air");
+            Vector2 playerVelocity = new Vector2(myRigidbody.velocity.x + moveInput.x * horizontalAirSpeed , myRigidbody.velocity.y);
+            
+            myRigidbody.velocity = RestrictXSpeed(playerVelocity);
+        }
         if(isOnGround && !isOnSlope)
         {
+                        Debug.Log("is ground and not slope");
+
+            
             Vector2 playerVelocity = new Vector2(moveInput.x * horizontalSpeed, myRigidbody.velocity.y);
             myRigidbody.velocity = playerVelocity;
         }
         
-        if ( isOnSlope)
+        if ( isOnGround && isOnSlope && !HasJumped)
         {
-            
+            Debug.Log("is ground and slope");
             Vector2 playerVelocity = new Vector2(-moveInput.x * horizontalSpeed * perpendicularToNormalOfSlope.x  , horizontalSpeed * perpendicularToNormalOfSlope.y * -moveInput.x);
             myRigidbody.velocity = playerVelocity;
         }
         
 
+    }
+
+    private Vector2 RestrictXSpeed(Vector2 speed)
+    {
+        if(MathF.Abs( speed.x) > maxXSpeed)
+        {
+            speed.x = maxXSpeed * MathF.Sign(myRigidbody.velocity.x);
+        }
+        Debug.Log("speed" + speed.x);
+        return speed;
     }
 
     void FlipSprite()
@@ -110,18 +137,27 @@ public class PlayerMovement : MonoBehaviour
         {
             if (!isOnGround)
             {
+                Debug.Log("not on ground");
                 return;
             }
-            else
-            {
-                HasJumped = false;
-            }
+           
 
             if(value.isPressed)
             {
                 
                 myRigidbody.velocity += new Vector2 (0f, jumpSpeed);
+                Debug.Log("space pressed" + myRigidbody.velocity);
                 HasJumped = true;
+
+                StartCoroutine(checkIfJumped());
             }
+            
         }
+        
+        IEnumerator checkIfJumped()
+        {
+            yield return new WaitForSeconds(0.5f);
+            HasJumped = false;
+        }
+
 }

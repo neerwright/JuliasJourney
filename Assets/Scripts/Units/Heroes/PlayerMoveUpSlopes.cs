@@ -6,11 +6,14 @@ public class PlayerMoveUpSlopes : MonoBehaviour
 {
     
     [SerializeField] float slopeCheckDistance = 0.2f;
-    [SerializeField] float test = 0.2f;
+
     float slopeDownAngle;
     float slopeDownAngleOld;
-    bool isTouchingGround = false;
-    bool isOnSlope;
+    float slopeSideAngle;
+
+    //bool isTouchingGround = false;
+    
+
     CapsuleCollider2D myFeetCollider;
     Vector2 colliderSize;
     Vector2 colliderOffset;
@@ -30,7 +33,6 @@ public class PlayerMoveUpSlopes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckGround();
         SlopeCheck();
     }
 
@@ -38,6 +40,7 @@ public class PlayerMoveUpSlopes : MonoBehaviour
     {
         
         Vector2 checkPos = transform.position + CalculatePositionOfFeet();
+        //SlopeCheckHorizontal(checkPos);
         SlopeCheckVertical(checkPos);
     }
     private Vector3 CalculatePosition()
@@ -47,7 +50,6 @@ public class PlayerMoveUpSlopes : MonoBehaviour
     
     private Vector3 CalculatePositionOfFeet()
     {
-        Debug.Log( Mathf.Sin((transform.rotation.eulerAngles.z)* Mathf.Deg2Rad));
         float xPositionAfterRotation = Mathf.Sin(transform.rotation.eulerAngles.z* Mathf.Deg2Rad) * (myRenderer.bounds.size.x / 2  );
         //float yPositionAfterRotation = -colliderSize.y / 2;
         float yPositionAfterRotation = Mathf.Cos(transform.rotation.eulerAngles.z* Mathf.Deg2Rad)* -(myRenderer.bounds.size.y / 2 -1.6f );
@@ -56,7 +58,26 @@ public class PlayerMoveUpSlopes : MonoBehaviour
 
     private void SlopeCheckHorizontal(Vector2 checkPosition)
     {
-        
+        RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPosition, transform.right, slopeCheckDistance, LayerMask.GetMask("Ground"));
+        RaycastHit2D slopeHitBack = Physics2D.Raycast(checkPosition, -transform.right, slopeCheckDistance, LayerMask.GetMask("Ground"));
+
+        if (slopeHitFront)
+        {
+            
+            myMovementScript.SetIsOnSlope(true);
+            slopeSideAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
+        }
+        else if (slopeHitBack)
+        {
+            
+            myMovementScript.SetIsOnSlope(true);
+            slopeSideAngle = Vector2.Angle(slopeHitBack.normal, Vector2.up);
+        }
+        else
+        {
+            slopeSideAngle = 0.0f;
+            myMovementScript.SetIsOnSlope(false);
+        }
     }
     private void SlopeCheckVertical(Vector2 checkPosition)
     {
@@ -68,30 +89,19 @@ public class PlayerMoveUpSlopes : MonoBehaviour
         {
             PerpendicularToNormalOfSlope = Vector2.Perpendicular(hit.normal).normalized;
             slopeDownAngle = Vector2.Angle(hit.normal, Vector2.up);
-            Debug.DrawRay(checkPosition, hit.point - checkPosition , Color.green);
-            Debug.DrawRay(hit.point, hit.normal, Color.blue);
-            Debug.DrawRay(hit.point, PerpendicularToNormalOfSlope, Color.red);
+            //Debug.DrawRay(checkPosition, hit.point - checkPosition , Color.green);
+            //Debug.DrawRay(hit.point, hit.normal, Color.blue);
+            //Debug.DrawRay(hit.point, PerpendicularToNormalOfSlope, Color.red);
 
             if(slopeDownAngle != slopeDownAngleOld)
             {
-                Debug.Log("is on slope");
-                isOnSlope = true;
-                myMovementScript.OnSlope(PerpendicularToNormalOfSlope);
+                
+                myMovementScript.SetSlopeVector(PerpendicularToNormalOfSlope);
+                myMovementScript.SetIsOnSlope(true);
             }
 
             slopeDownAngleOld = slopeDownAngle;
         }
     }
-    private void CheckGround()
-    {
-        if (myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
-        {
-            isTouchingGround = true;
-        }
-        else
-        {
-            isTouchingGround = false;
-        }
-        
-    }
+    
 }
