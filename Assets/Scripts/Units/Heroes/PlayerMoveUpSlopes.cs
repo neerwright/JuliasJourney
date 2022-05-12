@@ -6,8 +6,9 @@ public class PlayerMoveUpSlopes : MonoBehaviour
 {
     
     [SerializeField] float slopeCheckDistance = 0.2f;
-     [SerializeField] float test = 0.2f;
+    [SerializeField] float test = 0.2f;
     float slopeDownAngle;
+    float slopeDownAngleOld;
     bool isTouchingGround = false;
     bool isOnSlope;
     BoxCollider2D myFeetCollider;
@@ -15,6 +16,7 @@ public class PlayerMoveUpSlopes : MonoBehaviour
     Vector2 colliderOffset;
     Vector2 PerpendicularToNormalOfSlope;
     Renderer myRenderer;
+    PlayerMovement myMovementScript;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,7 +24,7 @@ public class PlayerMoveUpSlopes : MonoBehaviour
         colliderSize = myFeetCollider.size; 
         colliderOffset = myFeetCollider.offset;
         myRenderer = GetComponent<Renderer>();
-
+        myMovementScript = GetComponent<PlayerMovement>();
     }
 
     // Update is called once per frame
@@ -38,10 +40,17 @@ public class PlayerMoveUpSlopes : MonoBehaviour
         Vector2 checkPos = transform.position + CalculatePositionOfFeet();
         SlopeCheckVertical(checkPos);
     }
+    private Vector3 CalculatePosition()
+    {
+        return new Vector3(0.0f, -colliderSize.y / 2);
+    }
+    
     private Vector3 CalculatePositionOfFeet()
     {
-        float xPositionAfterRotation = Mathf.Sin(transform.rotation.eulerAngles.z) * (myRenderer.bounds.size.x / 2  );
-        float yPositionAfterRotation = Mathf.Cos(transform.rotation.eulerAngles.z)* -(myRenderer.bounds.size.y / 2 -0.2f );
+        Debug.Log( Mathf.Sin((transform.rotation.eulerAngles.z)* Mathf.Deg2Rad));
+        float xPositionAfterRotation = Mathf.Sin(transform.rotation.eulerAngles.z* Mathf.Deg2Rad) * (myRenderer.bounds.size.x / 2  );
+        //float yPositionAfterRotation = -colliderSize.y / 2;
+        float yPositionAfterRotation = Mathf.Cos(transform.rotation.eulerAngles.z* Mathf.Deg2Rad)* -(myRenderer.bounds.size.y / 2 -1.6f );
         return new Vector3(xPositionAfterRotation, yPositionAfterRotation);
     }
 
@@ -57,12 +66,20 @@ public class PlayerMoveUpSlopes : MonoBehaviour
         
         if (hit)
         {
-            Debug.Log("hit");
-            PerpendicularToNormalOfSlope = Vector2.Perpendicular(hit.normal);
+            PerpendicularToNormalOfSlope = Vector2.Perpendicular(hit.normal).normalized;
             slopeDownAngle = Vector2.Angle(hit.normal, Vector2.up);
             Debug.DrawRay(checkPosition, hit.point - checkPosition , Color.green);
             Debug.DrawRay(hit.point, hit.normal, Color.blue);
             Debug.DrawRay(hit.point, PerpendicularToNormalOfSlope, Color.red);
+
+            if(slopeDownAngle != slopeDownAngleOld)
+            {
+                Debug.Log("is on slope");
+                isOnSlope = true;
+                myMovementScript.OnSlope(PerpendicularToNormalOfSlope);
+            }
+
+            slopeDownAngleOld = slopeDownAngle;
         }
     }
     private void CheckGround()
