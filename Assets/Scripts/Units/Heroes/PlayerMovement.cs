@@ -12,7 +12,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]float maxXSpeed = 12;
     [SerializeField]PhysicsMaterial2D noFriction;
     [SerializeField]PhysicsMaterial2D fullFriction;
-    Vector2 perpendicularToNormalOfSlope;
+
+
+
+    public Vector2 perpendicularToNormalOfSlope {get; set;}
     CapsuleCollider2D myFeetCollider;
     BoxCollider2D myCollider;
     Vector2 colliderSize;
@@ -20,11 +23,15 @@ public class PlayerMovement : MonoBehaviour
     Animator myAnimator;
     Vector2 moveInput;
 
-    bool PlayerHasHorizontalSpeed = false;
+    public bool canWalkOnSlope {get; set;}
+    public bool isOnSlope {get; set;}
+    public bool canJump {get; set;}
+    public bool PlayerHasHorizontalSpeed = false;
     bool HasJumped = false;
     bool isAlive = true; //replace with state machine
-    bool isOnSlope = false;
+    
     bool isOnGround = false;
+    
     // Start is called before the first frame update
     public void SetSlopeVector(Vector2 normal)
     {
@@ -37,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
     
     void Start()
     {
+        canJump = true;
         myRigidbody = GetComponent<Rigidbody2D>();
         myFeetCollider = GetComponent<CapsuleCollider2D>();
         myAnimator = GetComponent<Animator>();
@@ -61,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void SwitchMaterialBasedOnSlope()
     {
-        if(isOnSlope && (MathF.Abs( myRigidbody.velocity.x) < Mathf.Epsilon) )
+        if(isOnSlope && (MathF.Abs( myRigidbody.velocity.x) < Mathf.Epsilon) && canWalkOnSlope)
                 {
                     myRigidbody.sharedMaterial = fullFriction;
                 }
@@ -109,7 +117,7 @@ public class PlayerMovement : MonoBehaviour
                 myRigidbody.velocity = playerVelocity;
             }
             
-            if ( isOnGround && isOnSlope  )
+            if ( isOnGround && isOnSlope  && canWalkOnSlope)
             {
                 Debug.Log("is on slope");
                 Vector2 playerVelocity = new Vector2(-moveInput.x * horizontalSpeed * perpendicularToNormalOfSlope.x  , horizontalSpeed * perpendicularToNormalOfSlope.y * -moveInput.x);
@@ -152,7 +160,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnJump(InputValue value)
         {
-            if (!isOnGround)
+            if (!isOnGround || !canJump)
             {
                 Debug.Log("not on ground");
                 return;

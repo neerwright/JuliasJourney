@@ -5,14 +5,15 @@ using UnityEngine;
 public class PlayerMoveUpSlopes : MonoBehaviour
 {
     
-    [SerializeField] float slopeCheckDistance = 0.75f;
+    [SerializeField] float slopeCheckDistance = 1.25f;
+    [SerializeField] float maxSlopeAngle;
     
 
     float slopeDownAngle;
     float slopeDownAngleOld;
     float slopeSideAngle;
 
-    //bool isTouchingGround = false;
+
     
 
     CapsuleCollider2D myFeetCollider;
@@ -68,30 +69,33 @@ public class PlayerMoveUpSlopes : MonoBehaviour
         if (slopeHitFront)
         {
             PerpendicularToNormalOfSlope = Vector2.Perpendicular(slopeHitFront.normal).normalized;
-            myMovementScript.SetSlopeVector(PerpendicularToNormalOfSlope);
+            myMovementScript.perpendicularToNormalOfSlope = (PerpendicularToNormalOfSlope);
             Debug.Log("HitFront");
-            myMovementScript.SetIsOnSlope(true);
+            myMovementScript.isOnSlope = true;
+            Debug.Log("set Slooope");
             slopeSideAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
         }
         else if (slopeHitBack)
         {
             PerpendicularToNormalOfSlope = Vector2.Perpendicular(slopeHitBack.normal).normalized;
-            myMovementScript.SetSlopeVector(PerpendicularToNormalOfSlope);
+            myMovementScript.perpendicularToNormalOfSlope = (PerpendicularToNormalOfSlope);
             Debug.Log("HitBack");
-            myMovementScript.SetIsOnSlope(true);
+            myMovementScript.isOnSlope = (true);
+            Debug.Log("set Slooope");
             slopeSideAngle = Vector2.Angle(slopeHitBack.normal, Vector2.up);
         }
         else
         {
             slopeSideAngle = 0.0f;
-            myMovementScript.SetIsOnSlope(false);
+            myMovementScript.isOnSlope = (false);
+            Debug.Log("set Slooope faaalse");
         }
     }
     private void SlopeCheckVertical(Vector2 checkPosition)
     {
         //ajust position of beam a little bit more upwards
         checkPosition.y -= -1.6f;
-        RaycastHit2D hit = Physics2D.Raycast(checkPosition, Vector2.down, slopeCheckDistance * 8, LayerMask.GetMask("Ground"));
+        RaycastHit2D hit = Physics2D.Raycast(checkPosition, Vector2.down, slopeCheckDistance * 18, LayerMask.GetMask("Ground"));
         
         
         if (hit)
@@ -105,12 +109,27 @@ public class PlayerMoveUpSlopes : MonoBehaviour
             if(slopeDownAngle != slopeDownAngleOld)
             {
                 
-                myMovementScript.SetSlopeVector(PerpendicularToNormalOfSlope);
-                myMovementScript.SetIsOnSlope(true);
+                myMovementScript.perpendicularToNormalOfSlope = (PerpendicularToNormalOfSlope);
+                myMovementScript.isOnSlope = (true);
+                Debug.Log("set Slooope");
             }
 
             slopeDownAngleOld = slopeDownAngle;
         }
+
+        if(slopeDownAngle > maxSlopeAngle)
+        {
+            myMovementScript.canWalkOnSlope = false;
+            myMovementScript.canJump = false;
+        }
+        else
+        {
+            myMovementScript.canWalkOnSlope = true;
+            myMovementScript.canJump = true;
+        }
+
+        
+
     }
     
 }
