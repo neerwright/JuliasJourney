@@ -70,25 +70,24 @@ public class PlayerMoveUpSlopes : MonoBehaviour
         {
             PerpendicularToNormalOfSlope = Vector2.Perpendicular(slopeHitFront.normal).normalized;
             myMovementScript.perpendicularToNormalOfSlope = (PerpendicularToNormalOfSlope);
-            Debug.Log("HitFront");
+           
             myMovementScript.isOnSlope = true;
-            Debug.Log("set Slooope");
+            
             slopeSideAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
         }
         else if (slopeHitBack)
         {
             PerpendicularToNormalOfSlope = Vector2.Perpendicular(slopeHitBack.normal).normalized;
             myMovementScript.perpendicularToNormalOfSlope = (PerpendicularToNormalOfSlope);
-            Debug.Log("HitBack");
+            
             myMovementScript.isOnSlope = (true);
-            Debug.Log("set Slooope");
+            
             slopeSideAngle = Vector2.Angle(slopeHitBack.normal, Vector2.up);
         }
         else
         {
             slopeSideAngle = 0.0f;
             myMovementScript.isOnSlope = (false);
-            Debug.Log("set Slooope faaalse");
         }
     }
     private void SlopeCheckVertical(Vector2 checkPosition)
@@ -111,7 +110,6 @@ public class PlayerMoveUpSlopes : MonoBehaviour
                 
                 myMovementScript.perpendicularToNormalOfSlope = (PerpendicularToNormalOfSlope);
                 myMovementScript.isOnSlope = (true);
-                Debug.Log("set Slooope");
             }
 
             slopeDownAngleOld = slopeDownAngle;

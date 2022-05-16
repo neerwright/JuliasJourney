@@ -6,7 +6,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour 
 {
-    [SerializeField] float jumpSpeed = 5;
+    [SerializeField] float jumpSpeed = 30;
+    [SerializeField] float fallMultiplier = 1.5f;
+    [SerializeField] float lowJumpMultiplier = 4f;
     [SerializeField] float horizontalSpeed = 10;
     [SerializeField] float horizontalAirSpeed = 1.2f;
     [SerializeField]float maxXSpeed = 12;
@@ -15,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
 
 
 
+    float gravity;
     public Vector2 perpendicularToNormalOfSlope {get; set;}
     CapsuleCollider2D myFeetCollider;
     BoxCollider2D myCollider;
@@ -22,12 +25,13 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D myRigidbody;
     Animator myAnimator;
     Vector2 moveInput;
+    Vector2 vecGravity;
 
     public bool canWalkOnSlope {get; set;}
     public bool isOnSlope {get; set;}
     public bool canJump {get; set;}
-    public bool PlayerHasHorizontalSpeed = false;
-    bool HasJumped = false;
+    private bool PlayerHasHorizontalSpeed = false;
+    bool isJumping = false;
     bool isAlive = true; //replace with state machine
     
     bool isOnGround = false;
@@ -44,6 +48,7 @@ public class PlayerMovement : MonoBehaviour
     
     void Start()
     {
+        vecGravity = new Vector2(0, -Physics2D.gravity.y);
         canJump = true;
         myRigidbody = GetComponent<Rigidbody2D>();
         myFeetCollider = GetComponent<CapsuleCollider2D>();
@@ -51,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
         myCollider = GetComponent<BoxCollider2D>();
         colliderSize = myCollider.size;
         myRigidbody.freezeRotation = true;
+        gravity = myRigidbody.gravityScale;
     }
 
     // Update is called once per frame
@@ -64,7 +70,21 @@ public class PlayerMovement : MonoBehaviour
         Run();
         FlipSprite();
         CheckGrounded();
+        FallDown();
         SwitchMaterialBasedOnSlope();
+    }
+
+    private void FallDown()
+    {
+        if(myRigidbody.velocity.y > 0 && !isJumping)
+        {
+            myRigidbody.gravityScale = gravity * lowJumpMultiplier;
+        }
+
+        if (myRigidbody.velocity.y < 0 )
+        {
+            myRigidbody.gravityScale = gravity * fallMultiplier;
+        }
     }
 
     private void SwitchMaterialBasedOnSlope()
@@ -96,33 +116,30 @@ public class PlayerMovement : MonoBehaviour
     public void Run()
     {
         
+        
 
         myAnimator.SetBool("isRunning", PlayerHasHorizontalSpeed);
 
-        if(HasJumped)
-        {
-            Debug.Log("is in the air");
-            Vector2 playerVelocity = new Vector2(myRigidbody.velocity.x + moveInput.x * horizontalAirSpeed , myRigidbody.velocity.y);
+        if(isOnGround && !isOnSlope )
+        {    
+            Vector2 playerVelocity = new Vector2(moveInput.x * horizontalSpeed, myRigidbody.velocity.y);
+            myRigidbody.velocity = playerVelocity;
+        }
             
-            myRigidbody.velocity = RestrictXSpeed(playerVelocity);
+        if ( isOnGround && isOnSlope  && canWalkOnSlope)
+        {
+            Vector2 playerVelocity = new Vector2(-moveInput.x * horizontalSpeed * perpendicularToNormalOfSlope.x  , horizontalSpeed * perpendicularToNormalOfSlope.y * -moveInput.x);
+            myRigidbody.velocity = playerVelocity;
+        }
+        
+        if(!isOnGround)
+        {
+            Vector2 playerVelocity = new Vector2(moveInput.x * horizontalSpeed, myRigidbody.velocity.y);
+            myRigidbody.velocity = playerVelocity;
         }
         else
         {
-            if(isOnGround && !isOnSlope )
-            {
-            Debug.Log("is ground and not slope");
-
-                
-                Vector2 playerVelocity = new Vector2(moveInput.x * horizontalSpeed, myRigidbody.velocity.y);
-                myRigidbody.velocity = playerVelocity;
-            }
-            
-            if ( isOnGround && isOnSlope  && canWalkOnSlope)
-            {
-                Debug.Log("is on slope");
-                Vector2 playerVelocity = new Vector2(-moveInput.x * horizontalSpeed * perpendicularToNormalOfSlope.x  , horizontalSpeed * perpendicularToNormalOfSlope.y * -moveInput.x);
-                myRigidbody.velocity = playerVelocity;
-            }
+            myRigidbody.gravityScale = gravity;
         }
 
     }
@@ -133,7 +150,6 @@ public class PlayerMovement : MonoBehaviour
         {
             speed.x = maxXSpeed * MathF.Sign(myRigidbody.velocity.x);
         }
-        Debug.Log("speed" + speed.x);
         return speed;
     }
 
@@ -160,29 +176,35 @@ public class PlayerMovement : MonoBehaviour
 
     void OnJump(InputValue value)
         {
+            if(!value.isPressed)
+            {
+                Debug.Log("false");
+                isJumping = false;
+
+            }
+
             if (!isOnGround || !canJump)
             {
-                Debug.Log("not on ground");
                 return;
             }
            
 
             if(value.isPressed)
             {
-                
-                myRigidbody.velocity += new Vector2 (0f, jumpSpeed);
-                Debug.Log("space pressed" + myRigidbody.velocity);
-                HasJumped = true;
 
-                StartCoroutine(EndJump());
+                myRigidbody.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
+                
+                isJumping = true;
+
+                //StartCoroutine(EndJump());
             }
             
         }
         
         IEnumerator EndJump()
         {
-            yield return new WaitForSeconds(0.5f);
-            HasJumped = false;
+            yield return new WaitForSeconds(1.5f);
+            isJumping = false;
         }
 
 }
