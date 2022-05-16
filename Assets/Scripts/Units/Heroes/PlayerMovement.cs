@@ -126,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
             myRigidbody.velocity = playerVelocity;
         }
             
-        if ( isOnGround && isOnSlope  && canWalkOnSlope)
+        if ( isOnGround && isOnSlope  && canWalkOnSlope && !isJumping)
         {
             Vector2 playerVelocity = new Vector2(-moveInput.x * horizontalSpeed * perpendicularToNormalOfSlope.x  , horizontalSpeed * perpendicularToNormalOfSlope.y * -moveInput.x);
             myRigidbody.velocity = playerVelocity;
@@ -134,7 +134,7 @@ public class PlayerMovement : MonoBehaviour
         
         if(!isOnGround)
         {
-            Vector2 playerVelocity = new Vector2(moveInput.x * horizontalSpeed, myRigidbody.velocity.y);
+            Vector2 playerVelocity = new Vector2(moveInput.x * horizontalAirSpeed, myRigidbody.velocity.y);
             myRigidbody.velocity = playerVelocity;
         }
         else
@@ -178,9 +178,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if(!value.isPressed)
             {
-                Debug.Log("false");
                 isJumping = false;
-
             }
 
             if (!isOnGround || !canJump)
@@ -191,20 +189,11 @@ public class PlayerMovement : MonoBehaviour
 
             if(value.isPressed)
             {
-
                 myRigidbody.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
-                
                 isJumping = true;
-
-                //StartCoroutine(EndJump());
             }
             
         }
         
-        IEnumerator EndJump()
-        {
-            yield return new WaitForSeconds(1.5f);
-            isJumping = false;
-        }
 
 }
