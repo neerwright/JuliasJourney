@@ -21,7 +21,7 @@ public class PlayerMoveUpSlopes : MonoBehaviour
     Vector2 colliderOffset;
     Vector2 PerpendicularToNormalOfSlope;
     Renderer myRenderer;
-    PlayerMovement myMovementScript;
+    PlayerMovementOld myMovementScript;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +29,7 @@ public class PlayerMoveUpSlopes : MonoBehaviour
         colliderSize = myFeetCollider.size; 
         colliderOffset = myFeetCollider.offset;
         myRenderer = GetComponent<Renderer>();
-        myMovementScript = GetComponent<PlayerMovement>();
+        myMovementScript = GetComponent<PlayerMovementOld>();
     }
 
     // Update is called once per frame

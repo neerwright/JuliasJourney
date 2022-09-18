@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour 
+public class PlayerMovementOld : MonoBehaviour 
 {
     [SerializeField] float jumpSpeed = 30;
     [SerializeField] float fallMultiplier = 1.5f;
