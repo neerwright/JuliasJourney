@@ -13,7 +13,7 @@ public class PlayerInputSO : ScriptableObject , PlayerInputActions.IGameplayActi
     public event UnityAction JumpCanceledEvent = delegate{};
 
     public event UnityAction<Vector2> MoveEvent = delegate{};
-    public event UnityAction Attackevent = delegate{};
+    public event UnityAction AttackEvent = delegate{};
 
     public event UnityAction StartRunning = delegate{};
     public event UnityAction StoppedRunning = delegate{};
@@ -52,7 +52,7 @@ public class PlayerInputSO : ScriptableObject , PlayerInputActions.IGameplayActi
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        Attackevent.Invoke();
+        AttackEvent.Invoke();
     }
 
     public void OnRun(InputAction.CallbackContext context)

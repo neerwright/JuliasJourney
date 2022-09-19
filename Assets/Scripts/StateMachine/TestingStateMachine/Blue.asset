@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2272388513b88848a637930ed05eef2, type: 3}
   m_Name: Blue
   m_EditorClassIdentifier: 
-  _actions: []
-  _sceneGizmoColor: {r: 0.01498151, g: 0.16480774, b: 0.9528302, a: 0}
+  _actions:
+  - {fileID: 11400000, guid: edbf1cb4e616ef3459b3e0774254aade, type: 2}
+  _sceneGizmoColor: {r: 0.01498151, g: 0.16480774, b: 0.9528302, a: 1}

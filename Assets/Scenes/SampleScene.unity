@@ -2204,6 +2204,7 @@ GameObject:
   - component: {fileID: 632227289}
   - component: {fileID: 632227291}
   - component: {fileID: 632227292}
+  - component: {fileID: 632227293}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2403,6 +2404,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b568b12561f07724c9028b87dead3192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerInputSO: {fileID: 11400000, guid: 497326490c7a920459e60f0e3f851ca2, type: 2}
+  _playerController: {fileID: 632227293}
 --- !u!114 &632227292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2416,6 +2419,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _transitionTableSO: {fileID: 11400000, guid: 9f531cf06b9b7f44192f3eeb9d6729ff, type: 2}
+--- !u!114 &632227293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632227281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd34394d871b5164f8123dda712817f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _freeColliderIterations: 10
+  _player: {fileID: 632227291}
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &637024401
 GameObject:
   m_ObjectHideFlags: 0

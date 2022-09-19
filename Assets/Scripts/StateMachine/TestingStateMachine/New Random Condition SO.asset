@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e575d7959ec3d854ea8a24970aee12d1, type: 3}
   m_Name: New Random Condition SO
   m_EditorClassIdentifier: 
-  threshold: 50
+  threshold: 80
