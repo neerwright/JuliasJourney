@@ -56,6 +56,10 @@ public class StateMachine : MonoBehaviour
         return(_stateTimeElapsed >= duration);
     }
 
+    public void ResetStateTimer()
+    {
+        _stateTimeElapsed = 0;
+    }
 
     //Debug-----------------------
     private void OnDrawGizmos() 
