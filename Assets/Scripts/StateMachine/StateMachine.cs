@@ -2,58 +2,67 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class StateMachine : MonoBehaviour
+public class StateMachine : MonoBehaviour
 {
     [Tooltip("Set the initial state of this StateMachine")]
-	[SerializeField] private ScriptableObjects.TransitionTableSO _transitionTableSO;
+	[SerializeField] private TransitionTableSO _transitionTableSO;
     
     internal State _currentState;
-    private float stateTimeElapsed = 0;
+    private float _stateTimeElapsed = 0;
 
     void Awake()
     {
 		_currentState = _transitionTableSO.GetInitialState(this);
     }
+    
+    private void Start()
+	{
+		_currentState.OnStateEnter();
+	}
+    
+    private void Update()
+		{
+			if (_currentState.TryGetTransition(out var transitionState))
+				Transition(transitionState);
+
+			_currentState.OnUpdate();
+		}
+
+		private void Transition(State transitionState)
+		{
+			_currentState.OnStateExit();
+			_currentState = transitionState;
+			_currentState.OnStateEnter();
+
+            _stateTimeElapsed = 0;
+
+		}
+    
+    
+    
     //----------------------------
 
-        void Update()
-    {
-        currentState.UpdateState(this);
-    }
+
 
     public void SetState(State state)
     {
-        currentState = state;
-        //TODO: start Enter Phase of the state
-    }
-
-    //Decision --> transition to new state? null -> remain in same state
-    public void TransitionToState(State nextState)
-    {
-        if (nextState != null)
-        {
-            currentState = nextState;
-            OnExitState();
-        }
+        _currentState = state;
+ 		_currentState.OnStateEnter();       
     }
 
     public bool CheckIfCountDownElapsed(float duration)
     {
-        stateTimeElapsed += Time.deltaTime;
-        return(stateTimeElapsed >= duration);
+        _stateTimeElapsed += Time.deltaTime;
+        return(_stateTimeElapsed >= duration);
     }
 
-    protected void OnExitState()
-    {
-        stateTimeElapsed = 0;
-    }
 
-    //Debug
+    //Debug-----------------------
     private void OnDrawGizmos() 
     {
-        if (currentState != null )
+        if (_currentState != null )
         {
-            Gizmos.color = currentState.sceneGizmoColor;
+            Gizmos.color = _currentState._sceneGizmoColor;
             Gizmos.DrawWireSphere(transform.position, 3f);
         }
     }
