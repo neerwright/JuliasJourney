@@ -19,7 +19,8 @@ public class PlayerController : MonoBehaviour
         [SerializeField] private LayerMask _groundLayer;
         [SerializeField] private int _detectorCount = 3;
         [SerializeField] private float _detectionRayLength = 0.1f;
-        [SerializeField] [Range(0.1f, 0.3f)] private float _rayBuffer = 0.1f; // Prevents side detectors hitting the ground
+        [SerializeField] [Range(0.1f, 0.3f)] private float _rayBufferOffset = 0.1f; // Prevents side detectors hitting the ground
+        [SerializeField] private float nudgeDetectionDistance = 0.1f;
 
     private Vector2 _lastPosition;
     private Vector2 _targetVelocity;
@@ -45,18 +46,19 @@ public class PlayerController : MonoBehaviour
     public void Move(Vector2 movementVector)
     {
         RunCollisionChecks();
-        CheckForWalls();
+        CheckForWalls(ref movementVector);
         MoveCharacter(movementVector);
     }
 
     #region WallCheck
 
-    private void CheckForWalls()
+    private void CheckForWalls(ref Vector2 movementVector)
     {
-        if (_player.movementVector.x > 0 && _colRight || _player.movementVector.x < 0 && _colLeft) 
+
+        if (movementVector.x > 0 && _colRight || movementVector.x < 0 && _colLeft) 
         {
             // Don't walk through walls
-            _player.movementVector.x = 0;
+            movementVector.x = 0;  
         }
     }
     #endregion
@@ -85,31 +87,48 @@ public class PlayerController : MonoBehaviour
                     _rb2d.position = positionToMoveTo; //the last position without a collision
 
                     // We've landed on a corner or hit our head on a ledge. Nudge the player gently
-                    if (i == 1) {
+                    if (i == 1) 
+                    {
                         if (_player.movementVector.y < 0) _player.movementVector.y = 0;
                         
+                        float rayOffsetX = (_characterBounds.size.x /2 + RaycastOffset);
+                        float rayOffsetY =  _characterBounds.size.y /2;
+                        Vector2 dir = new Vector2(0,0);
+
                         //nudge player when hitting his Head on a platform above
-                        RaycastHit2D leftRay = Physics2D.Raycast(posToTry + new Vector2 (-_characterBounds.size.x /2 - RaycastOffset, _characterBounds.size.y /2)  , Vector2.up,0.1f, _groundLayer);
-                        RaycastHit2D rightRay = Physics2D.Raycast(posToTry + new Vector2 (_characterBounds.size.x/2 + RaycastOffset, _characterBounds.size.y/2),Vector2.up,0.1f, _groundLayer);
+                        RaycastHit2D leftRay =  Physics2D.Raycast(new Vector2 (posToTry.x -rayOffsetX, posToTry.y + rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
+                        RaycastHit2D rightRay = Physics2D.Raycast(new Vector2 (posToTry.x + rayOffsetX, posToTry.y + rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
                         
-                        Vector2 dir= new Vector2(0,0);
-                        if(leftRay && !rightRay)
+                        //did we hit our head on the left side (and not clos to the middle?)
+                        if(leftRay )
                         {
-                            if(Application.isPlaying)
+                            RaycastHit2D MiddleRay =  Physics2D.Raycast(new Vector2 (leftRay.point.x + nudgeDetectionDistance , posToTry.y + rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
+
+                            if(!MiddleRay)
                             {
-                                Debug.DrawRay( posToTry + new Vector2 (-_characterBounds.size.x/2,_characterBounds.size.y/2), Vector2.up, Color.green, 1.0f );
+                                if(Application.isPlaying)
+                                {
+                                    Debug.DrawRay(new Vector2 (posToTry.x -rayOffsetX, posToTry.y + rayOffsetY), Vector2.up, Color.green, 1.0f );
+                                }
+                                dir = _rb2d.position - leftRay.point;
                             }
-                            dir = _rb2d.position - leftRay.point;
+                            
     
                         }
-                        else if(rightRay && !leftRay)
+                        else if(rightRay )
                         {
-                            if(Application.isPlaying)
+                            RaycastHit2D MiddleRay =  Physics2D.Raycast(new Vector2 (leftRay.point.x - nudgeDetectionDistance , posToTry.y + rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
+
+                            if(!MiddleRay)
                             {
-                                Debug.DrawRay( posToTry + new Vector2 (_characterBounds.size.x/2,_characterBounds.size.y/2), Vector2.up, Color.green, 1.0f );
+                                if(Application.isPlaying)
+                                {
+                                    Debug.DrawRay( posToTry + new Vector2 (_characterBounds.size.x/2,_characterBounds.size.y/2), Vector2.up, Color.green, 1.0f );
+                                }
+                                dir = _rb2d.position - rightRay.point;
                             }
-                            dir = _rb2d.position - rightRay.point;
                         }
+                        
                         _rb2d.position += dir.normalized * move.magnitude;
                         
                         
@@ -156,10 +175,10 @@ public class PlayerController : MonoBehaviour
         // This is crying out for some kind of refactor. 
         var b = new Bounds(transform.position, _characterBounds.size);
 
-        _raysDown = new RayRange(b.min.x + _rayBuffer, b.min.y, b.max.x - _rayBuffer, b.min.y, Vector2.down);
-        _raysUp = new RayRange(b.min.x + _rayBuffer, b.max.y, b.max.x - _rayBuffer, b.max.y, Vector2.up);
-        _raysLeft = new RayRange(b.min.x, b.min.y + _rayBuffer, b.min.x, b.max.y - _rayBuffer, Vector2.left);
-        _raysRight = new RayRange(b.max.x, b.min.y + _rayBuffer, b.max.x, b.max.y - _rayBuffer, Vector2.right);
+        _raysDown = new RayRange(b.min.x + _rayBufferOffset, b.min.y, b.max.x - _rayBufferOffset, b.min.y, Vector2.down);
+        _raysUp = new RayRange(b.min.x + _rayBufferOffset, b.max.y, b.max.x - _rayBufferOffset, b.max.y, Vector2.up);
+        _raysLeft = new RayRange(b.min.x, b.min.y + _rayBufferOffset, b.min.x, b.max.y - _rayBufferOffset, Vector2.left);
+        _raysRight = new RayRange(b.max.x, b.min.y + _rayBufferOffset, b.max.x, b.max.y - _rayBufferOffset, Vector2.right);
     }
 
 
