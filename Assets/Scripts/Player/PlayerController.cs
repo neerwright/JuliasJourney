@@ -27,7 +27,8 @@ public class PlayerController : MonoBehaviour
     private RayRange _raysUp, _raysRight, _raysDown, _raysLeft;
     private bool _colUp, _colRight, _colDown, _colLeft;
     private float _timeLeftGrounded;
-    
+    private float RaycastOffset = 0.1f;
+
    
     //private List<RaycastHit2D> hitBuffer = new List<RaycastHit2D>(16);
 
@@ -87,13 +88,12 @@ public class PlayerController : MonoBehaviour
                     if (i == 1) {
                         if (_player.movementVector.y < 0) _player.movementVector.y = 0;
                         
-                        //nudge player when hitting Head slightly on a platform
-                        /*
-                        RaycastHit2D leftRay = Physics2D.Raycast(posToTry + new Vector2 (-_characterBounds.size.x /2, _characterBounds.size.y /2)  , Vector2.up,0.1f, _groundLayer);
-                        RaycastHit2D rightRay = Physics2D.Raycast(posToTry + new Vector2 (_characterBounds.size.x/2,_characterBounds.size.y/2),Vector2.up,0.1f, _groundLayer);
+                        //nudge player when hitting his Head on a platform above
+                        RaycastHit2D leftRay = Physics2D.Raycast(posToTry + new Vector2 (-_characterBounds.size.x /2 - RaycastOffset, _characterBounds.size.y /2)  , Vector2.up,0.1f, _groundLayer);
+                        RaycastHit2D rightRay = Physics2D.Raycast(posToTry + new Vector2 (_characterBounds.size.x/2 + RaycastOffset, _characterBounds.size.y/2),Vector2.up,0.1f, _groundLayer);
                         
                         Vector2 dir= new Vector2(0,0);
-                        if(leftRay)
+                        if(leftRay && !rightRay)
                         {
                             if(Application.isPlaying)
                             {
@@ -102,12 +102,16 @@ public class PlayerController : MonoBehaviour
                             dir = _rb2d.position - leftRay.point;
     
                         }
-                        else if(rightRay)
+                        else if(rightRay && !leftRay)
                         {
+                            if(Application.isPlaying)
+                            {
+                                Debug.DrawRay( posToTry + new Vector2 (_characterBounds.size.x/2,_characterBounds.size.y/2), Vector2.up, Color.green, 1.0f );
+                            }
                             dir = _rb2d.position - rightRay.point;
                         }
                         _rb2d.position += dir.normalized * move.magnitude;
-                        */
+                        
                         
                     }
 
