@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 {   
     [SerializeField] private PlayerInputSO _playerInputSO;
     [SerializeField] private PlayerController _playerController;
+	
     
     private Vector2 _inputVector;
 	private float _previousSpeed;
@@ -15,12 +16,20 @@ public class Player : MonoBehaviour
     //These fields are read and manipulated by the StateMachine actions
 	[NonSerialized] public bool jumpInput;
     [NonSerialized] public bool attackInput;
+	[NonSerialized] public bool grounded;
 
 	[NonSerialized] public Vector2 movementInput; //Initial input coming from the Player script
-	[NonSerialized] public Vector3 movementVector; //Final movement vector, manipulated by the StateMachine actions
+	[NonSerialized] public Vector2 movementVector; //Final movement vector, manipulated by the StateMachine actions
+	[NonSerialized]	public Rigidbody2D rb2d;
 
-    public const float GRAVITY_MULTIPLIER = 5f;
-    
+    public const float GRAVITY_MULTIPLIER = 3f;
+    public const float MAX_SPEED = 7f;
+	public const float GRAVITY_COMEBACK_MULTIPLIER = .03f;
+	public const float GRAVITY_DIVIDER = .6f;
+	public const float MAX_FALL_SPEED = -50f;
+	public const float MAX_RISE_SPEED = 100f;
+	public const float AIR_RESISTANCE = 5f;
+
    
     private void OnEnable()
 	{
@@ -49,7 +58,7 @@ public class Player : MonoBehaviour
 
     private void RecalculateMovement()
 	{
-
+		movementInput = _inputVector;
     }
 
     //---- EVENT LISTENERS ----

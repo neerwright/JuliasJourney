@@ -10,7 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2272388513b88848a637930ed05eef2, type: 3}
-  m_Name: Red
+  m_Name: IDLE
   m_EditorClassIdentifier: 
-  _actions: []
-  _sceneGizmoColor: {r: 0.990566, g: 0, b: 0, a: 1}
+  _actions:
+  - {fileID: 11400000, guid: 19cf772835012e4479951f55cfa82e7b, type: 2}
+  - {fileID: 11400000, guid: 39bbd4514532d9c41a0e9f4d15c149e4, type: 2}
+  _sceneGizmoColor: {r: 0.5140874, g: 0.9339623, b: 0.39355636, a: 1}
