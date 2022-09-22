@@ -120,6 +120,10 @@ public class PlayerController : MonoBehaviour
                                 dir = _rb2d.position - leftRay.point;
                                 _nudgingPlayer = true;
                             }
+                            else
+                            {
+                                _nudgingPlayer = false;
+                            }
                             
     
                         }
@@ -135,6 +139,10 @@ public class PlayerController : MonoBehaviour
                                 }
                                 dir = _rb2d.position - rightRay.point;
                                 _nudgingPlayer = true;
+                            }
+                            else
+                            {
+                                _nudgingPlayer = false;
                             }
                             
                         }
