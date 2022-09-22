@@ -73,92 +73,98 @@ public class PlayerController : MonoBehaviour
     {
             
             
-            var pos = _rb2d.position; 
-            var furthestPoint = pos + move;
+        var pos = _rb2d.position; 
+        var furthestPoint = pos + move;
 
-            // check furthest movement. If nothing hit, move and don't do extra checks
-            var hit = Physics2D.OverlapBox(furthestPoint, _characterBounds.size, 0, _groundLayer);
-            if (!hit) {
-                _rb2d.position += move;
-                return;
-            }
-            
-            // otherwise increment away from current pos; see what closest position we can move to
-            var positionToMoveTo = _rb2d.position;
-            for (int i = 1; i < _freeColliderIterations; i++) {
-                // increment to check all but furthestPoint - we did that already
-                var t = (float)i / _freeColliderIterations;
-                var posToTry = Vector2.Lerp(pos, furthestPoint, t);
+        // check furthest movement. If nothing hit, move and don't do extra checks
+        var hit = Physics2D.OverlapBox(furthestPoint, _characterBounds.size, 0, _groundLayer);
+        if (!hit) {
+            _rb2d.position += move;
+            return;
+        }
+        
+        // otherwise increment away from current pos; see what closest position we can move to
+        var positionToMoveTo = _rb2d.position;
+        for (int i = 1; i < _freeColliderIterations; i++) {
+            // increment to check all but furthestPoint - we did that already
+            var t = (float)i / _freeColliderIterations;
+            var posToTry = Vector2.Lerp(pos, furthestPoint, t);
 
-                if (Physics2D.OverlapBox(posToTry, _characterBounds.size, 0, _groundLayer)) {
-                    _rb2d.position = positionToMoveTo; //the last position without a collision
+            if (Physics2D.OverlapBox(posToTry, _characterBounds.size, 0, _groundLayer)) {
+                _rb2d.position = positionToMoveTo; //the last position without a collision
 
-                    // We've landed on a corner or hit our head on a ledge. Nudge the player gently
-                    if (i == 1) 
-                    {
-                        if (_player.movementVector.y < 0) _player.movementVector.y = 0;
-                        
-                        float rayOffsetX = (_characterBounds.size.x /2 + _nudgingRaycastOffset);
-                        float rayOffsetY =  _characterBounds.size.y /2;
-                        Vector2 dir = new Vector2(0,0);
-
-                        //nudge player when hitting his Head on a platform above
-                        RaycastHit2D leftRay =  Physics2D.Raycast(new Vector2 (posToTry.x -rayOffsetX, posToTry.y + rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
-                        RaycastHit2D rightRay = Physics2D.Raycast(new Vector2 (posToTry.x + rayOffsetX, posToTry.y + rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
-                        
-                        //did we hit our head on the left side (and not clos to the middle?)
-                        if(leftRay)
-                        {
-                            RaycastHit2D MiddleRay =  Physics2D.Raycast(new Vector2 (leftRay.point.x + nudgeDetectionDistance , posToTry.y + rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
-
-                            if(!MiddleRay)
-                            {
-                                if(Application.isPlaying)
-                                {
-                                    Debug.DrawRay(new Vector2 (posToTry.x -rayOffsetX, posToTry.y + rayOffsetY), Vector2.up, Color.green, 1.0f );
-                                }
-                                dir = _rb2d.position - leftRay.point;
-                                _nudgingPlayer = true;
-                            }
-                            else
-                            {
-                                _nudgingPlayer = false;
-                            }
-                            
-    
-                        }
-                        else if(rightRay)
-                        {
-                            RaycastHit2D MiddleRay =  Physics2D.Raycast(new Vector2 (rightRay.point.x - nudgeDetectionDistance , posToTry.y + rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
-
-                            if(!MiddleRay)
-                            {
-                                if(Application.isPlaying)
-                                {
-                                    Debug.DrawRay( posToTry + new Vector2 (_characterBounds.size.x/2,_characterBounds.size.y/2), Vector2.up, Color.green, 1.0f );
-                                }
-                                dir = _rb2d.position - rightRay.point;
-                                _nudgingPlayer = true;
-                            }
-                            else
-                            {
-                                _nudgingPlayer = false;
-                            }
-                            
-                        }
-                        
-                        
-                        _rb2d.position += dir.normalized * move.magnitude;
-                        
-                        
-                    }
-
-                    return;
+                // We've landed on a corner or hit our head on a ledge. Nudge the player gently
+                if (i == 1) 
+                {
+                    if (_player.movementVector.y < 0) _player.movementVector.y = 0;
+                    Vector2 dir = new Vector2(0,0);
+                    dir = CheckForNudging(posToTry);
+                    
+                    
+                    _rb2d.position += dir.normalized * move.magnitude;
+                    
+                    
                 }
 
-                positionToMoveTo = posToTry; //shift one for next iteration
+                return;
             }
+
+            positionToMoveTo = posToTry; //shift one for next iteration
         }
+    }
+
+
+    private Vector2 CheckForNudging(Vector2 center)
+    {
+        Vector2 dir = new Vector2(0,0);
+        float rayOffsetX = (_characterBounds.size.x /2 + _nudgingRaycastOffset);
+        float rayOffsetY =  _characterBounds.size.y /2;
+                    
+
+        //nudge player when hitting his Head on a platform above
+        RaycastHit2D leftRay =  Physics2D.Raycast(new Vector2 (center.x -rayOffsetX, center.y + rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
+        RaycastHit2D rightRay = Physics2D.Raycast(new Vector2 (center.x + rayOffsetX, center.y + rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
+        
+        //did we hit our head on the left side (and not clos to the middle?)
+        if(leftRay)
+        {
+            RaycastHit2D MiddleRay =  Physics2D.Raycast(new Vector2 (leftRay.point.x + nudgeDetectionDistance , center.y + rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
+
+            if(!MiddleRay)
+            {
+                
+                dir = _rb2d.position - leftRay.point;
+                _nudgingPlayer = true;
+            }
+            else
+            {
+                _nudgingPlayer = false;
+            }
+            
+
+        }
+        else if(rightRay)
+        {
+            RaycastHit2D MiddleRay =  Physics2D.Raycast(new Vector2 (rightRay.point.x - nudgeDetectionDistance , center.y + rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
+
+            if(!MiddleRay)
+            {
+                if(Application.isPlaying)
+                {
+                    Debug.DrawRay( center + new Vector2 (_characterBounds.size.x/2,_characterBounds.size.y/2), Vector2.up, Color.green, 1.0f );
+                }
+                dir = _rb2d.position - rightRay.point;
+                _nudgingPlayer = true;
+            }
+            else
+            {
+                _nudgingPlayer = false;
+            }
+            
+        }
+        
+        return dir;
+    }
     
     #endregion
     
@@ -210,35 +216,52 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
     
-    #region Gizmo
+    #region Debug
 
     private void OnDrawGizmos() 
     {
-            // Bounds
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireCube(transform.position + _characterBounds.center, _characterBounds.size);
+        // Bounds
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(transform.position + _characterBounds.center, _characterBounds.size);
 
-            // Rays
-            if (!Application.isPlaying) {
-                CalculateRayRanged();
-                Gizmos.color = Color.blue;
-                foreach (var range in new List<RayRange> { _raysUp, _raysRight, _raysDown, _raysLeft }) {
-                    foreach (var point in EvaluateRayPositions(range)) {
-                        Gizmos.DrawRay(point, range.Dir * _detectionRayLength);
-                    }
+        // Rays
+        if (!Application.isPlaying) {
+            CalculateRayRanged();
+            Gizmos.color = Color.blue;
+            foreach (var range in new List<RayRange> { _raysUp, _raysRight, _raysDown, _raysLeft }) {
+                foreach (var point in EvaluateRayPositions(range)) {
+                    Gizmos.DrawRay(point, range.Dir * _detectionRayLength);
                 }
             }
-
-            if (!Application.isPlaying) return;
-
-            // Draw the future position. Handy for visualizing gravity
-            Gizmos.color = Color.red;
-            var move = new Vector3(_player.movementVector.x, _player.movementVector.y) * Time.deltaTime;
-            Gizmos.DrawWireCube(transform.position + _characterBounds.center + move, _characterBounds.size);
         }
+
+        if (!Application.isPlaying) return;
+        
+        DrawNudgingRays();
+        // Draw the future position. Handy for visualizing gravity
+        Gizmos.color = Color.red;
+        var move = new Vector3(_player.movementVector.x, _player.movementVector.y) * Time.deltaTime;
+        Gizmos.DrawWireCube(transform.position + _characterBounds.center + move, _characterBounds.size);
+    }
+
+    private void DrawNudgingRays()
+    {
+        if(_nudgingPlayer && _colUp)
+        {
+            Vector2 position = new Vector2();
+            position.x = transform.position.x;
+            position.y = transform.position.y;
+            Debug.DrawRay(position + new Vector2 (_characterBounds.size.x/2 + _nudgingRaycastOffset,_characterBounds.size.y/2), Vector2.up, Color.green, 1.0f );
+            Debug.DrawRay(position - new Vector2 (_characterBounds.size.x/2 + _nudgingRaycastOffset, - _characterBounds.size.y/2), Vector2.up, Color.green, 1.0f );
+        }
+        
+    }
+
     #endregion
 
 }
+
+
 
 public struct RayRange {
     public RayRange(float x1, float y1, float x2, float y2, Vector2 dir) {

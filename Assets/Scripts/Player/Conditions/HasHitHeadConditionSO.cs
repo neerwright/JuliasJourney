@@ -25,7 +25,6 @@ public class HasHitHeadCondition : Condition
 		{
 			if(_playerController.CollisionAbove && !_playerController.IsNudgingPlayer)
 			{
-                Debug.Log("hit head");
 				_player.jumpInput = false;
 				_player.movementVector.y = 0f;
 
