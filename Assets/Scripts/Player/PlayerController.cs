@@ -11,7 +11,8 @@ public class PlayerController : MonoBehaviour
         public bool JumpingThisFrame { get; private set; }
         public bool LandingThisFrame { get; private set; }
         public bool IsGrounded => _colDown;
-    
+        public bool CollisionAbove => _colUp;
+        public bool IsNudgingPlayer => _nudgingPlayer;
    
 
     [Header("COLLISION")] 
@@ -28,7 +29,8 @@ public class PlayerController : MonoBehaviour
     private RayRange _raysUp, _raysRight, _raysDown, _raysLeft;
     private bool _colUp, _colRight, _colDown, _colLeft;
     private float _timeLeftGrounded;
-    private float RaycastOffset = 0.1f;
+    private float _nudgingRaycastOffset = 0.1f;
+    private bool _nudgingPlayer = false;
 
    
     //private List<RaycastHit2D> hitBuffer = new List<RaycastHit2D>(16);
@@ -54,6 +56,9 @@ public class PlayerController : MonoBehaviour
 
     private void CheckForWalls(ref Vector2 movementVector)
     {
+        //reset Nudging
+        //if(!_colUp && _nudgingPlayer)
+        //    _nudgingPlayer = false;
 
         if (movementVector.x > 0 && _colRight || movementVector.x < 0 && _colLeft) 
         {
@@ -66,6 +71,8 @@ public class PlayerController : MonoBehaviour
     #region Move
     private void MoveCharacter(Vector2 move) 
     {
+            
+            
             var pos = _rb2d.position; 
             var furthestPoint = pos + move;
 
@@ -75,7 +82,7 @@ public class PlayerController : MonoBehaviour
                 _rb2d.position += move;
                 return;
             }
-
+            
             // otherwise increment away from current pos; see what closest position we can move to
             var positionToMoveTo = _rb2d.position;
             for (int i = 1; i < _freeColliderIterations; i++) {
@@ -91,7 +98,7 @@ public class PlayerController : MonoBehaviour
                     {
                         if (_player.movementVector.y < 0) _player.movementVector.y = 0;
                         
-                        float rayOffsetX = (_characterBounds.size.x /2 + RaycastOffset);
+                        float rayOffsetX = (_characterBounds.size.x /2 + _nudgingRaycastOffset);
                         float rayOffsetY =  _characterBounds.size.y /2;
                         Vector2 dir = new Vector2(0,0);
 
@@ -100,7 +107,7 @@ public class PlayerController : MonoBehaviour
                         RaycastHit2D rightRay = Physics2D.Raycast(new Vector2 (posToTry.x + rayOffsetX, posToTry.y + rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
                         
                         //did we hit our head on the left side (and not clos to the middle?)
-                        if(leftRay )
+                        if(leftRay)
                         {
                             RaycastHit2D MiddleRay =  Physics2D.Raycast(new Vector2 (leftRay.point.x + nudgeDetectionDistance , posToTry.y + rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
 
@@ -111,13 +118,14 @@ public class PlayerController : MonoBehaviour
                                     Debug.DrawRay(new Vector2 (posToTry.x -rayOffsetX, posToTry.y + rayOffsetY), Vector2.up, Color.green, 1.0f );
                                 }
                                 dir = _rb2d.position - leftRay.point;
+                                _nudgingPlayer = true;
                             }
                             
     
                         }
-                        else if(rightRay )
+                        else if(rightRay)
                         {
-                            RaycastHit2D MiddleRay =  Physics2D.Raycast(new Vector2 (leftRay.point.x - nudgeDetectionDistance , posToTry.y + rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
+                            RaycastHit2D MiddleRay =  Physics2D.Raycast(new Vector2 (rightRay.point.x - nudgeDetectionDistance , posToTry.y + rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
 
                             if(!MiddleRay)
                             {
@@ -126,8 +134,11 @@ public class PlayerController : MonoBehaviour
                                     Debug.DrawRay( posToTry + new Vector2 (_characterBounds.size.x/2,_characterBounds.size.y/2), Vector2.up, Color.green, 1.0f );
                                 }
                                 dir = _rb2d.position - rightRay.point;
+                                _nudgingPlayer = true;
                             }
+                            
                         }
+                        
                         
                         _rb2d.position += dir.normalized * move.magnitude;
                         
