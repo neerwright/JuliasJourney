@@ -44,8 +44,21 @@ public class PlayerController : MonoBehaviour
     public void Move(Vector2 movementVector)
     {
         RunCollisionChecks();
+        CheckForWalls();
         MoveCharacter(movementVector);
     }
+
+    #region WallCheck
+
+    private void CheckForWalls()
+    {
+        if (_player.movementVector.x > 0 && _colRight || _player.movementVector.x < 0 && _colLeft) 
+        {
+            // Don't walk through walls
+            _player.movementVector.x = 0;
+        }
+    }
+    #endregion
 
     #region Move
     private void MoveCharacter(Vector2 move) 
