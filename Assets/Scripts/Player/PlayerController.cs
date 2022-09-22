@@ -87,10 +87,28 @@ public class PlayerController : MonoBehaviour
                     if (i == 1) {
                         if (_player.movementVector.y < 0) _player.movementVector.y = 0;
                         
-                        //nudge player --> but he will slide on ground
-                        //Vector2 hitPosition = new Vector2(hit.transform.position.x, hit.transform.position.y);
-                        //var dir = _rb2d.position - hitPosition;
-                        //_rb2d.position += dir.normalized * move.magnitude;
+                        //nudge player when hitting Head slightly on a platform
+                        /*
+                        RaycastHit2D leftRay = Physics2D.Raycast(posToTry + new Vector2 (-_characterBounds.size.x /2, _characterBounds.size.y /2)  , Vector2.up,0.1f, _groundLayer);
+                        RaycastHit2D rightRay = Physics2D.Raycast(posToTry + new Vector2 (_characterBounds.size.x/2,_characterBounds.size.y/2),Vector2.up,0.1f, _groundLayer);
+                        
+                        Vector2 dir= new Vector2(0,0);
+                        if(leftRay)
+                        {
+                            if(Application.isPlaying)
+                            {
+                                Debug.DrawRay( posToTry + new Vector2 (-_characterBounds.size.x/2,_characterBounds.size.y/2), Vector2.up, Color.green, 1.0f );
+                            }
+                            dir = _rb2d.position - leftRay.point;
+    
+                        }
+                        else if(rightRay)
+                        {
+                            dir = _rb2d.position - rightRay.point;
+                        }
+                        _rb2d.position += dir.normalized * move.magnitude;
+                        */
+                        
                     }
 
                     return;

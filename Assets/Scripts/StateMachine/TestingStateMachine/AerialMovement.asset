@@ -15,5 +15,5 @@ MonoBehaviour:
   description: 
   _speed: 7.8
   _acceleration: 20
-  _apexBonus: 100
+  _apexBonus: 50
   _jumpApexThreshold: 10

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Ascend
   m_EditorClassIdentifier: 
   description: 
-  initialJumpForce: 12
+  initialJumpForce: 15

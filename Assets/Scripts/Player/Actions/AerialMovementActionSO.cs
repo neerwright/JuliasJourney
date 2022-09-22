@@ -60,7 +60,8 @@ public class AerialMovementAction : StateAction
 		
 		var apexBonus = Mathf.Sign(horizontalInput) * _apexBonus * _apexPoint;
 		
-		return apexBonus * Time.deltaTime ;
+		apexBonus =(Mathf.Abs(horizontalInput) > Mathf.Epsilon)? apexBonus * Time.deltaTime : 0f;
+		return apexBonus;
 		
 
 	}
