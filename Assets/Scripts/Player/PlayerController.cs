@@ -32,6 +32,9 @@ public class PlayerController : MonoBehaviour
     private float _nudgingRaycastOffset = 0.1f;
     private bool _nudgingPlayer = false;
 
+    float rayOffsetX =0;
+    float rayOffsetY =0;
+
    
     //private List<RaycastHit2D> hitBuffer = new List<RaycastHit2D>(16);
 
@@ -42,6 +45,10 @@ public class PlayerController : MonoBehaviour
     {
         _player = GetComponent<Player>();
         _rb2d = GetComponent<Rigidbody2D>();
+
+        //ti start the raycast on top of player for nudging
+        rayOffsetX = (_characterBounds.size.x /2 + _nudgingRaycastOffset);
+        rayOffsetY =  _characterBounds.size.y /2;
     }
 
     //Passed parameter needs to have deltaTime applied 
@@ -56,9 +63,6 @@ public class PlayerController : MonoBehaviour
 
     private void CheckForWalls(ref Vector2 movementVector)
     {
-        //reset Nudging
-        //if(!_colUp && _nudgingPlayer)
-        //    _nudgingPlayer = false;
 
         if (movementVector.x > 0 && _colRight || movementVector.x < 0 && _colLeft) 
         {
@@ -66,6 +70,7 @@ public class PlayerController : MonoBehaviour
             movementVector.x = 0;  
         }
     }
+
     #endregion
 
     #region Move
@@ -82,7 +87,7 @@ public class PlayerController : MonoBehaviour
             _rb2d.position += move;
             return;
         }
-        
+
         // otherwise increment away from current pos; see what closest position we can move to
         var positionToMoveTo = _rb2d.position;
         for (int i = 1; i < _freeColliderIterations; i++) {
@@ -92,16 +97,37 @@ public class PlayerController : MonoBehaviour
 
             if (Physics2D.OverlapBox(posToTry, _characterBounds.size, 0, _groundLayer)) {
                 _rb2d.position = positionToMoveTo; //the last position without a collision
-
                 // We've landed on a corner or hit our head on a ledge. Nudge the player gently
                 if (i == 1) 
                 {
-                    if (_player.movementVector.y < 0) _player.movementVector.y = 0;
+                    Debug.Log("1");
+                    if (_player.movementVector.y < 0)
+                    {
+                        _player.movementVector.y = 0;
+                    } 
                     Vector2 dir = new Vector2(0,0);
                     dir = CheckForNudging(posToTry);
                     
+                    if(IsNudgingPlayer)
+                    {
+                        Debug.Log("nudge");
+                        _rb2d.position += dir.normalized * move.magnitude;    
+                    }
+                    else if(!IsGrounded)
+                    {
+                        Debug.Log("boooom");
+                        dir = transform.position - hit.transform.position;
+                        _rb2d.position += dir.normalized * move.magnitude;
+                    }
+                    else
+                    {
+                        Debug.Log("grouund");
+                        _rb2d.position += Vector2.up * move.magnitude * 0.1f;
+                    }
+                        
                     
-                    _rb2d.position += dir.normalized * move.magnitude;
+
+                    
                     
                     
                 }
@@ -117,20 +143,19 @@ public class PlayerController : MonoBehaviour
     private Vector2 CheckForNudging(Vector2 center)
     {
         Vector2 dir = new Vector2(0,0);
-        float rayOffsetX = (_characterBounds.size.x /2 + _nudgingRaycastOffset);
-        float rayOffsetY =  _characterBounds.size.y /2;
-                    
-
+        
         //nudge player when hitting his Head on a platform above
         RaycastHit2D leftRay =  Physics2D.Raycast(new Vector2 (center.x -rayOffsetX, center.y + rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
         RaycastHit2D rightRay = Physics2D.Raycast(new Vector2 (center.x + rayOffsetX, center.y + rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
         
-        //did we hit our head on the left side (and not clos to the middle?)
-        if(leftRay)
+        //did we hit our head on the left side (and not close to the middle?)
+        _nudgingPlayer = false;
+        
+        if(leftRay )
         {
             RaycastHit2D MiddleRay =  Physics2D.Raycast(new Vector2 (leftRay.point.x + nudgeDetectionDistance , center.y + rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
 
-            if(!MiddleRay)
+            if(!MiddleRay )
             {
                 
                 dir = _rb2d.position - leftRay.point;
@@ -220,6 +245,15 @@ public class PlayerController : MonoBehaviour
 
     private void OnDrawGizmos() 
     {
+        if(_colLeft)
+        {
+            //Debug.Log("left");
+        }
+        if(IsNudgingPlayer)
+        {
+            //Debug.Log("nudge");
+        }
+
         // Bounds
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(transform.position + _characterBounds.center, _characterBounds.size);
@@ -234,6 +268,8 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+
+        
 
         if (!Application.isPlaying) return;
         

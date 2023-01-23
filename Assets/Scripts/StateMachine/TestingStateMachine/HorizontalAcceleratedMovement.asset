@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 
   maxSpeed: 20
-  acceleration: 100
-  damping: 0.075
+  acceleration: 80
+  damping: 0.231
