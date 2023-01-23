@@ -100,6 +100,14 @@ public class PlayerController : MonoBehaviour
             if (Physics2D.OverlapBox(posToTry, _characterBounds.size, 0, _groundLayer)) {
                 _rb2d.position = positionToMoveTo; //the last position without a collision
                 
+                Vector2 dir = new Vector2(0,0);
+                dir = CheckForNudging(posToTry);
+                    
+                    if(IsNudgingPlayer)
+                    {
+                        Debug.Log("nudge");
+                        _rb2d.position += dir.normalized * move.magnitude;    
+                    }
                 // We've landed on a corner or hit our head on a ledge. Nudge the player gently
                 if (i == 1) 
                 {
@@ -108,14 +116,14 @@ public class PlayerController : MonoBehaviour
                     {
                         _player.movementVector.y = 0;
                     } 
-                    Vector2 dir = new Vector2(0,0);
-                    dir = CheckForNudging(posToTry);
+                    //Vector2 dir = new Vector2(0,0);
+                    //dir = CheckForNudging(posToTry);
                     
-                    if(IsNudgingPlayer)
-                    {
-                        Debug.Log("nudge");
-                        _rb2d.position += dir.normalized * move.magnitude;    
-                    }
+                    //if(IsNudgingPlayer)
+                    //{
+                    //    Debug.Log("nudge");
+                    //    _rb2d.position += dir.normalized * move.magnitude;    
+                    //}
                     
                     if(!IsGrounded && !_colUp)
                     {
@@ -124,19 +132,21 @@ public class PlayerController : MonoBehaviour
                         _rb2d.position += dir.normalized * move.magnitude;
                     }
                     
-                    if(IsGrounded)
+                    if(IsGrounded && !_colLeft && !_colRight)
                     {
                         //Debug.Log("grounded");
                         _rb2d.position += Vector2.up * Time.deltaTime ;
                     }
 
-                    //if(_colUp)
-                    //{
-                    //    Debug.Log("up");
-                    //    _player.movementVector.y = 0;
-                    //    _rb2d.position += Vector2.down * Time.deltaTime * 10;
-                    //}
+                    if(_colRight)
+                    {
+                        _rb2d.position += Vector2.left * Time.deltaTime ;
+                    }
 
+                    if(_colLeft)
+                    {
+                        _rb2d.position += Vector2.right * Time.deltaTime ;
+                    }
                     
                     
                     
