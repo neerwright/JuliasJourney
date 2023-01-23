@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     float rayOffsetY =0;
 
 
-    //private List<RaycastHit2D> hitBuffer = new List<RaycastHit2D>(16);
+    private const float NUDGE_MULT = 10f;
 
     private Rigidbody2D _rb2d;
     private Player _player;
@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
                 
                 Vector2 dir = new Vector2(0,0);
                 dir = CheckForNudging(posToTry);
-                    
+                //hit head onto plattform    
                 if(IsNudgingPlayer)
                 {
                     _rb2d.position += dir.normalized * move.magnitude;    
@@ -115,27 +115,27 @@ public class PlayerController : MonoBehaviour
                     // trying to jump on an edge
                      if (!_colDown && !_colLeft && !_colRight && !_colUp)
                     {
-                        _rb2d.position += Vector2.up * Time.deltaTime * 10 ;
+                        _rb2d.position += Vector2.up * Time.deltaTime * NUDGE_MULT ;
                     }
                     
                     //pop up from ground to be able to move
                     if(IsGrounded && !_colLeft && !_colRight)
                     {
                         _player.movementVector.y = 0;
-                        _rb2d.position += Vector2.up * Time.deltaTime * 10 ;
+                        _rb2d.position += Vector2.up * Time.deltaTime * NUDGE_MULT ;
                     }
                     
                     //pop out of wall
                     if(_colRight)
                     {
                         _player.movementVector.x = 0;
-                        _rb2d.position += Vector2.left * 10 * Time.deltaTime ;
+                        _rb2d.position += Vector2.left  * Time.deltaTime * NUDGE_MULT;
                     }
 
                     if(_colLeft)
                     {
                         _player.movementVector.x = 0;
-                        _rb2d.position += Vector2.right * 10  * Time.deltaTime ;
+                        _rb2d.position += Vector2.right  * Time.deltaTime * NUDGE_MULT;
                     }
                     
                     
