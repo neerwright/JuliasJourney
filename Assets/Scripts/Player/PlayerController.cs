@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     float rayOffsetX =0;
     float rayOffsetY =0;
 
-   
+
     //private List<RaycastHit2D> hitBuffer = new List<RaycastHit2D>(16);
 
     private Rigidbody2D _rb2d;
@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
         //ti start the raycast on top of player for nudging
         rayOffsetX = (_characterBounds.size.x /2 + _nudgingRaycastOffset);
         rayOffsetY =  _characterBounds.size.y /2;
+
     }
 
     //Passed parameter needs to have deltaTime applied 
@@ -78,7 +79,7 @@ public class PlayerController : MonoBehaviour
     #region Move
     private void MoveCharacter(Vector2 move) 
     {
-            
+ 
             
         var pos = _rb2d.position; 
         var furthestPoint = pos + move;
@@ -103,39 +104,38 @@ public class PlayerController : MonoBehaviour
                 Vector2 dir = new Vector2(0,0);
                 dir = CheckForNudging(posToTry);
                     
-                    if(IsNudgingPlayer)
-                    {
-                        Debug.Log("nudge");
-                        _rb2d.position += dir.normalized * move.magnitude;    
-                    }
+                if(IsNudgingPlayer)
+                {
+                    _rb2d.position += dir.normalized * move.magnitude;    
+                }
                 // We've landed on a corner or hit our head on a ledge. Nudge the player gently
                 if (i == 1) 
                 {
-                    
-                    if (_player.movementVector.y < 0)
+
+                    // trying to jump on an edge
+                     if (!_colDown && !_colLeft && !_colRight && !_colUp)
                     {
-                        _player.movementVector.y = 0;
-                    } 
-                    
-                    if(!IsGrounded && !_colUp)
-                    {
-                        dir = transform.position - hit.transform.position;
-                        _rb2d.position += dir.normalized * Time.deltaTime;
+                        _rb2d.position += Vector2.up * Time.deltaTime * 10 ;
                     }
                     
+                    //pop up from ground to be able to move
                     if(IsGrounded && !_colLeft && !_colRight)
                     {
-                        _rb2d.position += Vector2.up * Time.deltaTime ;
+                        _player.movementVector.y = 0;
+                        _rb2d.position += Vector2.up * Time.deltaTime * 10 ;
                     }
-
+                    
+                    //pop out of wall
                     if(_colRight)
                     {
-                        _rb2d.position += Vector2.left * Time.deltaTime ;
+                        _player.movementVector.x = 0;
+                        _rb2d.position += Vector2.left * 10 * Time.deltaTime ;
                     }
 
                     if(_colLeft)
                     {
-                        _rb2d.position += Vector2.right * Time.deltaTime ;
+                        _player.movementVector.x = 0;
+                        _rb2d.position += Vector2.right * 10  * Time.deltaTime ;
                     }
                     
                     
@@ -254,16 +254,7 @@ public class PlayerController : MonoBehaviour
     #region Debug
 
     private void OnDrawGizmos() 
-    {
-        if(_colLeft)
-        {
-            //Debug.Log("left");
-        }
-        if(IsNudgingPlayer)
-        {
-            //Debug.Log("nudge");
-        }
-
+    {            
         // Bounds
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(transform.position + _characterBounds.center, _characterBounds.size);
@@ -288,6 +279,11 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = Color.red;
         var move = new Vector3(_player.movementVector.x, _player.movementVector.y) * Time.deltaTime;
         Gizmos.DrawWireCube(transform.position + _characterBounds.center + move, _characterBounds.size);
+
+        
+        
+
+        
     }
 
     private void DrawNudgingRays()
