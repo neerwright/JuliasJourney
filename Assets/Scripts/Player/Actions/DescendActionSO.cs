@@ -45,6 +45,7 @@ public class DescendAction : StateAction
 
 		_player.movementVector.y = _verticalMovement;
 
+		//if head hit above, dont move any more upwards
 		if(_playerController.CollisionAbove && _verticalMovement > 0)
 		{
 			_verticalMovement = 0;

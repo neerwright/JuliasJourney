@@ -691,7 +691,7 @@ MonoBehaviour:
   _detectorCount: 24
   _detectionRayLength: 0.2
   _rayBufferOffset: 0.2
-  nudgeDetectionDistance: 0.4
+  nudgeDetectionDistance: 0.7
 --- !u!50 &632227294
 Rigidbody2D:
   serializedVersion: 4
