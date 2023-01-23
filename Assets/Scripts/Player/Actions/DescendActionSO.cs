@@ -11,6 +11,7 @@ public class DescendAction : StateAction
 {
 	//Component references
 	private Player _player;
+	private PlayerController _playerController;
 
 	private float _verticalMovement;
 	private float _gravityMultiplier;
@@ -20,6 +21,7 @@ public class DescendAction : StateAction
 	public override void Awake(StateMachine stateMachine)
 	{
 		_player = stateMachine.GetComponent<Player>();
+		_playerController = stateMachine.GetComponent<PlayerController>();
 	}
 
 	public override void OnStateEnter()
@@ -42,5 +44,10 @@ public class DescendAction : StateAction
 		_verticalMovement = Mathf.Clamp(_verticalMovement, Player.MAX_FALL_SPEED, Player.MAX_RISE_SPEED);
 
 		_player.movementVector.y = _verticalMovement;
+
+		if(_playerController.CollisionAbove && _verticalMovement > 0)
+		{
+			_verticalMovement = 0;
+		}
 	}
 }

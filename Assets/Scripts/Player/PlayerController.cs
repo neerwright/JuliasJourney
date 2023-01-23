@@ -69,6 +69,8 @@ public class PlayerController : MonoBehaviour
             // Don't walk through walls
             movementVector.x = 0;  
         }
+
+        
     }
 
     #endregion
@@ -97,10 +99,11 @@ public class PlayerController : MonoBehaviour
 
             if (Physics2D.OverlapBox(posToTry, _characterBounds.size, 0, _groundLayer)) {
                 _rb2d.position = positionToMoveTo; //the last position without a collision
+                
                 // We've landed on a corner or hit our head on a ledge. Nudge the player gently
                 if (i == 1) 
                 {
-                    Debug.Log("1");
+                    
                     if (_player.movementVector.y < 0)
                     {
                         _player.movementVector.y = 0;
@@ -116,17 +119,23 @@ public class PlayerController : MonoBehaviour
                     
                     if(!IsGrounded && !_colUp)
                     {
-                        Debug.Log("boooom");
+                        //Debug.Log("boooom");
                         dir = transform.position - hit.transform.position;
                         _rb2d.position += dir.normalized * move.magnitude;
                     }
                     
                     if(IsGrounded)
                     {
-                        _rb2d.position += Vector2.up * move.magnitude * 0.1f;
+                        //Debug.Log("grounded");
+                        _rb2d.position += Vector2.up * Time.deltaTime ;
                     }
-                        
-                    
+
+                    //if(_colUp)
+                    //{
+                    //    Debug.Log("up");
+                    //    _player.movementVector.y = 0;
+                    //    _rb2d.position += Vector2.down * Time.deltaTime * 10;
+                    //}
 
                     
                     

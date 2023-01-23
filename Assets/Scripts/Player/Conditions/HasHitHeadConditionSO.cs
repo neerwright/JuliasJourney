@@ -21,12 +21,15 @@ public class HasHitHeadCondition : Condition
 	protected override bool Statement()
 	{
 		bool isMovingUpwards = _player.movementVector.y > 0f;
+		
 		if (isMovingUpwards)
 		{
+			
 			if(_playerController.CollisionAbove && !_playerController.IsNudgingPlayer)
 			{
 				_player.jumpInput = false;
 				_player.movementVector.y = 0f;
+				
 
 				return true;
 			}
