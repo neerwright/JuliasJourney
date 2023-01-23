@@ -116,25 +116,15 @@ public class PlayerController : MonoBehaviour
                     {
                         _player.movementVector.y = 0;
                     } 
-                    //Vector2 dir = new Vector2(0,0);
-                    //dir = CheckForNudging(posToTry);
-                    
-                    //if(IsNudgingPlayer)
-                    //{
-                    //    Debug.Log("nudge");
-                    //    _rb2d.position += dir.normalized * move.magnitude;    
-                    //}
                     
                     if(!IsGrounded && !_colUp)
                     {
-                        //Debug.Log("boooom");
                         dir = transform.position - hit.transform.position;
-                        _rb2d.position += dir.normalized * move.magnitude;
+                        _rb2d.position += dir.normalized * Time.deltaTime;
                     }
                     
                     if(IsGrounded && !_colLeft && !_colRight)
                     {
-                        //Debug.Log("grounded");
                         _rb2d.position += Vector2.up * Time.deltaTime ;
                     }
 
