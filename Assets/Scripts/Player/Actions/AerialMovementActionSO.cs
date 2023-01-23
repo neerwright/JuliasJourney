@@ -51,7 +51,7 @@ public class AerialMovementAction : StateAction
 		SetVelocity(ref velocity.x, input.x, acceleration, speed);
 		 
 		_player.movementVector = velocity;
-        _player.movementVector.x += CalculateApexBonus(velocity.y, input.x);
+        //_player.movementVector.x += CalculateApexBonus(velocity.y, input.x);
 	}
 
 	private float CalculateApexBonus(float velocity, float horizontalInput)

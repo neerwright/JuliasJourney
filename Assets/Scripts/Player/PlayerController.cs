@@ -113,15 +113,16 @@ public class PlayerController : MonoBehaviour
                         Debug.Log("nudge");
                         _rb2d.position += dir.normalized * move.magnitude;    
                     }
-                    else if(!IsGrounded)
+                    
+                    if(!IsGrounded && !_colUp)
                     {
                         Debug.Log("boooom");
                         dir = transform.position - hit.transform.position;
                         _rb2d.position += dir.normalized * move.magnitude;
                     }
-                    else
+                    
+                    if(IsGrounded)
                     {
-                        Debug.Log("grouund");
                         _rb2d.position += Vector2.up * move.magnitude * 0.1f;
                     }
                         

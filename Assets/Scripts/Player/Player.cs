@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
 	[NonSerialized]	public Rigidbody2D rb2d;
 
     public const float GRAVITY_MULTIPLIER = 3f;
-    public const float MAX_SPEED = 7f;
+    public const float MAX_SPEED = 3f;
 	public const float GRAVITY_COMEBACK_MULTIPLIER = .03f;
 	public const float GRAVITY_DIVIDER = .6f;
 	public const float MAX_FALL_SPEED = -50f;
