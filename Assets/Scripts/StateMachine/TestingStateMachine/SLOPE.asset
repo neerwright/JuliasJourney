@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2272388513b88848a637930ed05eef2, type: 3}
   m_Name: SLOPE
   m_EditorClassIdentifier: 
-  _actions: []
-  _sceneGizmoColor: {r: 0, g: 0, b: 0, a: 0}
+  _actions:
+  - {fileID: 11400000, guid: 37a7ad8dea4169f46b46ec9f266f1172, type: 2}
+  - {fileID: 11400000, guid: 39bbd4514532d9c41a0e9f4d15c149e4, type: 2}
+  _sceneGizmoColor: {r: 0.4100965, g: 0.043137252, b: 1, a: 1}

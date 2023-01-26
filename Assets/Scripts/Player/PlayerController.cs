@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
         private int _freeColliderIterations = 10;
     
         public Vector2 Velocity{get; private set;}
+        public Vector2 AngleAlongSlope => _slopeNormalPerp;
         public bool JumpingThisFrame { get; private set; }
         public bool LandingThisFrame { get; private set; }
         public bool IsGrounded => _colDown;
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour
     private bool _nudgingPlayer = false;
     private bool _onSlope = false;
     private float _slopeDownAngle;
+    private float _slopeSideAngle;
     private float _slopeDownAngleOld;
     private Vector2 _slopeNormalPerp;
 
@@ -85,13 +87,31 @@ public class PlayerController : MonoBehaviour
     private void SlopeCheck()
     {
         Vector2 checkPos = transform.position - new Vector3(0.0f, _characterBounds.size.y / 2);
+        SlopeCheckHorizontal(checkPos);
         SlopeCheckVertical(checkPos);
 
     }
 
     private void SlopeCheckHorizontal(Vector2 checkPos)
     {
-
+        RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos, transform.right, _slopeCheckDistance, _groundLayer);
+        RaycastHit2D slopeHitBack = Physics2D.Raycast(checkPos, -transform.right, _slopeCheckDistance, _groundLayer);
+    
+        if(slopeHitFront)
+        {
+            _onSlope = true;
+            _slopeSideAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
+        }
+        else if(slopeHitBack)
+        {
+            _onSlope = true;
+            _slopeSideAngle = Vector2.Angle(slopeHitBack.normal, Vector2.up);
+        }
+        else
+        {
+            _slopeSideAngle = 0.0f;
+            _onSlope = false;
+        }
     }
 
     private void SlopeCheckVertical(Vector2 checkPos)
@@ -99,7 +119,7 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.down, _slopeCheckDistance, _groundLayer);
         if (hit)
         {
-            _slopeNormalPerp = Vector2.Perpendicular(hit.normal);
+            _slopeNormalPerp = Vector2.Perpendicular(hit.normal).normalized;
             _slopeDownAngle = Vector2.Angle(hit.normal, Vector2.up);
 
             if(_slopeDownAngle != _slopeDownAngleOld)
@@ -295,7 +315,13 @@ public class PlayerController : MonoBehaviour
     #region Debug
 
     private void OnDrawGizmos() 
-    {            
+    {     
+        if(IsOnSlope) 
+            Debug.Log("is On slope: ");      
+
+        if(!IsGrounded)
+            Debug.Log("not grounded "); 
+
         // Bounds
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(transform.position + _characterBounds.center, _characterBounds.size);

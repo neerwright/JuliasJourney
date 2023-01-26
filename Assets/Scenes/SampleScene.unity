@@ -684,14 +684,15 @@ MonoBehaviour:
   _freeColliderIterations: 24
   _characterBounds:
     m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0.68, y: 2, z: 1}
+    m_Extent: {x: 0.7, y: 2.03, z: 1}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
-  _detectorCount: 24
+  _detectorCount: 12
   _detectionRayLength: 0.32
-  _rayBufferOffset: 0.2
-  nudgeDetectionDistance: 3
+  _rayBufferOffset: 0.1
+  _nudgeDetectionDistance: 0.5
+  _slopeCheckDistance: 0.5
 --- !u!50 &632227294
 Rigidbody2D:
   serializedVersion: 4
