@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
         public bool IsGrounded => _colDown;
         public bool CollisionAbove => _colUp;
         public bool IsNudgingPlayer => _nudgingPlayer;
+        public bool IsOnSlope => _onSlope;
    
 
     [Header("COLLISION")] 
@@ -21,7 +22,9 @@ public class PlayerController : MonoBehaviour
         [SerializeField] private int _detectorCount = 3;
         [SerializeField] private float _detectionRayLength = 0.1f;
         [SerializeField] [Range(0.1f, 0.3f)] private float _rayBufferOffset = 0.1f; // Prevents side detectors hitting the ground
-        [SerializeField] private float nudgeDetectionDistance = 0.1f;
+        [SerializeField] private float _nudgeDetectionDistance = 0.1f;
+        [SerializeField] private float _slopeCheckDistance = 0.5f;
+
 
     private Vector2 _lastPosition;
     private Vector2 _targetVelocity;
@@ -31,6 +34,10 @@ public class PlayerController : MonoBehaviour
     private float _timeLeftGrounded;
     private float _nudgingRaycastOffset = 0.1f;
     private bool _nudgingPlayer = false;
+    private bool _onSlope = false;
+    private float _slopeDownAngle;
+    private float _slopeDownAngleOld;
+    private Vector2 _slopeNormalPerp;
 
     float rayOffsetX =0;
     float rayOffsetY =0;
@@ -57,10 +64,11 @@ public class PlayerController : MonoBehaviour
     {
         RunCollisionChecks();
         CheckForWalls(ref movementVector);
+        SlopeCheck();
         MoveCharacter(movementVector);
     }
 
-    #region WallCheck
+    #region WallAndSlopeCheck
 
     private void CheckForWalls(ref Vector2 movementVector)
     {
@@ -73,6 +81,39 @@ public class PlayerController : MonoBehaviour
 
         
     }
+
+    private void SlopeCheck()
+    {
+        Vector2 checkPos = transform.position - new Vector3(0.0f, _characterBounds.size.y / 2);
+        SlopeCheckVertical(checkPos);
+
+    }
+
+    private void SlopeCheckHorizontal(Vector2 checkPos)
+    {
+
+    }
+
+    private void SlopeCheckVertical(Vector2 checkPos)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.down, _slopeCheckDistance, _groundLayer);
+        if (hit)
+        {
+            _slopeNormalPerp = Vector2.Perpendicular(hit.normal);
+            _slopeDownAngle = Vector2.Angle(hit.normal, Vector2.up);
+
+            if(_slopeDownAngle != _slopeDownAngleOld)
+            {
+                _onSlope = true;
+            }
+            _slopeDownAngleOld = _slopeDownAngle;
+            
+            Debug.DrawRay(hit.point, _slopeNormalPerp, Color.red);
+            Debug.DrawRay(hit.point, hit.normal, Color.blue);
+
+        }
+    }
+
 
     #endregion
 
@@ -163,7 +204,7 @@ public class PlayerController : MonoBehaviour
         
         if(leftRay )
         {
-            RaycastHit2D MiddleRay =  Physics2D.Raycast(new Vector2 (leftRay.point.x + nudgeDetectionDistance , center.y + rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
+            RaycastHit2D MiddleRay =  Physics2D.Raycast(new Vector2 (leftRay.point.x + _nudgeDetectionDistance , center.y + rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
 
             if(!MiddleRay )
             {
@@ -180,7 +221,7 @@ public class PlayerController : MonoBehaviour
         }
         else if(rightRay)
         {
-            RaycastHit2D MiddleRay =  Physics2D.Raycast(new Vector2 (rightRay.point.x - nudgeDetectionDistance , center.y + rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
+            RaycastHit2D MiddleRay =  Physics2D.Raycast(new Vector2 (rightRay.point.x - _nudgeDetectionDistance , center.y + rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
 
             if(!MiddleRay)
             {
