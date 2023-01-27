@@ -338,7 +338,7 @@ public class PlayerController : MonoBehaviour
     {
         var b = new Bounds(transform.position, _characterBounds.size);
 
-        _raysDown = new RayRange(b.min.x + _rayBufferOffset, b.min.y, b.max.x - _rayBufferOffset, b.min.y, Vector2.down);
+        _raysDown = new RayRange(b.min.x + _rayBufferOffset - 0.2f, b.min.y, b.max.x - _rayBufferOffset + 0.2f, b.min.y, Vector2.down);
         _raysUp = new RayRange(b.min.x + _rayBufferOffset, b.max.y, b.max.x - _rayBufferOffset, b.max.y, Vector2.up);
         _raysLeft = new RayRange(b.min.x, b.min.y + _rayBufferOffset, b.min.x, b.max.y - _rayBufferOffset, Vector2.left);
         _raysRight = new RayRange(b.max.x, b.min.y + _rayBufferOffset, b.max.x, b.max.y - _rayBufferOffset, Vector2.right);
