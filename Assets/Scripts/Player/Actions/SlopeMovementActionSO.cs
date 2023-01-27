@@ -27,15 +27,23 @@ public class SlopeMovementAction : StateAction
 	{
 		if( _playerController.CanWalkOnSlope)
 		{
-			Vector2 SlopeAngle = _playerController.AngleAlongSlope;
-			_player.movementVector.x = SlopeAngle.x * -_player.movementInput.x * _originSO.speed;
-			_player.movementVector.y = SlopeAngle.y * -_player.movementInput.x * _originSO.speed;
-			_player.movementVector += Vector2.up * Time.deltaTime * 100;
-			//MaxSpeed
-			_player.movementVector.x = Mathf.Clamp(_player.movementVector.x, -_originSO.maxSpeed, _originSO.maxSpeed);
+			if((_playerController.IsOnSlope && _playerController.SlopeInBack) || (_playerController.SlopeInFront))
+			{
+				Vector2 SlopeVector = _playerController.VectorAlongSlope;
+				_player.movementVector.x = SlopeVector.x * -_player.movementInput.x * _originSO.speed;
+				_player.movementVector.y = SlopeVector.y * -_player.movementInput.x * _originSO.speed;
+			}
+			else
+			{
+				_player.movementVector.x = _player.movementInput.x * _originSO.speed;
+			}
+
+			
+
+			
 		}
-		
-		 
+		//MaxSpeed
+		_player.movementVector.x = Mathf.Clamp(_player.movementVector.x, -_originSO.maxSpeed, _originSO.maxSpeed);	 
 		
 	}
 }

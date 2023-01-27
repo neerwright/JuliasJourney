@@ -8,13 +8,16 @@ public class PlayerController : MonoBehaviour
         private int _freeColliderIterations = 10;
     
         public Vector2 Velocity{get; private set;}
-        public Vector2 AngleAlongSlope => _slopeNormalPerp;
+        public Vector2 VectorAlongSlope => _slopeNormalPerp;
+        
         public bool JumpingThisFrame { get; private set; }
         public bool LandingThisFrame { get; private set; }
         public bool IsGrounded => _colDown;
         public bool CollisionAbove => _colUp;
         public bool IsNudgingPlayer => _nudgingPlayer;
-        public bool IsOnSlope => _onSlope;
+        public bool IsOnSlope => _onSlopeVertical;
+        public bool SlopeInFront => Mathf.Sign(transform.localScale.x) > 1 ? _slopeOnRight : _slopeOnLeft;
+        public bool SlopeInBack  => Mathf.Sign(transform.localScale.x) > 1 ? _slopeOnLeft : _slopeOnRight;
         public bool CanWalkOnSlope => _canWalkOnSlope;
    
 
@@ -38,7 +41,9 @@ public class PlayerController : MonoBehaviour
     private float _timeLeftGrounded;
     private float _nudgingRaycastOffset = 0.1f;
     private bool _nudgingPlayer = false;
-    private bool _onSlope = false;
+    private bool _onSlopeVertical = false;
+    private bool _slopeOnRight = false;
+    private bool _slopeOnLeft = false;
     private bool _canWalkOnSlope = false;
     private float _slopeDownAngle;
     private float _slopeSideAngle;
@@ -49,7 +54,7 @@ public class PlayerController : MonoBehaviour
     float rayOffsetY =0;
 
 
-    private const float NUDGE_MULT = 1f;
+    private const float NUDGE_MULT = 4f;
     private const float NUDGE_RAY_DIST = 0.4f;
 
     private Rigidbody2D _rb2d;
@@ -79,8 +84,8 @@ public class PlayerController : MonoBehaviour
 
     private void CheckForWalls(ref Vector2 movementVector)
     {
-        if(IsOnSlope)
-            return;
+        //if(IsOnSlope)
+        //    return;
 
         if (movementVector.x > 0 && _colRight || movementVector.x < 0 && _colLeft) 
         {
@@ -104,32 +109,34 @@ public class PlayerController : MonoBehaviour
     {
         RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos + new Vector2(_characterBounds.size.x / 2 , 0), transform.right, _slopeCheckDistanceHorizontal, _groundLayer);
         RaycastHit2D slopeHitBack = Physics2D.Raycast(checkPos - new Vector2(_characterBounds.size.x / 2 , 0), -transform.right, _slopeCheckDistanceHorizontal, _groundLayer);
-        Debug.DrawRay(checkPos + new Vector2(_characterBounds.size.x / 2 , 0), transform.right, Color.red);
+        Debug.DrawRay(checkPos + new Vector2(_characterBounds.size.x / 2 , 0), transform.right * 100, Color.red);
 
 
         if(slopeHitFront)
         {
             Debug.DrawRay(slopeHitFront.point, slopeHitFront.normal, Color.blue);
-            _onSlope = true;
+            _slopeOnRight = true;
             _slopeSideAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
             _slopeNormalPerp = Vector2.Perpendicular(slopeHitFront.normal).normalized;
         }
         else if(slopeHitBack)
         {
-            _onSlope = true;
+            _slopeOnLeft = true;
             _slopeSideAngle = Vector2.Angle(slopeHitBack.normal, Vector2.up);
             _slopeNormalPerp = Vector2.Perpendicular(slopeHitBack.normal).normalized;
         }
         else
         {
             _slopeSideAngle = 0.0f;
-            _onSlope = false;
+            _slopeOnRight = false;
+            _slopeOnLeft = false;
         }
 
         //Hit a wall not a slope
         if(Mathf.Abs(_slopeSideAngle) > 85)
         {
-            _onSlope = false;
+            _slopeOnRight = false;
+            _slopeOnLeft = false;
         }
     }
 
@@ -144,11 +151,11 @@ public class PlayerController : MonoBehaviour
             if (Mathf.Abs(_slopeDownAngle) > Mathf.Epsilon )
             {
                 _slopeNormalPerp = Vector2.Perpendicular(hit.normal).normalized;
-                _onSlope = true;
+                _onSlopeVertical = true;
             }
-            else if (Mathf.Abs(_slopeSideAngle) <= Mathf.Epsilon) //if we detected slope horizontaly, dont overwrite _onSlope or _slopeNormalPerp
+            else  //if we detected slope horizontaly, dont overwrite _onSlope or _slopeNormalPerp
             {
-                _onSlope = false;
+                _onSlopeVertical = false;
             }
 
 
@@ -211,8 +218,6 @@ public class PlayerController : MonoBehaviour
                 // We've landed on a corner or hit our head on a ledge. Nudge the player gently
                 if (i == 1) 
                 {
-                    Debug.Log("down " + _colDown);
-                    Debug.Log("left " + _colLeft);
                     //trying to jump on an edge
                     if (!_colDown && !_colLeft && !_colRight && !_colUp)
                     {
@@ -220,27 +225,26 @@ public class PlayerController : MonoBehaviour
                     }
                     
                     //pop up from ground to be able to move
-                    if (!IsOnSlope)
+                    
+                    if(IsGrounded && !_colLeft && !_colRight)
                     {
-                        if(IsGrounded && !_colLeft && !_colRight)
-                        {
-                            _player.movementVector.y = 0;
-                            _rb2d.position += Vector2.up * Time.deltaTime * NUDGE_MULT ;
-                        }
+                        _player.movementVector.y = 0;
+                        _rb2d.position += Vector2.up * Time.deltaTime * NUDGE_MULT ;
+                    }
                         
                         //pop out of wall
-                        if(_colRight)
-                        {
-                            _player.movementVector.x = 0;
-                            _rb2d.position += Vector2.left  * Time.deltaTime * NUDGE_MULT;
-                        }
-
-                        if(_colLeft)
-                        {
-                            _player.movementVector.x = 0;
-                            _rb2d.position += Vector2.right  * Time.deltaTime * NUDGE_MULT;
-                        }
+                    if(_colRight)
+                    {
+                        _player.movementVector.x = 0;
+                        _rb2d.position += Vector2.left  * Time.deltaTime * NUDGE_MULT;
                     }
+
+                    if(_colLeft)
+                    {
+                        _player.movementVector.x = 0;
+                        _rb2d.position += Vector2.right  * Time.deltaTime * NUDGE_MULT;
+                    }
+                    
                     
                     
                     
