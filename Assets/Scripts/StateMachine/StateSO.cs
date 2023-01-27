@@ -8,6 +8,7 @@ public class StateSO : ScriptableObject
 	[SerializeField] private StateActionSO[] _actions = null;
     [SerializeField] private Color _sceneGizmoColor;
 
+
 	/// <summary>
 	/// Will create a new state or return an existing one inside <paramref name="createdInstances"/>.
 	/// </summary>    

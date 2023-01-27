@@ -49,7 +49,8 @@ public class PlayerController : MonoBehaviour
     float rayOffsetY =0;
 
 
-    private const float NUDGE_MULT = 10f;
+    private const float NUDGE_MULT = 1f;
+    private const float NUDGE_RAY_DIST = 0.4f;
 
     private Rigidbody2D _rb2d;
     private Player _player;
@@ -185,9 +186,13 @@ public class PlayerController : MonoBehaviour
             _rb2d.position += move;
             return;
         }
-        Debug.Log("hit");
-        Vector2 dir = new Vector2(0,0);
-        dir = CheckForNudging(_rb2d.position);
+        
+        
+        Vector2 dir = CheckForNudging(_rb2d.position);
+        if(IsNudgingPlayer)
+        {
+            _rb2d.position += dir.normalized * move.magnitude;    
+        }
 
         // otherwise increment away from current pos; see what closest position we can move to
         var positionToMoveTo = _rb2d.position;
@@ -195,23 +200,19 @@ public class PlayerController : MonoBehaviour
             // increment to check all but furthestPoint - we did that already
             var t = (float)i / _freeColliderIterations;
             var posToTry = Vector2.Lerp(pos, furthestPoint, t);
-
+            
+            //hit head onto plattform    
             
 
             if (Physics2D.OverlapBox(posToTry, _characterBounds.size, 0, _groundLayer)) {
                 _rb2d.position = positionToMoveTo; //the last position without a collision
                 
                 
-                //hit head onto plattform    
-                if(IsNudgingPlayer)
-                {
-                    Debug.Log("nuuud");
-                    _rb2d.position += dir.normalized * move.magnitude;    
-                }
                 // We've landed on a corner or hit our head on a ledge. Nudge the player gently
                 if (i == 1) 
                 {
-
+                    Debug.Log("down " + _colDown);
+                    Debug.Log("left " + _colLeft);
                     //trying to jump on an edge
                     if (!_colDown && !_colLeft && !_colRight && !_colUp)
                     {
@@ -257,10 +258,9 @@ public class PlayerController : MonoBehaviour
     private Vector2 CheckForNudging(Vector2 center)
     {
         Vector2 dir = new Vector2(0,0);
-        
         //nudge player when hitting his Head on a platform above
-        RaycastHit2D leftRay =  Physics2D.Raycast(new Vector2 (center.x -rayOffsetX, center.y + rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
-        RaycastHit2D rightRay = Physics2D.Raycast(new Vector2 (center.x + rayOffsetX, center.y + rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
+        RaycastHit2D leftRay =  Physics2D.Raycast(new Vector2 (center.x -rayOffsetX, center.y + rayOffsetY) , Vector2.up, NUDGE_RAY_DIST, _groundLayer);
+        RaycastHit2D rightRay = Physics2D.Raycast(new Vector2 (center.x + rayOffsetX, center.y + rayOffsetY) , Vector2.up, 0.4f, _groundLayer);
         
         //did we hit our head on the left side (and not close to the middle?)
         _nudgingPlayer = false;

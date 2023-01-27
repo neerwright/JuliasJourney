@@ -21,20 +21,25 @@ public class StateMachine : MonoBehaviour
 	}
     
     private void Update()
-		{
-			if (_currentState.TryGetTransition(out var transitionState))
-				Transition(transitionState);
+	{
+		if (_currentState.TryGetTransition(out var transitionState))
+			Transition(transitionState);
 
-			_currentState.OnUpdate();
-		}
+		_currentState.OnUpdate();
+	}
 
-		private void Transition(State transitionState)
-		{
-			_currentState.OnStateExit();
-			_currentState = transitionState;
-			_currentState.OnStateEnter();
+    private void FixedUpdate()
+    {
+        _currentState.OnFixedUpdate();
+    }    
 
-            _stateTimeElapsed = 0;
+	private void Transition(State transitionState)
+	{
+		_currentState.OnStateExit();
+		_currentState = transitionState;
+		_currentState.OnStateEnter();
+
+        _stateTimeElapsed = 0;
 
 		}
     
