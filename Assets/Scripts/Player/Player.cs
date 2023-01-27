@@ -7,7 +7,6 @@ using System;
 public class Player : MonoBehaviour
 {   
     [SerializeField] private PlayerInputSO _playerInputSO;
-    [SerializeField] private PlayerController _playerController;
 	
     
     private Vector2 _inputVector;

@@ -27,7 +27,7 @@ public class SlopeMovementAction : StateAction
 	{
 		if( _playerController.CanWalkOnSlope)
 		{
-			if((_playerController.IsOnSlope && _playerController.SlopeInBack) || (_playerController.SlopeInFront))
+			if((_playerController.IsOnSlope && _playerController.SlopeInBack) || _playerController.SlopeInFront)
 			{
 				Vector2 SlopeVector = _playerController.VectorAlongSlope;
 				_player.movementVector.x = SlopeVector.x * -_player.movementInput.x * _originSO.speed;

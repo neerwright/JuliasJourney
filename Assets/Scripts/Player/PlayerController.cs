@@ -16,8 +16,8 @@ public class PlayerController : MonoBehaviour
         public bool CollisionAbove => _colUp;
         public bool IsNudgingPlayer => _nudgingPlayer;
         public bool IsOnSlope => _onSlopeVertical;
-        public bool SlopeInFront => Mathf.Sign(transform.localScale.x) > 1 ? _slopeOnRight : _slopeOnLeft;
-        public bool SlopeInBack  => Mathf.Sign(transform.localScale.x) > 1 ? _slopeOnLeft : _slopeOnRight;
+        public bool SlopeInFront => Mathf.Sign(transform.localScale.x) == 1 ? _slopeOnRight : _slopeOnLeft;
+        public bool SlopeInBack  => Mathf.Sign(transform.localScale.x) == 1 ? _slopeOnLeft : _slopeOnRight;
         public bool CanWalkOnSlope => _canWalkOnSlope;
    
 
@@ -114,6 +114,7 @@ public class PlayerController : MonoBehaviour
 
         if(slopeHitFront)
         {
+            Debug.Log("right");
             Debug.DrawRay(slopeHitFront.point, slopeHitFront.normal, Color.blue);
             _slopeOnRight = true;
             _slopeSideAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
