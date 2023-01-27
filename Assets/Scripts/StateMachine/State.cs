@@ -8,6 +8,7 @@ public class State
 	internal StateMachine _stateMachine;
 	internal StateTransition[] _transitions;
 	internal StateAction[] _actions;
+	internal bool _useFixedUpdate;
 
     internal Color _sceneGizmoColor;
 
@@ -39,7 +40,7 @@ public class State
 		OnStateEnter(_actions);
 	}
 
-    		public void OnUpdate()
+    	public void OnUpdate()
 		{
 			for (int i = 0; i < _actions.Length; i++)
 				_actions[i].OnUpdate();

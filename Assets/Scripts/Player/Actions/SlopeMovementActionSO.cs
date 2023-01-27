@@ -25,13 +25,17 @@ public class SlopeMovementAction : StateAction
 
 	public override void OnUpdate()
 	{
+		if( _playerController.CanWalkOnSlope)
+		{
+			Vector2 SlopeAngle = _playerController.AngleAlongSlope;
+			_player.movementVector.x = SlopeAngle.x * -_player.movementInput.x * _originSO.speed;
+			_player.movementVector.y = SlopeAngle.y * -_player.movementInput.x * _originSO.speed;
+			_player.movementVector += Vector2.up * Time.deltaTime * 100;
+			//MaxSpeed
+			_player.movementVector.x = Mathf.Clamp(_player.movementVector.x, -_originSO.maxSpeed, _originSO.maxSpeed);
+		}
+		
 		 
-		Vector2 SlopeAngle = _playerController.AngleAlongSlope;
-		_player.movementVector.x = SlopeAngle.x * -_player.movementInput.x * _originSO.speed;
-		_player.movementVector.y = SlopeAngle.y * -_player.movementInput.x * _originSO.speed;
 		
-		
-		//MaxSpeed
-		_player.movementVector.x = Mathf.Clamp(_player.movementVector.x, -_originSO.maxSpeed, _originSO.maxSpeed);
 	}
 }
