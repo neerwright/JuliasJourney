@@ -89,8 +89,6 @@ public class PlayerController : MonoBehaviour
 
     private void CheckForWalls(ref Vector2 movementVector)
     {
-        //if(IsOnSlopeVertical)
-        //    return;
 
         if (movementVector.x > 0 && _colRight || movementVector.x < 0 && _colLeft) 
         {
@@ -202,10 +200,8 @@ public class PlayerController : MonoBehaviour
                 _canWalkOnSlope = true;
             }
             
-            //_slopeDownAngleOld = _slopeDownAngle;
             
             Debug.DrawRay(hit.point, _slopeNormalPerp, Color.red);
-            //Debug.DrawRay(hit.point, hit.normal, Color.blue);
 
         }
         else
@@ -220,8 +216,11 @@ public class PlayerController : MonoBehaviour
     #region Move
     private void MoveCharacter(Vector2 move) 
     {
- 
+        if(IsGrounded)
+            Debug.Log("ground");
+            
         Debug.DrawRay(_rb2d.position, move * 100, Color.green);   
+
         var pos = _rb2d.position; 
         var furthestPoint = pos + move;
 
