@@ -47,7 +47,6 @@ public class PlayerController : MonoBehaviour
     private bool _canWalkOnSlope = false;
     private float _slopeDownAngle;
     private float _slopeSideAngle;
-    private float _slopeDownAngleOld;
     private Vector2 _slopeNormalPerp;
 
     float rayOffsetX =0;
@@ -56,7 +55,7 @@ public class PlayerController : MonoBehaviour
 
     private const float NUDGE_MULT = 4f;
     private const float NUDGE_RAY_DIST = 0.4f;
-    private const float RAYS_DOWN_RANGE_BONUS = 0.2f;
+    private const float RAYS_DOWN_RANGE_BONUS = 0.0f;
 
     private Rigidbody2D _rb2d;
     private Player _player;
@@ -143,9 +142,27 @@ public class PlayerController : MonoBehaviour
 
     private void SlopeCheckVertical(Vector2 checkPos)
     {
-        RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.down, _slopeCheckDistanceVertical, _groundLayer);
-        if (hit)
+        RaycastHit2D hitLeft = Physics2D.Raycast(checkPos - new Vector2(_characterBounds.size.x / 2 , 0) , Vector2.down, _slopeCheckDistanceVertical, _groundLayer);
+        RaycastHit2D hitRight= Physics2D.Raycast(checkPos + new Vector2(_characterBounds.size.x / 2 , 0) , Vector2.down, _slopeCheckDistanceVertical, _groundLayer);
+
+        if (hitLeft || hitRight)
         {
+            RaycastHit2D hit;
+            if(hitLeft && hitRight) // which one is on a slope?
+            {
+                if(Vector2.Angle(hitLeft.normal, Vector2.up) >= Vector2.Angle(hitRight.normal, Vector2.up))
+                {
+                    hit = hitLeft;    
+                }
+                else
+                {
+                    hit = hitRight;
+                }
+            } 
+            else
+            {
+                hit = (hitLeft)? hitLeft : hitRight;
+            }
             
             _slopeDownAngle = Vector2.Angle(hit.normal, Vector2.up);
 

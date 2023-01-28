@@ -19,8 +19,9 @@ public class SlopeMovementAction : StateAction
 	
 	private bool _useSlopeMovement = false;
 	private float _angleCorrection;
-	private const float BONUS_ANGLE_DOWN = 0.6f;
-	private const float BONUS_ANGLE_UP = -0.5f;
+	private const float BONUS_ANGLE_DOWN = 0.3f;
+	private const float BONUS_ANGLE_UP = -0.4f;
+	private const float TRANSITION_ROUGHNESS_MULTIPLIER = 2.5f;
 	
 	public override void Awake(StateMachine stateMachine)
 	{
@@ -44,12 +45,10 @@ public class SlopeMovementAction : StateAction
 			}
 			else
 			{
+				_player.movementVector.y = 0;
 				_player.movementVector.x = _player.movementInput.x * _originSO.speed;
 			}
-
-			
-
-			
+	
 		}
 		//MaxSpeed
 		_player.movementVector.x = Mathf.Clamp(_player.movementVector.x, -_originSO.maxSpeed, _originSO.maxSpeed);	 
@@ -65,12 +64,29 @@ public class SlopeMovementAction : StateAction
 				_angleCorrection = BONUS_ANGLE_DOWN;
 		}
 
-		if (_playerController.SlopeInFront)
+		//smooth out transition when in front of a slope and starting to walk up
+		if (_playerController.SlopeInFront && !_playerController.IsOnSlope)
+		{
+			_useSlopeMovement = true;
+			if (Mathf.Abs(_player.movementInput.x) > Mathf.Epsilon)
+				_angleCorrection = Vector2.Dot(_playerController.VectorAlongSlope, Vector2.up) * TRANSITION_ROUGHNESS_MULTIPLIER;
+				
+			if(_angleCorrection > 0) // stay more grounded until slope is under our feet
+				_angleCorrection = -_angleCorrection;
+		}
+		
+		if (_playerController.SlopeInFront && _playerController.IsOnSlope)
 		{
 			_useSlopeMovement = true;
 
 			if (Mathf.Abs(_player.movementInput.x) > Mathf.Epsilon)
 				_angleCorrection = BONUS_ANGLE_UP;
+		}
+		
+		//smooth out transition when we start walking down a slope
+		if(_playerController.IsOnSlope && !_playerController.IsGrounded)
+		{
+			_useSlopeMovement = true;
 		}
 
 
