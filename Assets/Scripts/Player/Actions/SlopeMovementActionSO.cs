@@ -16,7 +16,12 @@ public class SlopeMovementAction : StateAction
 	private Player _player;
 	private PlayerController _playerController;
 	private new SlopeMovementActionSO _originSO => (SlopeMovementActionSO)base.OriginSO; // The SO this StateAction spawned from
-
+	
+	private bool _useSlopeMovement = false;
+	private float _angleCorrection;
+	private const float BONUS_ANGLE_DOWN = 0.6f;
+	private const float BONUS_ANGLE_UP = -0.5f;
+	
 	public override void Awake(StateMachine stateMachine)
 	{
 		_player = stateMachine.GetComponent<Player>();
@@ -25,28 +30,20 @@ public class SlopeMovementAction : StateAction
 
 	public override void OnUpdate()
 	{
+		_useSlopeMovement = false;
 		if( _playerController.CanWalkOnSlope)
 		{
-			if((_playerController.IsOnSlope && _playerController.SlopeInBack) || _playerController.SlopeInFront)
-			{
-				float angleCorrection = 0;
-				if(_playerController.SlopeInFront && Mathf.Abs(_player.movementInput.x) > Mathf.Epsilon)
-				{
-					angleCorrection = -0.5f;
-				}
-				if(_playerController.SlopeInBack && Mathf.Abs(_player.movementInput.x) > Mathf.Epsilon)
-				{
-					angleCorrection = 0.6f;
-				}
+			_angleCorrection = 0;
+			CheckMovementAndCalculateAngle();
 
+			if(_useSlopeMovement)
+			{
 				Vector2 SlopeVector = _playerController.VectorAlongSlope;
 				_player.movementVector.x = SlopeVector.x * -_player.movementInput.x * _originSO.speed;
-				_player.movementVector.y = SlopeVector.y * -_player.movementInput.x * _originSO.speed + angleCorrection;
+				_player.movementVector.y = SlopeVector.y * -_player.movementInput.x * _originSO.speed + _angleCorrection;			
 			}
 			else
 			{
-				Debug.Log("vert " + _playerController.IsOnSlope);
-				Debug.Log("back " + _playerController.SlopeInBack);				
 				_player.movementVector.x = _player.movementInput.x * _originSO.speed;
 			}
 
@@ -57,5 +54,25 @@ public class SlopeMovementAction : StateAction
 		//MaxSpeed
 		_player.movementVector.x = Mathf.Clamp(_player.movementVector.x, -_originSO.maxSpeed, _originSO.maxSpeed);	 
 		
+	}
+	private void CheckMovementAndCalculateAngle()
+	{
+		if (_playerController.IsOnSlope && _playerController.SlopeInBack)
+		{
+			_useSlopeMovement = true;
+
+			if (Mathf.Abs(_player.movementInput.x) > Mathf.Epsilon)
+				_angleCorrection = BONUS_ANGLE_DOWN;
+		}
+
+		if (_playerController.SlopeInFront)
+		{
+			_useSlopeMovement = true;
+
+			if (Mathf.Abs(_player.movementInput.x) > Mathf.Epsilon)
+				_angleCorrection = BONUS_ANGLE_UP;
+		}
+
+
 	}
 }
