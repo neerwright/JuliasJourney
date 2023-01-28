@@ -15,7 +15,8 @@ public class PlayerController : MonoBehaviour
         public bool IsGrounded => _colDown;
         public bool CollisionAbove => _colUp;
         public bool IsNudgingPlayer => _nudgingPlayer;
-        public bool IsOnSlope => _onSlopeVertical;
+        public bool IsOnSlopeVertical => _onSlopeVertical;
+        public bool IsCompletelyOnSlope => _onSlopeBothRays;
         public bool SlopeInFront => Mathf.Sign(transform.localScale.x) == 1 ? _slopeOnRight : _slopeOnLeft;
         public bool SlopeInBack  => Mathf.Sign(transform.localScale.x) == 1 ? _slopeOnLeft : _slopeOnRight;
         public bool CanWalkOnSlope => _canWalkOnSlope;
@@ -42,6 +43,7 @@ public class PlayerController : MonoBehaviour
     private float _nudgingRaycastOffset = 0.1f;
     private bool _nudgingPlayer = false;
     private bool _onSlopeVertical = false;
+    private bool _onSlopeBothRays = false;
     private bool _slopeOnRight = false;
     private bool _slopeOnLeft = false;
     private bool _canWalkOnSlope = false;
@@ -49,13 +51,15 @@ public class PlayerController : MonoBehaviour
     private float _slopeSideAngle;
     private Vector2 _slopeNormalPerp;
 
-    float rayOffsetX =0;
-    float rayOffsetY =0;
+    private float _rayOffsetX = 0;
+    private float _rayOffsetY = 0;
+    private float _verticalSlopeCheckOffset = 0.0f;
 
 
     private const float NUDGE_MULT = 4f;
     private const float NUDGE_RAY_DIST = 0.4f;
     private const float RAYS_DOWN_RANGE_BONUS = 0.0f;
+    
 
     private Rigidbody2D _rb2d;
     private Player _player;
@@ -66,9 +70,10 @@ public class PlayerController : MonoBehaviour
         _rb2d = GetComponent<Rigidbody2D>();
 
         //ti start the raycast on top of player for nudging
-        rayOffsetX = (_characterBounds.size.x /2 + _nudgingRaycastOffset);
-        rayOffsetY =  _characterBounds.size.y /2;
+        _rayOffsetX = (_characterBounds.size.x /2 + _nudgingRaycastOffset);
+        _rayOffsetY =  _characterBounds.size.y /2;
 
+        _verticalSlopeCheckOffset = (_characterBounds.size.x / 2 );
     }
 
     //Passed parameter needs to have deltaTime applied 
@@ -84,7 +89,7 @@ public class PlayerController : MonoBehaviour
 
     private void CheckForWalls(ref Vector2 movementVector)
     {
-        //if(IsOnSlope)
+        //if(IsOnSlopeVertical)
         //    return;
 
         if (movementVector.x > 0 && _colRight || movementVector.x < 0 && _colLeft) 
@@ -108,7 +113,7 @@ public class PlayerController : MonoBehaviour
     private void SlopeCheckHorizontal(Vector2 checkPos)
     {
         RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos + new Vector2(_characterBounds.size.x / 2 , 0), transform.right, _slopeCheckDistanceHorizontal, _groundLayer);
-        RaycastHit2D slopeHitBack = Physics2D.Raycast(checkPos - new Vector2(_characterBounds.size.x / 2 , 0), -transform.right, _slopeCheckDistanceHorizontal, _groundLayer);
+        RaycastHit2D slopeHitBack  = Physics2D.Raycast(checkPos - new Vector2(_characterBounds.size.x / 2 , 0), -transform.right, _slopeCheckDistanceHorizontal, _groundLayer);
         Debug.DrawRay(checkPos + new Vector2(_characterBounds.size.x / 2 , 0), transform.right * 100, Color.red);
 
 
@@ -142,21 +147,31 @@ public class PlayerController : MonoBehaviour
 
     private void SlopeCheckVertical(Vector2 checkPos)
     {
-        RaycastHit2D hitLeft = Physics2D.Raycast(checkPos - new Vector2(_characterBounds.size.x / 2 , 0) , Vector2.down, _slopeCheckDistanceVertical, _groundLayer);
-        RaycastHit2D hitRight= Physics2D.Raycast(checkPos + new Vector2(_characterBounds.size.x / 2 , 0) , Vector2.down, _slopeCheckDistanceVertical, _groundLayer);
+        _onSlopeBothRays = false;
+        
+        RaycastHit2D hitLeft = Physics2D.Raycast(checkPos - new Vector2(_verticalSlopeCheckOffset, 0) , Vector2.down, _slopeCheckDistanceVertical, _groundLayer);
+        RaycastHit2D hitRight= Physics2D.Raycast(checkPos + new Vector2(_verticalSlopeCheckOffset, 0) , Vector2.down, _slopeCheckDistanceVertical, _groundLayer);
 
         if (hitLeft || hitRight)
         {
             RaycastHit2D hit;
             if(hitLeft && hitRight) // which one is on a slope?
             {
-                if(Vector2.Angle(hitLeft.normal, Vector2.up) >= Vector2.Angle(hitRight.normal, Vector2.up))
+                float AngleLeft = Vector2.Angle(hitLeft.normal, Vector2.up);
+                float AngleRight = Vector2.Angle(hitRight.normal, Vector2.up);
+
+                if( AngleLeft >= AngleRight)
                 {
                     hit = hitLeft;    
                 }
                 else
                 {
                     hit = hitRight;
+                }
+
+                if (AngleLeft > 0 && AngleRight > 0)
+                {
+                    _onSlopeBothRays = true;
                 }
             } 
             else
@@ -174,6 +189,7 @@ public class PlayerController : MonoBehaviour
             else  
             {
                 _onSlopeVertical = false;
+                _onSlopeBothRays = false;
             }
 
 
@@ -219,7 +235,10 @@ public class PlayerController : MonoBehaviour
         
         Vector2 dir = CheckForNudging(_rb2d.position);
         if(IsNudgingPlayer)
-            _rb2d.MovePosition(_rb2d.position + dir.normalized * move.magnitude);    
+        {
+            _rb2d.MovePosition(_rb2d.position + dir.normalized * move.magnitude);
+        }
+            
         
 
         // otherwise increment away from current pos; see what closest position we can move to
@@ -230,20 +249,24 @@ public class PlayerController : MonoBehaviour
             var posToTry = Vector2.Lerp(pos, furthestPoint, t);
             
             //hit head onto plattform    
-            
+            Debug.Log("hit " + IsGrounded );
 
             if (Physics2D.OverlapBox(posToTry, _characterBounds.size, 0, _groundLayer)) {
                 _rb2d.MovePosition(positionToMoveTo); //the last position without a collision
                 
-                
+                Debug.Log("overlap " );
                 // We've landed on a corner or hit our head on a ledge. Nudge the player gently
                 if (i == 1) 
                 {
-                    if (IsOnSlope || SlopeInFront || SlopeInBack)
+                    if (IsOnSlopeVertical || SlopeInFront || SlopeInBack)
                     {
+
                         if(_colLeft)
                         {
-                            //_player.movementVector.x = 0;
+                            _rb2d.MovePosition(_rb2d.position -  Vector2.Perpendicular(_slopeNormalPerp) * Time.deltaTime * NUDGE_MULT );
+                        }
+                        if(_colRight)
+                        {
                             _rb2d.MovePosition(_rb2d.position -  Vector2.Perpendicular(_slopeNormalPerp) * Time.deltaTime * NUDGE_MULT );
                         }
                     }
@@ -255,14 +278,14 @@ public class PlayerController : MonoBehaviour
                         }
                         
                         //pop up from ground to be able to move
-                        
                         if(IsGrounded && !_colLeft && !_colRight)
                         {
+                            Debug.Log("ground");
                             _player.movementVector.y = 0;
                             _rb2d.MovePosition(_rb2d.position + Vector2.up * Time.deltaTime * NUDGE_MULT );
                         }
                             
-                            //pop out of wall
+                        //pop out of wall
                         if(_colRight)
                         {
                             _player.movementVector.x = 0;
@@ -290,15 +313,15 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 dir = new Vector2(0,0);
         //nudge player when hitting his Head on a platform above
-        RaycastHit2D leftRay =  Physics2D.Raycast(new Vector2 (center.x -rayOffsetX, center.y + rayOffsetY) , Vector2.up, NUDGE_RAY_DIST, _groundLayer);
-        RaycastHit2D rightRay = Physics2D.Raycast(new Vector2 (center.x + rayOffsetX, center.y + rayOffsetY) , Vector2.up, 0.4f, _groundLayer);
+        RaycastHit2D leftRay =  Physics2D.Raycast(new Vector2 (center.x -_rayOffsetX, center.y + _rayOffsetY) , Vector2.up, NUDGE_RAY_DIST, _groundLayer);
+        RaycastHit2D rightRay = Physics2D.Raycast(new Vector2 (center.x + _rayOffsetX, center.y + _rayOffsetY) , Vector2.up, 0.4f, _groundLayer);
         
         //did we hit our head on the left side (and not close to the middle?)
         _nudgingPlayer = false;
         
         if(leftRay )
         {
-            RaycastHit2D MiddleRay =  Physics2D.Raycast(new Vector2 (leftRay.point.x + _nudgeDetectionDistance , center.y + rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
+            RaycastHit2D MiddleRay =  Physics2D.Raycast(new Vector2 (leftRay.point.x + _nudgeDetectionDistance , center.y + _rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
 
             if(!MiddleRay )
             {
@@ -315,7 +338,7 @@ public class PlayerController : MonoBehaviour
         }
         else if(rightRay)
         {
-            RaycastHit2D MiddleRay =  Physics2D.Raycast(new Vector2 (rightRay.point.x - _nudgeDetectionDistance , center.y + rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
+            RaycastHit2D MiddleRay =  Physics2D.Raycast(new Vector2 (rightRay.point.x - _nudgeDetectionDistance , center.y + _rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
 
             if(!MiddleRay)
             {
@@ -419,7 +442,7 @@ public class PlayerController : MonoBehaviour
         var move = new Vector3(_player.movementVector.x, _player.movementVector.y) * Time.deltaTime;
         Gizmos.DrawWireCube(transform.position + _characterBounds.center + move, _characterBounds.size);
 
-        //if(IsOnSlope) 
+        //if(IsOnSlopeVertical) 
         //    Debug.Log("is On slope: ");      
 
         //if(IsGrounded)

@@ -19,9 +19,9 @@ public class SlopeMovementAction : StateAction
 	
 	private bool _useSlopeMovement = false;
 	private float _angleCorrection;
-	private const float BONUS_ANGLE_DOWN = 0.3f;
-	private const float BONUS_ANGLE_UP = -0.4f;
-	private const float TRANSITION_ROUGHNESS_MULTIPLIER = 2.5f;
+	private const float BONUS_ANGLE_DOWN = 0.6f;
+	private const float BONUS_ANGLE_UP = -0.7f;
+	private const float TRANSITION_ROUGHNESS_MULTIPLIER = 4.5f;
 	
 	public override void Awake(StateMachine stateMachine)
 	{
@@ -56,7 +56,7 @@ public class SlopeMovementAction : StateAction
 	}
 	private void CheckMovementAndCalculateAngle()
 	{
-		if (_playerController.IsOnSlope && _playerController.SlopeInBack)
+		if (_playerController.IsOnSlopeVertical && _playerController.SlopeInBack)
 		{
 			_useSlopeMovement = true;
 
@@ -65,7 +65,7 @@ public class SlopeMovementAction : StateAction
 		}
 
 		//smooth out transition when in front of a slope and starting to walk up
-		if (_playerController.SlopeInFront && !_playerController.IsOnSlope)
+		if (_playerController.SlopeInFront && !_playerController.IsOnSlopeVertical)
 		{
 			_useSlopeMovement = true;
 			if (Mathf.Abs(_player.movementInput.x) > Mathf.Epsilon)
@@ -75,7 +75,7 @@ public class SlopeMovementAction : StateAction
 				_angleCorrection = -_angleCorrection;
 		}
 		
-		if (_playerController.SlopeInFront && _playerController.IsOnSlope)
+		if (_playerController.SlopeInFront && _playerController.IsOnSlopeVertical)
 		{
 			_useSlopeMovement = true;
 
@@ -84,9 +84,12 @@ public class SlopeMovementAction : StateAction
 		}
 		
 		//smooth out transition when we start walking down a slope
-		if(_playerController.IsOnSlope && !_playerController.IsGrounded)
+		if(_playerController.IsCompletelyOnSlope && !_playerController.SlopeInFront && !_playerController.SlopeInBack)
 		{
 			_useSlopeMovement = true;
+
+			if (Mathf.Abs(_player.movementInput.x) > Mathf.Epsilon)
+				_angleCorrection = -0.7f;
 		}
 
 

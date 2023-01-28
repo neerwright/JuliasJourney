@@ -21,6 +21,7 @@ public class DecelerateHorizontalAction : StateAction
 
     public override void OnUpdate()
 	{
+		_player.movementVector.y = 0;
         _player.movementVector.x = Mathf.MoveTowards(_player.movementVector.x, 0, OriginSO._deAcceleration * Time.deltaTime);
 	}
 
