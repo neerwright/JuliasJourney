@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: DecelerateHorizontalAction
   m_EditorClassIdentifier: 
   description: 
-  _deAcceleration: 99.5
+  _deAcceleration: 50

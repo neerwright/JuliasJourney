@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
         _rayOffsetX = (_characterBounds.size.x /2 + _nudgingRaycastOffset);
         _rayOffsetY =  _characterBounds.size.y /2;
 
-        _verticalSlopeCheckOffset = (_characterBounds.size.x / 2 );
+        _verticalSlopeCheckOffset = ( _characterBounds.size.x / 2 );
     }
 
     //Passed parameter needs to have deltaTime applied 
@@ -114,7 +114,7 @@ public class PlayerController : MonoBehaviour
     {
         RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos + new Vector2(_characterBounds.size.x / 2 , 0), transform.right, _slopeCheckDistanceHorizontal, _groundLayer);
         RaycastHit2D slopeHitBack  = Physics2D.Raycast(checkPos - new Vector2(_characterBounds.size.x / 2 , 0), -transform.right, _slopeCheckDistanceHorizontal, _groundLayer);
-        Debug.DrawRay(checkPos + new Vector2(_characterBounds.size.x / 2 , 0), transform.right * 100, Color.red);
+        //Debug.DrawRay(checkPos + new Vector2(_characterBounds.size.x / 2 , 0), transform.right * 100, Color.red);
 
 
         if(slopeHitFront)
@@ -204,7 +204,7 @@ public class PlayerController : MonoBehaviour
             
             //_slopeDownAngleOld = _slopeDownAngle;
             
-            //Debug.DrawRay(hit.point, _slopeNormalPerp, Color.red);
+            Debug.DrawRay(hit.point, _slopeNormalPerp, Color.red);
             //Debug.DrawRay(hit.point, hit.normal, Color.blue);
 
         }
@@ -248,24 +248,15 @@ public class PlayerController : MonoBehaviour
             var t = (float)i / _freeColliderIterations;
             var posToTry = Vector2.Lerp(pos, furthestPoint, t);
             
-            //hit head onto plattform    
-            Debug.Log("hit " + IsGrounded );
-
             if (Physics2D.OverlapBox(posToTry, _characterBounds.size, 0, _groundLayer)) {
                 _rb2d.MovePosition(positionToMoveTo); //the last position without a collision
                 
-                Debug.Log("overlap " );
                 // We've landed on a corner or hit our head on a ledge. Nudge the player gently
                 if (i == 1) 
                 {
                     if (IsOnSlopeVertical || SlopeInFront || SlopeInBack)
                     {
-
-                        if(_colLeft)
-                        {
-                            _rb2d.MovePosition(_rb2d.position -  Vector2.Perpendicular(_slopeNormalPerp) * Time.deltaTime * NUDGE_MULT );
-                        }
-                        if(_colRight)
+                        if(_slopeOnLeft || _slopeOnRight)
                         {
                             _rb2d.MovePosition(_rb2d.position -  Vector2.Perpendicular(_slopeNormalPerp) * Time.deltaTime * NUDGE_MULT );
                         }
@@ -280,7 +271,6 @@ public class PlayerController : MonoBehaviour
                         //pop up from ground to be able to move
                         if(IsGrounded && !_colLeft && !_colRight)
                         {
-                            Debug.Log("ground");
                             _player.movementVector.y = 0;
                             _rb2d.MovePosition(_rb2d.position + Vector2.up * Time.deltaTime * NUDGE_MULT );
                         }

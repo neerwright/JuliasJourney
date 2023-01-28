@@ -28,6 +28,7 @@ public class AcceleratedMovementAction : StateAction
 
 	public override void OnUpdate()
 	{
+		_player.movementVector.y = 0f;
 		//acceleration --> delta.Time is used 
 		_player.movementVector.x += _player.movementInput.x  * _originSO.acceleration * Time.deltaTime;
 		//Decelerate
