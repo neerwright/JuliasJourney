@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
 
     private const float NUDGE_MULT = 4f;
     private const float NUDGE_RAY_DIST = 0.4f;
+    private const float RAYS_DOWN_RANGE_BONUS = 0.2f;
 
     private Rigidbody2D _rb2d;
     private Player _player;
@@ -114,7 +115,6 @@ public class PlayerController : MonoBehaviour
 
         if(slopeHitFront)
         {
-            Debug.Log("right");
             Debug.DrawRay(slopeHitFront.point, slopeHitFront.normal, Color.blue);
             _slopeOnRight = true;
             _slopeSideAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
@@ -154,7 +154,7 @@ public class PlayerController : MonoBehaviour
                 _slopeNormalPerp = Vector2.Perpendicular(hit.normal).normalized;
                 _onSlopeVertical = true;
             }
-            else  //if we detected slope horizontaly, dont overwrite _onSlope or _slopeNormalPerp
+            else  
             {
                 _onSlopeVertical = false;
             }
@@ -175,6 +175,10 @@ public class PlayerController : MonoBehaviour
             //Debug.DrawRay(hit.point, hit.normal, Color.blue);
 
         }
+        else
+        {
+            _onSlopeVertical = false;
+        }
     }
 
 
@@ -191,16 +195,15 @@ public class PlayerController : MonoBehaviour
         // check furthest movement. If nothing hit, move and don't do extra checks
         var hit = Physics2D.OverlapBox(furthestPoint, _characterBounds.size, 0, _groundLayer);
         if (!hit) {
-            _rb2d.position += move;
+            _rb2d.MovePosition(_rb2d.position + move);
             return;
         }
         
         
         Vector2 dir = CheckForNudging(_rb2d.position);
         if(IsNudgingPlayer)
-        {
-            _rb2d.position += dir.normalized * move.magnitude;    
-        }
+            _rb2d.MovePosition(_rb2d.position + dir.normalized * move.magnitude);    
+        
 
         // otherwise increment away from current pos; see what closest position we can move to
         var positionToMoveTo = _rb2d.position;
@@ -213,43 +216,49 @@ public class PlayerController : MonoBehaviour
             
 
             if (Physics2D.OverlapBox(posToTry, _characterBounds.size, 0, _groundLayer)) {
-                _rb2d.position = positionToMoveTo; //the last position without a collision
+                _rb2d.MovePosition(positionToMoveTo); //the last position without a collision
                 
                 
                 // We've landed on a corner or hit our head on a ledge. Nudge the player gently
                 if (i == 1) 
                 {
-                    //trying to jump on an edge
-                    if (!_colDown && !_colLeft && !_colRight && !_colUp)
+                    if (IsOnSlope || SlopeInFront || SlopeInBack)
                     {
-                        _rb2d.position += Vector2.up * Time.deltaTime * NUDGE_MULT ;
+                        if(_colLeft)
+                        {
+                            //_player.movementVector.x = 0;
+                            _rb2d.MovePosition(_rb2d.position -  Vector2.Perpendicular(_slopeNormalPerp) * Time.deltaTime * NUDGE_MULT );
+                        }
                     }
-                    
-                    //pop up from ground to be able to move
-                    
-                    if(IsGrounded && !_colLeft && !_colRight)
+                    else
                     {
-                        _player.movementVector.y = 0;
-                        _rb2d.position += Vector2.up * Time.deltaTime * NUDGE_MULT ;
-                    }
+                        if (!_colDown && !_colLeft && !_colRight && !_colUp)
+                        {
+                            _rb2d.position += Vector2.up * Time.deltaTime * NUDGE_MULT ;
+                        }
                         
-                        //pop out of wall
-                    if(_colRight)
-                    {
-                        _player.movementVector.x = 0;
-                        _rb2d.position += Vector2.left  * Time.deltaTime * NUDGE_MULT;
-                    }
+                        //pop up from ground to be able to move
+                        
+                        if(IsGrounded && !_colLeft && !_colRight)
+                        {
+                            _player.movementVector.y = 0;
+                            _rb2d.MovePosition(_rb2d.position + Vector2.up * Time.deltaTime * NUDGE_MULT );
+                        }
+                            
+                            //pop out of wall
+                        if(_colRight)
+                        {
+                            _player.movementVector.x = 0;
+                            _rb2d.MovePosition(_rb2d.position + Vector2.left  * Time.deltaTime * NUDGE_MULT);
+                        }
 
-                    if(_colLeft)
-                    {
-                        _player.movementVector.x = 0;
-                        _rb2d.position += Vector2.right  * Time.deltaTime * NUDGE_MULT;
-                    }
-                    
-                    
-                    
-                    
-                    
+                        if(_colLeft)
+                        {
+                            _player.movementVector.x = 0;
+                            _rb2d.MovePosition(_rb2d.position + Vector2.right  * Time.deltaTime * NUDGE_MULT);
+                        }
+                    }                    
+                                                    
                 }
 
                 return;
@@ -320,7 +329,7 @@ public class PlayerController : MonoBehaviour
 
         // Ground
         LandingThisFrame = false;
-        var groundedCheck = RunDetection(_raysDown);
+        var groundedCheck = RunDetection(_raysDown , RAYS_DOWN_RANGE_BONUS);
         if (_colDown && !groundedCheck) _timeLeftGrounded = Time.time; // Only trigger when first leaving
         else if (!_colDown && groundedCheck) {
             //_coyoteUsable = true; // Only trigger when first touching
@@ -334,8 +343,8 @@ public class PlayerController : MonoBehaviour
         _colLeft = RunDetection(_raysLeft);
         _colRight = RunDetection(_raysRight);
 
-        bool RunDetection(RayRange range) {
-            return EvaluateRayPositions(range).Any(point => Physics2D.Raycast(point, range.Dir, _detectionRayLength, _groundLayer));
+        bool RunDetection(RayRange range, float extendRange = 0) {
+            return EvaluateRayPositions(range).Any(point => Physics2D.Raycast(point, range.Dir, _detectionRayLength + extendRange, _groundLayer));
         }
     }
 
@@ -373,11 +382,14 @@ public class PlayerController : MonoBehaviour
         if (!Application.isPlaying) {
             CalculateRayRanged();
             Gizmos.color = Color.blue;
-            foreach (var range in new List<RayRange> { _raysUp, _raysRight, _raysDown, _raysLeft }) {
+            foreach (var range in new List<RayRange> { _raysUp, _raysRight, _raysLeft }) {
                 foreach (var point in EvaluateRayPositions(range)) {
                     Gizmos.DrawRay(point, range.Dir * _detectionRayLength);
                 }
             }
+            foreach (var point in EvaluateRayPositions(_raysDown)) {
+                    Gizmos.DrawRay(point, _raysDown.Dir * (_detectionRayLength + RAYS_DOWN_RANGE_BONUS));
+                } 
         }
 
         
