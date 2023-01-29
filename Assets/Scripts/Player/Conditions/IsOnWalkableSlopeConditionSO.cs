@@ -2,9 +2,9 @@ using UnityEngine;
 
 
 [CreateAssetMenu(menuName = "State Machine/Conditions/Is Character Controller on a Slope")]
-public class IsOnSlopeConditionSO : StateConditionSO<IsOnSlopeCondition> { }
+public class IsOnWalkableSlopeConditionSO : StateConditionSO<IsOnWalkableSlopeCondition> { }
 
-public class IsOnSlopeCondition : Condition
+public class IsOnWalkableSlopeCondition : Condition
 {
 	private PlayerController _playerController;
 

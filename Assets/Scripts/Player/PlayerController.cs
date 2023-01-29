@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
     private const float NUDGE_RAY_DIST = 0.4f;
     private const float RAYS_DOWN_RANGE_BONUS = 0.0f;
     
+    private bool bDebug = false;
 
     private Rigidbody2D _rb2d;
     private Player _player;
@@ -216,8 +217,11 @@ public class PlayerController : MonoBehaviour
     #region Move
     private void MoveCharacter(Vector2 move) 
     {
-        if(IsGrounded)
-            Debug.Log("ground");
+        _nudgingPlayer = false;
+        if(bDebug)
+        {
+            Debug.Log(move);
+        }
             
         Debug.DrawRay(_rb2d.position, move * 100, Color.green);   
 
@@ -230,7 +234,7 @@ public class PlayerController : MonoBehaviour
             _rb2d.MovePosition(_rb2d.position + move);
             return;
         }
-        
+        //Debug.Log("hit");
         
         Vector2 dir = CheckForNudging(_rb2d.position);
         if(IsNudgingPlayer)
@@ -246,18 +250,29 @@ public class PlayerController : MonoBehaviour
             // increment to check all but furthestPoint - we did that already
             var t = (float)i / _freeColliderIterations;
             var posToTry = Vector2.Lerp(pos, furthestPoint, t);
+            //_rb2d.MovePosition(positionToMoveTo);
             
+
             if (Physics2D.OverlapBox(posToTry, _characterBounds.size, 0, _groundLayer)) {
                 _rb2d.MovePosition(positionToMoveTo); //the last position without a collision
-                
+                //Debug.Log("Overlap box");
                 // We've landed on a corner or hit our head on a ledge. Nudge the player gently
                 if (i == 1) 
                 {
                     if (IsOnSlopeVertical || SlopeInFront || SlopeInBack)
                     {
+                        //Debug.Log("Slooope");
                         if(_slopeOnLeft || _slopeOnRight)
                         {
-                            _rb2d.MovePosition(_rb2d.position -  Vector2.Perpendicular(_slopeNormalPerp) * Time.deltaTime * NUDGE_MULT );
+
+                            _rb2d.position = (_rb2d.position -  2 * (Vector2.Perpendicular(_slopeNormalPerp) * Time.deltaTime)); //make some space between player and ledge 
+                            var newfurthestPoint = _rb2d.position + move;
+                            var newHit = Physics2D.OverlapBox(newfurthestPoint, _characterBounds.size, 0, _groundLayer);
+                            if (!newHit) {
+                                _rb2d.MovePosition(_rb2d.position + move); // keep moving player in desired direction
+                                return;
+                            } 
+                            
                         }
                     }
                     else
@@ -292,7 +307,10 @@ public class PlayerController : MonoBehaviour
 
                 return;
             }
-
+            else
+            {
+                _rb2d.MovePosition(positionToMoveTo);
+            }
             positionToMoveTo = posToTry; //shift one for next iteration
         }
     }

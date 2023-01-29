@@ -3,8 +3,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "SlopeMovement", menuName = "State Machine/Actions/Slope Movement")]
 public class SlopeMovementActionSO : StateActionSO<SlopeMovementAction>
 {
-	[Tooltip("Maximum speed")]
-	public float maxSpeed = 5f;
 	[Tooltip("Speed multiplyer")]
 	public float speed = 8f;
 	
@@ -38,8 +36,9 @@ public class SlopeMovementAction : StateAction
 		{
 			Vector2 SlopeVector = _playerController.VectorAlongSlope;
 			Debug.DrawRay(_player.transform.position, SlopeVector, Color.red);
+			
 			_player.movementVector.x = SlopeVector.x * -_player.movementInput.x * _originSO.speed;
-			_player.movementVector.y = SlopeVector.y * -_player.movementInput.x * _originSO.speed + _angleCorrection;			
+			_player.movementVector.y = SlopeVector.y * -_player.movementInput.x * _originSO.speed + _angleCorrection;		
 		}
 		else
 		{
