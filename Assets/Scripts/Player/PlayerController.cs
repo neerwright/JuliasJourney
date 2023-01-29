@@ -7,11 +7,12 @@ public class PlayerController : MonoBehaviour
     [Header("MOVE")] [SerializeField, Tooltip("Raising this value increases collision accuracy at the cost of performance.")]
         private int _freeColliderIterations = 10;
     
-        public Vector2 Velocity{get; private set;}
-        public Vector2 VectorAlongSlope => _slopeNormalPerp;
-        
-        public bool JumpingThisFrame { get; private set; }
+        public bool CoyoteUsable{get;set;}
+        public float TimeLeftGrounded{get;set;}
+        public Vector2 Velocity{get; private set;} 
+        //public bool JumpingThisFrame { get; private set; }
         public bool LandingThisFrame { get; private set; }
+        public Vector2 VectorAlongSlope => _slopeNormalPerp;
         public bool IsGrounded => _colDown;
         public bool CollisionAbove => _colUp;
         public bool IsNudgingPlayer => _nudgingPlayer;
@@ -20,7 +21,9 @@ public class PlayerController : MonoBehaviour
         public bool SlopeInFront => Mathf.Sign(transform.localScale.x) == 1 ? _slopeOnRight : _slopeOnLeft;
         public bool SlopeInBack  => Mathf.Sign(transform.localScale.x) == 1 ? _slopeOnLeft : _slopeOnRight;
         public bool CanWalkOnSlope => _canWalkOnSlope;
+        public bool CanUseCoyote => CoyoteUsable && !_colDown && TimeLeftGrounded + _coyoteTimeThreshold > Time.time;
    
+        
 
     [Header("COLLISION")] 
         [SerializeField] private Bounds _characterBounds;
@@ -33,13 +36,15 @@ public class PlayerController : MonoBehaviour
         [SerializeField] private float _slopeCheckDistanceHorizontal = 0.7f;
         [SerializeField] private float _maxSlopeAngle = 60.0f;
 
+        [SerializeField] private float _coyoteTimeThreshold = 0.1f;
+
+
 
     private Vector2 _lastPosition;
     private Vector2 _targetVelocity;
     private const float MIN_MOVE_DISTANCE = 0.001f;
     private RayRange _raysUp, _raysRight, _raysDown, _raysLeft;
     private bool _colUp, _colRight, _colDown, _colLeft;
-    private float _timeLeftGrounded;
     private float _nudgingRaycastOffset = 0.1f;
     private bool _nudgingPlayer = false;
     private bool _onSlopeVertical = false;
@@ -337,9 +342,12 @@ public class PlayerController : MonoBehaviour
         // Ground
         LandingThisFrame = false;
         var groundedCheck = RunDetection(_raysDown , RAYS_DOWN_RANGE_BONUS);
-        if (_colDown && !groundedCheck) _timeLeftGrounded = Time.time; // Only trigger when first leaving
+        if (_colDown && !groundedCheck) 
+        {
+            TimeLeftGrounded = Time.time; // Only trigger when first leaving
+        }
         else if (!_colDown && groundedCheck) {
-            //_coyoteUsable = true; // Only trigger when first touching
+            CoyoteUsable = true; // Only trigger when first touching
             LandingThisFrame = true;
         }
 
@@ -405,7 +413,10 @@ public class PlayerController : MonoBehaviour
         
 
         if (!Application.isPlaying) return;
-        
+        if(CanUseCoyote)
+            Debug.Log("coyo");
+
+        Debug.Log(TimeLeftGrounded);
         // Draw the future position. Handy for visualizing gravity
         Gizmos.color = Color.red;
         var move = new Vector3(_player.movementVector.x, _player.movementVector.y) * Time.deltaTime;

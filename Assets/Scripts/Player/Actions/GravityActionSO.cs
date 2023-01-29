@@ -23,7 +23,6 @@ public class GravityAction : StateAction
 
 	public override void OnUpdate()
 	{
-		Debug.Log("gravity");
 		_player.movementVector.y = _originSO.verticalPull;
 	}
 }
