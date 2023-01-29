@@ -253,22 +253,27 @@ public class PlayerController : MonoBehaviour
                     //When on a Slope
                     if (IsOnSlopeVertical || SlopeInFront || SlopeInBack)
                     {
-    
+                        Vector2 SlopeNormal = Vector2.Perpendicular(_slopeNormalPerp);
+
                         if(_slopeOnLeft || _slopeOnRight)
                         {
-                            _rb2d.position = (_rb2d.position - (Vector2.Perpendicular(_slopeNormalPerp) * Time.deltaTime)); //make some space between player and ledge                             
-                            _player.movementVector.y = 0;
-                            _rb2d.MovePosition(_rb2d.position + _player.movementVector * Time.deltaTime);
+                            _rb2d.position = (_rb2d.position - (SlopeNormal * Time.deltaTime)); //make some space between player and ledge                             
+                            
                         }
                         else
                         {
                             if(_colDown)
                             {
-                                _rb2d.MovePosition(_rb2d.position -  4 * (Vector2.Perpendicular(_slopeNormalPerp) * Time.deltaTime));
-                                
+                                _rb2d.MovePosition(_rb2d.position -  4f * (Vector2.Perpendicular(_slopeNormalPerp) * Time.deltaTime));    
                             }
                         }
-                        
+                        _player.movementVector.y = 0;
+                        move.y = 0;
+                        if (Mathf.Sign(SlopeNormal.x) != Mathf.Sign(_player.movementVector.x))
+                        {
+                            _rb2d.MovePosition(_rb2d.position + _player.movementVector * Time.deltaTime);
+                        }
+                                               
                     }
                     else
                     {
