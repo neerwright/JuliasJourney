@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2272388513b88848a637930ed05eef2, type: 3}
   m_Name: SLIDE_DOWN_SLOPE
   m_EditorClassIdentifier: 
-  _actions: []
+  _actions:
+  - {fileID: 11400000, guid: 79c43e51735da9b4c8459dd1bdd0b72a, type: 2}
+  - {fileID: 11400000, guid: 39bbd4514532d9c41a0e9f4d15c149e4, type: 2}
   _sceneGizmoColor: {r: 0, g: 0, b: 0, a: 1}

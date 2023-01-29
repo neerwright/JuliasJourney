@@ -646,7 +646,7 @@ MonoBehaviour:
     m_Bits: 64
   _detectorCount: 12
   _detectionRayLength: 0.2
-  _rayBufferOffset: 0.197
+  _rayBufferOffset: 0.2
   _nudgeDetectionDistance: 0.7
   _slopeCheckDistanceVertical: 1.7
   _slopeCheckDistanceHorizontal: 0.7
