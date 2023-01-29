@@ -266,23 +266,23 @@ public class PlayerController : MonoBehaviour
                             _rb2d.MovePosition(_rb2d.position + Vector2.up * Time.deltaTime * NUDGE_MULT) ;
                         }
                         
-                        //pop up from ground to be able to move
+                        //pop up from ground to be able to move forward
                         if(IsGrounded && !_colLeft && !_colRight)
                         {
                             _player.movementVector.y = 0;
-                            _rb2d.MovePosition(_rb2d.position + Vector2.up * Time.deltaTime * NUDGE_MULT );
+                            _rb2d.position = _rb2d.position + Vector2.up * Time.deltaTime * NUDGE_MULT;
+                            
+                            _rb2d.MovePosition(_rb2d.position + _player.movementVector * Time.deltaTime);
                         }
                             
                         //pop out of wall
                         if(_colRight)
                         {
-                            _player.movementVector.x = 0;
                             _rb2d.MovePosition(_rb2d.position + Vector2.left  * Time.deltaTime * NUDGE_MULT);
                         }
 
                         if(_colLeft)
                         {
-                            _player.movementVector.x = 0;
                             _rb2d.MovePosition(_rb2d.position + Vector2.right  * Time.deltaTime * NUDGE_MULT);
                         }
 
@@ -413,10 +413,7 @@ public class PlayerController : MonoBehaviour
         
 
         if (!Application.isPlaying) return;
-        if(CanUseCoyote)
-            Debug.Log("coyo");
 
-        Debug.Log(TimeLeftGrounded);
         // Draw the future position. Handy for visualizing gravity
         Gizmos.color = Color.red;
         var move = new Vector3(_player.movementVector.x, _player.movementVector.y) * Time.deltaTime;
