@@ -51,16 +51,16 @@ public class PlayerController : MonoBehaviour
     private float _slopeSideAngle;
     private Vector2 _slopeNormalPerp;
 
-    private float _rayOffsetX = 0;
-    private float _rayOffsetY = 0;
+    private float _rayOffsetY = 0f;
     private float _verticalSlopeCheckOffset = 0.0f;
 
 
     private const float NUDGE_MULT = 4f;
     private const float NUDGE_RAY_DIST = 0.4f;
     private const float RAYS_DOWN_RANGE_BONUS = 0.0f;
+    private const float NUDGING_SPEED_THRESHOLD = 8f;
     
-    private bool bDebug = false;
+   
 
     private Rigidbody2D _rb2d;
     private Player _player;
@@ -70,11 +70,9 @@ public class PlayerController : MonoBehaviour
         _player = GetComponent<Player>();
         _rb2d = GetComponent<Rigidbody2D>();
 
-        //ti start the raycast on top of player for nudging
-        _rayOffsetX = (_characterBounds.size.x /2 + _nudgingRaycastOffset);
         _rayOffsetY =  _characterBounds.size.y /2;
 
-        _verticalSlopeCheckOffset = ( _characterBounds.size.x / 2 );
+        _verticalSlopeCheckOffset =  _characterBounds.size.x / 2;
     }
 
     //Passed parameter needs to have deltaTime applied 
@@ -217,14 +215,10 @@ public class PlayerController : MonoBehaviour
     #region Move
     private void MoveCharacter(Vector2 move) 
     {
+        Debug.DrawRay(_rb2d.position, move * 100, Color.green);
+        
         _nudgingPlayer = false;
-        if(bDebug)
-        {
-            Debug.Log(move);
-        }
             
-        Debug.DrawRay(_rb2d.position, move * 100, Color.green);   
-
         var pos = _rb2d.position; 
         var furthestPoint = pos + move;
 
@@ -234,15 +228,7 @@ public class PlayerController : MonoBehaviour
             _rb2d.MovePosition(_rb2d.position + move);
             return;
         }
-        //Debug.Log("hit");
-        
-        Vector2 dir = CheckForNudging(_rb2d.position);
-        if(IsNudgingPlayer)
-        {
-            _rb2d.MovePosition(_rb2d.position + dir.normalized * move.magnitude);
-        }
-            
-        
+
 
         // otherwise increment away from current pos; see what closest position we can move to
         var positionToMoveTo = _rb2d.position;
@@ -255,31 +241,24 @@ public class PlayerController : MonoBehaviour
 
             if (Physics2D.OverlapBox(posToTry, _characterBounds.size, 0, _groundLayer)) {
                 _rb2d.MovePosition(positionToMoveTo); //the last position without a collision
-                //Debug.Log("Overlap box");
+                
                 // We've landed on a corner or hit our head on a ledge. Nudge the player gently
                 if (i == 1) 
                 {
+                    //When on a Slope
                     if (IsOnSlopeVertical || SlopeInFront || SlopeInBack)
                     {
                         //Debug.Log("Slooope");
                         if(_slopeOnLeft || _slopeOnRight)
                         {
-
-                            _rb2d.position = (_rb2d.position -  4 * (Vector2.Perpendicular(_slopeNormalPerp) * Time.deltaTime)); //make some space between player and ledge 
-                            var newfurthestPoint = _rb2d.position + move;
-                            var newHit = Physics2D.OverlapBox(newfurthestPoint, _characterBounds.size, 0, _groundLayer);
-                            if (!newHit) {
-                                _rb2d.MovePosition(_rb2d.position + move); // keep moving player in desired direction
-                                return;
-                            } 
-                            
+                            _rb2d.position = (_rb2d.position -  4 * (Vector2.Perpendicular(_slopeNormalPerp) * Time.deltaTime)); //make some space between player and ledge                             
                         }
                     }
                     else
                     {
-                        if (!_colDown && !_colLeft && !_colRight && !_colUp)
+                        if (!_colDown && !_colLeft && !_colRight && !_colUp && !IsNudgingPlayer)
                         {
-                            _rb2d.position += Vector2.up * Time.deltaTime * NUDGE_MULT ;
+                            _rb2d.MovePosition(_rb2d.position + Vector2.up * Time.deltaTime * NUDGE_MULT) ;
                         }
                         
                         //pop up from ground to be able to move
@@ -301,7 +280,36 @@ public class PlayerController : MonoBehaviour
                             _player.movementVector.x = 0;
                             _rb2d.MovePosition(_rb2d.position + Vector2.right  * Time.deltaTime * NUDGE_MULT);
                         }
-                    }                    
+
+                        if(_colUp && !IsGrounded)//hit head on plattform
+                        {
+                            RaycastHit2D leftRay =  Physics2D.Raycast(_rb2d.position + new Vector2(-_nudgeDetectionDistance,_rayOffsetY), Vector2.up, NUDGE_RAY_DIST, _groundLayer);
+                            RaycastHit2D rightRay = Physics2D.Raycast(_rb2d.position + new Vector2(_nudgeDetectionDistance,_rayOffsetY), Vector2.up, NUDGE_RAY_DIST, _groundLayer);
+                            if(leftRay && rightRay)
+                                return;
+
+                            Vector2 dir = new Vector2(0,0);
+                            if(rightRay && _player.movementVector.x < -NUDGING_SPEED_THRESHOLD)
+                            {
+                                _nudgingPlayer = true;
+                                dir = Vector2.left * NUDGE_MULT;
+                            }
+                            if(leftRay && _player.movementVector.x > NUDGING_SPEED_THRESHOLD)
+                            {
+                                _nudgingPlayer = true;
+                                dir = Vector2.right * NUDGE_MULT;
+                            }
+        
+                            _rb2d.position = (_rb2d.position + dir * Time.deltaTime);
+                        }
+                    }
+                    //Check again if w can move after nudging
+                    furthestPoint = _rb2d.position + move;
+                    var Hit = Physics2D.OverlapBox(furthestPoint, _characterBounds.size, 0, _groundLayer);
+                    if (!Hit) {
+                        _rb2d.MovePosition(_rb2d.position + move); // keep moving player in desired direction
+                        return;
+                        }                    
                                                     
                 }
 
@@ -316,55 +324,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    private Vector2 CheckForNudging(Vector2 center)
-    {
-        Vector2 dir = new Vector2(0,0);
-        //nudge player when hitting his Head on a platform above
-        RaycastHit2D leftRay =  Physics2D.Raycast(new Vector2 (center.x -_rayOffsetX, center.y + _rayOffsetY) , Vector2.up, NUDGE_RAY_DIST, _groundLayer);
-        RaycastHit2D rightRay = Physics2D.Raycast(new Vector2 (center.x + _rayOffsetX, center.y + _rayOffsetY) , Vector2.up, 0.4f, _groundLayer);
-        
-        //did we hit our head on the left side (and not close to the middle?)
-        _nudgingPlayer = false;
-        
-        if(leftRay )
-        {
-            RaycastHit2D MiddleRay =  Physics2D.Raycast(new Vector2 (leftRay.point.x + _nudgeDetectionDistance , center.y + _rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
-
-            if(!MiddleRay )
-            {
-                
-                dir = _rb2d.position - leftRay.point;
-                _nudgingPlayer = true;
-            }
-            else
-            {
-                _nudgingPlayer = false;
-            }
-            
-
-        }
-        else if(rightRay)
-        {
-            RaycastHit2D MiddleRay =  Physics2D.Raycast(new Vector2 (rightRay.point.x - _nudgeDetectionDistance , center.y + _rayOffsetY) , Vector2.up, 0.1f, _groundLayer);
-
-            if(!MiddleRay)
-            {
-                if(Application.isPlaying)
-                {
-                    Debug.DrawRay( center + new Vector2 (_characterBounds.size.x/2,_characterBounds.size.y/2), Vector2.up, Color.green, 1.0f );
-                }
-                dir = _rb2d.position - rightRay.point;
-                _nudgingPlayer = true;
-            }
-            else
-            {
-                _nudgingPlayer = false;
-            }
-            
-        }
-        
-        return dir;
-    }
+    
     
     #endregion
     
@@ -386,7 +346,7 @@ public class PlayerController : MonoBehaviour
         _colDown = groundedCheck;
 
         // The rest
-        _colUp = RunDetection(_raysUp);
+        _colUp = RunDetection(_raysUp, RAYS_DOWN_RANGE_BONUS);
         _colLeft = RunDetection(_raysLeft);
         _colRight = RunDetection(_raysRight);
 
@@ -429,12 +389,15 @@ public class PlayerController : MonoBehaviour
         if (!Application.isPlaying) {
             CalculateRayRanged();
             Gizmos.color = Color.blue;
-            foreach (var range in new List<RayRange> { _raysUp, _raysRight, _raysLeft }) {
+            foreach (var range in new List<RayRange> { _raysRight, _raysLeft }) {
                 foreach (var point in EvaluateRayPositions(range)) {
                     Gizmos.DrawRay(point, range.Dir * _detectionRayLength);
                 }
             }
             foreach (var point in EvaluateRayPositions(_raysDown)) {
+                    Gizmos.DrawRay(point, _raysDown.Dir * (_detectionRayLength + RAYS_DOWN_RANGE_BONUS));
+                } 
+            foreach (var point in EvaluateRayPositions(_raysUp)) {
                     Gizmos.DrawRay(point, _raysDown.Dir * (_detectionRayLength + RAYS_DOWN_RANGE_BONUS));
                 } 
         }
@@ -443,19 +406,10 @@ public class PlayerController : MonoBehaviour
 
         if (!Application.isPlaying) return;
         
-        DrawNudgingRays();
         // Draw the future position. Handy for visualizing gravity
         Gizmos.color = Color.red;
         var move = new Vector3(_player.movementVector.x, _player.movementVector.y) * Time.deltaTime;
         Gizmos.DrawWireCube(transform.position + _characterBounds.center + move, _characterBounds.size);
-
-        //if(IsOnSlopeVertical) 
-        //    Debug.Log("is On slope: ");      
-
-        //if(IsGrounded)
-        //    Debug.Log("grounded ");
-        
-
         
     }
 
