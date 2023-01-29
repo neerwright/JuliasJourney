@@ -265,7 +265,7 @@ public class PlayerController : MonoBehaviour
                         if(_slopeOnLeft || _slopeOnRight)
                         {
 
-                            _rb2d.position = (_rb2d.position -  2 * (Vector2.Perpendicular(_slopeNormalPerp) * Time.deltaTime)); //make some space between player and ledge 
+                            _rb2d.position = (_rb2d.position -  4 * (Vector2.Perpendicular(_slopeNormalPerp) * Time.deltaTime)); //make some space between player and ledge 
                             var newfurthestPoint = _rb2d.position + move;
                             var newHit = Physics2D.OverlapBox(newfurthestPoint, _characterBounds.size, 0, _groundLayer);
                             if (!newHit) {

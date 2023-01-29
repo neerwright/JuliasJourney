@@ -27,19 +27,10 @@ public class SlopeSlideDownAction : StateAction
 
 	public override void OnUpdate()
 	{
-		
-		
-		
-
-		
 		Vector2 SlopeVector = _playerController.VectorAlongSlope;
 		Debug.DrawRay(_player.transform.position, SlopeVector * 100, Color.red);
 		_player.movementVector.x = SlopeVector.x * _originSO.speed;
-		_player.movementVector.y = SlopeVector.y * _originSO.speed;			
-		
-	
-
-		
+		_player.movementVector.y = SlopeVector.y * _originSO.speed;					
 	}
 	
 }

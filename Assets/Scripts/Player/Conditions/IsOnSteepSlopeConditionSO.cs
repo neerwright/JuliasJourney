@@ -15,5 +15,5 @@ public class IsOnSteepSlopeCondition : Condition
 		_playerController = stateMachine.GetComponent<PlayerController>();
 	}
 
-	protected override bool Statement() => !_playerController.CanWalkOnSlope && (_playerController.IsOnSlopeVertical) && _playerController.IsGrounded && (_playerController.SlopeInFront || _playerController.SlopeInBack); 
+	protected override bool Statement() => !_playerController.CanWalkOnSlope && (_playerController.IsOnSlopeVertical) && (_playerController.SlopeInFront || _playerController.SlopeInBack); 
 }
