@@ -1,40 +1,43 @@
 using UnityEngine;
+using Statemachine;
 
-
-[CreateAssetMenu(menuName = "State Machine/Conditions/Has Hit the Head")]
-public class HasHitHeadConditionSO : StateConditionSO<HasHitHeadCondition> { }
-
-public class HasHitHeadCondition : Condition
+namespace Player
 {
-	//Component references
-	private Player _player;
-	private PlayerController _playerController;
-	private Transform _transform;
+	[CreateAssetMenu(menuName = "State Machine/Conditions/Has Hit the Head")]
+	public class HasHitHeadConditionSO : StateConditionSO<HasHitHeadCondition> { }
 
-	public override void Awake(StateMachine stateMachine)
+	public class HasHitHeadCondition : Condition
 	{
-		_transform = stateMachine.GetComponent<Transform>();
-		_player = stateMachine.GetComponent<Player>();
-		_playerController = stateMachine.GetComponent<PlayerController>();
-	}
+		//Component references
+		private Player _player;
+		private PlayerController _playerController;
+		private Transform _transform;
 
-	protected override bool Statement()
-	{
-		bool isMovingUpwards = _player.movementVector.y > 0f;
-		
-		if (isMovingUpwards)
+		public override void Awake(StateMachine stateMachine)
 		{
-			
-			if(_playerController.CollisionAbove && !_playerController.IsNudgingPlayer)
-			{
-				_player.jumpInput = false;
-				_player.movementVector.y = 0f;
-				
-
-				return true;
-			}
+			_transform = stateMachine.GetComponent<Transform>();
+			_player = stateMachine.GetComponent<Player>();
+			_playerController = stateMachine.GetComponent<PlayerController>();
 		}
 
-		return false;
+		protected override bool Statement()
+		{
+			bool isMovingUpwards = _player.movementVector.y > 0f;
+			
+			if (isMovingUpwards)
+			{
+				
+				if(_playerController.CollisionAbove && !_playerController.IsNudgingPlayer)
+				{
+					_player.jumpInput = false;
+					_player.movementVector.y = 0f;
+					
+
+					return true;
+				}
+			}
+
+			return false;
+		}
 	}
 }

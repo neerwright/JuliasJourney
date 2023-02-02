@@ -1,71 +1,73 @@
-
-
-public class StateTransition : IStateComponent
+namespace Statemachine
 {
-    private State _targetState;
-		private StateCondition[] _conditions;
-		private int[] _resultGroups;
-		private bool[] _results;
 
-        internal StateTransition() { }  
-		public StateTransition(State targetState, StateCondition[] conditions, int[] resultGroups = null)
-		{
-			Init(targetState, conditions, resultGroups);
-		}
+	public class StateTransition : IStateComponent
+	{
+		private State _targetState;
+			private StateCondition[] _conditions;
+			private int[] _resultGroups;
+			private bool[] _results;
 
-        internal void Init(State targetState, StateCondition[] conditions, int[] resultGroups = null)
-		{
-			_targetState = targetState;
-			_conditions = conditions;
-			_resultGroups = resultGroups != null && resultGroups.Length > 0 ? resultGroups : new int[1];
-			_results = new bool[_resultGroups.Length];
-		}
+			internal StateTransition() { }  
+			public StateTransition(State targetState, StateCondition[] conditions, int[] resultGroups = null)
+			{
+				Init(targetState, conditions, resultGroups);
+			}
 
-        /// <summary>
-		/// Checks wether the conditions to transition to the target state are met.
-		/// </summary>
-		/// <param name="state">Returns the state to transition to. Null if the conditions aren't met.</param>
-		/// <returns>True if the conditions are met.</returns>
-		public bool TryGetTransiton(out State state)
-		{
-			state = ShouldTransition() ? _targetState : null;
-			return state != null;
-		}
+			internal void Init(State targetState, StateCondition[] conditions, int[] resultGroups = null)
+			{
+				_targetState = targetState;
+				_conditions = conditions;
+				_resultGroups = resultGroups != null && resultGroups.Length > 0 ? resultGroups : new int[1];
+				_results = new bool[_resultGroups.Length];
+			}
 
-        //check if ALL conditions are met.
-        private bool ShouldTransition()
-		{
-			int count = _resultGroups.Length;
-			for (int i = 0, idx = 0; i < count && idx < _conditions.Length; i++)
-				for (int j = 0; j < _resultGroups[i]; j++, idx++)
-					_results[i] = j == 0 ?
-						_conditions[idx].IsMet() :
-						_results[i] && _conditions[idx].IsMet();
+			/// <summary>
+			/// Checks wether the conditions to transition to the target state are met.
+			/// </summary>
+			/// <param name="state">Returns the state to transition to. Null if the conditions aren't met.</param>
+			/// <returns>True if the conditions are met.</returns>
+			public bool TryGetTransiton(out State state)
+			{
+				state = ShouldTransition() ? _targetState : null;
+				return state != null;
+			}
 
-			bool ret = false;
-			for (int i = 0; i < count && !ret; i++)
-				ret = ret || _results[i];
+			//check if ALL conditions are met.
+			private bool ShouldTransition()
+			{
+				int count = _resultGroups.Length;
+				for (int i = 0, idx = 0; i < count && idx < _conditions.Length; i++)
+					for (int j = 0; j < _resultGroups[i]; j++, idx++)
+						_results[i] = j == 0 ?
+							_conditions[idx].IsMet() :
+							_results[i] && _conditions[idx].IsMet();
 
-			return ret;
-		}
-        
-        //-----------------------
-        public void OnStateEnter()
-		{
-			for (int i = 0; i < _conditions.Length; i++)
-				_conditions[i]._condition.OnStateEnter();
-		}
+				bool ret = false;
+				for (int i = 0; i < count && !ret; i++)
+					ret = ret || _results[i];
 
-		public void OnStateExit()
-		{
-			for (int i = 0; i < _conditions.Length; i++)
-				_conditions[i]._condition.OnStateExit();
-		}
+				return ret;
+			}
+			
+			//-----------------------
+			public void OnStateEnter()
+			{
+				for (int i = 0; i < _conditions.Length; i++)
+					_conditions[i]._condition.OnStateEnter();
+			}
 
-        //for caching conditions later
-        //internal void ClearConditionsCache()
-		//{
-		//	for (int i = 0; i < _conditions.Length; i++)
-		//		_conditions[i]._condition.ClearStatementCache();
-		//}
+			public void OnStateExit()
+			{
+				for (int i = 0; i < _conditions.Length; i++)
+					_conditions[i]._condition.OnStateExit();
+			}
+
+			//for caching conditions later
+			//internal void ClearConditionsCache()
+			//{
+			//	for (int i = 0; i < _conditions.Length; i++)
+			//		_conditions[i]._condition.ClearStatementCache();
+			//}
+	}
 }

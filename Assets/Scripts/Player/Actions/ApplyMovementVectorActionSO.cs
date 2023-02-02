@@ -1,27 +1,32 @@
 using UnityEngine;
+using Statemachine;
 
-[CreateAssetMenu(fileName = "ApplyMovementVector", menuName = "State Machine/Actions/Apply Movement Vector")]
-public class ApplyMovementVectorActionSO : StateActionSO<ApplyMovementVectorAction> { }
-
-public class ApplyMovementVectorAction : StateAction
+namespace Player
 {
-	//Component references
-    private Player _player;
-	private PlayerController _playerController;
 
-	public override void Awake(StateMachine stateMachine)
+	[CreateAssetMenu(fileName = "ApplyMovementVector", menuName = "State Machine/Actions/Apply Movement Vector")]
+	public class ApplyMovementVectorActionSO : StateActionSO<ApplyMovementVectorAction> { }
+
+	public class ApplyMovementVectorAction : StateAction
 	{
-		_player = stateMachine.GetComponent<Player>();
-		_playerController = stateMachine.GetComponent<PlayerController>();
-	}
+		//Component references
+		private Player _player;
+		private PlayerController _playerController;
 
-	public override void OnUpdate()
-	{
+		public override void Awake(StateMachine stateMachine)
+		{
+			_player = stateMachine.GetComponent<Player>();
+			_playerController = stateMachine.GetComponent<PlayerController>();
+		}
 
-	}
+		public override void OnUpdate()
+		{
 
-	public override void OnFixedUpdate()
-	{
-		_playerController.Move(_player.movementVector * Time.deltaTime);//applies the current movementVector
+		}
+
+		public override void OnFixedUpdate()
+		{
+			_playerController.Move(_player.movementVector * Time.deltaTime);//applies the current movementVector
+		}
 	}
 }

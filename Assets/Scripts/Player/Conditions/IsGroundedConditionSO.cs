@@ -1,17 +1,20 @@
 using UnityEngine;
+using Statemachine;
 
-
-[CreateAssetMenu(menuName = "State Machine/Conditions/Is Character Controller Grounded")]
-public class IsGroundedConditionSO : StateConditionSO<IsGroundedCondition> { }
-
-public class IsGroundedCondition : Condition
+namespace Player
 {
-	private PlayerController _playerController;
+	[CreateAssetMenu(menuName = "State Machine/Conditions/Is Character Controller Grounded")]
+	public class IsGroundedConditionSO : StateConditionSO<IsGroundedCondition> { }
 
-	public override void Awake(StateMachine stateMachine)
+	public class IsGroundedCondition : Condition
 	{
-		_playerController = stateMachine.GetComponent<PlayerController>();
-	}
+		private PlayerController _playerController;
 
-	protected override bool Statement() => _playerController.IsGrounded;
+		public override void Awake(StateMachine stateMachine)
+		{
+			_playerController = stateMachine.GetComponent<PlayerController>();
+		}
+
+		protected override bool Statement() => _playerController.IsGrounded;
+	}
 }

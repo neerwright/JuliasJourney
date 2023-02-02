@@ -1,12 +1,15 @@
-interface IStateComponent
-	{
-		/// <summary>
-		/// Called when entering the state.
-		/// </summary>
-		void OnStateEnter();
+namespace Statemachine
+{
+	interface IStateComponent
+		{
+			/// <summary>
+			/// Called when entering the state.
+			/// </summary>
+			void OnStateEnter();
 
-		/// <summary>
-		/// Called when leaving the state.
-		/// </summary>
-		void OnStateExit();
-	}
+			/// <summary>
+			/// Called when leaving the state.
+			/// </summary>
+			void OnStateExit();
+		}
+}

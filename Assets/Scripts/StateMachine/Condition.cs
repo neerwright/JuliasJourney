@@ -1,6 +1,7 @@
 
-
-public abstract class Condition : IStateComponent
+namespace Statemachine
+{
+	public abstract class Condition : IStateComponent
 	{
 		internal StateConditionSO _originSO;
 
@@ -52,3 +53,4 @@ public abstract class Condition : IStateComponent
 			return isMet;
 		}
 	}
+}
