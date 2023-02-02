@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Utilities;
 
 namespace Player
 {
@@ -98,6 +99,7 @@ namespace Player
             RunCollisionChecks();
             CheckForWalls(ref movementVector);
             SlopeCheck();
+            CheckForNonWalkableSlope();
             MoveCharacter(movementVector);
         }
 
@@ -109,118 +111,52 @@ namespace Player
 
             if (movementVector.x > 0 && _colRight || movementVector.x < 0 && _colLeft) 
             {
-                
                 // Don't walk through walls
                 _isCollidingWithWall = true;
                 movementVector.x = 0;  
             }          
         }
 
-        private void SlopeCheck()
+        private void CheckForNonWalkableSlope()
         {
-            Vector2 checkPos = transform.position - new Vector3(0.0f, _characterBounds.size.y / 2);
-            SlopeCheckHorizontal(checkPos);
-            SlopeCheckVertical(checkPos);
-        }
-
-        private void SlopeCheckHorizontal(Vector2 checkPos)
-        {
-            RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos + new Vector2(_characterBounds.size.x / 2 , 0), transform.right, _slopeCheckDistanceHorizontal, _groundLayer);
-            RaycastHit2D slopeHitBack  = Physics2D.Raycast(checkPos - new Vector2(_characterBounds.size.x / 2 , 0), -transform.right, _slopeCheckDistanceHorizontal, _groundLayer);
-
-            if(slopeHitFront)
+            if (_slopeDownAngle > _maxSlopeAngle || _slopeSideAngle > _maxSlopeAngle)
             {
-                _slopeOnRight = true;
-                _slopeSideAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
-                _slopeNormalPerp = Vector2.Perpendicular(slopeHitFront.normal).normalized;
-            }
-            else if(slopeHitBack)
-            {
-                _slopeOnLeft = true;
-                _slopeSideAngle = Vector2.Angle(slopeHitBack.normal, Vector2.up);
-                _slopeNormalPerp = Vector2.Perpendicular(slopeHitBack.normal).normalized;
+                _canWalkOnSlope = false;
             }
             else
             {
-                _slopeSideAngle = 0.0f;
-                _slopeOnRight = false;
-                _slopeOnLeft = false;
+                _canWalkOnSlope = true;
             }
+        }
 
+        private void SlopeCheck()
+        {
+            Vector2 checkPos = transform.position - new Vector3(0.0f, _characterBounds.size.y / 2);
+
+            RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos + new Vector2(_characterBounds.size.x / 2 , 0), transform.right, _slopeCheckDistanceHorizontal, _groundLayer);
+            RaycastHit2D slopeHitBack  = Physics2D.Raycast(checkPos - new Vector2(_characterBounds.size.x / 2 , 0), -transform.right, _slopeCheckDistanceHorizontal, _groundLayer);
+
+            (_slopeOnRight, _slopeOnLeft, _slopeSideAngle, _slopeNormalPerp) = SlopeChecker.SlopeCheckHorizontal(slopeHitFront, slopeHitBack);
             //Hit a wall not a slope
             if(Mathf.Abs(_slopeSideAngle) > 85)
             {
                 _slopeOnRight = false;
                 _slopeOnLeft = false;
             }
-        }
-
-        private void SlopeCheckVertical(Vector2 checkPos)
-        {
-            _onSlopeBothRays = false;
             
+
             RaycastHit2D hitLeft = Physics2D.Raycast(checkPos - new Vector2(_verticalSlopeCheckOffset, 0) , Vector2.down, _slopeCheckDistanceVertical, _groundLayer);
             RaycastHit2D hitRight= Physics2D.Raycast(checkPos + new Vector2(_verticalSlopeCheckOffset, 0) , Vector2.down, _slopeCheckDistanceVertical, _groundLayer);
 
-            if (hitLeft || hitRight)
+            Vector2 NormalPerpVertical;
+            (_onSlopeBothRays , _onSlopeVertical , _slopeDownAngle, NormalPerpVertical) = SlopeChecker.SlopeCheckVertical(hitLeft, hitRight);
+            
+            if(_slopeDownAngle > Mathf.Epsilon)
             {
-                RaycastHit2D hit;
-                if(hitLeft && hitRight) // which one is on a slope?
-                {
-                    float AngleLeft = Vector2.Angle(hitLeft.normal, Vector2.up);
-                    float AngleRight = Vector2.Angle(hitRight.normal, Vector2.up);
-
-                    if( AngleLeft >= AngleRight)
-                    {
-                        hit = hitLeft;    
-                    }
-                    else
-                    {
-                        hit = hitRight;
-                    }
-
-                    if (AngleLeft > 0 && AngleRight > 0)
-                    {
-                        _onSlopeBothRays = true;
-                    }
-                } 
-                else
-                {
-                    hit = (hitLeft)? hitLeft : hitRight;
-                }
-                
-                _slopeDownAngle = Vector2.Angle(hit.normal, Vector2.up);
-
-                if (Mathf.Abs(_slopeDownAngle) > Mathf.Epsilon )
-                {
-                    _slopeNormalPerp = Vector2.Perpendicular(hit.normal).normalized;
-                    _onSlopeVertical = true;
-                }
-                else  
-                {
-                    _onSlopeVertical = false;
-                    _onSlopeBothRays = false;
-                }
-
-
-                if (_slopeDownAngle > _maxSlopeAngle || _slopeSideAngle > _maxSlopeAngle)
-                {
-                    _canWalkOnSlope = false;
-                }
-                else
-                {
-                    _canWalkOnSlope = true;
-                }
-                
-                
+                _slopeNormalPerp = NormalPerpVertical;
             }
-            else
-            {
-                _onSlopeVertical = false;
-            }
+
         }
-
-
         #endregion
 
         #region Move
@@ -261,21 +197,20 @@ namespace Player
                         {
                             Vector2 SlopeNormal = Vector2.Perpendicular(_slopeNormalPerp);
 
-                            if(_slopeOnLeft || _slopeOnRight)
+                            if(_slopeOnLeft || _slopeOnRight) //stuck on slope, pop out
                             {
-                                _rb2d.position = (_rb2d.position - (SlopeNormal * Time.deltaTime)); //make some space between player and ledge                             
-                                
+                                _rb2d.position = (_rb2d.position - (SlopeNormal * Time.deltaTime)); //make some space between player and ledge                                
                             }
                             else
                             {
-                                if(_colDown)
+                                if(_colDown) //pop out extra hard when stuck in ground
                                 {
                                     _rb2d.MovePosition(_rb2d.position -  4f * (Vector2.Perpendicular(_slopeNormalPerp) * Time.deltaTime));    
                                 }
                             }
                             _player.movementVector.y = 0;
                             move.y = 0;
-                            if (Mathf.Sign(SlopeNormal.x) != Mathf.Sign(_player.movementVector.x))
+                            if (Mathf.Sign(SlopeNormal.x) != Mathf.Sign(_player.movementVector.x)) // but keep speed in dir we are moving in
                             {
                                 _rb2d.MovePosition(_rb2d.position + _player.movementVector * Time.deltaTime);
                             }
@@ -330,7 +265,7 @@ namespace Player
                                 _rb2d.position = (_rb2d.position + dir * Time.deltaTime);
                             }
                         }
-                        //Check again if w can move after nudging
+                        //Check again if we can move right after nudging
                         furthestPoint = _rb2d.position + move;
                         var Hit = Physics2D.OverlapBox(furthestPoint, _characterBounds.size, 0, _groundLayer);
                         if (!Hit) {
