@@ -18,7 +18,7 @@ namespace Player
 
 		private float _verticalMovement;
 		private float _gravityContributionMultiplier;
-		private new AscendActionSO _originSO => (AscendActionSO)base.OriginSO; // The SO this StateAction spawned from
+		private AscendActionSO _originSO => (AscendActionSO)base.OriginSO; // The SO this StateAction spawned from
 
 		public override void Awake(StateMachine stateMachine)
 		{

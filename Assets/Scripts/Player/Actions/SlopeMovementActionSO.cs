@@ -17,7 +17,7 @@ namespace Player
 		//Component references
 		private Player _player;
 		private PlayerController _playerController;
-		private new SlopeMovementActionSO _originSO => (SlopeMovementActionSO)base.OriginSO; // The SO this StateAction spawned from
+		private SlopeMovementActionSO _originSO => (SlopeMovementActionSO)base.OriginSO; // The SO this StateAction spawned from
 		
 		private bool _useSlopeMovement = false;
 		private float _angleCorrection;

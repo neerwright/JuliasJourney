@@ -17,7 +17,7 @@ namespace Player
 		//Component references
 		private Player _player;
 		private PlayerController _playerController;
-		private new SlopeSlideDownActionSO _originSO => (SlopeSlideDownActionSO)base.OriginSO; // The SO this StateAction spawned from
+		private SlopeSlideDownActionSO _originSO => (SlopeSlideDownActionSO)base.OriginSO; // The SO this StateAction spawned from
 		
 		
 

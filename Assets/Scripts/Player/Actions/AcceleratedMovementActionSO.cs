@@ -24,7 +24,7 @@ namespace Player
 		//Component references
 		private Player _player;
 		private PlayerController _playerController;
-		private new AcceleratedMovementActionSO _originSO => (AcceleratedMovementActionSO)base.OriginSO; // The SO this StateAction spawned from
+		private AcceleratedMovementActionSO _originSO => (AcceleratedMovementActionSO)base.OriginSO; // The SO this StateAction spawned from
 
 		public override void Awake(StateMachine stateMachine)
 		{

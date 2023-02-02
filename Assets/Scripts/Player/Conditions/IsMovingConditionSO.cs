@@ -12,7 +12,7 @@ namespace Player
 	public class IsMovingCondition : Condition
 	{
 		private Player _player;
-		private new IsMovingConditionSO _originSO => (IsMovingConditionSO)base.OriginSO; // The SO this Condition spawned from
+		private IsMovingConditionSO _originSO => (IsMovingConditionSO)base.OriginSO; // The SO this Condition spawned from
 
 		public override void Awake(StateMachine stateMachine)
 		{

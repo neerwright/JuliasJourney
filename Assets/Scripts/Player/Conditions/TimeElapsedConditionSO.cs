@@ -17,7 +17,7 @@ namespace Player
 	public class TimeElapsedCondition : Condition
 	{
 		private float _startTime;
-		private new TimeElapsedConditionSO _originSO => (TimeElapsedConditionSO)base.OriginSO; // The SO this Condition spawned from
+		private TimeElapsedConditionSO _originSO => (TimeElapsedConditionSO)base.OriginSO; // The SO this Condition spawned from
 
 		public override void OnStateEnter()
 		{

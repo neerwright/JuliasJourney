@@ -18,7 +18,7 @@ namespace Player
         private StateMachine _stateMachine;
         private int timerDuration = 3;
 
-        private new RandomConditionSO _originSO => (RandomConditionSO)base.OriginSO; // The SO this Condition spawned from
+        private RandomConditionSO _originSO => (RandomConditionSO)base.OriginSO; // The SO this Condition spawned from
 
         public override void Awake(StateMachine stateMachine)
         {

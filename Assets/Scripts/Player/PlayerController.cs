@@ -66,7 +66,6 @@ namespace Player
         private bool _isCollidingWithWall = false;
         
 
-        private float _nudgingRaycastOffset = 0.1f;
         private float _rayOffsetY = 0f;
         private float _verticalSlopeCheckOffset = 0.0f;
 

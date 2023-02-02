@@ -15,7 +15,7 @@ namespace Player
 	{
 		//Component references
 		private Player _player;
-		private new HorizontalMoveActionSO _originSO => (HorizontalMoveActionSO)base.OriginSO; // The SO this StateAction spawned from
+		private HorizontalMoveActionSO _originSO => (HorizontalMoveActionSO)base.OriginSO; // The SO this StateAction spawned from
 
 		public override void Awake(StateMachine stateMachine)
 		{
