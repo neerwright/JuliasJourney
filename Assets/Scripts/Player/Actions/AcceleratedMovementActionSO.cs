@@ -19,11 +19,14 @@ public class AcceleratedMovementAction : StateAction
 {
 	//Component references
 	private Player _player;
+	private PlayerController _playerController;
 	private new AcceleratedMovementActionSO _originSO => (AcceleratedMovementActionSO)base.OriginSO; // The SO this StateAction spawned from
 
 	public override void Awake(StateMachine stateMachine)
 	{
 		_player = stateMachine.GetComponent<Player>();
+		_playerController = stateMachine.GetComponent<PlayerController>();
+
 	}
 
 	public override void OnUpdate()
@@ -33,7 +36,8 @@ public class AcceleratedMovementAction : StateAction
 		_player.movementVector.x += _player.movementInput.x  * _originSO.acceleration * Time.deltaTime;
 		//Decelerate
 		_player.movementVector.x *= Mathf.Pow(1f - _originSO.damping, Time.deltaTime * 10f);
-		
+		if (_playerController.IsCollidingWithWall)
+			_player.movementVector.x = 0;
 		
 		//MaxSpeed
 		_player.movementVector.x = Mathf.Clamp(_player.movementVector.x, -_originSO.maxSpeed, _originSO.maxSpeed);

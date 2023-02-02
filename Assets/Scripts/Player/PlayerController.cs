@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
         public bool SlopeInBack  => Mathf.Sign(transform.localScale.x) == 1 ? _slopeOnLeft : _slopeOnRight;
         public bool CanWalkOnSlope => _canWalkOnSlope;
         public bool CanUseCoyote => CoyoteUsable && !_colDown && TimeLeftGrounded + _coyoteTimeThreshold > Time.time;
+        public bool IsCollidingWithWall => _isCollidingWithWall;
    
         
 
@@ -52,6 +53,7 @@ public class PlayerController : MonoBehaviour
     private bool _slopeOnRight = false;
     private bool _slopeOnLeft = false;
     private bool _canWalkOnSlope = false;
+    private bool _isCollidingWithWall = false;
     private float _slopeDownAngle;
     private float _slopeSideAngle;
     private Vector2 _slopeNormalPerp;
@@ -93,10 +95,13 @@ public class PlayerController : MonoBehaviour
 
     private void CheckForWalls(ref Vector2 movementVector)
     {
+        _isCollidingWithWall = false;
 
         if (movementVector.x > 0 && _colRight || movementVector.x < 0 && _colLeft) 
         {
+            
             // Don't walk through walls
+            _isCollidingWithWall = true;
             movementVector.x = 0;  
         }
 
@@ -294,11 +299,15 @@ public class PlayerController : MonoBehaviour
                         //pop out of wall
                         if(_colRight)
                         {
+                            _player.movementVector.x = 0;
+                            move.x=0;
                             _rb2d.MovePosition(_rb2d.position + Vector2.left  * Time.deltaTime * NUDGE_MULT);
                         }
 
                         if(_colLeft)
                         {
+                            _player.movementVector.x = 0;
+                            move.x=0;
                             _rb2d.MovePosition(_rb2d.position + Vector2.right  * Time.deltaTime * NUDGE_MULT);
                         }
 
