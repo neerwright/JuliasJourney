@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7b0df8e8cb472f46811b06dc1f50ed4, type: 3}
   m_Name: JumpTimerElapsed Condition SO
   m_EditorClassIdentifier: 
-  timerLength: 0.3
+  description: How high we can jump
+  timerLength: 0.2

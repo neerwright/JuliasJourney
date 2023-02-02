@@ -7,28 +7,10 @@ namespace Player
 
     public class PlayerController : MonoBehaviour 
     {
-        [Header("MOVE")] [SerializeField, Tooltip("Raising this value increases collision accuracy at the cost of performance.")]
+        [Header("MOVE")] 
+            [SerializeField, Tooltip("Raising this value increases collision accuracy at the cost of performance.")]
             private int _freeColliderIterations = 10;
         
-            public bool CoyoteUsable{get;set;}
-            public float TimeLeftGrounded{get;set;}
-            public Vector2 Velocity{get; private set;} 
-            //public bool JumpingThisFrame { get; private set; }
-            public bool LandingThisFrame { get; private set; }
-            public Vector2 VectorAlongSlope => _slopeNormalPerp;
-            public bool IsGrounded => _colDown;
-            public bool CollisionAbove => _colUp;
-            public bool IsNudgingPlayer => _nudgingPlayer;
-            public bool IsOnSlopeVertical => _onSlopeVertical;
-            public bool IsCompletelyOnSlope => _onSlopeBothRays;
-            public bool SlopeInFront => Mathf.Sign(transform.localScale.x) == 1 ? _slopeOnRight : _slopeOnLeft;
-            public bool SlopeInBack  => Mathf.Sign(transform.localScale.x) == 1 ? _slopeOnLeft : _slopeOnRight;
-            public bool CanWalkOnSlope => _canWalkOnSlope;
-            public bool CanUseCoyote => CoyoteUsable && !_colDown && TimeLeftGrounded + _coyoteTimeThreshold > Time.time;
-            public bool IsCollidingWithWall => _isCollidingWithWall;
-    
-            
-
         [Header("COLLISION")] 
             [SerializeField] private Bounds _characterBounds;
             [SerializeField] private LayerMask _groundLayer;
@@ -44,27 +26,52 @@ namespace Player
 
 
 
-        private Vector2 _lastPosition;
-        private Vector2 _targetVelocity;
-        private const float MIN_MOVE_DISTANCE = 0.001f;
+        //MOVING    
+            public Vector2 VectorAlongSlope => _slopeNormalPerp;
+            public bool IsOnSlopeVertical => _onSlopeVertical;
+            public bool IsCompletelyOnSlope => _onSlopeBothRays;
+            public bool SlopeInFront => Mathf.Sign(transform.localScale.x) == 1 ? _slopeOnRight : _slopeOnLeft;
+            public bool SlopeInBack  => Mathf.Sign(transform.localScale.x) == 1 ? _slopeOnLeft : _slopeOnRight;
+            public bool CanWalkOnSlope => _canWalkOnSlope;
+                  
+        //JUMPIMG
+            public bool CoyoteUsable{get;set;}
+            public bool CanUseCoyote => CoyoteUsable && !_colDown && TimeLeftGrounded + _coyoteTimeThreshold > Time.time;
+            public float TimeLeftGrounded{get;set;}
+            public bool LandingThisFrame { get; private set; }
+            public bool IsGrounded => _colDown;
+
+        //COLLISION
+            public bool CollisionAbove => _colUp;
+            public bool IsNudgingPlayer => _nudgingPlayer;
+            public bool IsCollidingWithWall => _isCollidingWithWall;
+
+
+
         private RayRange _raysUp, _raysRight, _raysDown, _raysLeft;
         private bool _colUp, _colRight, _colDown, _colLeft;
-        private float _nudgingRaycastOffset = 0.1f;
+        
         private bool _nudgingPlayer = false;
+
         private bool _onSlopeVertical = false;
         private bool _onSlopeBothRays = false;
         private bool _slopeOnRight = false;
         private bool _slopeOnLeft = false;
         private bool _canWalkOnSlope = false;
-        private bool _isCollidingWithWall = false;
         private float _slopeDownAngle;
         private float _slopeSideAngle;
         private Vector2 _slopeNormalPerp;
 
+        private bool _isCollidingWithWall = false;
+        
+
+        private float _nudgingRaycastOffset = 0.1f;
         private float _rayOffsetY = 0f;
         private float _verticalSlopeCheckOffset = 0.0f;
 
+        private Vector2 _debugCurMoveVector;
 
+        private const float MIN_MOVE_DISTANCE = 0.001f;
         private const float NUDGE_MULT = 4f;
         private const float NUDGE_RAY_DIST = 0.4f;
         private const float RAYS_DOWN_RANGE_BONUS = 0.0f;
@@ -106,9 +113,7 @@ namespace Player
                 // Don't walk through walls
                 _isCollidingWithWall = true;
                 movementVector.x = 0;  
-            }
-
-            
+            }          
         }
 
         private void SlopeCheck()
@@ -116,20 +121,15 @@ namespace Player
             Vector2 checkPos = transform.position - new Vector3(0.0f, _characterBounds.size.y / 2);
             SlopeCheckHorizontal(checkPos);
             SlopeCheckVertical(checkPos);
-            
-
         }
 
         private void SlopeCheckHorizontal(Vector2 checkPos)
         {
             RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos + new Vector2(_characterBounds.size.x / 2 , 0), transform.right, _slopeCheckDistanceHorizontal, _groundLayer);
             RaycastHit2D slopeHitBack  = Physics2D.Raycast(checkPos - new Vector2(_characterBounds.size.x / 2 , 0), -transform.right, _slopeCheckDistanceHorizontal, _groundLayer);
-            //Debug.DrawRay(checkPos + new Vector2(_characterBounds.size.x / 2 , 0), transform.right * 100, Color.red);
-
 
             if(slopeHitFront)
             {
-                Debug.DrawRay(slopeHitFront.point, slopeHitFront.normal, Color.blue);
                 _slopeOnRight = true;
                 _slopeSideAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
                 _slopeNormalPerp = Vector2.Perpendicular(slopeHitFront.normal).normalized;
@@ -213,8 +213,6 @@ namespace Player
                 }
                 
                 
-                Debug.DrawRay(hit.point, _slopeNormalPerp, Color.red);
-
             }
             else
             {
@@ -228,7 +226,7 @@ namespace Player
         #region Move
         private void MoveCharacter(Vector2 move) 
         {
-            Debug.DrawRay(_rb2d.position, move * 100, Color.green);
+            _debugCurMoveVector = move;
             
             _nudgingPlayer = false;
                 
@@ -302,15 +300,11 @@ namespace Player
                             //pop out of wall
                             if(_colRight)
                             {
-                                _player.movementVector.x = 0;
-                                move.x=0;
                                 _rb2d.MovePosition(_rb2d.position + Vector2.left  * Time.deltaTime * NUDGE_MULT);
                             }
 
                             if(_colLeft)
                             {
-                                _player.movementVector.x = 0;
-                                move.x=0;
                                 _rb2d.MovePosition(_rb2d.position + Vector2.right  * Time.deltaTime * NUDGE_MULT);
                             }
 
@@ -442,23 +436,13 @@ namespace Player
 
             if (!Application.isPlaying) return;
 
+            //Draw current movement vector
+            Debug.DrawRay(_rb2d.position, _debugCurMoveVector * 10, Color.green);
+
             // Draw the future position. Handy for visualizing gravity
             Gizmos.color = Color.red;
             var move = new Vector3(_player.movementVector.x, _player.movementVector.y) * Time.deltaTime;
             Gizmos.DrawWireCube(transform.position + _characterBounds.center + move, _characterBounds.size);
-            
-        }
-
-        private void DrawNudgingRays()
-        {
-            if(_nudgingPlayer && _colUp)
-            {
-                Vector2 position = new Vector2();
-                position.x = transform.position.x;
-                position.y = transform.position.y;
-                Debug.DrawRay(position + new Vector2 (_characterBounds.size.x/2 + _nudgingRaycastOffset,_characterBounds.size.y/2), Vector2.up, Color.green, 1.0f );
-                Debug.DrawRay(position - new Vector2 (_characterBounds.size.x/2 + _nudgingRaycastOffset, - _characterBounds.size.y/2), Vector2.up, Color.green, 1.0f );
-            }
             
         }
 
