@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b141bfd9d6c53940958a96c1be65b3e, type: 3}
   m_Name: IsTouchingFeather
   m_EditorClassIdentifier: 
-  description: input insideCollider form Extra jump script here
-  BoolVariable: {fileID: 11400000, guid: 36d5b4d311fb4fa4cbbd3af5719684d2, type: 2}
+  description: input isInsideFeatherSO
+  BoolVariable: {fileID: 11400000, guid: 2377a6287613e3049bb9408cc72a2baf, type: 2}
