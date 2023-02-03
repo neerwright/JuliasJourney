@@ -7,6 +7,6 @@ public class Feather : MonoBehaviour , IUsableItem
     // Start is called before the first frame update
     public void Use()
     {
-        Debug.Log("used");
+        this.gameObject.SetActive(false);
     }
 }

@@ -32,7 +32,7 @@ public class CheckColliderWithTag : MonoBehaviour
             {
                 if (_isInsideColliderWithTag)
                     _isInsideColliderWithTag.Value = true;
-                    _lastGameObject.gameObject = other.gameObject;
+                    _lastGameObject.GameObject = other.gameObject;
             }
         }
 

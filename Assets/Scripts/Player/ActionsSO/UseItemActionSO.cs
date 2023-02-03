@@ -32,7 +32,7 @@ namespace Player
 		{
 			if (_originSO.Moment == SpecificMoment.OnStateEnter)
             {
-                IUsableItem UsableItem = _originSO.ItemToUse.gameObject.GetComponent<IUsableItem>();
+                IUsableItem UsableItem = _originSO.ItemToUse.GameObject.GetComponent<IUsableItem>();
                 UsableItem?.Use();
             }    
 		}

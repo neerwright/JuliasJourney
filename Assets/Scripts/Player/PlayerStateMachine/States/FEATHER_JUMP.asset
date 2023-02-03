@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: FEATHER_JUMP
   m_EditorClassIdentifier: 
   _actions:
+  - {fileID: 11400000, guid: 6de9d9e5579dfe94885e12054b2acd57, type: 2}
   - {fileID: 11400000, guid: 8bdc3f0a4e1582c45860fadb98bcb3f3, type: 2}
   - {fileID: 11400000, guid: de3df8d754da0aa4f957cc9b1dbbb47c, type: 2}
   - {fileID: 11400000, guid: 39bbd4514532d9c41a0e9f4d15c149e4, type: 2}
