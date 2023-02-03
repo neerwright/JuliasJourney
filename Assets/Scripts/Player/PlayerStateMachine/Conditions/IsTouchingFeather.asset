@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2347d88ee32348d4ab0d47eff3277b6f, type: 3}
-  m_Name: ApplyMovementVector 1
+  m_Script: {fileID: 11500000, guid: 8b141bfd9d6c53940958a96c1be65b3e, type: 3}
+  m_Name: IsTouchingFeather
   m_EditorClassIdentifier: 
-  description: 
+  description: input insideCollider form Extra jump script here
+  BoolVariable: {fileID: 11400000, guid: 36d5b4d311fb4fa4cbbd3af5719684d2, type: 2}

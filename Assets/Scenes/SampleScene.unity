@@ -475,6 +475,7 @@ GameObject:
   - component: {fileID: 632227293}
   - component: {fileID: 632227294}
   - component: {fileID: 632227295}
+  - component: {fileID: 632227296}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -699,6 +700,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 5.22}
   m_EdgeRadius: 0
+--- !u!114 &632227296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632227281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71790a5dc74045c49861bba47eb47811, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tag: Feather
+  _isInsideColliderWithTag: {fileID: 11400000, guid: 2377a6287613e3049bb9408cc72a2baf, type: 2}
+  _lastGameObject: {fileID: 11400000, guid: 4f44c2f40ac53e442aae24bf6daf3473, type: 2}
 --- !u!1 &637024401
 GameObject:
   m_ObjectHideFlags: 0
