@@ -8,6 +8,7 @@ namespace Player
 	[CreateAssetMenu(fileName = "UseItemAction", menuName = "State Machine/Actions/Use a usable Item")]
 	public class UseItemActionSO : StateActionSO
     { 
+        [Tooltip("GameObject inside SO has to be a usable item, else nothing happens")]
         [SerializeField] private GameObjectVariableSO _itemToUse;
 		public GameObjectVariableSO ItemToUse => _itemToUse;
 
@@ -23,8 +24,11 @@ namespace Player
 
 		public override void OnUpdate()
 		{
-			//if (_originSO.Moment == SpecificMoment.OnUpdate)
-            //    pass;
+			if (_originSO.Moment == SpecificMoment.OnUpdate)
+            {
+                IUsableItem UsableItem = _originSO.ItemToUse.GameObject.GetComponent<IUsableItem>();
+                UsableItem?.Use();
+            }  
 		}
 
 
@@ -39,8 +43,11 @@ namespace Player
 
 		public override void OnStateExit()
 		{
-			//if (_originSO.Moment == SpecificMoment.OnStateExit)
-            //    pass;
+			if (_originSO.Moment == SpecificMoment.OnStateExit)
+            {
+                IUsableItem UsableItem = _originSO.ItemToUse.GameObject.GetComponent<IUsableItem>();
+                UsableItem?.Use();
+            }  
 		}
 		
 	}
