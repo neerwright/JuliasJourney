@@ -27,7 +27,7 @@ namespace Player
 
 
 
-        //MOVING    
+        //SLOPES   
             public Vector2 VectorAlongSlope => _slopeNormalPerp;
             public bool IsOnSlopeVertical => _onSlopeVertical;
             public bool IsCompletelyOnSlope => _onSlopeBothRays;

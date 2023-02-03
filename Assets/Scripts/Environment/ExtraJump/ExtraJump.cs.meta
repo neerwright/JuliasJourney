@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: cad15793b0d580244aadf2ca48d94517
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _isInsideCollider: {fileID: 11400000, guid: 36d5b4d311fb4fa4cbbd3af5719684d2, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
