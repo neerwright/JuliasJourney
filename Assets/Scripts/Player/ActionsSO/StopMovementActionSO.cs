@@ -26,20 +26,20 @@ namespace Player
 		public override void OnUpdate()
 		{
 			if (OriginSO.Moment == SpecificMoment.OnUpdate)
-				_player.movementVector = Vector3.zero;
+				_player.movementVector = Vector2.zero;
 		}
 
 
 			public override void OnStateEnter()
 		{
 			if (OriginSO.Moment == SpecificMoment.OnStateEnter)
-				_player.movementVector = Vector3.zero;
+				_player.movementVector = Vector2.zero;
 		}
 
 		public override void OnStateExit()
 		{
 			if (OriginSO.Moment == SpecificMoment.OnStateExit)
-				_player.movementVector = Vector3.zero;
+				_player.movementVector = Vector2.zero;
 		}
 	}
 }
