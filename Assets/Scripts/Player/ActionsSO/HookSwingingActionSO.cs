@@ -82,7 +82,14 @@ namespace Player
 
             initialVelocity = Mathf.Clamp(initialVelocity, -0.9f, 0.9f);
             if(dir.y > 0) // if we are under, not above Hooked Thingy, swing with an initial speed
+            {
                 _swingAngleVelocity = initialVelocity;
+            }
+            else
+            {
+                _swingAngleVelocity = _player.movementVector.y * Time.deltaTime * OriginSO.InitialVelocity;
+            }
+                
         }
 	}
 }

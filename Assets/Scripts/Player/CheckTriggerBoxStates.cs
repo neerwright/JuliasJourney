@@ -32,7 +32,6 @@ namespace Player
     
             private void OnTriggerStay2D(Collider2D other)
             {
-                Debug.Log(other.gameObject.tag);
                 foreach (Pair<BoolVariableSO, string> triggerBoxState in _triggerBoxSet.Items)
                 {
                     if(other.gameObject.tag == triggerBoxState.ItemTwo)
