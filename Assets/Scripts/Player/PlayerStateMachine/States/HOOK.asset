@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: HOOK
   m_EditorClassIdentifier: 
   _actions:
-  - {fileID: 11400000, guid: 0e09e976b30f9ec48a163c97f9fa81ee, type: 2}
   - {fileID: 11400000, guid: b9ae141f8e7402c4a96345351d86d522, type: 2}
   - {fileID: 11400000, guid: 39bbd4514532d9c41a0e9f4d15c149e4, type: 2}
   _sceneGizmoColor: {r: 0.4056604, g: 0.28363213, b: 0.16328466, a: 1}

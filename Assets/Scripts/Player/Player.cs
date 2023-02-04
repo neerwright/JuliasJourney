@@ -31,7 +31,7 @@ namespace Player
 		public const float GRAVITY_DIVIDER = .6f;
 		public const float MAX_FALL_SPEED = -50f;
 		public const float MAX_RISE_SPEED = 100f;
-		public const float AIR_RESISTANCE = 5f;
+		public const float AIR_RESISTANCE = 2f;
 
 		public const float INPUT_BUFFER = 0.6f;
 

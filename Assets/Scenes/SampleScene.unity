@@ -701,7 +701,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 292134313}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 169.7, y: 1, z: 0}
+  m_LocalPosition: {x: 163.11, y: 2.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4749,7 +4749,6 @@ GameObject:
   - component: {fileID: 871017235}
   - component: {fileID: 871017234}
   - component: {fileID: 871017233}
-  - component: {fileID: 871017232}
   m_Layer: 0
   m_Name: Square
   m_TagString: Hook
@@ -4757,18 +4756,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &871017232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 871017231}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8561e5e8cd307e54f9c13e25a9e99474, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!58 &871017233
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -4784,7 +4771,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 11.36
+  m_Radius: 8.82
 --- !u!212 &871017234
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4845,7 +4832,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 871017231}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 177.59, y: 11.87, z: 0}
+  m_LocalPosition: {x: 178.02, y: 10.57, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
