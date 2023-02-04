@@ -9,10 +9,15 @@ public class GameEventListener : MonoBehaviour
     public UnityEvent Response;
 
     private void OnEnable()
-    { Event.RegisterListener(this); }
+    { 
+        if(Event)
+            Event.RegisterListener(this); 
+        else
+        Debug.LogError("Event not set");        
+    }
 
     private void OnDisable()
-    { Event.UnregisterListener(this); }
+    { Event?.UnregisterListener(this); }
 
     public void OnEventRaised()
     { Response.Invoke(); }

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: FeatherAscent
   m_EditorClassIdentifier: 
   description: Ascend a bit less for feather jump
-  initialJumpForce: 6
+  initialJumpForce: 8
