@@ -74,7 +74,8 @@ namespace Player
 
         public void OnInteract(InputAction.CallbackContext context)
         {
-            InteractEvent.Invoke();
+            if(context.phase == InputActionPhase.Performed)
+                InteractEvent.Invoke();
         }
 
         

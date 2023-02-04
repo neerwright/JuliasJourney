@@ -15,13 +15,15 @@ namespace Player
 		private float _previousSpeed;
 		
 		//These fields are read and manipulated by the StateMachine actions
-		[NonSerialized] public bool jumpInput;
-		[NonSerialized] public bool attackInput;
-		[NonSerialized] public bool grounded;
+		[NonSerialized] public bool jumpInput = false;
+		[NonSerialized] public bool attackInput = false;
+		[NonSerialized] public bool grounded = false;
+		[NonSerialized] public bool interactInput = false;
 
 		[NonSerialized] public Vector2 movementInput; //Initial input coming from the Player script
 		[NonSerialized] public Vector2 movementVector; //Final movement vector, manipulated by the StateMachine actions
 		[NonSerialized]	public Rigidbody2D rb2d;
+
 
 		public const float GRAVITY_MULTIPLIER = 3f;
 		public const float MAX_SPEED = 3f;
@@ -31,6 +33,10 @@ namespace Player
 		public const float MAX_RISE_SPEED = 100f;
 		public const float AIR_RESISTANCE = 5f;
 
+		public const float INPUT_BUFFER = 0.6f;
+
+		private bool _coRoutineIsPlaying = false;
+		private IEnumerator coroutine;
 	
 		private void OnEnable()
 		{
@@ -38,7 +44,10 @@ namespace Player
 			_playerInputSO.JumpCanceledEvent += OnJumpCanceled;
 			_playerInputSO.MoveEvent += OnMove;
 			_playerInputSO.AttackEvent += OnStartedAttack;
+			_playerInputSO.InteractEvent += OnInteract;
+
 			//...
+			coroutine = WaitAndSetInteractInputToFalse(INPUT_BUFFER);
 		}
 
 		//Removes all listeners to the events coming from the InputReader script
@@ -48,6 +57,7 @@ namespace Player
 			_playerInputSO.JumpCanceledEvent -= OnJumpCanceled;
 			_playerInputSO.MoveEvent -= OnMove;
 			_playerInputSO.AttackEvent -= OnStartedAttack;
+			_playerInputSO.InteractEvent -= OnInteract;
 			//...
 		}
 
@@ -89,6 +99,36 @@ namespace Player
 		}
 
 		private void OnStartedAttack() => attackInput = true;
+		
+		private void OnInteract()
+		{
+			if(!_coRoutineIsPlaying)
+			{
+				interactInput = true;
+				coroutine = WaitAndSetInteractInputToFalse(INPUT_BUFFER);
+        		StartCoroutine(coroutine);
+			}
+			else //player pressed button again
+			{
+				if(coroutine != null)
+				{
+					StopCoroutine(coroutine);
+					interactInput = true;
+					coroutine = WaitAndSetInteractInputToFalse(INPUT_BUFFER);
+					StartCoroutine(coroutine);
+				}
+				}
+		} 
+			
+
+
+		IEnumerator WaitAndSetInteractInputToFalse(float seconds)
+		{
+			_coRoutineIsPlaying = true;
+			yield return new WaitForSeconds(seconds);
+			interactInput = false;
+			_coRoutineIsPlaying = false;
+		}
 
 	}
 }
