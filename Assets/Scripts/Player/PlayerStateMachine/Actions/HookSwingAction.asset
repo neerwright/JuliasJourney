@@ -15,4 +15,4 @@ MonoBehaviour:
   description: 
   HookTargets: {fileID: 11400000, guid: 25e14bfec19c6914da4baca48a00cb20, type: 2}
   SwingSpeed: 10
-  InitialVelocity: 5
+  InitialVelocity: 10.69

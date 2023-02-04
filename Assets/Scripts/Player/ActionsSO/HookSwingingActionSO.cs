@@ -77,18 +77,17 @@ namespace Player
             
             // if we started the hook on the side we are not moving towards -> more initial speed
             float multiplyer = -(Mathf.Sign(_player.movementVector.x)) * (Mathf.Cos(_ropeAngle * Mathf.Deg2Rad) - Mathf.Sign(_player.movementVector.x));
+            multiplyer = Mathf.Clamp(multiplyer, -1f, 1f);
             
             initialVelocity = _player.movementVector.x * Time.deltaTime * OriginSO.InitialVelocity * multiplyer;
 
             initialVelocity = Mathf.Clamp(initialVelocity, -0.9f, 0.9f);
-            if(dir.y > 0) // if we are under, not above Hooked Thingy, swing with an initial speed
+            if(dir.y < 0) // if we are above the hook target, use falling speed as initial velocity
             {
-                _swingAngleVelocity = initialVelocity;
+                initialVelocity = _player.movementVector.y * Time.deltaTime * OriginSO.InitialVelocity;
+                initialVelocity = Mathf.Clamp(initialVelocity, -0.9f, 0.9f);
             }
-            else
-            {
-                _swingAngleVelocity = _player.movementVector.y * Time.deltaTime * OriginSO.InitialVelocity;
-            }
+            _swingAngleVelocity = initialVelocity;
                 
         }
 	}
