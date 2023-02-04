@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using VariableSO;
+using Scriptables;
 
 namespace Environment{
     public class ExtraJump : MonoBehaviour

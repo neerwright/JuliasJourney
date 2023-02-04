@@ -20,7 +20,7 @@ namespace Player
 
         public event UnityAction StartRunning = delegate{};
         public event UnityAction StoppedRunning = delegate{};
-
+        public event UnityAction InteractEvent = delegate{};
 
 
         private PlayerInputActions _playerInputActions;
@@ -71,5 +71,12 @@ namespace Player
                     break;
             }
         }
+
+        public void OnInteract(InputAction.CallbackContext context)
+        {
+            InteractEvent.Invoke();
+        }
+
+        
     }
 }

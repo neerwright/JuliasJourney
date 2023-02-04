@@ -1,6 +1,6 @@
 using UnityEngine;
 using Statemachine;
-using VariableSO;
+using Scriptables;
 
 namespace Player
 {

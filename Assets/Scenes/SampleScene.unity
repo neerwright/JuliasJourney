@@ -1054,8 +1054,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71790a5dc74045c49861bba47eb47811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tag: Feather
-  _isInsideColliderWithTag: {fileID: 11400000, guid: 2377a6287613e3049bb9408cc72a2baf, type: 2}
+  _triggerBoxSet: {fileID: 11400000, guid: f9074a2d2c5b01242823fd86d6193937, type: 2}
   _lastGameObject: {fileID: 11400000, guid: 4f44c2f40ac53e442aae24bf6daf3473, type: 2}
 --- !u!1 &637024401
 GameObject:
