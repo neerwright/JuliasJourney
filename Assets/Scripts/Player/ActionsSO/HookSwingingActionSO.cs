@@ -1,6 +1,7 @@
 using UnityEngine;
 using Statemachine;
 using Scriptables;
+using System.Linq;
 
 namespace Player
 {
@@ -8,7 +9,7 @@ namespace Player
 	[CreateAssetMenu(fileName = "HookSwingAction", menuName = "State Machine/Actions/Hook Swinging")]
 	public class HookSwingingActionSO : StateActionSO
 	{
-        public GameObjectVariableSO HookTarget;
+        public GameObjectSet HookTargets;
         public float SwingSpeed = 10f;
 		public float InitialVelocity = 10f;
 
@@ -49,7 +50,10 @@ namespace Player
 
 		public override void OnStateEnter()
 		{
-            _targetPosition = OriginSO.HookTarget.GameObject.transform.position;
+            GameObject HookTarget;
+            HookTarget = OriginSO.HookTargets.Items.Where(p => p.tag == "Hook").OrderBy(p => Vector2.Distance(p.transform.position, _player.transform.position)).FirstOrDefault();
+            Debug.Log("Target: " + HookTarget);
+            _targetPosition = HookTarget.transform.position;
             _ropePosition = _player.transform.position;
             Vector2 dir = _targetPosition - _ropePosition;
             _ropeAngle = Vector2.SignedAngle(Vector2.right , -dir);

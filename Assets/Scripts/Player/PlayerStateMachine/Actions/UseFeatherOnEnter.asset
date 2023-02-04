@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: UseFeatherOnEnter
   m_EditorClassIdentifier: 
   description: Use the Last Feather inside the LastFeatherSO
-  _itemToUse: {fileID: 11400000, guid: 4f44c2f40ac53e442aae24bf6daf3473, type: 2}
+  _itemsToUse: {fileID: 11400000, guid: 25e14bfec19c6914da4baca48a00cb20, type: 2}
   _moment: 0

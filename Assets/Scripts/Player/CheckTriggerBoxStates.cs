@@ -11,13 +11,13 @@ namespace Player
         private BoolStringVariableSet _triggerBoxSet;
 
         [SerializeField]
-        private GameObjectVariableSO _lastGameObject;
+        private GameObjectSet _GameObjectsInsideTriggerBox;
             
         private void OnEnable()
             {
                 if(_triggerBoxSet != null)
                 {
-                    foreach (Pair<BoolVariableSO, StringVariableSO> triggerBoxState in _triggerBoxSet.Items)
+                    foreach (Pair<BoolVariableSO, string> triggerBoxState in _triggerBoxSet.Items)
                     {
                         triggerBoxState.ItemOne.Value = false;
                     }
@@ -25,31 +25,32 @@ namespace Player
                 else 
                     Debug.LogError("BoolVarSet not set in " + gameObject.name);
 
-                if(_lastGameObject == null)
-                    Debug.LogError("GOVar not set in " + gameObject.name); 
+                if(_GameObjectsInsideTriggerBox == null)
+                    Debug.LogError("GOSet not set in " + gameObject.name); 
                     
             }
     
-            private void OnTriggerEnter2D(Collider2D other)
+            private void OnTriggerStay2D(Collider2D other)
             {
-                foreach (Pair<BoolVariableSO, StringVariableSO> triggerBoxState in _triggerBoxSet.Items)
+                Debug.Log(other.gameObject.tag);
+                foreach (Pair<BoolVariableSO, string> triggerBoxState in _triggerBoxSet.Items)
                 {
-                    if(other.gameObject.tag == triggerBoxState.ItemTwo.Value)
+                    if(other.gameObject.tag == triggerBoxState.ItemTwo)
                     {
                         triggerBoxState.ItemOne.Value = true;
-                        _lastGameObject.GameObject = other.gameObject;
+                        _GameObjectsInsideTriggerBox.Items.Add(other.gameObject);
                     }
-                }
-                
+                }   
             }
 
             private void OnTriggerExit2D(Collider2D other)
             {
-                foreach (Pair<BoolVariableSO, StringVariableSO> triggerBoxState in _triggerBoxSet.Items)
+                foreach (Pair<BoolVariableSO, string> triggerBoxState in _triggerBoxSet.Items)
                 {
-                    if(other.gameObject.tag == triggerBoxState.ItemTwo.Value)
+                    if(other.gameObject.tag == triggerBoxState.ItemTwo)
                     {
                         triggerBoxState.ItemOne.Value = false;
+                        _GameObjectsInsideTriggerBox.Items.Remove(other.gameObject);
                     }
                 }
             }  

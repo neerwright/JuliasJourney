@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Items:
   - ItemOne: {fileID: 11400000, guid: 2377a6287613e3049bb9408cc72a2baf, type: 2}
-    ItemTwo: {fileID: 11400000, guid: 99f4fac5973fa04409a0aac885fd77ce, type: 2}
+    ItemTwo: Feather
   - ItemOne: {fileID: 11400000, guid: 16e107643b7d528449517b9b856bfbfd, type: 2}
-    ItemTwo: {fileID: 11400000, guid: 9e5b65495f38c3244b49453e4e96b4eb, type: 2}
+    ItemTwo: Hook
