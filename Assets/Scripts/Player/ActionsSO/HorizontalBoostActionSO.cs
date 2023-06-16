@@ -24,8 +24,9 @@ namespace Player
 
 		public override void OnUpdate()
 		{
+            float input = _player.movementInput.x;
 			//delta.Time is used when the movement is applied (ApplyMovementVectorAction)
-			_player.movementVector.x += _originSO.boostSpeed * Time.deltaTime; 
+			_player.movementVector.x += _originSO.boostSpeed * Time.deltaTime * input; 
 		}
 	}
 }

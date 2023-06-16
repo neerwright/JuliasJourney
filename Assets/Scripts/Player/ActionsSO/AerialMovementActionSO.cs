@@ -73,6 +73,10 @@ namespace Player
 			}
 			else
 			{	
+				if(Mathf.Sign(input.x) != Mathf.Sign(velocity.x))
+				{
+					SetVelocity(ref velocity.x, input.x, acceleration);
+				}
 				//Absolute MaxSpeed
 				velocity.x = Mathf.Clamp(velocity.x, -absMaxSpeed, absMaxSpeed);
 			}

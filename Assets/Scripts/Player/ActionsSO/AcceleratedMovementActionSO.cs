@@ -49,6 +49,11 @@ namespace Player
 			}
 			else
 			{
+				if(Mathf.Sign(_player.movementInput.x) != Mathf.Sign(_player.movementVector.x))
+				{
+					//acceleration --> in opposite direction
+					_player.movementVector.x += _player.movementInput.x  * _originSO.acceleration * Time.deltaTime;
+				}
 				//Absolute MaxSpeed
 				_player.movementVector.x = Mathf.Clamp(_player.movementVector.x, -_originSO.absoluteMaxSpeed, _originSO.absoluteMaxSpeed);
 			}
