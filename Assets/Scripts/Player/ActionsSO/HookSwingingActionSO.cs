@@ -52,7 +52,6 @@ namespace Player
 		{
             GameObject HookTarget;
             HookTarget = OriginSO.HookTargets.Items.Where(p => p.tag == "Hook").OrderBy(p => Vector2.Distance(p.transform.position, _player.transform.position)).FirstOrDefault();
-            Debug.Log("Target: " + HookTarget);
             _targetPosition = HookTarget.transform.position;
             _ropePosition = _player.transform.position;
             Vector2 dir = _targetPosition - _ropePosition;

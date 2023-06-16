@@ -7,8 +7,11 @@ namespace Player
 	[CreateAssetMenu(fileName = "HorizontalAcceleratedMovement", menuName = "State Machine/Actions/Horizontal accelerated Movement")]
 	public class AcceleratedMovementActionSO : StateActionSO<AcceleratedMovementAction>
 	{
-		[Tooltip("Maximum speed")]
-		public float maxSpeed = 5f;
+		[Tooltip("slower Maximum speed, only when accelerati g on ground")]
+		public float maxSpeedOnGround = 9f;
+
+		[Tooltip("Maximum speed, if faster, slowly damp towards it")]
+		public float absoluteMaxSpeed = 30f;
 
 		[Tooltip("Horizontal acceleration")]
 		public float acceleration = 3f;
@@ -36,15 +39,30 @@ namespace Player
 		public override void OnUpdate()
 		{
 			_player.movementVector.y = 0f;
-			//acceleration --> delta.Time is used 
-			_player.movementVector.x += _player.movementInput.x  * _originSO.acceleration * Time.deltaTime;
+
+			if (Mathf.Abs(_player.movementVector.x) <= _originSO.maxSpeedOnGround)
+			{
+				//acceleration --> delta.Time is used 
+				_player.movementVector.x += _player.movementInput.x  * _originSO.acceleration * Time.deltaTime;
+				//MaxSpeed
+				_player.movementVector.x = Mathf.Clamp(_player.movementVector.x, -_originSO.maxSpeedOnGround, _originSO.maxSpeedOnGround);
+			}
+			else
+			{
+				//Absolute MaxSpeed
+				_player.movementVector.x = Mathf.Clamp(_player.movementVector.x, -_originSO.absoluteMaxSpeed, _originSO.absoluteMaxSpeed);
+			}
+			
 			//Decelerate
 			_player.movementVector.x *= Mathf.Pow(1f - _originSO.damping, Time.deltaTime * 10f);
+			
+			//collision
 			if (_playerController.IsCollidingWithWall)
 				_player.movementVector.x = 0;
 			
-			//MaxSpeed
-			_player.movementVector.x = Mathf.Clamp(_player.movementVector.x, -_originSO.maxSpeed, _originSO.maxSpeed);
+			
+			
+
 		}
 	}
 }
