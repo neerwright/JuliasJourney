@@ -33,9 +33,13 @@ namespace Player
 		{
 			if (_originSO.Moment == SpecificMoment.OnUpdate)
             {
-                GameObject targetItem = _originSO.ItemsToUse.Items.OrderBy(p => Vector2.Distance(p.transform.position, _player.transform.position)).FirstOrDefault();
-                IUsableItem UsableItem = targetItem.GetComponent<IUsableItem>();
-                UsableItem?.Use();
+                if(_originSO.ItemsToUse != null)
+                {
+                    GameObject targetItem = _originSO.ItemsToUse.Items.OrderBy(p => Vector2.Distance(p.transform.position, _player.transform.position)).FirstOrDefault();
+                    IUsableItem UsableItem = targetItem.GetComponent<IUsableItem>();
+                    UsableItem?.Use();
+                }
+                
             }  
 		}
 
@@ -44,9 +48,12 @@ namespace Player
 		{
 			if (_originSO.Moment == SpecificMoment.OnStateEnter)
             {
-                GameObject targetItem = _originSO.ItemsToUse.Items.OrderBy(p => Vector2.Distance(p.transform.position, _player.transform.position)).FirstOrDefault();
-                IUsableItem UsableItem = targetItem.GetComponent<IUsableItem>();
-                UsableItem?.Use();
+                if(_originSO.ItemsToUse != null)
+                {
+                    GameObject targetItem = _originSO.ItemsToUse.Items.OrderBy(p => Vector2.Distance(p.transform.position, _player.transform.position)).FirstOrDefault();
+                    IUsableItem UsableItem = targetItem.GetComponent<IUsableItem>();
+                    UsableItem?.Use();
+                }
             }    
 		}
 
@@ -54,9 +61,12 @@ namespace Player
 		{
 			if (_originSO.Moment == SpecificMoment.OnStateExit)
             {
-                GameObject targetItem = _originSO.ItemsToUse.Items.OrderBy(p => Vector2.Distance(p.transform.position, _player.transform.position)).FirstOrDefault();
-                IUsableItem UsableItem = targetItem.GetComponent<IUsableItem>();
-                UsableItem?.Use();
+                if(_originSO.ItemsToUse != null)
+                {
+                    GameObject targetItem = _originSO.ItemsToUse.Items.OrderBy(p => Vector2.Distance(p.transform.position, _player.transform.position)).FirstOrDefault();
+                    IUsableItem UsableItem = targetItem.GetComponent<IUsableItem>();
+                    UsableItem?.Use();
+                }
             }  
 		}
 		

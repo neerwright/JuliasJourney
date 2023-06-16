@@ -10,6 +10,7 @@ namespace Player
 	public class HookSwingingActionSO : StateActionSO
 	{
         public GameObjectSet HookTargets;
+        public float MaxSpeed = 0.4f;
         public float SwingSpeed = 10f;
 		public float InitialVelocity = 10f;
 
@@ -19,6 +20,8 @@ namespace Player
 	public class HookSwingingAction : StateAction
 	{
 		private Player _player;
+        private GameObject _hookTarget;
+        Vector2 _originalHookPosition;
         private Vector2 _targetPosition;
         private Vector2 _ropePosition;
         private float _swingAngleVelocity = 0;
@@ -30,6 +33,7 @@ namespace Player
 		public override void Awake(StateMachine stateMachine)
 		{
 			_player = stateMachine.GetComponent<Player>();
+            
 		}
 
 		public override void OnUpdate()
@@ -38,23 +42,25 @@ namespace Player
             float ropeAngleAcceleration = (float) -0.5 * Mathf.Cos(_ropeAngle * Mathf.Deg2Rad) * Time.deltaTime ;
             _swingAngleVelocity += ropeAngleAcceleration;
             _swingAngleVelocity += Time.deltaTime * _player.movementInput.x * 0.1f;
+            _swingAngleVelocity= Mathf.Clamp(_swingAngleVelocity, -OriginSO.MaxSpeed, OriginSO.MaxSpeed);
             _ropeAngle += _swingAngleVelocity;
-            //_swingAngleVelocity *= 0.99;
+
             _ropePosition.x = _targetPosition.x + _ropeLength * (Mathf.Cos(_ropeAngle * Mathf.Deg2Rad)); 
             _ropePosition.y = _targetPosition.y + _ropeLength * (Mathf.Sin(_ropeAngle * Mathf.Deg2Rad)); 
 
             _player.movementVector.x = (_ropePosition.x - _player.transform.position.x) * OriginSO.SwingSpeed;
             _player.movementVector.y = (_ropePosition.y - _player.transform.position.y) * OriginSO.SwingSpeed;
-
+            if(_hookTarget != null)
+                _hookTarget.transform.position = _player.transform.position;
         }
 
 
 		public override void OnStateEnter()
 		{
             GameObject HookCenter;
-            GameObject HookTarget;
-            HookTarget = OriginSO.HookTargets.Items.Where(p => p.tag == "Hook").OrderBy(p => Vector2.Distance(p.transform.position, _player.transform.position)).FirstOrDefault();
-            HookCenter = HookTarget.transform.parent.gameObject;
+            _hookTarget = OriginSO.HookTargets.Items.Where(p => p.tag == "Hook").OrderBy(p => Vector2.Distance(p.transform.position, _player.transform.position)).FirstOrDefault(); 
+            _originalHookPosition = _hookTarget.transform.position;
+            HookCenter = _hookTarget.transform.parent.gameObject;
 
             _targetPosition = HookCenter.transform.position;
             _ropePosition = _player.transform.position;
@@ -70,7 +76,8 @@ namespace Player
 
 		public override void OnStateExit()
 		{
-
+            if(_hookTarget != null)
+                _hookTarget.transform.position = _originalHookPosition;
 		}
 
         private void CalculateInitialVelocity(Vector2 dir)

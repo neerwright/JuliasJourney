@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Feather : MonoBehaviour , IUsableItem
+public class ItemReactivator : MonoBehaviour , IUsableItem
 {
     private bool _CO_playing = false;
-    CapsuleCollider2D m_Collider;
+    Collider2D m_Collider;
     public Renderer rend;
 
     void Start()
@@ -13,7 +13,7 @@ public class Feather : MonoBehaviour , IUsableItem
         rend = GetComponent<Renderer>();
         rend.enabled = true;
         //Fetch the GameObject's Collider (make sure it has a Collider component)
-        m_Collider = GetComponent<CapsuleCollider2D>();
+        m_Collider = GetComponent<Collider2D>();
     }
     
     
