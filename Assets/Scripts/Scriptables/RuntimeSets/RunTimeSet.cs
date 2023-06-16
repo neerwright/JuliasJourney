@@ -7,7 +7,12 @@ namespace Scriptables
 
     public abstract class RunTimeSet<T> : ScriptableObject
     {
-        public List<T> Items = new List<T>();
+        public HashSet<T> Items = new HashSet<T>();
+
+        public void OnEnable()
+        {
+            Items = new HashSet<T>();
+        }
 
         public void Add(T t)
         {

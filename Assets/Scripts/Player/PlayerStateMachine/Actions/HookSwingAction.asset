@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 
   HookTargets: {fileID: 11400000, guid: 25e14bfec19c6914da4baca48a00cb20, type: 2}
-  SwingSpeed: 10
-  InitialVelocity: 10.69
+  SwingSpeed: 13.32
+  InitialVelocity: 11.8

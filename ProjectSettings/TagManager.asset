@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Feather
   - Hook
+  - HookCenter
   layers:
   - Default
   - TransparentFX

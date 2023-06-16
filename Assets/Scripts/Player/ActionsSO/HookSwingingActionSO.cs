@@ -37,6 +37,7 @@ namespace Player
 			
             float ropeAngleAcceleration = (float) -0.5 * Mathf.Cos(_ropeAngle * Mathf.Deg2Rad) * Time.deltaTime ;
             _swingAngleVelocity += ropeAngleAcceleration;
+            _swingAngleVelocity += Time.deltaTime * _player.movementInput.x * 0.1f;
             _ropeAngle += _swingAngleVelocity;
             //_swingAngleVelocity *= 0.99;
             _ropePosition.x = _targetPosition.x + _ropeLength * (Mathf.Cos(_ropeAngle * Mathf.Deg2Rad)); 
@@ -50,9 +51,12 @@ namespace Player
 
 		public override void OnStateEnter()
 		{
+            GameObject HookCenter;
             GameObject HookTarget;
             HookTarget = OriginSO.HookTargets.Items.Where(p => p.tag == "Hook").OrderBy(p => Vector2.Distance(p.transform.position, _player.transform.position)).FirstOrDefault();
-            _targetPosition = HookTarget.transform.position;
+            HookCenter = HookTarget.transform.parent.gameObject;
+
+            _targetPosition = HookCenter.transform.position;
             _ropePosition = _player.transform.position;
             Vector2 dir = _targetPosition - _ropePosition;
             _ropeAngle = Vector2.SignedAngle(Vector2.right , -dir);
@@ -80,12 +84,6 @@ namespace Player
             
             initialVelocity = _player.movementVector.x * Time.deltaTime * OriginSO.InitialVelocity * multiplyer;
 
-            initialVelocity = Mathf.Clamp(initialVelocity, -0.9f, 0.9f);
-            if(dir.y < 0) // if we are above the hook target, use falling speed as initial velocity
-            {
-                initialVelocity = _player.movementVector.y * Time.deltaTime * OriginSO.InitialVelocity;
-                initialVelocity = Mathf.Clamp(initialVelocity, -0.9f, 0.9f);
-            }
             _swingAngleVelocity = initialVelocity;
                 
         }
