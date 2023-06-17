@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: FeatherBoost
   m_EditorClassIdentifier: 
   description: 
-  boostSpeed: 22
+  boostSpeed: 1

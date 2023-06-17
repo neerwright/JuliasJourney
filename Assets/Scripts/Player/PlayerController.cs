@@ -148,6 +148,13 @@ namespace Player
             RaycastHit2D slopeHitBack  = Physics2D.Raycast(checkPos - new Vector2(_characterBounds.size.x / 2 , 0), -transform.right, _slopeCheckDistanceHorizontal, _groundLayer);
 
             (_slopeOnRight, _slopeOnLeft, _slopeSideAngle, _slopeNormalPerp) = SlopeChecker.SlopeCheckHorizontal(slopeHitFront, slopeHitBack);
+            
+            if (_slopeOnRight)
+            {
+                if(slopeHitFront)
+                    _slopeTag = slopeHitFront.transform.gameObject.tag;
+            }
+
             //Hit a wall not a slope
             if(Mathf.Abs(_slopeSideAngle) > 85)
             {
@@ -162,8 +169,12 @@ namespace Player
             Vector2 NormalPerpVertical;
             (_onSlopeBothRays , _onSlopeVertical , _slopeDownAngle, NormalPerpVertical) = SlopeChecker.SlopeCheckVertical(hitLeft, hitRight);
             
-            if (_onSlopeBothRays)
-                _slopeTag = hitLeft.transform.gameObject.tag;
+            if (_onSlopeVertical)
+            {
+                if(hitRight)
+                    _slopeTag = hitRight.transform.gameObject.tag;
+            }
+                
                 
 
             if(_slopeDownAngle > Mathf.Epsilon)

@@ -301,3 +301,15 @@ MonoBehaviour:
     - ExpectedResult: 0
       Condition: {fileID: 11400000, guid: 015874cf5b1b1e243aac53cd8d3ebb0f, type: 2}
       Operator: 1
+  - FromState: {fileID: 11400000, guid: e815e902fa7364c41961a04daf573de5, type: 2}
+    ToState: {fileID: 11400000, guid: 4fde4958af1554040af4e48a42c7c9b1, type: 2}
+    Conditions:
+    - ExpectedResult: 1
+      Condition: {fileID: 11400000, guid: edf2c0443ac1bf24f98eadc61ad6f314, type: 2}
+      Operator: 1
+  - FromState: {fileID: 11400000, guid: 4679139268ba0b94a9647dcb28a72066, type: 2}
+    ToState: {fileID: 11400000, guid: e815e902fa7364c41961a04daf573de5, type: 2}
+    Conditions:
+    - ExpectedResult: 0
+      Condition: {fileID: 11400000, guid: edf2c0443ac1bf24f98eadc61ad6f314, type: 2}
+      Operator: 1
