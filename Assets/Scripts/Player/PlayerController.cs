@@ -47,12 +47,13 @@ namespace Player
             public bool CollisionAbove => _colUp;
             public bool IsNudgingPlayer => _nudgingPlayer;
             public bool IsCollidingWithWall => _isCollidingWithWall;
+            public bool TouchingPlatform { get; set; }
 
 
 
         private RayRange _raysUp, _raysRight, _raysDown, _raysLeft;
         private bool _colUp, _colRight, _colDown, _colLeft;
-        
+
         private bool _nudgingPlayer = false;
 
         private bool _onSlopeVertical = false;
@@ -101,6 +102,7 @@ namespace Player
             CheckForWalls(ref movementVector);
             SlopeCheck();
             CheckForNonWalkableSlope();
+            
             MoveCharacter(movementVector);
         }
 
@@ -345,6 +347,8 @@ namespace Player
                 yield return Vector2.Lerp(range.Start, range.End, t);
             }
         }
+
+
         #endregion
         
         #region Debug
