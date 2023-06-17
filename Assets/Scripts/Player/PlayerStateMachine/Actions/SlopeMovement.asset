@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: SlopeMovement
   m_EditorClassIdentifier: 
   description: 
-  maxSpeed: 5
   speed: 8
+  acceleration: 16

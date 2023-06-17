@@ -7,10 +7,10 @@ namespace Player
 	[CreateAssetMenu(fileName = "HorizontalAcceleratedMovement", menuName = "State Machine/Actions/Horizontal accelerated Movement")]
 	public class AcceleratedMovementActionSO : StateActionSO<AcceleratedMovementAction>
 	{
-		[Tooltip("slower Maximum speed, only when accelerati g on ground")]
+		[Tooltip("slower Maximum speed, only when walking normally on the ground")]
 		public float maxSpeedOnGround = 9f;
 
-		[Tooltip("Maximum speed, if faster, slowly damp towards it")]
+		[Tooltip("Maximum speed, if faster with boosts")]
 		public float absoluteMaxSpeed = 30f;
 
 		[Tooltip("Horizontal acceleration")]

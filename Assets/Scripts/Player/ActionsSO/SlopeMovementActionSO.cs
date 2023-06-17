@@ -9,6 +9,9 @@ namespace Player
 	{
 		[Tooltip("Speed multiplyer")]
 		public float speed = 8f;
+
+		[Tooltip("Speed multiplyer")]
+		public float acceleration = 16f;
 		
 	}
 
@@ -34,26 +37,70 @@ namespace Player
 		{
 			_useSlopeMovement = false;
 			_angleCorrection = 0;
-			CheckMovementAndCalculateAngle();
+			CheckMovementAndCalculateAngleCorrection();
 
 			if(_useSlopeMovement)
 			{
 				Vector2 SlopeVector = _playerController.VectorAlongSlope;
 				Debug.DrawRay(_player.transform.position, SlopeVector, Color.red);
 				
-				_player.movementVector.x = SlopeVector.x * -_player.movementInput.x * _originSO.speed;
-				_player.movementVector.y = SlopeVector.y * -_player.movementInput.x * _originSO.speed + _angleCorrection;		
+				float movementSign = Mathf.Sign(_player.movementVector.x);
+
+				Debug.Log(SlopeVector);
+								Debug.Log(movementSign);
+
+
+				if(Mathf.Sign(movementSign) == Mathf.Sign(SlopeVector.y))
+				{
+					
+					//slide down: accelerate
+					_player.movementVector.x += SlopeVector.x * -_player.movementInput.x * _originSO.acceleration * Time.deltaTime;
+					_player.movementVector.y += (SlopeVector.y * -_player.movementInput.x * _originSO.acceleration + _angleCorrection) * Time.deltaTime;
+				}
+				else
+				{
+					//sudden turnaround from walking up  to down
+					if(Mathf.Sign(_player.movementVector.x) != Mathf.Sign(_player.movementInput.x))
+					{
+						
+						_player.movementVector.x = SlopeVector.x * movementSign* _originSO.speed  ;
+						_player.movementVector.y = (SlopeVector.y * movementSign * _originSO.speed + _angleCorrection ) ;
+					}
+					else
+					{
+						//walk up slope: linear movement
+						_player.movementVector.x = SlopeVector.x * -_player.movementInput.x * _originSO.speed ;
+						_player.movementVector.y = (SlopeVector.y * -_player.movementInput.x * _originSO.speed + _angleCorrection) ;
+					}	
+					
+
+					
+				}
+					
 			}
 			else
 			{
 				_player.movementVector.y = 0;
-				_player.movementVector.x = _player.movementInput.x * _originSO.speed;
+				//_player.movementVector.x = _player.movementInput.x * _originSO.speed;
 			}
 		
 
 			
 		}
-		private void CheckMovementAndCalculateAngle()
+
+		public override void OnStateEnter()
+		{
+			Vector2 SlopeVector = _playerController.VectorAlongSlope;
+			if(_player.transform.localScale.x == 1)
+			{
+				SlopeVector = -SlopeVector;
+			}
+			_player.movementVector = SlopeVector * _player.movementVector.magnitude;
+			
+				
+		}
+
+		private void CheckMovementAndCalculateAngleCorrection()
 		{
 			if (_playerController.IsOnSlopeVertical && _playerController.SlopeInBack)
 			{
