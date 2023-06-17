@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 443e372fbed1f904a8cd9a7f8d6949b5, type: 3}
-  m_Name: HookSwingAction
+  m_Script: {fileID: 11500000, guid: f7b0df8e8cb472f46811b06dc1f50ed4, type: 3}
+  m_Name: BoostJumpTimer
   m_EditorClassIdentifier: 
   description: 
-  HookTargets: {fileID: 11400000, guid: 25e14bfec19c6914da4baca48a00cb20, type: 2}
-  MaxSpeed: 2.31
-  SwingSpeed: 22.41
-  InitialVelocity: 11.8
+  timerLength: 0.1

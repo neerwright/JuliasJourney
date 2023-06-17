@@ -17,5 +17,5 @@ MonoBehaviour:
   _absoluteMaxSpeed: 67.8
   _acceleration: 0.1
   _airResistance: 0.1
-  _apexBonus: 25
-  _jumpApexThreshold: 10
+  _apexBonus: 30
+  _jumpApexThreshold: 12
