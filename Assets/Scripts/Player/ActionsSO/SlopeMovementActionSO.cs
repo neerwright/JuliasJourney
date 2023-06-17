@@ -18,7 +18,7 @@ namespace Player
 	public class SlopeMovementAction : StateAction
 	{
 		//Component references
-		private Player _player;
+		private PlayerScript _player;
 		private PlayerController _playerController;
 		private SlopeMovementActionSO _originSO => (SlopeMovementActionSO)base.OriginSO; // The SO this StateAction spawned from
 		
@@ -29,7 +29,7 @@ namespace Player
 		
 		public override void Awake(StateMachine stateMachine)
 		{
-			_player = stateMachine.GetComponent<Player>();
+			_player = stateMachine.GetComponent<PlayerScript>();
 			_playerController = stateMachine.GetComponent<PlayerController>();
 		}
 

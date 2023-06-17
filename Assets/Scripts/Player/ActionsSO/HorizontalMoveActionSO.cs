@@ -14,12 +14,12 @@ namespace Player
 	public class HorizontalMoveAction : StateAction
 	{
 		//Component references
-		private Player _player;
+		private PlayerScript _player;
 		private HorizontalMoveActionSO _originSO => (HorizontalMoveActionSO)base.OriginSO; // The SO this StateAction spawned from
 
 		public override void Awake(StateMachine stateMachine)
 		{
-			_player = stateMachine.GetComponent<Player>();
+			_player = stateMachine.GetComponent<PlayerScript>();
 		}
 
 		public override void OnUpdate()

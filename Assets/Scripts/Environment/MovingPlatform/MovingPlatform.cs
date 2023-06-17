@@ -15,6 +15,8 @@ public class MovingPlatform : MonoBehaviour
     private GameObject _player;
 
     private PlayerController _playerController;
+    private PlayerScript _playerScript;
+
     private int array_index;
     private const float REACH_GOAL_THRESHOLD = 0.02f;
     // Start is called before the first frame update
@@ -22,6 +24,7 @@ public class MovingPlatform : MonoBehaviour
     {
         transform.position = points[startingPoint].position;
         _playerController = _player.GetComponent<PlayerController>();
+        _playerScript = _player.GetComponent<PlayerScript>();
     }
 
     // Update is called once per frame
@@ -46,6 +49,7 @@ public class MovingPlatform : MonoBehaviour
         if(Collider.gameObject.tag == "Player")
         {
             _playerController.TouchingPlatform = true;
+            _playerScript.movementVector.x += speed * Time.deltaTime;
         }
     }
 

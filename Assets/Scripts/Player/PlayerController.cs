@@ -83,11 +83,11 @@ namespace Player
     
 
         private Rigidbody2D _rb2d;
-        private Player _player;
+        private PlayerScript _player;
 
         void OnEnable() 
         {
-            _player = GetComponent<Player>();
+            _player = GetComponent<PlayerScript>();
             _rb2d = GetComponent<Rigidbody2D>();
 
             _rayOffsetY =  _characterBounds.size.y /2;

@@ -14,12 +14,12 @@ namespace Player
 
 	public class DecelerateHorizontalAction : StateAction
 	{
-		private Player _player;
+		private PlayerScript _player;
 		private new DecelerateHorizontalActionSO OriginSO => (DecelerateHorizontalActionSO)base.OriginSO;
 
 		public override void Awake(StateMachine stateMachine)
 		{
-			_player = stateMachine.GetComponent<Player>();
+			_player = stateMachine.GetComponent<PlayerScript>();
 		}
 
 		public override void OnUpdate()

@@ -6,7 +6,7 @@ using System;
 namespace Player
 {
 
-	public class Player : MonoBehaviour
+	public class PlayerScript : MonoBehaviour
 	{   
 		[SerializeField] private PlayerInputSO _playerInputSO;
 		

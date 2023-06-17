@@ -9,14 +9,14 @@ namespace Player
 	public class HasHitHeadCondition : Condition
 	{
 		//Component references
-		private Player _player;
+		private PlayerScript _player;
 		private PlayerController _playerController;
 		private Transform _transform;
 
 		public override void Awake(StateMachine stateMachine)
 		{
 			_transform = stateMachine.GetComponent<Transform>();
-			_player = stateMachine.GetComponent<Player>();
+			_player = stateMachine.GetComponent<PlayerScript>();
 			_playerController = stateMachine.GetComponent<PlayerController>();
 		}
 

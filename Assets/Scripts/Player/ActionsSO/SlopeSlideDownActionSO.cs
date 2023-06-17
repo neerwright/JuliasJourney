@@ -15,7 +15,7 @@ namespace Player
 	public class SlopeSlideDownAction : StateAction
 	{
 		//Component references
-		private Player _player;
+		private PlayerScript _player;
 		private PlayerController _playerController;
 		private SlopeSlideDownActionSO _originSO => (SlopeSlideDownActionSO)base.OriginSO; // The SO this StateAction spawned from
 		
@@ -24,7 +24,7 @@ namespace Player
 
 		public override void Awake(StateMachine stateMachine)
 		{
-			_player = stateMachine.GetComponent<Player>();
+			_player = stateMachine.GetComponent<PlayerScript>();
 			_playerController = stateMachine.GetComponent<PlayerController>();
 		}
 
@@ -51,9 +51,9 @@ namespace Player
 			}
 				
 
-			if(_player.movementVector.y < Player.MAX_FALL_SPEED)
+			if(_player.movementVector.y < PlayerScript.MAX_FALL_SPEED)
 			{
-				_player.movementVector.y = Player.MAX_FALL_SPEED;
+				_player.movementVector.y = PlayerScript.MAX_FALL_SPEED;
 				_player.movementVector.x = _player.movementVector.y * ratio;
 			}	
 

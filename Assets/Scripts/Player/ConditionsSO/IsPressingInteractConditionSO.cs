@@ -9,10 +9,10 @@ namespace Player
 	public class IsPressingInteractCondition : Condition
 	{
 		//Component references
-		private Player _player;
+		private PlayerScript _player;
 		public override void Awake(StateMachine stateMachine)
 		{
-			_player = stateMachine.GetComponent<Player>();
+			_player = stateMachine.GetComponent<PlayerScript>();
 		}
 
 		protected override bool Statement() => _player.interactInput;

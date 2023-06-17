@@ -10,12 +10,12 @@ namespace Player
 	public class ApplyMovementVectorAction : StateAction
 	{
 		//Component references
-		private Player _player;
+		private PlayerScript _player;
 		private PlayerController _playerController;
 
 		public override void Awake(StateMachine stateMachine)
 		{
-			_player = stateMachine.GetComponent<Player>();
+			_player = stateMachine.GetComponent<PlayerScript>();
 			_playerController = stateMachine.GetComponent<PlayerController>();
 		}
 

@@ -43,7 +43,7 @@ namespace Player
 	{
 		private new AerialMovementActionSO OriginSO => (AerialMovementActionSO)base.OriginSO;
 
-		private Player _player;
+		private PlayerScript _player;
 		private float _apexPoint = 0f;
 		private float _jumpApexThreshold;
 		private float _apexBonus = 2f;
@@ -53,7 +53,7 @@ namespace Player
 
 		public override void Awake(StateMachine stateMachine)
 		{
-			_player = stateMachine.GetComponent<Player>();
+			_player = stateMachine.GetComponent<PlayerScript>();
 			_turnSpeed = OriginSO._turnSpeed;
 			_slowSpeedTurnBonus = OriginSO._slowSpeedTurnBonus;
 		}

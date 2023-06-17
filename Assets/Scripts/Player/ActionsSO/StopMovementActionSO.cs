@@ -15,12 +15,12 @@ namespace Player
 
 	public class StopMovement : StateAction
 	{
-		private Player _player;
+		private PlayerScript _player;
 		private new StopMovementActionSO OriginSO => (StopMovementActionSO)base.OriginSO;
 
 		public override void Awake(StateMachine stateMachine)
 		{
-			_player = stateMachine.GetComponent<Player>();
+			_player = stateMachine.GetComponent<PlayerScript>();
 		}
 
 		public override void OnUpdate()

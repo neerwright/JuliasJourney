@@ -19,7 +19,7 @@ namespace Player
 
 	public class HookSwingingAction : StateAction
 	{
-		private Player _player;
+		private PlayerScript _player;
         private GameObject _hookTarget;
         Vector2 _originalHookPosition;
         private Vector2 _targetPosition;
@@ -32,7 +32,7 @@ namespace Player
 
 		public override void Awake(StateMachine stateMachine)
 		{
-			_player = stateMachine.GetComponent<Player>();
+			_player = stateMachine.GetComponent<PlayerScript>();
             
 		}
 

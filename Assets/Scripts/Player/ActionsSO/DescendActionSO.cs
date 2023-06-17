@@ -14,7 +14,7 @@ namespace Player
 	public class DescendAction : StateAction
 	{
 		//Component references
-		private Player _player;
+		private PlayerScript _player;
 		private PlayerController _playerController;
 
 		private float _verticalMovement;
@@ -24,7 +24,7 @@ namespace Player
 
 		public override void Awake(StateMachine stateMachine)
 		{
-			_player = stateMachine.GetComponent<Player>();
+			_player = stateMachine.GetComponent<PlayerScript>();
 			_playerController = stateMachine.GetComponent<PlayerController>();
 		}
 
@@ -41,11 +41,11 @@ namespace Player
 		public override void OnUpdate()
 		{
 			//Note that deltaTime is used even though it's going to be used in ApplyMovementVectorAction, this is because it represents an acceleration, not a speed
-			_verticalMovement += Physics.gravity.y *Player.GRAVITY_MULTIPLIER * _gravityMultiplier * Time.deltaTime;
+			_verticalMovement += Physics.gravity.y *PlayerScript.GRAVITY_MULTIPLIER * _gravityMultiplier * Time.deltaTime;
 			//Note that even if it's added, the above value is negative due to Physics.gravity.y
 
 			//Cap the maximum so the player doesn't reach incredible speeds when freefalling from high positions
-			_verticalMovement = Mathf.Clamp(_verticalMovement, Player.MAX_FALL_SPEED, Player.MAX_RISE_SPEED);
+			_verticalMovement = Mathf.Clamp(_verticalMovement, PlayerScript.MAX_FALL_SPEED, PlayerScript.MAX_RISE_SPEED);
 
 			_player.movementVector.y = _verticalMovement;
 
