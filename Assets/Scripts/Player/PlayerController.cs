@@ -95,6 +95,10 @@ namespace Player
             _verticalSlopeCheckOffset =  _characterBounds.size.x / 2;
         }
 
+        public void ForceMove(Vector2 movementVector)
+        {
+            MoveCharacter(movementVector);
+        }
         //Passed parameter needs to have deltaTime applied 
         public void Move(Vector2 movementVector)
         {
@@ -179,7 +183,7 @@ namespace Player
                 
             var pos = _rb2d.position; 
             var furthestPoint = pos + move;
-
+            
             // check furthest movement. If nothing hit, move and don't do extra checks
             var hit = Physics2D.OverlapBox(furthestPoint, _characterBounds.size, 0, _groundLayer);
             if (!hit) {
@@ -303,7 +307,7 @@ namespace Player
             
             if (TouchingPlatform)
             {
-                if(!_colLeft && !_colRight)
+                if(!_colLeft && !_colRight && !_colDown)
                 { 
                     return;
                 }
@@ -311,6 +315,10 @@ namespace Player
                 //push character out of plattform
                 var pos = _rb2d.position;
                 Vector2 positionToMoveTo = new Vector2(0,0);
+                if(_colDown)
+                { 
+                    positionToMoveTo = pos + Vector2.up * 0.5f;
+                }
                 if(_colLeft)
                 { 
                     positionToMoveTo = pos + Vector2.right * 0.2f;
@@ -319,6 +327,7 @@ namespace Player
                 { 
                     positionToMoveTo = pos + Vector2.left * 0.2f;
                 }
+                
 
                 
                 for (int i = 1; i < _freeColliderIterations; i++) {

@@ -15,7 +15,6 @@ public class MovingPlatform : MonoBehaviour
     private GameObject _player;
 
     private PlayerController _playerController;
-    private PlayerScript _playerScript;
 
     private int array_index;
     private bool playerIsTouchingPlatform = false;
@@ -25,7 +24,6 @@ public class MovingPlatform : MonoBehaviour
     {
         transform.position = points[startingPoint].position;
         _playerController = _player.GetComponent<PlayerController>();
-        _playerScript = _player.GetComponent<PlayerScript>();
     }
 
     // Update is called once per frame
@@ -44,10 +42,10 @@ public class MovingPlatform : MonoBehaviour
         Vector3 oldPos = transform.position;
         transform.position = Vector2.MoveTowards(transform.position, points[array_index].position, speed * Time.deltaTime);
         
+
         if(playerIsTouchingPlatform)
         {
-            Vector3 posDifference = transform.position - oldPos;
-            _playerScript.movementVector.x += posDifference.x;
+            Vector3 posDifference = transform.position - oldPos;    
         }
     }
 
