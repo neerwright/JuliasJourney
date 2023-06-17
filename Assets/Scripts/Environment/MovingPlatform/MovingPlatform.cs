@@ -18,6 +18,7 @@ public class MovingPlatform : MonoBehaviour
     private PlayerScript _playerScript;
 
     private int array_index;
+    private bool playerIsTouchingPlatform = false;
     private const float REACH_GOAL_THRESHOLD = 0.02f;
     // Start is called before the first frame update
     void Start()
@@ -40,16 +41,22 @@ public class MovingPlatform : MonoBehaviour
             }
         }
 
+        Vector3 oldPos = transform.position;
         transform.position = Vector2.MoveTowards(transform.position, points[array_index].position, speed * Time.deltaTime);
         
+        if(playerIsTouchingPlatform)
+        {
+            Vector3 posDifference = transform.position - oldPos;
+            _playerScript.movementVector.x += posDifference.x;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D Collider)
     {
         if(Collider.gameObject.tag == "Player")
         {
+            playerIsTouchingPlatform = true;
             _playerController.TouchingPlatform = true;
-            _playerScript.movementVector.x += speed * Time.deltaTime;
         }
     }
 
@@ -57,6 +64,7 @@ public class MovingPlatform : MonoBehaviour
     {
         if(Collider.gameObject.tag == "Player")
         {
+            playerIsTouchingPlatform = false;
             _playerController.TouchingPlatform = false;
         }
     }

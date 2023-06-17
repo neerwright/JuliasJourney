@@ -100,9 +100,11 @@ namespace Player
         {
             RunCollisionChecks();
             CheckForWalls(ref movementVector);
+            
             SlopeCheck();
             CheckForNonWalkableSlope();
             
+            HandleMovingPlatform();
             MoveCharacter(movementVector);
         }
 
@@ -295,6 +297,48 @@ namespace Player
         }
 
 
+
+        private void HandleMovingPlatform()
+        {
+            
+            if (TouchingPlatform)
+            {
+                if(!_colLeft && !_colRight)
+                { 
+                    return;
+                }
+
+                //push character out of plattform
+                var pos = _rb2d.position;
+                Vector2 positionToMoveTo = new Vector2(0,0);
+                if(_colLeft)
+                { 
+                    positionToMoveTo = pos + Vector2.right * 0.2f;
+                }
+                if(_colRight)
+                { 
+                    positionToMoveTo = pos + Vector2.left * 0.2f;
+                }
+
+                
+                for (int i = 1; i < _freeColliderIterations; i++) {
+                    // increment to check all but furthestPoint - we did that already
+                    var t = (float)i / _freeColliderIterations;
+                    var posToTry = Vector2.Lerp(pos, positionToMoveTo, t);
+                    //_rb2d.MovePosition(positionToMoveTo);
+                    
+
+                    if (!Physics2D.OverlapBox(posToTry, _characterBounds.size, 0, _groundLayer)) {
+                        _rb2d.position = (posToTry);  //the first position without a collision\
+                        break;
+                    }
+                    
+                }    
+            }
+                
+        }
+        
+    
         
         
         #endregion
@@ -347,6 +391,9 @@ namespace Player
                 yield return Vector2.Lerp(range.Start, range.End, t);
             }
         }
+
+
+        
 
 
         #endregion
