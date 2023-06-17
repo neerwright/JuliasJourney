@@ -42,8 +42,8 @@ namespace Player
 		private float _apexPoint = 0f;
 		private float _jumpApexThreshold;
 		private float _apexBonus = 2f;
-		private bool _applyApexBonus = false;
-		private const float APEX_MAX_SPEED_BONUS = 10f;
+		private bool _applyExtraAirResistance = false;
+		private const float MAX_SPEED_THREASHOLD = 12.5f;
 
 
 
@@ -61,17 +61,23 @@ namespace Player
 			float absMaxSpeed = OriginSO.AbsoluteMaxSpeed;
 			float airResistance = OriginSO.AirResistance;
 
-			float acceleration = OriginSO.Acceleration;
+			float acceleration = OriginSO.Acceleration / 100f;
 			_jumpApexThreshold = OriginSO.JumpApexThreshold;
 			_apexBonus = OriginSO.ApexBonus;
 
+			float apexBonus = CalculateApexBonus(velocity.y, input.x);
+			Debug.Log(apexBonus);
+			
+			
+			//
 
 			if (Mathf.Abs(velocity.x) <= maxSpeedInAir)
 			{
-				
 				SetVelocity(ref velocity.x, input.x, acceleration);
-				float bonus = _applyApexBonus ? 0 : APEX_MAX_SPEED_BONUS;
-				velocity.x = Mathf.Clamp(velocity.x, -maxSpeedInAir - bonus, maxSpeedInAir + bonus);
+				velocity.x += apexBonus;
+				velocity.x = Mathf.Clamp(velocity.x, -maxSpeedInAir , maxSpeedInAir);
+				
+				
 			}
 			else
 			{	
@@ -82,9 +88,9 @@ namespace Player
 				//Absolute MaxSpeed
 				velocity.x = Mathf.Clamp(velocity.x, -absMaxSpeed, absMaxSpeed);
 			}
-			ApplyAirResistance(ref velocity.x, airResistance);
 			
-			velocity.x += CalculateApexBonus(velocity.y, input.x);
+			
+			ApplyAirResistance(ref velocity.x, airResistance );
 			_player.movementVector = velocity;
 			
 			
@@ -92,11 +98,12 @@ namespace Player
 
 		private float CalculateApexBonus(float velocity, float horizontalInput)
 		{
+			_applyExtraAirResistance = false;
 			_apexPoint = Mathf.InverseLerp(_jumpApexThreshold, 0, Mathf.Abs(velocity));
 			var apexBonus = Mathf.Sign(horizontalInput) * _apexBonus * _apexPoint;
 			
 			apexBonus =(Mathf.Abs(horizontalInput) > Mathf.Epsilon)? apexBonus * Time.deltaTime : 0f;
-			
+
 			return apexBonus;
 		}
 
