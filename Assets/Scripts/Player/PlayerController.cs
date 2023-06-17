@@ -34,6 +34,7 @@ namespace Player
             public bool SlopeInFront => Mathf.Sign(transform.localScale.x) == 1 ? _slopeOnRight : _slopeOnLeft;
             public bool SlopeInBack  => Mathf.Sign(transform.localScale.x) == 1 ? _slopeOnLeft : _slopeOnRight;
             public bool CanWalkOnSlope => _canWalkOnSlope;
+            public string SlopeTag => _slopeTag;
                   
         //JUMPIMG
             public bool CoyoteUsable{get;set;}
@@ -62,6 +63,7 @@ namespace Player
         private float _slopeDownAngle;
         private float _slopeSideAngle;
         private Vector2 _slopeNormalPerp;
+        private string _slopeTag = "";
 
         private bool _isCollidingWithWall = false;
         
@@ -129,7 +131,9 @@ namespace Player
         }
 
         private void SlopeCheck()
-        {
+        { 
+            _slopeTag = "";
+
             Vector2 checkPos = transform.position - new Vector3(0.0f, _characterBounds.size.y / 2);
 
             RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos + new Vector2(_characterBounds.size.x / 2 , 0), transform.right, _slopeCheckDistanceHorizontal, _groundLayer);
@@ -150,6 +154,10 @@ namespace Player
             Vector2 NormalPerpVertical;
             (_onSlopeBothRays , _onSlopeVertical , _slopeDownAngle, NormalPerpVertical) = SlopeChecker.SlopeCheckVertical(hitLeft, hitRight);
             
+            if (_onSlopeBothRays)
+                _slopeTag = hitLeft.transform.gameObject.tag;
+                
+
             if(_slopeDownAngle > Mathf.Epsilon)
             {
                 _slopeNormalPerp = NormalPerpVertical;

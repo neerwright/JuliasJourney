@@ -27,6 +27,11 @@ namespace Player
 		[Tooltip("air Resistance applied at the end to dampen movement")]
 		[SerializeField] [Range(0.1f, 100f)] private float _airResistance = 20f;
 
+		[Tooltip("faster turning speed")]
+		[SerializeField] [Range(1f, 200f)] public float _turnSpeed = 100f;
+		[Tooltip("little extra turning speed when we are still slow")]
+		[SerializeField] [Range(0.01f, 1f)] public float _slowSpeedTurnBonus = 0.05f;
+
 		[Tooltip("extra speed during apex of jump")]
 		[SerializeField] private float _apexBonus = 2;
 		[Tooltip("When upwards velocity is smaller than threshold, the apex bonus gets applied gradually")]
@@ -42,15 +47,15 @@ namespace Player
 		private float _apexPoint = 0f;
 		private float _jumpApexThreshold;
 		private float _apexBonus = 2f;
-		private bool _applyExtraAirResistance = false;
-		private const float MAX_SPEED_THREASHOLD = 12.5f;
-
+		private float _turnSpeed;
+		private float _slowSpeedTurnBonus;
 
 
 		public override void Awake(StateMachine stateMachine)
 		{
 			_player = stateMachine.GetComponent<Player>();
-			
+			_turnSpeed = OriginSO._turnSpeed;
+			_slowSpeedTurnBonus = OriginSO._slowSpeedTurnBonus;
 		}
 
 		public override void OnUpdate()
@@ -65,15 +70,21 @@ namespace Player
 			_jumpApexThreshold = OriginSO.JumpApexThreshold;
 			_apexBonus = OriginSO.ApexBonus;
 
-			float apexBonus = CalculateApexBonus(velocity.y, input.x);
-			Debug.Log(apexBonus);
-			
+			float apexBonus = CalculateApexBonus(velocity.y, input.x);			
 			
 			//
 
 			if (Mathf.Abs(velocity.x) <= maxSpeedInAir)
 			{
-				SetVelocity(ref velocity.x, input.x, acceleration);
+				if(Mathf.Sign(input.x) != Mathf.Sign(velocity.x))
+				{
+					SetVelocity(ref velocity.x, input.x, acceleration * _turnSpeed + _slowSpeedTurnBonus);
+				}
+				else
+				{
+					SetVelocity(ref velocity.x, input.x, acceleration);
+				}
+				
 				velocity.x += apexBonus;
 				velocity.x = Mathf.Clamp(velocity.x, -maxSpeedInAir , maxSpeedInAir);
 				
@@ -83,7 +94,7 @@ namespace Player
 			{	
 				if(Mathf.Sign(input.x) != Mathf.Sign(velocity.x))
 				{
-					SetVelocity(ref velocity.x, input.x, acceleration);
+					SetVelocity(ref velocity.x, input.x, acceleration * _turnSpeed);
 				}
 				//Absolute MaxSpeed
 				velocity.x = Mathf.Clamp(velocity.x, -absMaxSpeed, absMaxSpeed);
@@ -98,7 +109,6 @@ namespace Player
 
 		private float CalculateApexBonus(float velocity, float horizontalInput)
 		{
-			_applyExtraAirResistance = false;
 			_apexPoint = Mathf.InverseLerp(_jumpApexThreshold, 0, Mathf.Abs(velocity));
 			var apexBonus = Mathf.Sign(horizontalInput) * _apexBonus * _apexPoint;
 			

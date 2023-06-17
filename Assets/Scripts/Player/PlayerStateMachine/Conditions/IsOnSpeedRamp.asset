@@ -9,15 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 932b8dc37ca32ef4780be0377a50e764, type: 3}
-  m_Name: AerialMovement
+  m_Script: {fileID: 11500000, guid: 539a1be40d65d0a44822840a98e926d3, type: 3}
+  m_Name: IsOnSpeedRamp
   m_EditorClassIdentifier: 
-  description: 
-  _maxAirSpeed: 14
-  _absoluteMaxSpeed: 67.8
-  _acceleration: 0.1
-  _airResistance: 0.1
-  _turnSpeed: 50
-  _slowSpeedTurnBonus: 0.08
-  _apexBonus: 30
-  _jumpApexThreshold: 12

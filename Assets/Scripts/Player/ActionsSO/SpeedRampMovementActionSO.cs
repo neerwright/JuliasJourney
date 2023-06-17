@@ -4,23 +4,23 @@ using Statemachine;
 namespace Player
 {
 
-	[CreateAssetMenu(fileName = "SlopeMovement", menuName = "State Machine/Actions/Slope Movement")]
-	public class SlopeMovementActionSO : StateActionSO<SlopeMovementAction>
+	[CreateAssetMenu(fileName = "SpeedRampMovement", menuName = "State Machine/Actions/SpeedRamp")]
+	public class SpeedRampMovementActionSO : StateActionSO<SpeedRampMovementAction>
 	{
 		[Tooltip("Speed multiplyer")]
-		public float speed = 8f;
+		public float speed = 1f;
 
 		[Tooltip("Speed multiplyer")]
-		public float acceleration = 16f;
+		public float acceleration = 50f;
 		
 	}
 
-	public class SlopeMovementAction : StateAction
+	public class SpeedRampMovementAction : StateAction
 	{
 		//Component references
 		private Player _player;
 		private PlayerController _playerController;
-		private SlopeMovementActionSO _originSO => (SlopeMovementActionSO)base.OriginSO; // The SO this StateAction spawned from
+		private SpeedRampMovementActionSO _originSO => (SpeedRampMovementActionSO)base.OriginSO; // The SO this StateAction spawned from
 		
 		private bool _useSlopeMovement = false;
 		private float _angleCorrection;
@@ -46,12 +46,12 @@ namespace Player
 				
 				float movementSign = Mathf.Sign(_player.movementVector.x);
 
-				if(Mathf.Sign(movementSign) == Mathf.Sign(SlopeVector.y))
+				if(Mathf.Sign(movementSign) != Mathf.Sign(SlopeVector.y))
 				{
 					
-					//slide down: accelerate
+					//slide up: accelerate
 					_player.movementVector.x += SlopeVector.x * -_player.movementInput.x * _originSO.acceleration * Time.deltaTime;
-					_player.movementVector.y += (SlopeVector.y * -_player.movementInput.x * _originSO.acceleration + _angleCorrection) * Time.deltaTime;
+					_player.movementVector.y += (SlopeVector.y * -_player.movementInput.x * _originSO.acceleration + _angleCorrection * 10f) * Time.deltaTime;
 				}
 				else
 				{
@@ -64,7 +64,7 @@ namespace Player
 					}
 					else
 					{
-						//walk up slope: linear movement
+						//walk doen ramp: linear movement
 						_player.movementVector.x = SlopeVector.x * -_player.movementInput.x * _originSO.speed ;
 						_player.movementVector.y = (SlopeVector.y * -_player.movementInput.x * _originSO.speed + _angleCorrection) ;
 					}	

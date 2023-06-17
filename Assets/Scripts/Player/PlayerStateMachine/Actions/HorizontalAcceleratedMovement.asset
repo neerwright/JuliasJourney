@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HorizontalAcceleratedMovement
   m_EditorClassIdentifier: 
   description: 
-  maxSpeedOnGround: 12
+  maxSpeedOnGround: 14
   absoluteMaxSpeed: 30
   acceleration: 50
-  damping: 0.021
+  damping: 0.01
