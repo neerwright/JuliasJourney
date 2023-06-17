@@ -102,6 +102,7 @@ namespace Player
 		
 		private void OnInteract()
 		{
+			gameObject.transform.position = new Vector3(79.8f,69.6f,0);
 			if(!_coRoutineIsPlaying)
 			{
 				interactInput = true;
