@@ -125,11 +125,10 @@ namespace Player
 			{
 				_useSlopeMovement = true;
 
-				if (Mathf.Abs(_player.movementInput.x) > Mathf.Epsilon)
-					_angleCorrection = Vector2.Dot(_playerController.VectorAlongSlope, Vector2.up);
+				Debug.Log("here");
+				_angleCorrection = 10f;
 				
-				if(_angleCorrection > 0) // stay closer to slope 
-					_angleCorrection = -_angleCorrection;	
+				
 
 			}
 

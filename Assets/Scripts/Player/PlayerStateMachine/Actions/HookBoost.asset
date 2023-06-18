@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: HookBoost
   m_EditorClassIdentifier: 
   description: 
-  boostSpeed: 50
+  boostSpeed: 60

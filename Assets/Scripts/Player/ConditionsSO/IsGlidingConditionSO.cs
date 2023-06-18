@@ -16,6 +16,6 @@ namespace Player
 			_playerController = stateMachine.GetComponent<PlayerController>();
 		}
 
-		protected override bool Statement() => _playerController.isGliding;
+		protected override bool Statement() => _playerController.IsGliding;
 	}
 }

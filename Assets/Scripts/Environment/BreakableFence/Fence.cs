@@ -3,24 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using Player;
 
-public class GlideTrigger : MonoBehaviour
+public class Fence : MonoBehaviour
 {
+    [SerializeField]
+    private float speedThreashold;
+
     [SerializeField]
     private GameObject _player;
 
-    private PlayerController _playerController;
+    private PlayerScript _playerScript; 
     // Start is called before the first frame update
     void Start()
     {
-        _playerController = _player.GetComponent<PlayerController>();
+        _playerScript = _player.GetComponent<PlayerScript>();
     }
 
     private void OnTriggerEnter2D(Collider2D Collider)
     {
         if(Collider.gameObject.tag == "Player")
         {
-            Debug.Log("glide");
-            _playerController.IsGliding = !_playerController.IsGliding ;
+            if( _playerScript.movementVector.x > speedThreashold)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: HookTimerElapsed
   m_EditorClassIdentifier: 
   description: 
-  timerLength: 1
+  timerLength: 0.3

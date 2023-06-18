@@ -26,8 +26,9 @@ namespace Player
             [SerializeField] private float _coyoteTimeThreshold = 0.1f;
 
 
-        //Movement Types
-            public bool isGliding { get; set; }
+        //setable Movement Types
+            public bool IsGliding { get; set; }
+            public bool TouchingPlatform { get; set; }
         //SLOPES   
             public Vector2 VectorAlongSlope => _slopeNormalPerp;
             public bool IsOnSlopeVertical => _onSlopeVertical;
@@ -48,7 +49,7 @@ namespace Player
             public bool CollisionAbove => _colUp;
             public bool IsNudgingPlayer => _nudgingPlayer;
             public bool IsCollidingWithWall => _isCollidingWithWall;
-            public bool TouchingPlatform { get; set; }
+            
 
 
 

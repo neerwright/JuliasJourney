@@ -38,12 +38,7 @@ namespace Player
 		private bool _coRoutineIsPlaying = false;
 		private IEnumerator coroutine;
 
-		private PlayerController pc;
-	
-		private void Start()
-		{
-			pc = GetComponent<PlayerController>();
-		}
+
 
 		private void OnEnable()
 		{
@@ -110,8 +105,7 @@ namespace Player
 		
 		private void OnInteract()
 		{
-			gameObject.transform.position = new Vector3(79.8f,69.6f,0);
-			pc.isGliding = false;
+			gameObject.transform.position = new Vector3(75.91f,251.2f,0f);
 
 			if(!_coRoutineIsPlaying)
 			{

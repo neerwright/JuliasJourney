@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44502cc69fa1f0340b85c5a574eea54a, type: 3}
-  m_Name: GlideMovement
+  m_Script: {fileID: 11500000, guid: 8b141bfd9d6c53940958a96c1be65b3e, type: 3}
+  m_Name: TouchedJumpPadCondition
   m_EditorClassIdentifier: 
   description: 
-  _maxSpeed: 58.2
-  _speed: 4.4
-  _acceleration: 62.1
-  _drop: 55.6
-  _airResistance: 3
+  BoolVariable: {fileID: 11400000, guid: e1b6fd9eca05a7f45a24a805c3b4f9e1, type: 2}
