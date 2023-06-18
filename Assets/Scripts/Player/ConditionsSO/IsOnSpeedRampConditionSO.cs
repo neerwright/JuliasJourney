@@ -16,6 +16,6 @@ namespace Player
 			_playerController = stateMachine.GetComponent<PlayerController>();
 		}
 
-		protected override bool Statement() => _playerController.IsOnSlopeVertical && _playerController.SlopeTag == "SpeedRamp";
+		protected override bool Statement() => (_playerController.SlopeInFront || _playerController.IsOnSlopeVertical) && _playerController.SlopeTag == "SpeedRamp";
 	}
 }

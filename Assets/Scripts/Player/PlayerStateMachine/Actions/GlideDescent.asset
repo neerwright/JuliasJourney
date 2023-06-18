@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: GlideDescent
   m_EditorClassIdentifier: 
   description: 
-  gravityMultiplier: 1
+  gravityMultiplier: 0.5

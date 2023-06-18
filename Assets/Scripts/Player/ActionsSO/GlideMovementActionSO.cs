@@ -12,6 +12,7 @@ namespace Player
 	{
 		public float MaxSpeed => _maxSpeed;
 		public float AirResistance => _airResistance;
+        public float Drop => _drop;
         
 
 		
@@ -20,6 +21,7 @@ namespace Player
 		[SerializeField] [Range(0.1f, 100f)] private float _maxSpeed = 12f;
         [SerializeField] [Range(0.1f, 100f)] public float _speed = 12f;
         [SerializeField] [Range(0.1f, 100f)] public float _acceleration = 12f;
+        [SerializeField] [Range(0.1f, 100f)] public float _drop = 40f;
 		
 		[SerializeField] [Range(0.1f, 100f)] private float _airResistance = 20f;
 
@@ -33,28 +35,33 @@ namespace Player
 		private PlayerScript _player;
         private float _speed;
         private float _acceleration;
-
+        private bool _decellerating = false;
 
 		public override void Awake(StateMachine stateMachine)
 		{
 			_player = stateMachine.GetComponent<PlayerScript>();
             _speed = OriginSO._speed;
-            _acceleration = OriginSO._acceleration;
+            _acceleration = OriginSO._acceleration ;
 		}
 
 		public override void OnUpdate()
 		{
-            Debug.Log(_speed);
 			Vector2 velocity = _player.movementVector;
 			Vector2 input = _player.movementInput;
 			float maxSpeed = OriginSO.MaxSpeed;
+            float drop = OriginSO.Drop;
+
 			float airResistance = OriginSO.AirResistance;
             
+            if(_speed > maxSpeed)
+            {
+                Debug.Log(_speed);
+                _speed = -drop;
+                _player.movementVector.y = -10f;
+            }
+            
+
             SetVelocity(ref velocity.y, input.y, ref _speed, _acceleration);
-            
-            
-            
-            velocity.x = Mathf.Clamp(velocity.x, -maxSpeed , maxSpeed);
 				
 
 			ApplyAirResistance(ref velocity.x, airResistance );
@@ -64,18 +71,19 @@ namespace Player
 		}
 
 
-		private void SetVelocity(ref float currentAxisSpeed, float axisInput, ref float speed, float acceleratio)
+		private void SetVelocity(ref float currentAxisSpeed, float axisInput, ref float speed, float acceleration)
 		{
             
 			if (axisInput > 0.1f)
 			{
 				currentAxisSpeed += axisInput * speed * Time.deltaTime;
-                speed += Time.deltaTime * acceleratio;
+                speed += Time.deltaTime * acceleration;
+                
+                
 			}
             else
             {
-                speed -= Time.deltaTime * acceleratio * 100f;
-                speed = Mathf.Max(speed, OriginSO._speed);
+                //speed = Mathf.Max(speed, OriginSO._speed);
             }
             
 		}

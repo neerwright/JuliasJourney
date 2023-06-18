@@ -103,6 +103,7 @@ namespace Player
         //Passed parameter needs to have deltaTime applied 
         public void Move(Vector2 movementVector)
         {
+
             RunCollisionChecks();
             CheckForWalls(ref movementVector);
             

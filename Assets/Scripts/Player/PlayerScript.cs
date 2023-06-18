@@ -37,9 +37,17 @@ namespace Player
 
 		private bool _coRoutineIsPlaying = false;
 		private IEnumerator coroutine;
+
+		private PlayerController pc;
 	
+		private void Start()
+		{
+			pc = GetComponent<PlayerController>();
+		}
+
 		private void OnEnable()
 		{
+
 			_playerInputSO.JumpEvent += OnJumpInitiated;
 			_playerInputSO.JumpCanceledEvent += OnJumpCanceled;
 			_playerInputSO.MoveEvent += OnMove;
@@ -103,6 +111,8 @@ namespace Player
 		private void OnInteract()
 		{
 			gameObject.transform.position = new Vector3(79.8f,69.6f,0);
+			pc.isGliding = false;
+
 			if(!_coRoutineIsPlaying)
 			{
 				interactInput = true;

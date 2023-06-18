@@ -25,7 +25,7 @@ namespace Player
 		private bool _useSlopeMovement = false;
 		private float _angleCorrection;
 
-		private const float TRANSITION_ALONG_SLOPE_MULT = 5.0f;
+		private const float TRANSITION_ALONG_SLOPE_MULT = -1.0f;
 		
 		public override void Awake(StateMachine stateMachine)
 		{
@@ -108,15 +108,14 @@ namespace Player
 			if (_playerController.SlopeInFront && !_playerController.IsOnSlopeVertical)
 			{
 				_useSlopeMovement = true;
-				if (Mathf.Abs(_player.movementInput.x) > Mathf.Epsilon)
-					_angleCorrection = Vector2.Dot(_playerController.VectorAlongSlope, Vector2.up) * TRANSITION_ALONG_SLOPE_MULT;
+				
+				_angleCorrection = Vector2.Dot(_playerController.VectorAlongSlope, Vector2.up) * TRANSITION_ALONG_SLOPE_MULT;
 					
-				if(_angleCorrection > 0) // stay more grounded until slope is under our feet
-					_angleCorrection = -_angleCorrection;
 				
 			}
 			
 			if (_playerController.SlopeInFront && _playerController.IsOnSlopeVertical)
+				_angleCorrection = 0.1f;
 			{
 				_useSlopeMovement = true;
 			}

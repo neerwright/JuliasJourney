@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: GlideMovement
   m_EditorClassIdentifier: 
   description: 
-  _maxSpeed: 12
-  _airResistance: 20
+  _maxSpeed: 55.8
+  _speed: 1
+  _acceleration: 4.1
+  _airResistance: 3
