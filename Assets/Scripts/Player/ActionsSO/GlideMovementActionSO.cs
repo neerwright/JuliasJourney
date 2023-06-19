@@ -36,7 +36,6 @@ namespace Player
 		private PlayerController pc;
         private float _speed;
         private float _acceleration;
-        private bool _decellerating = false;
 		private bool endGlide = false;
 		private float maxSpeed;
 		private float reduceMaxSpeed;

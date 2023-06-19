@@ -373,7 +373,6 @@ namespace Player
                 {
                     
                     _player.movementVector = -1 * VectorAlongSlope * _player.movementVector.magnitude;
-                    Debug.Log(_player.movementVector);
                 }
                 TouchedSlope = false;
             }
