@@ -24,7 +24,8 @@ namespace Player
             [SerializeField] private float _slopeCheckDistanceVertical = 0.7f;
             [SerializeField] private float _slopeCheckDistanceHorizontal = 0.7f;
             [SerializeField] private float _maxSlopeAngle = 60.0f;
-
+            [Range(0f, 1f)]
+            [SerializeField] private float _bonkedThreashold = 0.3f;
             [SerializeField] private float _coyoteTimeThreshold = 0.1f;
 
 
@@ -53,7 +54,7 @@ namespace Player
             public bool CollisionAbove => _colUp;
             public bool IsNudgingPlayer => _nudgingPlayer;
             public bool IsCollidingWithWall => _isCollidingWithWall;
-            
+            public event UnityAction<float> Bonked = delegate {};
 
 
 
@@ -124,13 +125,23 @@ namespace Player
 
         private void CheckForWalls(ref Vector2 movementVector)
         {
-            _isCollidingWithWall = false;
+            
 
             if (movementVector.x > 0 && _colRight || movementVector.x < 0 && _colLeft) 
             {
                 // Don't walk through walls
+                if(!_isCollidingWithWall && movementVector.x > _bonkedThreashold)
+                {
+                    Debug.Log(movementVector.x);
+                    Bonked.Invoke(movementVector.x);
+                }
                 _isCollidingWithWall = true;
+                
                 movementVector.x = 0;  
+            }
+            else
+            {
+                _isCollidingWithWall = false;
             }          
         }
 

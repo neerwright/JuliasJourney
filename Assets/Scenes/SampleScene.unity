@@ -3799,7 +3799,7 @@ MonoBehaviour:
   _playerInputSO: {fileID: 11400000, guid: 497326490c7a920459e60f0e3f851ca2, type: 2}
   _playerController: {fileID: 632227293}
   _landingSquashPower: 2
-  _shakePower: 14.3
+  _shakePower: 10.8
   _minimumLandingSquash: 0.57
   _landingScreenShakeThreshold: 0.611
   _bigShakeThreshold: 0.8

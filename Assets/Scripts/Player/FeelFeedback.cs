@@ -13,6 +13,9 @@ public class FeelFeedback : MonoBehaviour
     [SerializeField] private float _landingSquashPower = 2f;
     [Range(1f, 20f)]
     [SerializeField] private float _shakePower = 7f;
+    [Range(1f, 20f)]
+    [SerializeField] private float _shakePowerBonk = 9f;
+    
     [Range(0.1f, 1f)]
     [SerializeField] private float _minimumLandingSquash = 0.4f;
     [Range(0f, 1f)]
@@ -21,10 +24,12 @@ public class FeelFeedback : MonoBehaviour
     
     public MMFeedbacks JumpFeedback;
     public MMFeedbacks LandingFeedback;
+    public MMFeedbacks BonkFeedback;
 
-    private Rigidbody _rigidbody;
+    //private Rigidbody _rigidbody;
     private PlayerScript _playerScript;
-    private MMFeedbackSquashAndStretch SquashAndStretchFeelComponent;
+    private MMFeedbackSquashAndStretch SquashAndStretchLanding;
+    private MMFeedbackSquashAndStretch SquashAndStretchBonk;
     private float BIG_SHAKE = 3f;
     private float _velocityLastFrame; 
 
@@ -32,30 +37,24 @@ public class FeelFeedback : MonoBehaviour
 	{
         _playerInputSO.JumpEvent += PlayJumpFeedback;
         _playerController.LandedOnGround += PlayLandingFeedback;
+        _playerController.Bonked += PlayBonkFeedback;
     }
 
     private void OnDisable()
     {
         _playerInputSO.JumpEvent -= PlayJumpFeedback;
         _playerController.LandedOnGround -= PlayLandingFeedback;
+        _playerController.Bonked -= PlayBonkFeedback;
 
     }
 
     private void Awake()
     {
-        _rigidbody = this.gameObject.GetComponent<Rigidbody>();
+        //_rigidbody = this.gameObject.GetComponent<Rigidbody>();
         _playerScript = this.gameObject.GetComponent<PlayerScript>();
-
-        
-        
+        SquashAndStretchLanding = (MMFeedbackSquashAndStretch) LandingFeedback.Feedbacks[0];
+        SquashAndStretchBonk = (MMFeedbackSquashAndStretch) BonkFeedback.Feedbacks[0];
             
-                
-                SquashAndStretchFeelComponent = (MMFeedbackSquashAndStretch) LandingFeedback.Feedbacks[0];
-                Debug.Log(SquashAndStretchFeelComponent);
-            
-        
-
-
     }
 
     void Update()
@@ -75,17 +74,28 @@ public class FeelFeedback : MonoBehaviour
         float _velocity = _playerScript.movementVector.y;
         float fallingRatio = Mathf.InverseLerp(0, PlayerScript.MAX_FALL_SPEED, _velocity);
         float squashStrength = Mathf.Max(fallingRatio, _minimumLandingSquash);
-        if (SquashAndStretchFeelComponent)
+        if (SquashAndStretchLanding)
         {
-            SquashAndStretchFeelComponent.RemapCurveOne = squashStrength * _landingSquashPower;
+            SquashAndStretchLanding.RemapCurveOne = squashStrength * _landingSquashPower;
 
         }
         
         LandingFeedback?.PlayFeedbacks();
         
         float bigShake = fallingRatio > _bigShakeThreshold ? BIG_SHAKE : 1f;
-        Debug.Log(_shakePower * (fallingRatio * bigShake) );
         if(fallingRatio > _landingScreenShakeThreshold)
             ProCamera2DShake.Instance.Shake(0.5f * (1/ BIG_SHAKE), new Vector2 (0.1f * _shakePower , _shakePower ) * (fallingRatio * bigShake)  , 1, 1, 10, new Vector3(0,0,0), 0.1f);
+    }
+
+    private void PlayBonkFeedback(float velocity)
+    {
+        Debug.Log(velocity);
+        if (SquashAndStretchBonk)
+        {
+            SquashAndStretchBonk.RemapCurveOne = (velocity / 2) + 1f;
+
+        }
+        BonkFeedback?.PlayFeedbacks();
+        ProCamera2DShake.Instance.Shake(0.2f , new Vector2 ( _shakePowerBonk , _shakePowerBonk ) * velocity  , 1, 1, 10, new Vector3(0,0,0), 0.1f);
     }
 }
