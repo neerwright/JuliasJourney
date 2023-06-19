@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Utilities;
+using UnityEngine.Events;
+
 
 namespace Player
 {
@@ -44,6 +46,7 @@ namespace Player
             public bool CanUseCoyote => CoyoteUsable && !_colDown && TimeLeftGrounded + _coyoteTimeThreshold > Time.time;
             public float TimeLeftGrounded{get;set;}
             public bool LandingThisFrame { get; private set; }
+            public event UnityAction LandedOnGround = delegate {};
             public bool IsGrounded => _colDown;
 
         //COLLISION
@@ -396,6 +399,7 @@ namespace Player
             else if (!_colDown && groundedCheck) {
                 CoyoteUsable = true; // Only trigger when first touching
                 LandingThisFrame = true;
+                LandedOnGround.Invoke();
             }
 
             _colDown = groundedCheck;
