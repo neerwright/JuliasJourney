@@ -19,7 +19,6 @@ public class GlideTrigger : MonoBehaviour
     {
         if(Collider.gameObject.tag == "Player")
         {
-            Debug.Log("glide");
             _playerController.IsGliding = !_playerController.IsGliding ;
         }
     }

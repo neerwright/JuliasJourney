@@ -86,13 +86,14 @@ namespace Player
 
 		public override void OnStateEnter()
 		{
+			
+			_playerController.TouchedSlope = true;
 			Vector2 SlopeVector = _playerController.VectorAlongSlope;
 			if(_player.transform.localScale.x == 1)
 			{
 				SlopeVector = -SlopeVector;
 			}
 			_player.movementVector = SlopeVector * _player.movementVector.magnitude;
-			
 				
 		}
 
@@ -109,9 +110,7 @@ namespace Player
 			{
 				_useSlopeMovement = true;
 				
-				_angleCorrection = Vector2.Dot(_playerController.VectorAlongSlope, Vector2.up) * TRANSITION_ALONG_SLOPE_MULT;
-					
-				
+				_angleCorrection = Vector2.Dot(_playerController.VectorAlongSlope, Vector2.up) * TRANSITION_ALONG_SLOPE_MULT;				
 			}
 			
 			if (_playerController.SlopeInFront && _playerController.IsOnSlopeVertical)
@@ -124,12 +123,7 @@ namespace Player
 			if(_playerController.IsCompletelyOnSlope && !_playerController.SlopeInFront && !_playerController.SlopeInBack)
 			{
 				_useSlopeMovement = true;
-
-				Debug.Log("here");
-				_angleCorrection = 10f;
-				
-				
-
+				_angleCorrection = 10f;								
 			}
 
 

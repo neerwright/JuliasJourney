@@ -86,6 +86,7 @@ namespace Player
 
 		public override void OnStateEnter()
 		{
+			_playerController.TouchedSlope = true;
 			Vector2 SlopeVector = _playerController.VectorAlongSlope;
 			if(_player.transform.localScale.x == 1)
 			{

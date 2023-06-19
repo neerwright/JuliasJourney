@@ -29,6 +29,7 @@ namespace Player
         //setable Movement Types
             public bool IsGliding { get; set; }
             public bool TouchingPlatform { get; set; }
+            public bool TouchedSlope { get; set; }
         //SLOPES   
             public Vector2 VectorAlongSlope => _slopeNormalPerp;
             public bool IsOnSlopeVertical => _onSlopeVertical;
@@ -111,6 +112,7 @@ namespace Player
             SlopeCheck();
             CheckForNonWalkableSlope();
             
+            HandleSlopeEntry();
             HandleMovingPlatform();
             MoveCharacter(movementVector);
         }
@@ -362,7 +364,20 @@ namespace Player
         }
         
     
-        
+        private void HandleSlopeEntry()
+        {
+            if(TouchedSlope)
+            {
+
+                if(_player.movementVector.y < 0)
+                {
+                    
+                    _player.movementVector = -1 * VectorAlongSlope * _player.movementVector.magnitude;
+                    Debug.Log(_player.movementVector);
+                }
+                TouchedSlope = false;
+            }
+        }
         
         #endregion
         

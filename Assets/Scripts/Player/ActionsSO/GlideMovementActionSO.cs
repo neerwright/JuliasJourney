@@ -65,7 +65,6 @@ namespace Player
 		{
 			if(_player.interactInput)
 			{
-				Debug.Log("reset");
 				pc.IsGliding = false;
 				endGlide = false;
 				ResetGlide();
