@@ -8,10 +8,16 @@ namespace Player
 	public class SlopeMovementActionSO : StateActionSO<SlopeMovementAction>
 	{
 		[Tooltip("Speed multiplyer")]
-		public float speed = 8f;
+		public float gravityOnRamp = 8f;
 
 		[Tooltip("Speed multiplyer")]
-		public float acceleration = 16f;
+		public float speedUp = 16f;
+
+		[Tooltip("Speed multiplyer")]
+		public float speedDown = 16f;
+
+		[Tooltip("Speed multiplyer")]
+		public float turnSpeed = 1f;
 		
 	}
 
@@ -22,8 +28,9 @@ namespace Player
 		private PlayerController _playerController;
 		private SlopeMovementActionSO _originSO => (SlopeMovementActionSO)base.OriginSO; // The SO this StateAction spawned from
 		
+		private Vector2 _slopeVector;
 		private bool _useSlopeMovement = false;
-		private float _angleCorrection;
+		private float _angleCorrection = 0f;
 
 		private const float TRANSITION_ALONG_SLOPE_MULT = 5.0f;
 		
@@ -34,52 +41,73 @@ namespace Player
 		}
 
 		public override void OnUpdate()
-		{
-			Debug.Log(_player.movementVector.magnitude);
-			_useSlopeMovement = false;
-			_angleCorrection = 0;
-			CheckMovementAndCalculateAngleCorrection();
+		{			
+			Debug.DrawRay(_player.transform.position, _slopeVector * 10f, Color.red);
 
-			if(_useSlopeMovement)
+			float input = _player.movementInput.x;	
+			float inputSign = Mathf.Sign(input);
+			//gravity, move down slope even when standing still
+			if ( input == 0)
 			{
-				Vector2 SlopeVector = _playerController.VectorAlongSlope;
-				Debug.DrawRay(_player.transform.position, SlopeVector, Color.red);
+				_player.movementVector = new Vector2(0,0);
 				
-				float movementSign = Mathf.Sign(_player.movementVector.x);
+				//_player.movementVector.x -= _slopeVector.x * -_originSO.gravityOnRamp * Time.deltaTime;
+				//_player.movementVector.y -= _slopeVector.y * -_originSO.gravityOnRamp* Time.deltaTime;
+				return;
+			}
 
-				if(Mathf.Sign(movementSign) == Mathf.Sign(SlopeVector.y))
+			//slide down: 
+			if(Mathf.Sign(inputSign) != Mathf.Sign(_slopeVector.y))
+			{
+				if(!_playerController.SlopeInBack && !_playerController.IsCompletelyOnSlope)
 				{
-					
-					//slide down: accelerate
-					_player.movementVector.x += SlopeVector.x * -_player.movementInput.x * _originSO.speed * Time.deltaTime;
-					_player.movementVector.y += (SlopeVector.y * -_player.movementInput.x * _originSO.speed + _angleCorrection) * Time.deltaTime;
+					//we are starting to walk down a slope -> smooth transition onto slope
+					_player.movementVector.x += input * Time.deltaTime * _originSO.speedDown;
+					return;
 				}
-				else
+				else if (!_playerController.SlopeInBack && _playerController.IsCompletelyOnSlope)
 				{
-					//sudden turnaround from walking up  to down
-					if(Mathf.Sign(_player.movementVector.x) != Mathf.Sign(_player.movementInput.x))
-					{
-						
-						_player.movementVector.x = SlopeVector.x * movementSign* _originSO.speed  ;
-						_player.movementVector.y = (SlopeVector.y * movementSign * _originSO.speed + _angleCorrection ) ;
-					}
-					else
-					{
-						//walk up slope: linear movement
-						_player.movementVector.x = SlopeVector.x * -_player.movementInput.x * _originSO.speed ;
-						_player.movementVector.y = (SlopeVector.y * -_player.movementInput.x * _originSO.speed + _angleCorrection) ;
-					}	
-					
-
-					
+					//moment we have both feet under ledge -> walk down 
+					_player.movementVector = _slopeVector * _player.movementVector.magnitude;
 				}
+				
+				Debug.Log("acell");
+				//accelerate
+				_player.movementVector.x += _slopeVector.x * input * Time.deltaTime * _originSO.speedDown;
+				_player.movementVector.y += _slopeVector.y * input  * Time.deltaTime * _originSO.speedDown;
+				
 					
 			}
 			else
 			{
-				_player.movementVector.y = 0;
-				//_player.movementVector.x = _player.movementInput.x * _originSO.speed;
+				//walk up slope: linear movement
+				Debug.Log("lin");
+				_player.movementVector.x = _slopeVector.x * input * _originSO.speedUp ;
+				_player.movementVector.y = (_slopeVector.y * input * _originSO.speedUp) ;
+				
+				//walked completey up -> smooth transition to walking
+				if(!_playerController.SlopeInFront && !_playerController.IsCompletelyOnSlope)
+				{
+					Debug.Log("S");
+					_player.movementVector.x = input * _originSO.speedUp;
+					if (_player.movementVector.y > 0f)
+						_player.movementVector.y = 0f;
+
+					//touch ground
+					_player.movementVector.y -= _originSO.speedUp;	
+					return;
+				}
+
+				//sudden turnaround from walking up  to down
+				if(Mathf.Sign(_player.movementVector.x) != inputSign)
+				{
+					_player.movementVector.x = _slopeVector.x * input * _originSO.turnSpeed  ;
+					_player.movementVector.y = (_slopeVector.y * input  * _originSO.turnSpeed ) ;
+				}	
 			}
+					
+			
+			
 		
 
 			
@@ -88,51 +116,48 @@ namespace Player
 		public override void OnStateEnter()
 		{
 			_playerController.TouchedSlope = true;
-			Vector2 SlopeVector = _playerController.VectorAlongSlope;
-			if(_player.transform.localScale.x == 1)
-			{
-				SlopeVector = -SlopeVector;
-			}
-			_player.movementVector = SlopeVector * _player.movementVector.magnitude;
+			
+			_slopeVector = _playerController.VectorAlongSlope;
+			
+			_slopeVector = -_slopeVector;
+			
+			_player.movementVector = _slopeVector * _player.movementVector.magnitude;
 			
 				
 		}
 
-		private void CheckMovementAndCalculateAngleCorrection()
+		private void AngleCorrection()
 		{
+			_angleCorrection = 0f;
 			if (_playerController.IsOnSlopeVertical && _playerController.SlopeInBack)
 			{
-				_useSlopeMovement = true;	
 			}
 			
 
 			//smooth out transition when in front of a slope and starting to walk up
 			if (_playerController.SlopeInFront && !_playerController.IsOnSlopeVertical)
 			{
-				_useSlopeMovement = true;
-				if (Mathf.Abs(_player.movementInput.x) > Mathf.Epsilon)
-					_angleCorrection = Vector2.Dot(_playerController.VectorAlongSlope, Vector2.up) * TRANSITION_ALONG_SLOPE_MULT;
+				//if (Mathf.Abs(_player.movementInput.x) > Mathf.Epsilon)
+					//_angleCorrection = -10f ;//Vector2.Dot(_playerController.VectorAlongSlope, Vector2.up) * TRANSITION_ALONG_SLOPE_MULT;
 					
-				if(_angleCorrection > 0) // stay more grounded until slope is under our feet
-					_angleCorrection = -_angleCorrection;
+				//if(_angleCorrection > 0) // stay more grounded until slope is under our feet
+				//	_angleCorrection = -_angleCorrection;
 				
 			}
 			
 			if (_playerController.SlopeInFront && _playerController.IsOnSlopeVertical)
 			{
-				_useSlopeMovement = true;
 			}
 			
 			//smooth out transition when we start walking down a slope
 			if(_playerController.IsCompletelyOnSlope && !_playerController.SlopeInFront && !_playerController.SlopeInBack)
 			{
-				_useSlopeMovement = true;
 
-				if (Mathf.Abs(_player.movementInput.x) > Mathf.Epsilon)
-					_angleCorrection = Vector2.Dot(_playerController.VectorAlongSlope, Vector2.up);
+				//if (Mathf.Abs(_player.movementInput.x) > Mathf.Epsilon)
+				//	_angleCorrection = Vector2.Dot(_playerController.VectorAlongSlope, Vector2.up);
 				
-				if(_angleCorrection > 0) // stay closer to slope 
-					_angleCorrection = -_angleCorrection;	
+				//if(_angleCorrection > 0) // stay closer to slope 
+				//	_angleCorrection = -_angleCorrection;	
 
 			}
 
