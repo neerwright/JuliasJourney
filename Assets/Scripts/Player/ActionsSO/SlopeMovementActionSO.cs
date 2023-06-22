@@ -35,6 +35,7 @@ namespace Player
 
 		public override void OnUpdate()
 		{
+			Debug.Log(_player.movementVector.magnitude);
 			_useSlopeMovement = false;
 			_angleCorrection = 0;
 			CheckMovementAndCalculateAngleCorrection();
@@ -50,8 +51,8 @@ namespace Player
 				{
 					
 					//slide down: accelerate
-					_player.movementVector.x += SlopeVector.x * -_player.movementInput.x * _originSO.acceleration * Time.deltaTime;
-					_player.movementVector.y += (SlopeVector.y * -_player.movementInput.x * _originSO.acceleration + _angleCorrection) * Time.deltaTime;
+					_player.movementVector.x += SlopeVector.x * -_player.movementInput.x * _originSO.speed * Time.deltaTime;
+					_player.movementVector.y += (SlopeVector.y * -_player.movementInput.x * _originSO.speed + _angleCorrection) * Time.deltaTime;
 				}
 				else
 				{
