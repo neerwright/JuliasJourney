@@ -9,11 +9,11 @@ namespace Player
     {
     
         [SerializeField] private AnimancerComponent _animancer;
-        [SerializeField] private AnimationClip _idle;
-        [SerializeField] private AnimationClip _move;
-        [SerializeField] private AnimationClip _slide;
-        [SerializeField] private AnimationClip _jump;
-        [SerializeField] private AnimationClip _walk;
+        [SerializeField] private ClipTransition _idle;
+        [SerializeField] private ClipTransition _move;
+        [SerializeField] private ClipTransition _slide;
+        [SerializeField] private ClipTransition _jump;
+        [SerializeField] private ClipTransition _walk;
 
         void Start()
         {
