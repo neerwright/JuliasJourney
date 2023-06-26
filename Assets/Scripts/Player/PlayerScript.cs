@@ -74,9 +74,13 @@ namespace Player
 
 		private void FlipSprite()
 		{
+			
 			bool playerHasHorizontalSpeed = Mathf.Abs(movementVector.x) > Mathf.Epsilon;
 			if (playerHasHorizontalSpeed)
+			{
 				transform.localScale = new Vector2 (Mathf.Sign(movementVector.x), 1f);
+			}
+				
 		}
 
 		private void RecalculateMovement()

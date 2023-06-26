@@ -882,7 +882,7 @@ Transform:
   m_GameObject: {fileID: 103175814}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 632227282}
@@ -1012,9 +1012,9 @@ MonoBehaviour:
     Quantized: 0
     TargetBPM: 120
   DebugActive: 0
-  SquashAndStretchTarget: {fileID: 632227282}
+  SquashAndStretchTarget: {fileID: 837671479}
   Mode: 0
-  Axis: 3
+  Axis: 4
   TimeScale: 0
   AnimateScaleDuration: 0.2
   RemapCurveZero: 1
@@ -3249,9 +3249,9 @@ MonoBehaviour:
     Quantized: 0
     TargetBPM: 120
   DebugActive: 0
-  SquashAndStretchTarget: {fileID: 632227282}
+  SquashAndStretchTarget: {fileID: 837671479}
   Mode: 0
-  Axis: 0
+  Axis: 6
   TimeScale: 0
   AnimateScaleDuration: 0.3
   RemapCurveZero: 1
@@ -4116,7 +4116,7 @@ MonoBehaviour:
     Quantized: 0
     TargetBPM: 120
   DebugActive: 0
-  SquashAndStretchTarget: {fileID: 632227282}
+  SquashAndStretchTarget: {fileID: 837671479}
   Mode: 0
   Axis: 3
   TimeScale: 0
