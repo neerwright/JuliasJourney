@@ -1089,6 +1089,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &122501825 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 398546808373353068, guid: a43fdfe9391fe7d49bbf1e992a50f299, type: 3}
+  m_PrefabInstance: {fileID: 837671478}
+  m_PrefabAsset: {fileID: 0}
+--- !u!210 &122501828
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122501825}
+  m_Enabled: 1
+  m_SortingLayerID: -1622709567
+  m_SortingLayer: 2
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
+--- !u!1 &140775998 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1975367301585059605, guid: a43fdfe9391fe7d49bbf1e992a50f299, type: 3}
+  m_PrefabInstance: {fileID: 837671478}
+  m_PrefabAsset: {fileID: 0}
+--- !u!210 &140776001
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140775998}
+  m_Enabled: 1
+  m_SortingLayerID: 2130936389
+  m_SortingLayer: 7
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &158472082
 GameObject:
   m_ObjectHideFlags: 0
@@ -1610,6 +1644,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &229823911 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -805849407481567242, guid: a43fdfe9391fe7d49bbf1e992a50f299, type: 3}
+  m_PrefabInstance: {fileID: 837671478}
+  m_PrefabAsset: {fileID: 0}
+--- !u!210 &229823914
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229823911}
+  m_Enabled: 1
+  m_SortingLayerID: -544169517
+  m_SortingLayer: 4
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &258847172
 GameObject:
   m_ObjectHideFlags: 0
@@ -4678,6 +4729,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &747717028 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2623031501168831696, guid: a43fdfe9391fe7d49bbf1e992a50f299, type: 3}
+  m_PrefabInstance: {fileID: 837671478}
+  m_PrefabAsset: {fileID: 0}
+--- !u!210 &747717031
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 747717028}
+  m_Enabled: 1
+  m_SortingLayerID: 469398625
+  m_SortingLayer: 3
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &760288538
 GameObject:
   m_ObjectHideFlags: 0
@@ -6942,6 +7010,23 @@ Transform:
   m_Father: {fileID: 639382898}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1155104748 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -896770268078843103, guid: a43fdfe9391fe7d49bbf1e992a50f299, type: 3}
+  m_PrefabInstance: {fileID: 837671478}
+  m_PrefabAsset: {fileID: 0}
+--- !u!210 &1155104751
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1155104748}
+  m_Enabled: 1
+  m_SortingLayerID: -536108061
+  m_SortingLayer: 5
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &1165708323
 GameObject:
   m_ObjectHideFlags: 0
@@ -68549,6 +68634,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1638450368 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -259972160606440404, guid: a43fdfe9391fe7d49bbf1e992a50f299, type: 3}
+  m_PrefabInstance: {fileID: 837671478}
+  m_PrefabAsset: {fileID: 0}
+--- !u!210 &1638450371
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1638450368}
+  m_Enabled: 1
+  m_SortingLayerID: 731668241
+  m_SortingLayer: 6
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &1700119757
 GameObject:
   m_ObjectHideFlags: 0

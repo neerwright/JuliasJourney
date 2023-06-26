@@ -18,7 +18,7 @@ namespace Player
 
         private void Update()
         {
-           // _animancer.Play(_test);
+            //_animancer.Play(_test);
         }
     }
 }

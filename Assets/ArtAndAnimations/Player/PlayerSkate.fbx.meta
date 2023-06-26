@@ -42,6 +42,9 @@ ModelImporter:
   - first:
       74: -1689700653081241477
     second: rig|JumpLand (1)
+  - first:
+      74: 8529663515624641224
+    second: rig|Jump (1)
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -102,11 +105,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: rig|JumpLand (1)
-      takeName: rig|JumpLand
+      name: rig|Jump (1)
+      takeName: rig|Jump
       internalID: 0
-      firstFrame: 2
-      lastFrame: 12
+      firstFrame: 1.8
+      lastFrame: 43
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

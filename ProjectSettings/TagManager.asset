@@ -48,8 +48,20 @@ TagManager:
   - name: BG
     uniqueID: 880269873
     locked: 0
+  - name: CharBackArm
+    uniqueID: 2672257729
+    locked: 0
+  - name: CharBackLeg
+    uniqueID: 469398625
+    locked: 0
   - name: CharTroso
     uniqueID: 3750797779
+    locked: 0
+  - name: CharFrontLeg
+    uniqueID: 3758859235
+    locked: 0
+  - name: CharHead
+    uniqueID: 731668241
     locked: 0
   - name: CharFrontArm
     uniqueID: 2130936389

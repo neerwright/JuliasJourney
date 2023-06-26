@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: NewSpeedRamp
   m_EditorClassIdentifier: 
   description: 
-  gravityOnRamp: 77.35
-  speedUp: 91.5
-  speedDown: 3.95
-  turnSpeed: 1
+  gravityOnRamp: 22.55
+  speedUp: 37.8
+  speedDown: 5.52
   initialSpeedBoost: 1
