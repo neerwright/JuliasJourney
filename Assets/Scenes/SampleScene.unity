@@ -3897,7 +3897,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 632227281}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91bbcb9ce39e2a449b364e2a57fb09af, type: 3}
   m_Name: 
@@ -3909,9 +3909,9 @@ MonoBehaviour:
       _NormalizedTimes: []
       _Callbacks: []
       _Names: []
-    _Clip: {fileID: 0}
-    _Speed: 1
-    _NormalizedStartTime: 0.49844238
+    _Clip: {fileID: 7400000, guid: 7112b83dc525f6c4caf70cfa4f95a060, type: 2}
+    _Speed: NaN
+    _NormalizedStartTime: NaN
   _move:
     _FadeDuration: 0
     _Events:
@@ -3923,12 +3923,12 @@ MonoBehaviour:
     _Speed: 1
     _NormalizedStartTime: 0.25
   _slide:
-    _FadeDuration: 0.25
+    _FadeDuration: 1
     _Events:
       _NormalizedTimes: []
       _Callbacks: []
       _Names: []
-    _Clip: {fileID: 0}
+    _Clip: {fileID: 7400000, guid: db4f27d9bc36f164b8173fa74ac850be, type: 2}
     _Speed: 1
     _NormalizedStartTime: NaN
   _jump:
@@ -3937,16 +3937,17 @@ MonoBehaviour:
       _NormalizedTimes: []
       _Callbacks: []
       _Names: []
-    _Clip: {fileID: 0}
+    _Clip: {fileID: -512320013847864616, guid: a43fdfe9391fe7d49bbf1e992a50f299, type: 3}
     _Speed: 1
     _NormalizedStartTime: NaN
   _walk:
-    _FadeDuration: 0.25
+    _FadeDuration: 0.5
     _Events:
-      _NormalizedTimes: []
+      _NormalizedTimes:
+      - 0.8863636
       _Callbacks: []
       _Names: []
-    _Clip: {fileID: 0}
+    _Clip: {fileID: 7400000, guid: 77290a6b4b298dd45bff61aad46c5520, type: 2}
     _Speed: 1
     _NormalizedStartTime: NaN
 --- !u!1 &637024401

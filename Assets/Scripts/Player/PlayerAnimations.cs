@@ -9,26 +9,10 @@ namespace Player
     {
     
         [SerializeField] private AnimancerComponent _animancer;
-        [SerializeField] private ClipTransition _idle;
-        [SerializeField] private ClipTransition _move;
-        [SerializeField] private ClipTransition _slide;
-        [SerializeField] private ClipTransition _jump;
-        [SerializeField] private ClipTransition _walk;
-
-        void Start()
+        
+        public AnimancerComponent get_animancer()
         {
-
-        }
-
-        private void OnEnable()
-        {
-            _animancer.Play(_move);
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            
+            return _animancer;
         }
     }
 }
