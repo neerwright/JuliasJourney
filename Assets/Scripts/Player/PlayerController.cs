@@ -131,7 +131,6 @@ namespace Player
                 // Don't walk through walls
                 if(!_isCollidingWithWall && movementVector.x > _bonkedThreashold)
                 {
-                    Debug.Log(movementVector.x);
                     Bonked.Invoke(movementVector.x);
                 }
                 _isCollidingWithWall = true;

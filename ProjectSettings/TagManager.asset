@@ -7,6 +7,7 @@ TagManager:
   - Feather
   - Hook
   - HookCenter
+  - SpeedRamp
   layers:
   - Default
   - TransparentFX
@@ -46,4 +47,10 @@ TagManager:
     locked: 0
   - name: BG
     uniqueID: 880269873
+    locked: 0
+  - name: CharTroso
+    uniqueID: 3750797779
+    locked: 0
+  - name: CharFrontArm
+    uniqueID: 2130936389
     locked: 0

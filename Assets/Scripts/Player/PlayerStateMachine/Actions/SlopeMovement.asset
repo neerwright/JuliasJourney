@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: SlopeMovement
   m_EditorClassIdentifier: 
   description: 
-  speed: 8
-  acceleration: 16
+  gravityOnRamp: 8
+  speedUp: 5
+  speedDown: 16
+  turnSpeed: 1
+  initialSpeedBoost: 1.1
