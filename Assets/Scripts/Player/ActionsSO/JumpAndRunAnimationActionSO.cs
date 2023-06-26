@@ -76,7 +76,6 @@ namespace Player
 
         public void PlayRunningAnim()
         {
-            Debug.Log("1");
             if(!_animancer)
             {
                 _animancer = pAnimns.get_animancer();
@@ -90,7 +89,6 @@ namespace Player
 
         private void PlayLandingAnim()
         {
-            Debug.Log("22");
             
             if(!_animancer)
                 {
@@ -101,7 +99,6 @@ namespace Player
             {
                 var state = _animancer.Play(_jumpLandingClip);
                 state.Events.OnEnd = PlayRunningAnim;
-                Debug.Log("2");
             }
         }
 	}

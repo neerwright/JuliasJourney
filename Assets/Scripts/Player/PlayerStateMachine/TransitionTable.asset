@@ -367,3 +367,12 @@ MonoBehaviour:
     - ExpectedResult: 0
       Condition: {fileID: 11400000, guid: eca91398186ce5e4b802b91b6f7d58fb, type: 2}
       Operator: 1
+  - FromState: {fileID: 11400000, guid: 6b41eb7b5f0aa8642922e51e3f2c503b, type: 2}
+    ToState: {fileID: 11400000, guid: e815e902fa7364c41961a04daf573de5, type: 2}
+    Conditions:
+    - ExpectedResult: 0
+      Condition: {fileID: 11400000, guid: 8bcbad8c799ad474fa1fe45104fcb0ff, type: 2}
+      Operator: 0
+    - ExpectedResult: 0
+      Condition: {fileID: 11400000, guid: edf2c0443ac1bf24f98eadc61ad6f314, type: 2}
+      Operator: 1
