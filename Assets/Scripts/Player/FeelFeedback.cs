@@ -89,7 +89,6 @@ public class FeelFeedback : MonoBehaviour
 
     private void PlayBonkFeedback(float velocity)
     {
-        Debug.Log(velocity);
         if (SquashAndStretchBonk)
         {
             SquashAndStretchBonk.RemapCurveOne = (velocity / 2) + 1f;

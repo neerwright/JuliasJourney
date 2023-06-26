@@ -37,7 +37,6 @@ namespace Player
             pAnimns = _player.GetComponent<PlayerAnimations>();
             if(pAnimns)
             {
-                Debug.Log("getting");
                 _animancer = pAnimns.get_animancer();
             }
 		}
