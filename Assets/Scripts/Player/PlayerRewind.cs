@@ -53,6 +53,7 @@ namespace Player
                 if ( index < 1)
                 {
                     _playerController.IsRewinding = false;
+                    _timeController.Rewind = false;
                 }
             }
         }

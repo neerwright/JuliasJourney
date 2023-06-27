@@ -15,26 +15,24 @@ namespace RewindSystem
         }
 
         [SerializeField] IntGameEvent startRewinding;
-        [SerializeField] GameEvent stopRewinding;
         [SerializeField] GameObjectStringSet timeObjects;
         [SerializeField] FloatVariableSO PlayerVelocity;
         
         public bool Rewind {get;set;}
-        //private bool _stepedBack = false;
+        private bool _stepedBack = false;
 
         private RecordedData[,] _recordedData;
-        private const int recordMax = 10000;
+        private const int recordMax = 300;
         private int recordCount;
         private int recordIndex;
 
         private Dictionary<string, int> timeObjectsIndexDict ;
 
-        private bool raisedEvent = false;
+        
 
         public RecordedData getRecordedData(string ObjectName, int recordIndex)
         {
             int objectIndex = timeObjectsIndexDict[ObjectName];
-            Debug.Log(_recordedData[objectIndex, recordIndex].pos);
             return _recordedData[objectIndex, recordIndex];
         }
 
@@ -49,22 +47,23 @@ namespace RewindSystem
         {
             if(Rewind)
             {
-                if(!raisedEvent)
+                if(!_stepedBack)
                 {
-                    raisedEvent = true;
+                    _stepedBack = true;
                     startRewinding?.Raise(recordIndex - 1);    
                 }
                 
             }
             else
             {
-                
-                if(raisedEvent)
+                if(_stepedBack)
                 {
-                    raisedEvent = false;
-                    stopRewinding?.Raise();
+                    _stepedBack = false;
+                    recordCount = 1;
+                    
                 }
-
+                 
+                
                 //capture data
                 for(int objectIndex = 0; objectIndex < timeObjects.Size(); objectIndex++)
                 {
@@ -79,6 +78,10 @@ namespace RewindSystem
                     Debug.Log(objectIndex);
                 }
                 recordCount++;
+                if(recordCount >= recordMax)
+                {
+                    recordCount = 1;
+                }
                 recordIndex = recordCount;
                 
             }
