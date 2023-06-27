@@ -16,6 +16,7 @@ namespace Player
         
         [Header("COLLISION")] 
             [SerializeField] private Bounds _characterBounds;
+            
             [SerializeField] private LayerMask _groundLayer;
             [SerializeField] private int _detectorCount = 3;
             [SerializeField] private float _detectionRayLength = 0.1f;
@@ -51,6 +52,12 @@ namespace Player
             public bool IsGrounded => _colDown;
 
         //COLLISION
+            private Bounds _originalCharacterBounds;
+            public Bounds CharacterBounds
+            {
+                get { return _characterBounds; }
+                set { _characterBounds = value;}
+            } 
             public bool CollisionAbove => _colUp;
             public bool IsNudgingPlayer => _nudgingPlayer;
             public bool IsCollidingWithWall => _isCollidingWithWall;
@@ -92,8 +99,14 @@ namespace Player
         private Rigidbody2D _rb2d;
         private PlayerScript _player;
 
+        public void ResetBounds()
+        {
+            CharacterBounds = _originalCharacterBounds;
+        }
+
         void OnEnable() 
         {
+            _originalCharacterBounds = _characterBounds;
             _player = GetComponent<PlayerScript>();
             _rb2d = GetComponent<Rigidbody2D>();
 

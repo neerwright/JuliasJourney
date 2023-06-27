@@ -9,15 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 932b8dc37ca32ef4780be0377a50e764, type: 3}
-  m_Name: AerialMovement
+  m_Script: {fileID: 11500000, guid: 74fbbd5ff73c1d845a8bf6e19154819f, type: 3}
+  m_Name: ResetBounds
   m_EditorClassIdentifier: 
   description: 
-  _maxAirSpeed: 14
-  _absoluteMaxSpeed: 67.8
-  _acceleration: 9.4
-  _airResistance: 0.1
-  _turnSpeed: 15.9
-  _slowSpeedTurnBonus: 0.08
-  _apexBonus: 30
-  _jumpApexThreshold: 12
+  _moment: 0
+  _characterBounds:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  _resetBounds: 0
