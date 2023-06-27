@@ -1,0 +1,16 @@
+{
+    "name": "RewindSystem",
+    "rootNamespace": "",
+    "references": [
+        "GUID:a46d9d1875828c343ad0fa0ff7e7df08"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

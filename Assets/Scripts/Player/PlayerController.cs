@@ -34,6 +34,7 @@ namespace Player
             public bool IsGliding { get; set; }
             public bool TouchingPlatform { get; set; }
             public bool TouchedSlope { get; set; }
+            public bool IsRewinding { get; set; }
         //SLOPES   
             public Vector2 VectorAlongSlope => _slopeNormalPerp;
             public bool IsOnSlopeVertical => _onSlopeVertical;

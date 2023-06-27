@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74fbbd5ff73c1d845a8bf6e19154819f, type: 3}
-  m_Name: ResetBounds
+  m_Script: {fileID: 11500000, guid: c2272388513b88848a637930ed05eef2, type: 3}
+  m_Name: REWINDING
   m_EditorClassIdentifier: 
-  description: 
-  _moment: 0
-  _characterBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
-  _resetBounds: 1
+  _actions: []
+  _sceneGizmoColor: {r: 1, g: 1, b: 1, a: 1}

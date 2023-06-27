@@ -15,6 +15,6 @@ MonoBehaviour:
   description: 
   _moment: 0
   _characterBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0.59, y: 1, z: 1}
+    m_Center: {x: 0, y: 0.7, z: 0}
+    m_Extent: {x: 0.59, y: 1.5, z: 1}
   _resetBounds: 0

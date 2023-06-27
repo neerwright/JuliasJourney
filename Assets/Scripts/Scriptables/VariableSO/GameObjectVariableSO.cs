@@ -7,6 +7,6 @@ namespace Scriptables{
     [CreateAssetMenu(menuName = "VariableSO/GameObject Variable")]
     public class GameObjectVariableSO : ScriptableObject
     {
-        public GameObject GameObject;
+        public GameObject GObject;
     }
 }

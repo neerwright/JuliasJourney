@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: ad8a811ab8442a84db7dcdfe7faf3e26
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - startRewinding: {fileID: 11400000, guid: af057c5cb674dc247aff2e2aa671f0b7, type: 2}
+  - stopRewinding: {fileID: 11400000, guid: af057c5cb674dc247aff2e2aa671f0b7, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

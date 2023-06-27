@@ -48,7 +48,6 @@ namespace Player
 			//, move up slope even when standing still
 			if ( _playerController.IsCompletelyOnSlope)
 			{
-				Debug.Log("gravity");
 				_player.movementVector.x += _slopeVector.x * _originSO.gravityOnRamp * Time.deltaTime;
 				_player.movementVector.y += _slopeVector.y * _originSO.gravityOnRamp* Time.deltaTime;
 			}
