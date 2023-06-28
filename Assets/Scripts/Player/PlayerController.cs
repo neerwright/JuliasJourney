@@ -116,22 +116,23 @@ namespace Player
             _verticalSlopeCheckOffset =  _characterBounds.size.x / 2;
         }
 
-        public void ForceMove(Vector2 movementVector)
-        {
-            MoveCharacter(movementVector);
-        }
+        
         //Passed parameter needs to have deltaTime applied 
         public void Move(Vector2 movementVector)
         {
-            RunCollisionChecks();
-            CheckForWalls(ref movementVector);
+            if(!IsRewinding)
+            {
+                RunCollisionChecks();
+                CheckForWalls(ref movementVector);
             
-            SlopeCheck();
-            CheckForNonWalkableSlope();
+                SlopeCheck();
+                CheckForNonWalkableSlope();
             
-            HandleSlopeEntry();
-            HandleMovingPlatform();
-            MoveCharacter(movementVector);
+                HandleSlopeEntry();
+                HandleMovingPlatform();
+                MoveCharacter(movementVector);
+            }
+            
         }
 
         #region WallAndSlopeCheck

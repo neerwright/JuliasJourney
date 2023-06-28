@@ -73,14 +73,12 @@ namespace Player
             
             if(_currTime > OriginSO.EndClip)
             {
-                Debug.Log("end");
                 _currTime = OriginSO.EndClip;
             }
                  
 
             if(_clip != null)
             {
-                Debug.Log(_currTime);
                 _animancer.Play(_clip, OriginSO.Transition).Time = _currTime ;
             }
                 

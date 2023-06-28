@@ -40,8 +40,6 @@ namespace Player
 		private bool _coRoutineIsPlaying = false;
 		private IEnumerator coroutine;
 
-		private int index = 0;
-
 		private void OnEnable()
 		{
 			
@@ -113,10 +111,6 @@ namespace Player
 		
 		private void OnInteract()
 		{
-			//Vector3[] positionsToTele = { new Vector3(80.9f,68.800f,0f) , new Vector3(73.09f,131f,0f) , new Vector3(75.91f,251.2f,0f)};
-			//gameObject.transform.position = positionsToTele[index];
-			//index++;
-			//index = index % 3;
 
 			if(!_coRoutineIsPlaying)
 			{
