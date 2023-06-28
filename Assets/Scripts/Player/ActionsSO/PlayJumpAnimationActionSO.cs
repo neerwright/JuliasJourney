@@ -55,7 +55,7 @@ namespace Player
                 _animancer = pAnimns.get_animancer();
             }
 
-            _currTime = _startClip;
+            _currTime = OriginSO.StartClip;
 		}
 
 		public override void OnUpdate()
@@ -64,20 +64,24 @@ namespace Player
             
             _animationData.Time = _currTime;			
             
-            if(_currTime > _endClip)
-                 return;
+            if(_currTime > OriginSO.EndClip)
+            {
+                Debug.Log("end");
+                return;
+            }
+                 
 
-            if(_clip != null)
-                _animancer.Play(_clip, AnimancerPlayable.DefaultFadeDuration).Time = _currTime ;
+            if(_clip.Clip != null)
+                _animancer.Play(_clip.Clip, 0.5f).Time = _currTime ;
 
-            _currTime += Time.deltaTime;
+            _currTime += 1000 * Time.deltaTime;
             
 		}
 
 
-			public override void OnStateEnter()
+		public override void OnStateEnter()
 		{
-			
+			_currTime = 0;
 		}
 
 		public override void OnStateExit()
