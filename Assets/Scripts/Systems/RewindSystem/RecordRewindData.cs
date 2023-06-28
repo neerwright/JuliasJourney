@@ -12,8 +12,8 @@ namespace RewindSystem
         
 
         [SerializeField] private GameObject _rewindMethodUser;
-        [SerializeField] private FloatVariableSO _playerVelocity;
-        [SerializeField] GameEvent stopRewinding;
+        [SerializeField] private Vector2VariableSO _playerVelocity;
+        
         //[SerializeField] private bool _useArray = false;
 
         [HideInInspector] public int RecordIndex {get;set;}
@@ -23,7 +23,7 @@ namespace RewindSystem
         private bool _stepedBack = false;
 
         private List<RecordedData> _recordedData;
-        private const int maxRewindData = 300;
+        private const int maxRewindData = 100;
         private int index = 0;
 
         private RecordedData[,] _recordedDataArray;
@@ -48,7 +48,7 @@ namespace RewindSystem
             _rewind = false;
             index = 0;
             _rewindDataManager?.Clear();
-            stopRewinding?.Raise();
+            Debug.Log("CancelRewind");
         }
 
 
@@ -211,6 +211,7 @@ namespace RewindSystem
             else
             {
                 Array.Clear(_recordedDataArray, 0, _recordedDataArray.Length);
+                arrayIndex = 0;
             }
         }
     }

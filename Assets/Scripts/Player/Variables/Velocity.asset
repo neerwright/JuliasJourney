@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2272388513b88848a637930ed05eef2, type: 3}
-  m_Name: REWINDING
+  m_Script: {fileID: 11500000, guid: f8d50afa3e92b5f4ab05157eac6a001f, type: 3}
+  m_Name: Velocity
   m_EditorClassIdentifier: 
-  _actions:
-  - {fileID: 11400000, guid: 178120c6167cc9048a28e0f58d5f9d2d, type: 2}
-  _sceneGizmoColor: {r: 1, g: 1, b: 1, a: 1}
+  Value: {x: 0, y: 0}

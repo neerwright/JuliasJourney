@@ -12,7 +12,7 @@ namespace RewindSystem
 
         [SerializeField] IntGameEvent startRewinding;
         [SerializeField] GameObjectStringSet timeObjects;
-        [SerializeField] FloatVariableSO PlayerVelocity;
+        //[SerializeField] FloatVariableSO PlayerVelocity;
         
         public bool Rewind {get;set;}
         private bool _stepedBack = false;
@@ -67,7 +67,7 @@ namespace RewindSystem
                     
                     RecordedData data = new RecordedData();
                     data.pos = timeObject.transform.position;
-                    data.vel = PlayerVelocity.Value;
+                    //data.vel = PlayerVelocity.Value;
                     _recordedData[objectIndex, recordCount] = data;
                     //Debug.Log(_recordedData[objectIndex, recordCount].pos);
                     timeObjectsIndexDict[timeObjects.Items[objectIndex].ItemTwo] = objectIndex;

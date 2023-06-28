@@ -10,5 +10,5 @@ interface IRewindData
 public struct RecordedData
         {
             public Vector2 pos;
-            public float vel;
+            public Vector2 vel;
         }

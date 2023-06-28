@@ -3730,6 +3730,7 @@ GameObject:
   - component: {fileID: 632227302}
   - component: {fileID: 632227305}
   - component: {fileID: 632227306}
+  - component: {fileID: 632227307}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4015,6 +4016,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecb63310bf318094dbdb24fe55639bd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerVelocity: {fileID: 0}
 --- !u!114 &632227304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4028,9 +4030,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rewindMethodUser: {fileID: 632227281}
-  _playerVelocity: {fileID: 11400000, guid: d141ce9283d269d4fa9cdb65cbe42885, type: 2}
+  _playerVelocity: {fileID: 11400000, guid: 17c432cdeb9739142a7fbce26d37e6a3, type: 2}
   stopRewinding: {fileID: 11400000, guid: 7678b5f2efb2c7b4ebed76d7a6e6edfd, type: 2}
-  _useArray: 1
 --- !u!114 &632227305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4087,6 +4088,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &632227307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632227281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 995172a8eee60e34aac320ec12d2430c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocitySO: {fileID: 11400000, guid: 17c432cdeb9739142a7fbce26d37e6a3, type: 2}
+  _playerScript: {fileID: 632227291}
 --- !u!1 &637024401
 GameObject:
   m_ObjectHideFlags: 0

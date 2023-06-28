@@ -15,7 +15,7 @@ namespace Player
         [SerializeField] private PlayerScript _playerScript;
         [SerializeField] private PlayerController _playerController;
         [SerializeField] GameEvent startRewinding;
-
+        [SerializeField] GameEvent stopRewinding;
 
         private void StartRewind()
         {
@@ -26,6 +26,7 @@ namespace Player
 
         public void StopRewind()
         {
+            stopRewinding?.Raise();
             _playerController.IsRewinding = false;
         }
 		

@@ -11,7 +11,7 @@ namespace Player
 	{   
 		[SerializeField] private PlayerInputSO _playerInputSO;
 		[SerializeField] private GameEvent _playerPressedInteractEvent;
-		
+		[SerializeField] private GameEvent _playerCanceledInteractEvent;
 		
 		private Vector2 _inputVector;
 		private float _previousSpeed;
@@ -45,7 +45,7 @@ namespace Player
 		private void OnEnable()
 		{
 			
-
+			_playerInputSO.StoppedInteractEvent += OnInteractCanceled;
 			_playerInputSO.JumpEvent += OnJumpInitiated;
 			_playerInputSO.JumpCanceledEvent += OnJumpCanceled;
 			_playerInputSO.MoveEvent += OnMove;
@@ -59,6 +59,7 @@ namespace Player
 		//Removes all listeners to the events coming from the InputReader script
 		private void OnDisable()
 		{
+			_playerInputSO.StoppedInteractEvent -= OnInteractCanceled;
 			_playerInputSO.JumpEvent -= OnJumpInitiated;
 			_playerInputSO.JumpCanceledEvent -= OnJumpCanceled;
 			_playerInputSO.MoveEvent -= OnMove;
@@ -126,7 +127,11 @@ namespace Player
 			}
 
 		} 
-			
+		
+		private void OnInteractCanceled()
+		{
+			_playerCanceledInteractEvent?.Raise();
+		}	
 
 
 		IEnumerator WaitUntilInteractCanBePressedAgain(float seconds)

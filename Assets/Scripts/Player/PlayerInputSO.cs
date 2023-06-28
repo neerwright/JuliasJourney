@@ -21,6 +21,7 @@ namespace Player
         public event UnityAction StartRunning = delegate{};
         public event UnityAction StoppedRunning = delegate{};
         public event UnityAction InteractEvent = delegate{};
+        public event UnityAction StoppedInteractEvent = delegate{};
 
 
         private PlayerInputActions _playerInputActions;
@@ -76,6 +77,8 @@ namespace Player
         {
             if(context.phase == InputActionPhase.Performed)
                 InteractEvent.Invoke();
+            if(context.phase == InputActionPhase.Canceled )
+                StoppedInteractEvent.Invoke();
         }
 
         
