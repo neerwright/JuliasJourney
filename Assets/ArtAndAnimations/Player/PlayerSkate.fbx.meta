@@ -108,7 +108,7 @@ ModelImporter:
       name: rig|Jump (1)
       takeName: rig|Jump
       internalID: 0
-      firstFrame: 1.8
+      firstFrame: 0
       lastFrame: 43
       wrapMode: 0
       orientationOffsetY: 0

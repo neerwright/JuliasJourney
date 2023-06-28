@@ -4020,7 +4020,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerVelocity: {fileID: 11400000, guid: 17c432cdeb9739142a7fbce26d37e6a3, type: 2}
-  _animationData: {fileID: 0}
+  _animationData: {fileID: 11400000, guid: c574f52e49fc2a9479bbdc2dbdb31e1d, type: 2}
 --- !u!114 &632227304
 MonoBehaviour:
   m_ObjectHideFlags: 0
