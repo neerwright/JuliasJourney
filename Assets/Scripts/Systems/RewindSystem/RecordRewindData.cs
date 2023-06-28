@@ -23,7 +23,8 @@ namespace RewindSystem
         private bool _stepedBack = false;
 
         private List<RecordedData> _recordedData;
-        private const int maxRewindData = 100;
+        private const int MAX_REWIND_DATA = 2000;
+        private const float MAX_REWIND_TIME = 1.1f;
         private int index = 0;
 
         private RecordedData[,] _recordedDataArray;
@@ -32,13 +33,17 @@ namespace RewindSystem
         public void StartRewind()
         {
             _rewind = true;
+
+			var coroutine = RewindTimer(MAX_REWIND_TIME);
+        	StartCoroutine(coroutine);
+			
         }
 
         
 
         private void Awake()
         {
-            _rewindDataManager = new RewindDataManager(true, maxRewindData);
+            _rewindDataManager = new RewindDataManager(true, MAX_REWIND_DATA);
             
             _rewindMethod = _rewindMethodUser.GetComponent<IRewindData>();
         }
@@ -57,9 +62,9 @@ namespace RewindSystem
             if(_rewind)
             {
                 
-                if(index >= maxRewindData)
+                if(index >= MAX_REWIND_DATA)
                 {
-                    index = maxRewindData -1;
+                    index = MAX_REWIND_DATA -1;
                 } 
 
                 ; 
@@ -88,14 +93,21 @@ namespace RewindSystem
                 _rewindDataManager.Enqueue(data);
 
                 //int size = _rewindDataManager.Size();
-                if(index > maxRewindData)
+                if(index > MAX_REWIND_DATA)
                 {
                     _rewindDataManager.Dequeue();
-                    index = maxRewindData -1;
+                    index = MAX_REWIND_DATA -1;
                 }       
                 index++;
             }
         }
+
+        IEnumerator RewindTimer(float seconds)
+		{			
+			yield return new WaitForSeconds(seconds);
+            StopRewind();
+		}
+
         
     }
 
@@ -216,4 +228,5 @@ namespace RewindSystem
         }
     }
 }
+
 
