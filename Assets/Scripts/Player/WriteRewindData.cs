@@ -5,14 +5,15 @@ using Scriptables;
 
 namespace Player
 {
-    public class TrackVelocity : MonoBehaviour
+    public class WriteRewindData : MonoBehaviour
     {
-        [SerializeField] private Vector2VariableSO velocitySO;
+        [SerializeField] private Vector2VariableSO _velocitySO;
+        
         [SerializeField] private PlayerScript _playerScript;
         // Update is called once per frame
         void Update()
         {
-            velocitySO.Value = _playerScript.movementVector;
+            _velocitySO.Value = _playerScript.movementVector;
         }
     }
 }

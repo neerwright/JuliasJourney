@@ -13,6 +13,7 @@ namespace RewindSystem
 
         [SerializeField] private GameObject _rewindMethodUser;
         [SerializeField] private Vector2VariableSO _playerVelocity;
+        [SerializeField] private AnimationTrackerSO _animationData;
         
         //[SerializeField] private bool _useArray = false;
 
@@ -53,7 +54,6 @@ namespace RewindSystem
             _rewind = false;
             index = 0;
             _rewindDataManager?.Clear();
-            Debug.Log("CancelRewind");
         }
 
 
@@ -90,6 +90,8 @@ namespace RewindSystem
                 RecordedData data = new RecordedData();
                 data.pos = gameObject.transform.position;
                 data.vel = _playerVelocity.Value;
+                data.time = _animationData.Time;
+                data.clip = _animationData.Clip;
                 _rewindDataManager.Enqueue(data);
 
                 //int size = _rewindDataManager.Size();

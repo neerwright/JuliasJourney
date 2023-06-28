@@ -1,6 +1,7 @@
 using UnityEngine;
 using Statemachine;
 using Animancer;
+using Scriptables;
 
 namespace Player
 {
@@ -17,6 +18,9 @@ namespace Player
 
         [SerializeField] private ClipTransition _RunningClip;
         public ClipTransition RunClip => _RunningClip;
+
+        [SerializeField] private AnimationTrackerSO _animationData;
+        public AnimationTrackerSO AnimationData => _animationData;
         
 		protected override StateAction CreateAction() => new PlayJumpAndRunAnimation();
 	}
@@ -32,8 +36,13 @@ namespace Player
         private ClipTransition _jumpLandingClip;
         private ClipTransition _runningClip;
 
+        private AnimationTrackerSO _animationData;
+        private AnimancerState _state;
+        private AnimationClip _currClip;
+
 		public override void Awake(StateMachine stateMachine)
 		{
+            _animationData = OriginSO.AnimationData;
             _jumpLandingClip = OriginSO.JumpClip;
             _runningClip = OriginSO.RunClip;
             _playerController = stateMachine.GetComponent<PlayerController>();
@@ -48,7 +57,9 @@ namespace Player
 
 		public override void OnUpdate()
 		{
-			
+			_animationData.Clip = _currClip;
+            if(_state != null)
+                _animationData.Time = _state.Time;
 		}
 
 
@@ -76,6 +87,7 @@ namespace Player
 
         public void PlayRunningAnim()
         {
+            _currClip = _runningClip.Clip;
             if(!_animancer)
             {
                 _animancer = pAnimns.get_animancer();
@@ -83,13 +95,13 @@ namespace Player
 
             if(_animancer)
             {
-                _animancer.Play(_runningClip);
+                _state = _animancer.Play(_runningClip);
             }
         }
 
         private void PlayLandingAnim()
         {
-            
+            _currClip = _jumpLandingClip.Clip;
             if(!_animancer)
                 {
                     _animancer = pAnimns.get_animancer();
@@ -97,8 +109,8 @@ namespace Player
 
             if(_animancer)
             {
-                var state = _animancer.Play(_jumpLandingClip);
-                state.Events.OnEnd = PlayRunningAnim;
+                _state = _animancer.Play(_jumpLandingClip);
+                _state.Events.OnEnd = PlayRunningAnim;
             }
         }
 	}

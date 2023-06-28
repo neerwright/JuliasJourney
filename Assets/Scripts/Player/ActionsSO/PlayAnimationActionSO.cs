@@ -1,6 +1,7 @@
 using UnityEngine;
 using Statemachine;
 using Animancer;
+using Scriptables;
 
 namespace Player
 {
@@ -11,6 +12,8 @@ namespace Player
 		[SerializeField] private StateAction.SpecificMoment _moment = default;
 		public StateAction.SpecificMoment Moment => _moment;
 
+        [SerializeField] private AnimationTrackerSO _animationData;
+        public AnimationTrackerSO AnimationData => _animationData;
         //[SerializeField] private AnimancerComponent _animancer;
         //public AnimancerComponent Animancer => _animancer;
 
@@ -29,8 +32,12 @@ namespace Player
         private AnimancerComponent _animancer;
         private ClipTransition _clip;
 
+        private AnimationTrackerSO _animationData;
+        private AnimancerState _state;
+
 		public override void Awake(StateMachine stateMachine)
 		{
+            _animationData = OriginSO.AnimationData;
 			//_animancer = OriginSO.Animancer;
             _clip = OriginSO.Clip;
             _player = stateMachine.GetComponent<PlayerScript>();
@@ -43,9 +50,13 @@ namespace Player
 
 		public override void OnUpdate()
 		{
-			if (OriginSO.Moment == SpecificMoment.OnUpdate)
+            _animationData.Clip = _clip.Clip;
+            if(_state != null)
+                _animationData.Time = _state.Time;
+			
+            if (OriginSO.Moment == SpecificMoment.OnUpdate)
             {
-                _animancer.Play(_clip);
+                _state = _animancer.Play(_clip);
             }
 		}
 
@@ -61,7 +72,7 @@ namespace Player
 
                 if(_animancer)
                 {
-                    _animancer.Play(_clip);
+                    _state = _animancer.Play(_clip);
                 }
             }
 		}
@@ -70,7 +81,7 @@ namespace Player
 		{
 			if (OriginSO.Moment == SpecificMoment.OnStateExit)
 			{
-                _animancer.Play(_clip);
+                _state = _animancer.Play(_clip);
             }
 		}
 	}
