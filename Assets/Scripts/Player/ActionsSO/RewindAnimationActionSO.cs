@@ -47,7 +47,7 @@ namespace Player
             var clip = _animationData.Clip;
             double time = _animationData.Time;
             if(clip != null)
-                _animancer.Play(clip, AnimancerPlayable.DefaultFadeDuration).Time = (float) time;
+                _animancer.Play(clip, 0.5f).Time = (float) time;
 		}
 
 
