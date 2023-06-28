@@ -8,11 +8,7 @@ namespace RewindSystem
 
     public class TimeController : MonoBehaviour
     {
-        public struct RecordedData
-        {
-            public Vector2 pos;
-            public float vel;
-        }
+        
 
         [SerializeField] IntGameEvent startRewinding;
         [SerializeField] GameObjectStringSet timeObjects;

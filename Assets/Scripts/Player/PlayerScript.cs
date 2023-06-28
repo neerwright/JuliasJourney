@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Scriptables;
 
 namespace Player
 {
@@ -9,6 +10,7 @@ namespace Player
 	public class PlayerScript : MonoBehaviour
 	{   
 		[SerializeField] private PlayerInputSO _playerInputSO;
+		[SerializeField] private GameEvent _playerPressedInteractEvent;
 		
 		
 		private Vector2 _inputVector;
@@ -33,7 +35,7 @@ namespace Player
 		public const float MAX_RISE_SPEED = 100f;
 		public const float AIR_RESISTANCE = 2f;
 
-		public const float INPUT_BUFFER = 0.6f;
+		public const float INPUT_BUFFER = 1.6f;
 
 		private bool _coRoutineIsPlaying = false;
 		private IEnumerator coroutine;
@@ -51,7 +53,7 @@ namespace Player
 			_playerInputSO.InteractEvent += OnInteract;
 
 			//...
-			coroutine = WaitAndSetInteractInputToFalse(INPUT_BUFFER);
+			coroutine = WaitUntilInteractCanBePressedAgain(INPUT_BUFFER);
 		}
 
 		//Removes all listeners to the events coming from the InputReader script
@@ -118,29 +120,21 @@ namespace Player
 			if(!_coRoutineIsPlaying)
 			{
 				interactInput = true;
-				coroutine = WaitAndSetInteractInputToFalse(INPUT_BUFFER);
+				_playerPressedInteractEvent?.Raise();
+				coroutine = WaitUntilInteractCanBePressedAgain(INPUT_BUFFER);
         		StartCoroutine(coroutine);
 			}
-			else //player pressed button again
-			{
-				if(coroutine != null)
-				{
-					StopCoroutine(coroutine);
-					interactInput = true;
-					coroutine = WaitAndSetInteractInputToFalse(INPUT_BUFFER);
-					StartCoroutine(coroutine);
-				}
-				}
+
 		} 
 			
 
 
-		IEnumerator WaitAndSetInteractInputToFalse(float seconds)
-		{
+		IEnumerator WaitUntilInteractCanBePressedAgain(float seconds)
+		{			
 			_coRoutineIsPlaying = true;
 			yield return new WaitForSeconds(seconds);
-			interactInput = false;
 			_coRoutineIsPlaying = false;
+			interactInput = false;
 		}
 
 	}
