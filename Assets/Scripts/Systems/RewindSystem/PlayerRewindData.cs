@@ -17,7 +17,6 @@ namespace Animancer.Assets.Scripts.Systems.RewindSystem
         public void Rewind(RecordedData data)
         {
             gameObject.transform.position = data.pos;
-            Debug.Log("Rewind");
         }
     }
 }

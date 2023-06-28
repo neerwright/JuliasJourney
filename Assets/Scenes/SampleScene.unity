@@ -4029,7 +4029,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rewindMethodUser: {fileID: 632227281}
   _playerVelocity: {fileID: 11400000, guid: d141ce9283d269d4fa9cdb65cbe42885, type: 2}
-  stopRewinding: {fileID: 11400000, guid: 227c850029ea4e343b7eeabb5edb676d, type: 2}
+  stopRewinding: {fileID: 11400000, guid: 7678b5f2efb2c7b4ebed76d7a6e6edfd, type: 2}
+  _useArray: 1
 --- !u!114 &632227305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4042,7 +4043,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7881123eb9ed30f41865049f3d528cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 227c850029ea4e343b7eeabb5edb676d, type: 2}
+  Event: {fileID: 11400000, guid: 7678b5f2efb2c7b4ebed76d7a6e6edfd, type: 2}
   Response:
     m_PersistentCalls:
       m_Calls:
@@ -4074,8 +4075,8 @@ MonoBehaviour:
   Response:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 632227304}
-        m_TargetAssemblyTypeName: RewindSystem.RecordRewindData, RewindSystem
+      - m_Target: {fileID: 632227300}
+        m_TargetAssemblyTypeName: Player.Poketwatch, Player
         m_MethodName: StartRewind
         m_Mode: 1
         m_Arguments:
