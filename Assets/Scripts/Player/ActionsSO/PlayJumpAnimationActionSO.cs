@@ -19,9 +19,16 @@ namespace Player
         [SerializeField] private float _endClip =1f;
 		public float EndClip => _endClip;
 
-        [SerializeField] private ClipTransition _clip;
-        public ClipTransition Clip => _clip;
+        [SerializeField] private AnimationClip _clip;
+        public AnimationClip Clip => _clip;
         
+
+        [SerializeField] private float _speed = 1f;
+        public float Speed => _speed;
+
+        [SerializeField] private float _transition = 0.25f;
+        public float Transition => _transition;
+
 		protected override StateAction CreateAction() => new PlayJumpAnimation();
 	}
 
@@ -32,7 +39,7 @@ namespace Player
 
 		private new PlayJumpAnimationActionSO OriginSO => (PlayJumpAnimationActionSO)base.OriginSO;
         private AnimancerComponent _animancer;
-        private ClipTransition _clip;
+        private AnimationClip _clip;
 
         private AnimationTrackerSO _animationData;
         private AnimancerState _state;
@@ -60,28 +67,32 @@ namespace Player
 
 		public override void OnUpdate()
 		{
-            _animationData.Clip = _clip.Clip;
+            _animationData.Clip = _clip;
             
             _animationData.Time = _currTime;			
             
             if(_currTime > OriginSO.EndClip)
             {
                 Debug.Log("end");
-                return;
+                _currTime = OriginSO.EndClip;
             }
                  
 
-            if(_clip.Clip != null)
-                _animancer.Play(_clip.Clip, 0.5f).Time = _currTime ;
+            if(_clip != null)
+            {
+                Debug.Log(_currTime);
+                _animancer.Play(_clip, OriginSO.Transition).Time = _currTime ;
+            }
+                
 
-            _currTime += 1000 * Time.deltaTime;
+            _currTime += OriginSO.Speed * Time.deltaTime;
             
 		}
 
 
 		public override void OnStateEnter()
 		{
-			_currTime = 0;
+			_currTime = OriginSO.StartClip;
 		}
 
 		public override void OnStateExit()

@@ -14,14 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: 
   _animationData: {fileID: 11400000, guid: c574f52e49fc2a9479bbdc2dbdb31e1d, type: 2}
-  _startClip: 1.8
-  _endClip: 20.5
-  _clip:
-    _FadeDuration: 0.25
-    _Events:
-      _NormalizedTimes: []
-      _Callbacks: []
-      _Names: []
-    _Clip: {fileID: -512320013847864616, guid: a43fdfe9391fe7d49bbf1e992a50f299, type: 3}
-    _Speed: 1
-    _NormalizedStartTime: NaN
+  _startClip: 0.05
+  _endClip: 0.5
+  _clip: {fileID: -512320013847864616, guid: a43fdfe9391fe7d49bbf1e992a50f299, type: 3}
+  _speed: 2.5
+  _transition: 0.1
