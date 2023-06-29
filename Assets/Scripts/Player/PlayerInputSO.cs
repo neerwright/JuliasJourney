@@ -22,6 +22,7 @@ namespace Player
         public event UnityAction StoppedRunning = delegate{};
         public event UnityAction InteractEvent = delegate{};
         public event UnityAction StoppedInteractEvent = delegate{};
+        public event UnityAction ResetEvent = delegate{};
 
 
         private PlayerInputActions _playerInputActions;
