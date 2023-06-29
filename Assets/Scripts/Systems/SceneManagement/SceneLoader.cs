@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Events;
 using Scriptables;
 using System;
+using System.Collections.Generic;
 
 /// <summary>
 /// This class manages the scene loading and unloading.
@@ -27,6 +28,7 @@ namespace SceneManagement
         
         
         [SerializeField] private GameSceneSO _gameplayScene;
+        [SerializeField] private GameSceneSO _firstIsland;
         //[SerializeField] private FadeChannelSO _fadeRequestChannel = default;
 
         public event EventHandler _gamplaySceneLoaded = delegate {};
@@ -41,9 +43,15 @@ namespace SceneManagement
         private Scene _gameplayManagerScene = new Scene();
         //private float _fadeDuration = .5f;
         private bool _isLoading = false; //To prevent a new loading request while already loading a new scene
+        private bool _loadIsland = false;
+        
+        private Queue<GameSceneSO> _islandsLoaded;
+        private const int MAX_ISLAND_ACTIVE = 2;
 
         private void OnEnable()
         {
+            _islandsLoaded = new Queue<GameSceneSO>();
+            _islandsLoaded.Enqueue(_firstIsland);
             _gamplaySceneLoaded = OnGameplayManagersLoaded;
             _onNewSceneLoaded = OnNewSceneLoaded;
             //_loadLocation.OnLoadingRequested += LoadLocation;
@@ -55,6 +63,12 @@ namespace SceneManagement
             _onNewSceneLoaded -= OnNewSceneLoaded;
         }
         
+        public void LoadNextIsland(GameSceneSO locationToLoad)
+        {
+            _loadIsland = true;
+            LoadLocation(locationToLoad);
+        }
+
         public void LoadLocation(GameSceneSO locationToLoad)
         {
             //Prevent a double-loading, for situations where the player falls in two Exit colliders in one frame
@@ -92,6 +106,8 @@ namespace SceneManagement
             LoadMenu(menuToLoad);
         }
 
+        
+
         private IEnumerator WaitToLoadLocationNext(GameSceneSO locationToLoad)
         {
             while (_isLoading) 
@@ -99,6 +115,15 @@ namespace SceneManagement
                 yield return new WaitForSeconds(0.1f);
             }
             LoadLocation(locationToLoad);
+        }
+
+        private IEnumerator WaitToLoadIslandNext(GameSceneSO locationToLoad)
+        {
+            while (_isLoading) 
+            {
+                yield return new WaitForSeconds(0.1f);
+            }
+            LoadNextIsland(locationToLoad);
         }
 
 
@@ -146,6 +171,10 @@ namespace SceneManagement
                 yield return new WaitForSeconds(0.1f);
             }
             Debug.Log("Invoke");
+            if(_loadIsland)
+            {
+                _islandsLoaded.Enqueue(gameScene); 
+            }
             _onNewSceneLoaded.Invoke(this, EventArgs.Empty);
             
         }
@@ -160,17 +189,32 @@ namespace SceneManagement
 
         private void UnloadPreviousScene()
         {
+            GameSceneSO sceneToUnload = null;
+
+            if(_loadIsland)
+            {
+                if(_islandsLoaded.Count > MAX_ISLAND_ACTIVE)
+                {
+                    GameSceneSO island = _islandsLoaded.Dequeue();
+                    sceneToUnload = island;
+                }
+                
+            }
+            else
+            {
+                sceneToUnload = _currentlyLoadedScene;
+            }
             //_inputReader.DisableAllInput();
             Debug.Log("del");
-            if (_currentlyLoadedScene != null) //would be null if the game was started in Initialisation
+            if (sceneToUnload != null) //would be null if the game was started in Initialisation
             {
                 
-                if (SceneManager.GetSceneByName(_currentlyLoadedScene.sceneName).IsValid()) 
+                if (SceneManager.GetSceneByName(sceneToUnload.sceneName).IsValid()) 
                 {
                     
-                    Debug.Log(_currentlyLoadedScene);
+                    Debug.Log(sceneToUnload);
                     Debug.Log("/////////");
-                    SceneManager.UnloadSceneAsync(_currentlyLoadedScene.sceneName);
+                    SceneManager.UnloadSceneAsync(sceneToUnload.sceneName);
                 }
                 
                 
@@ -185,6 +229,7 @@ namespace SceneManagement
 
         private void LoadNewScene()
         {
+            
             Debug.Log("2");
             Debug.Log(_sceneToLoad.sceneName);
             Debug.Log("/////////");
@@ -210,7 +255,7 @@ namespace SceneManagement
             
 
             _isLoading = false;
-
+            _loadIsland = false;
 
             StartGameplay();
         }

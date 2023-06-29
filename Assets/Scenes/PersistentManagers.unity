@@ -166,6 +166,7 @@ GameObject:
   - component: {fileID: 376395724}
   - component: {fileID: 376395723}
   - component: {fileID: 376395726}
+  - component: {fileID: 376395727}
   m_Layer: 0
   m_Name: SceneLoader
   m_TagString: Untagged
@@ -215,6 +216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _onSceneReady: {fileID: 11400000, guid: 85bab8c6089750343ad6ef1957239d80, type: 2}
   _gameplayScene: {fileID: 11400000, guid: 99aa5533f8e5aea469927c6be1d017da, type: 2}
+  _firstIsland: {fileID: 11400000, guid: 460f728bb0ce6ff499514438b80d8971, type: 2}
 --- !u!4 &376395725
 Transform:
   m_ObjectHideFlags: 0
@@ -249,6 +251,34 @@ MonoBehaviour:
       - m_Target: {fileID: 376395724}
         m_TargetAssemblyTypeName: SceneManagement.SceneLoader, SceneManagement
         m_MethodName: LoadLocation
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &376395727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376395722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8de8b2b5fe53e6c4ea629beb467cc230, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 7f0646c9281ffc842a815bcdb1b4d275, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 376395724}
+        m_TargetAssemblyTypeName: SceneManagement.SceneLoader, SceneManagement
+        m_MethodName: LoadNextIsland
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
