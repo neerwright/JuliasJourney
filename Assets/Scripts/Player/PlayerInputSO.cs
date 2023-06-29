@@ -40,6 +40,7 @@ namespace Player
 
         public void OnJump(InputAction.CallbackContext context)
         {
+            Debug.Log("Jump");
             if (context.phase == InputActionPhase.Performed)
             {
                 JumpEvent.Invoke();
@@ -76,6 +77,7 @@ namespace Player
 
         public void OnInteract(InputAction.CallbackContext context)
         {
+            Debug.Log("Interact");
             if(context.phase == InputActionPhase.Performed)
                 InteractEvent.Invoke();
             if(context.phase == InputActionPhase.Canceled )
@@ -84,6 +86,7 @@ namespace Player
 
         public void OnReset(InputAction.CallbackContext context)
         {
+            Debug.Log("Reset");
             if(context.phase == InputActionPhase.Performed)
                 ResetEvent.Invoke();
         }
@@ -94,11 +97,11 @@ namespace Player
         }
 
         public void EnableGameplayInput()
-	{
-		//_gameInput.Menus.Disable();
-		//_gameInput.Dialogues.Disable();
-		_playerInputActions.Gameplay.Enable();
-	}
+        {
+            //_gameInput.Menus.Disable();
+            //_gameInput.Dialogues.Disable();
+            _playerInputActions.Gameplay.Enable();
+        }
 
         
     }
