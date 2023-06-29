@@ -16,6 +16,6 @@ MonoBehaviour:
   _animationData: {fileID: 11400000, guid: c574f52e49fc2a9479bbdc2dbdb31e1d, type: 2}
   _startClip: 0.05
   _endClip: 0.5
-  _clip: {fileID: -512320013847864616, guid: a43fdfe9391fe7d49bbf1e992a50f299, type: 3}
+  _clip: {fileID: -2749901835121494608, guid: a43fdfe9391fe7d49bbf1e992a50f299, type: 3}
   _speed: 2.2
   _transition: 0.1

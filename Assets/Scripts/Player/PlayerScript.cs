@@ -40,6 +40,15 @@ namespace Player
 		private bool _coRoutineIsPlaying = false;
 		private IEnumerator coroutine;
 
+		public void DisableControls()
+		{
+			_playerInputSO.DisableGameplayInput();
+		}
+		public void EnableControls()
+		{
+			_playerInputSO.EnableGameplayInput();
+		}
+
 		private void OnEnable()
 		{
 			

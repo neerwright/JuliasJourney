@@ -82,6 +82,24 @@ namespace Player
                 StoppedInteractEvent.Invoke();
         }
 
+        public void OnReset(InputAction.CallbackContext context)
+        {
+            if(context.phase == InputActionPhase.Performed)
+                ResetEvent.Invoke();
+        }
+
+        public void DisableGameplayInput()
+        {
+            _playerInputActions.Gameplay.Disable();
+        }
+
+        public void EnableGameplayInput()
+	{
+		//_gameInput.Menus.Disable();
+		//_gameInput.Dialogues.Disable();
+		_playerInputActions.Gameplay.Enable();
+	}
+
         
     }
 }

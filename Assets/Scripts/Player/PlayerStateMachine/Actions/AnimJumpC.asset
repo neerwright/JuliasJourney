@@ -16,12 +16,6 @@ MonoBehaviour:
   _animationData: {fileID: 11400000, guid: c574f52e49fc2a9479bbdc2dbdb31e1d, type: 2}
   _startClip: 32.6
   _endClip: 42.6
-  _clip:
-    _FadeDuration: 0.25
-    _Events:
-      _NormalizedTimes: []
-      _Callbacks: []
-      _Names: []
-    _Clip: {fileID: -512320013847864616, guid: a43fdfe9391fe7d49bbf1e992a50f299, type: 3}
-    _Speed: 1
-    _NormalizedStartTime: NaN
+  _clip: {fileID: -2749901835121494608, guid: a43fdfe9391fe7d49bbf1e992a50f299, type: 3}
+  _speed: 1
+  _transition: 0.25
