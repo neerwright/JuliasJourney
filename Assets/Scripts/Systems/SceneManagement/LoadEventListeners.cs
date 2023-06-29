@@ -22,6 +22,9 @@ namespace SceneManagement
         { Event?.UnregisterListener(this); }
 
         public void OnEventRaised(GameSceneSO value)
-        { Response.Invoke(value); }
+        { 
+            Debug.Log(value);
+            Response.Invoke((GameSceneSO) value); 
+        }
     }
 }

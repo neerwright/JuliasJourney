@@ -24,7 +24,7 @@ namespace SceneManagement
         public void Raise(GameSceneSO value)
         {
             for(int i = listeners.Count -1; i >= 0; i--)
-                listeners[i]?.OnEventRaised(value);
+                listeners[i]?.OnEventRaised((GameSceneSO) value);
         }
 
     }

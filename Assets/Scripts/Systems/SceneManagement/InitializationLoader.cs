@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using Scriptables;
 /// <summary>
 /// This class is responsible for starting the game by loading the persistent managers scene 
 /// and raising the event to load the Main Menu
@@ -9,8 +10,8 @@ namespace SceneManagement
 {
     public class InitializationLoader : MonoBehaviour
     {
-        [SerializeField] private GameSceneSO _managersScene = default;
-        [SerializeField] private GameSceneSO _menuToLoad = default;
+        [SerializeField] private GameSceneSO _managersScene;
+        [SerializeField] private GameSceneSO _menuToLoad;
 
         [Header("Broadcasting on")]
         [SerializeField] private LoadEventSO _menuLoadEvent;
@@ -19,15 +20,6 @@ namespace SceneManagement
         {
             SceneManager.sceneLoaded += LoadMainMenu;
         }
-        private void Start()
-        {
-            //SceneManager.LoadSceneAsync(_managersScene.sceneName, LoadSceneMode.Additive);
-        }
-
-        //private void LoadEventChannel(AsyncOperationHandle<SceneInstance> obj)
-        //{
-        //    _menuLoadChannel.LoadAssetAsync<LoadEventChannelSO>().Completed += LoadMainMenu;
-        //}
 
         void LoadMainMenu(Scene scene, LoadSceneMode mode)
         {
@@ -40,19 +32,44 @@ namespace SceneManagement
                 }
             }
             catch (System.IndexOutOfRangeException s) { return; }
-            StartCoroutine("SwitchActive"); // <--- using Lariosss's answer
+
+            
+            SceneManager.LoadScene("PersistentManagers", LoadSceneMode.Additive);
+            var persistentManagers = SceneManager.GetSceneByName("PersistentManagers");
+            StartCoroutine(CheckIfSceneLoaded(persistentManagers)); 
         }
 
         IEnumerator SwitchActive()
         {
             var persistentManagers = SceneManager.GetSceneByName("PersistentManagers");
-            SceneManager.LoadScene("PersistentManagers", LoadSceneMode.Single);
-            if (persistentManagers.IsValid()) 
+            if (persistentManagers.IsValid())
+            {
+                Debug.Log("Set Active");
                 SceneManager.SetActiveScene(persistentManagers);
+                
+            } 
+            Debug.Log("unload init Scene");    
             yield return SceneManager.UnloadSceneAsync("InitScene");
+            
         }
 
-
+        IEnumerator CheckIfSceneLoaded(Scene scene)
+        {
+            while (!scene.isLoaded) 
+            {
+                yield return new WaitForSeconds(0.1f);
+            }
+            print("Raise");
+            _menuLoadEvent.Raise(_menuToLoad);
+            StartCoroutine("SwitchActive");
+            //var persistentManagers = SceneManager.GetSceneByName("PersistentManagers");
+            //if (persistentManagers.IsValid())
+            //{
+            //    Debug.Log("Set Active");
+            //    SceneManager.SetActiveScene(persistentManagers);
+            //    
+            //}
+        }
 
 
 

@@ -168,5 +168,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _managersScene: {fileID: 11400000, guid: fd3808da63439f649b9646c45ac85e1b, type: 2}
-  _menuToLoad: {fileID: 0}
+  _menuToLoad: {fileID: 11400000, guid: 0da6f9306768ead44836c9078c1a2cf9, type: 2}
   _menuLoadEvent: {fileID: 11400000, guid: e9b29b2a922fdd542a26465b46d2602c, type: 2}
