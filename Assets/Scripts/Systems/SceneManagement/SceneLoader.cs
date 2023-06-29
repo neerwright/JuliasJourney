@@ -25,7 +25,8 @@ namespace SceneManagement
 
         [Header("Broadcasting on")]
         [SerializeField] private GameEvent _onSceneReady = default; //picked up by the SpawnSystem
-        
+        [SerializeField] private GameEvent _onGameplayReady = default;
+        [SerializeField] private GameEvent _onIslandReady = default;
         
         [SerializeField] private GameSceneSO _gameplayScene;
         [SerializeField] private GameSceneSO _firstIsland;
@@ -51,7 +52,7 @@ namespace SceneManagement
         private void OnEnable()
         {
             _islandsLoaded = new Queue<GameSceneSO>();
-            _islandsLoaded.Enqueue(_firstIsland);
+            //_islandsLoaded.Enqueue(_firstIsland);
             _gamplaySceneLoaded = OnGameplayManagersLoaded;
             _onNewSceneLoaded = OnNewSceneLoaded;
             //_loadLocation.OnLoadingRequested += LoadLocation;
@@ -65,6 +66,8 @@ namespace SceneManagement
         
         public void LoadNextIsland(GameSceneSO locationToLoad)
         {
+            if(_isLoading)
+                return;
             _loadIsland = true;
             LoadLocation(locationToLoad);
         }
@@ -159,6 +162,7 @@ namespace SceneManagement
                 yield return new WaitForSeconds(0.1f);
             }
             _gamplaySceneLoaded?.Invoke(this, EventArgs.Empty);
+            _onGameplayReady.Raise();
             
         }
 
@@ -171,8 +175,9 @@ namespace SceneManagement
                 yield return new WaitForSeconds(0.1f);
             }
             Debug.Log("Invoke");
-            if(_loadIsland)
+            if(_loadIsland || gameScene.sceneName == _firstIsland.sceneName)
             {
+                _onIslandReady?.Raise();
                 _islandsLoaded.Enqueue(gameScene); 
             }
             _onNewSceneLoaded.Invoke(this, EventArgs.Empty);
@@ -250,6 +255,8 @@ namespace SceneManagement
             Scene scene = SceneManager.GetSceneByName(_currentlyLoadedScene.sceneName);
             if(scene.IsValid())
             {
+                Debug.Log("SetAktive");
+                Debug.Log(_currentlyLoadedScene.sceneName);
                 SceneManager.SetActiveScene(scene);
             }
             

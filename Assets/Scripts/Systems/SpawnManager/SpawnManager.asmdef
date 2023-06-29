@@ -1,0 +1,18 @@
+{
+    "name": "SpawnManager",
+    "rootNamespace": "",
+    "references": [
+        "GUID:629706cb1657c574bb0e4b4fbdf57326",
+        "GUID:a46d9d1875828c343ad0fa0ff7e7df08",
+        "GUID:5948cc696622a6a4199f9b894db15ac2"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
