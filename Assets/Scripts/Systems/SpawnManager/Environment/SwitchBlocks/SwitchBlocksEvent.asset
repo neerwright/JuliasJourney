@@ -9,11 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e05a29e10d73344db86fd33d1e6e655, type: 3}
-  m_Name: FinalRampMovement
+  m_Script: {fileID: 11500000, guid: 986806da9f722db49a2254756f4634ff, type: 3}
+  m_Name: SwitchBlocksEvent
   m_EditorClassIdentifier: 
-  description: 
-  gravityOnRamp: 21.8
-  speedUp: 30.11
-  speedDown: 6.59
-  initialSpeedBoost: 7.52
