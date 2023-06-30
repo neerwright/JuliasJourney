@@ -1,32 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Player;
+using GameManager;
 
 namespace environment
 {
     public class GlideTrigger : MonoBehaviour, IEnvironmentalObject
     {
         [SerializeField]
-        private GameObject _player;
-
-        private PlayerController _playerController;
-        // Start is called before the first frame update
+        private GameStateSO _gameState;
+        
         public void Initialize(GameObject player)
         {
-            _player = player;
-        }
 
-        void Start()
-        {
-            _playerController = _player.GetComponent<PlayerController>();
         }
 
         private void OnTriggerEnter2D(Collider2D Collider)
         {
+            Debug.Log("trig");
             if(Collider.gameObject.tag == "Player")
             {
-                _playerController.IsGliding = !_playerController.IsGliding ;
+                Debug.Log("trigsdsd");
+                _gameState.UpdateGameState(GameState.Glide);
             }
         }
     }

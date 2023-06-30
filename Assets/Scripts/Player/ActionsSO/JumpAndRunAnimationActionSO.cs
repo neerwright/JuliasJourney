@@ -51,7 +51,7 @@ namespace Player
             
             if(pAnimns)
             {
-                _animancer = pAnimns.get_animancer();
+                _animancer = pAnimns.get_animancer(AnimancerObjects.Player);
             }
 		}
 
@@ -90,7 +90,7 @@ namespace Player
             _currClip = _runningClip.Clip;
             if(!_animancer)
             {
-                _animancer = pAnimns.get_animancer();
+                _animancer = pAnimns.get_animancer(AnimancerObjects.Player);
             }
 
             if(_animancer)
@@ -104,7 +104,7 @@ namespace Player
             _currClip = _jumpLandingClip.Clip;
             if(!_animancer)
                 {
-                    _animancer = pAnimns.get_animancer();
+                    _animancer = pAnimns.get_animancer(AnimancerObjects.Player);
                 }
 
             if(_animancer)

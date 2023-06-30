@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 808cdab5837121943b791ce1896082d7, type: 3}
-  m_Name: IsGlidingCondition
+  m_Script: {fileID: 11500000, guid: 539a1be40d65d0a44822840a98e926d3, type: 3}
+  m_Name: OnFinalRampCondition
   m_EditorClassIdentifier: 
-  description: 
-  gameState: {fileID: 11400000, guid: c2ccf5a952309dc409a3bc6284fa13c1, type: 2}
-  gameStateCondition: 4
+  finalRamp: 1

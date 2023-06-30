@@ -59,7 +59,7 @@ namespace Player
             pAnimns = _player.GetComponent<PlayerAnimations>();
             if(pAnimns)
             {
-                _animancer = pAnimns.get_animancer();
+                _animancer = pAnimns.get_animancer(AnimancerObjects.Player);
             }
 
             _currTime = OriginSO.StartClip;

@@ -19,6 +19,9 @@ namespace Player
 
         [SerializeField] private ClipTransition _clip;
         public ClipTransition Clip => _clip;
+
+        public AnimancerObjects animancerObject = AnimancerObjects.Player;
+        public bool loop = true;
         
 		protected override StateAction CreateAction() => new PlayAnimation();
 	}
@@ -43,16 +46,20 @@ namespace Player
             _player = stateMachine.GetComponent<PlayerScript>();
             pAnimns = _player.GetComponent<PlayerAnimations>();
             if(pAnimns)
-            {
-                _animancer = pAnimns.get_animancer();
+            {   
+                    _animancer = pAnimns.get_animancer(OriginSO.animancerObject);         
             }
 		}
 
 		public override void OnUpdate()
 		{
-            _animationData.Clip = _clip.Clip;
-            if(_state != null)
+            if(_animationData != null)
+            {
+                _animationData.Clip = _clip.Clip;
+
+                if(_state != null)
                 _animationData.Time = _state.Time;
+            }           
 			
             if (OriginSO.Moment == SpecificMoment.OnUpdate)
             {
@@ -61,13 +68,20 @@ namespace Player
 		}
 
 
-			public override void OnStateEnter()
+		public override void OnStateEnter()
 		{
+            if(!OriginSO.loop)
+            {
+                if(_state != null)
+                {
+                    _state.Time = 0;
+                }
+            }
 			if (OriginSO.Moment == SpecificMoment.OnStateEnter)
 			{
                 if(!_animancer)
                 {
-                    _animancer = pAnimns.get_animancer();
+                     _animancer = pAnimns.get_animancer(OriginSO.animancerObject);
                 }
 
                 if(_animancer)

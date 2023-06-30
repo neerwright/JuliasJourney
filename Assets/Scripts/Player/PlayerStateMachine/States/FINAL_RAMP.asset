@@ -10,12 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2272388513b88848a637930ed05eef2, type: 3}
-  m_Name: IDLE
+  m_Name: FINAL_RAMP
   m_EditorClassIdentifier: 
   _actions:
-  - {fileID: 11400000, guid: 8257397a80bc7f34db6b44eac5f80b5a, type: 2}
-  - {fileID: 11400000, guid: e6a92db33b596db498675fdb634830d5, type: 2}
-  - {fileID: 11400000, guid: 655a0a76dc00de849888cc90062fb2f8, type: 2}
-  - {fileID: 11400000, guid: 19cf772835012e4479951f55cfa82e7b, type: 2}
+  - {fileID: 11400000, guid: 161730ba510ec6948937bd7b0ebfb4eb, type: 2}
+  - {fileID: 11400000, guid: 19d888c4b79bad642a7fff12a0d25225, type: 2}
   - {fileID: 11400000, guid: 39bbd4514532d9c41a0e9f4d15c149e4, type: 2}
-  _sceneGizmoColor: {r: 0.93750924, g: 0.9622642, b: 0.65966535, a: 1}
+  _sceneGizmoColor: {r: 0, g: 0, b: 0, a: 1}
