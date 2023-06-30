@@ -88,7 +88,6 @@ namespace SceneManagement
             //In case we are coming from the main menu, we need to load the Gameplay manager scene first
             if (!gameplayScene.isLoaded)
             {
-                Debug.Log("Load gameplay");
                 SceneManager.LoadSceneAsync(_gameplayScene.sceneName, LoadSceneMode.Additive);
                 IEnumerator couroutine = CheckIfGameplayLoaded(_gameplayScene);
                 StartCoroutine(couroutine);
@@ -132,7 +131,6 @@ namespace SceneManagement
 
         public void LoadMenu(GameSceneSO menuToLoad)
         {
-            Debug.Log("load menue");
             //Prevent a double-loading, for situations where the player falls in two Exit colliders in one frame
             if (_isLoading)
             {
@@ -174,7 +172,6 @@ namespace SceneManagement
                 Debug.Log(gameScene.sceneName);
                 yield return new WaitForSeconds(0.1f);
             }
-            Debug.Log("Invoke");
             if(_loadIsland || gameScene.sceneName == _firstIsland.sceneName)
             {
                 _onIslandReady?.Raise();
@@ -186,8 +183,6 @@ namespace SceneManagement
 
         private void OnGameplayManagersLoaded(object sender, EventArgs e)
         {
-            Debug.Log("1");
-            //UnloadPreviousScene();
             LoadNewScene();
         }
 
@@ -210,7 +205,6 @@ namespace SceneManagement
                 sceneToUnload = _currentlyLoadedScene;
             }
             //_inputReader.DisableAllInput();
-            Debug.Log("del");
             if (sceneToUnload != null) //would be null if the game was started in Initialisation
             {
                 
@@ -218,7 +212,7 @@ namespace SceneManagement
                 {
                     
                     Debug.Log(sceneToUnload);
-                    Debug.Log("/////////");
+
                     SceneManager.UnloadSceneAsync(sceneToUnload.sceneName);
                 }
                 
@@ -235,9 +229,8 @@ namespace SceneManagement
         private void LoadNewScene()
         {
             
-            Debug.Log("2");
             Debug.Log(_sceneToLoad.sceneName);
-            Debug.Log("/////////");
+
             Scene scene = SceneManager.GetSceneByName(_sceneToLoad.sceneName);
             SceneManager.LoadSceneAsync(_sceneToLoad.sceneName, LoadSceneMode.Additive);
             StartCoroutine(CheckIfSceneLoaded(_sceneToLoad));
@@ -245,10 +238,6 @@ namespace SceneManagement
 
         private void OnNewSceneLoaded(object sender, EventArgs e)
         {
-            Debug.Log("3");
-            Debug.Log(_currentlyLoadedScene);
-            Debug.Log(_sceneToLoad);
-            Debug.Log("----------------");
             UnloadPreviousScene();
             //Save loaded scenes (to be unloaded at next load request)
             _currentlyLoadedScene = _sceneToLoad;

@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: GLIDING
   m_EditorClassIdentifier: 
   _actions:
+  - {fileID: 11400000, guid: a3c53079eee46e445870914b785f3dd0, type: 2}
+  - {fileID: 11400000, guid: e6a92db33b596db498675fdb634830d5, type: 2}
+  - {fileID: 11400000, guid: 8257397a80bc7f34db6b44eac5f80b5a, type: 2}
   - {fileID: 11400000, guid: 5558cac4c569acb46a8efaf75f532b59, type: 2}
   - {fileID: 11400000, guid: 965dc1ad740fceb4bbb5a50bdc847cf6, type: 2}
   - {fileID: 11400000, guid: 39bbd4514532d9c41a0e9f4d15c149e4, type: 2}
-  _sceneGizmoColor: {r: 0.8113208, g: 0.8113208, b: 0.8113208, a: 1}
+  _sceneGizmoColor: {r: 0.9716981, g: 0.93079054, b: 0.5194612, a: 1}

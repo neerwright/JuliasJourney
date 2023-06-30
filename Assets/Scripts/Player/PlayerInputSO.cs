@@ -40,7 +40,6 @@ namespace Player
 
         public void OnJump(InputAction.CallbackContext context)
         {
-            Debug.Log("Jump");
             if (context.phase == InputActionPhase.Performed)
             {
                 JumpEvent.Invoke();

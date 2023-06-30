@@ -20,8 +20,10 @@ namespace Player
 		
 		[SerializeField] [Range(0.1f, 100f)] private float _maxSpeed = 12f;
         [SerializeField] [Range(0.1f, 100f)] public float _speed = 12f;
+		[SerializeField] [Range(0.1f, 100f)] public float rotationSpeed = 12f;
         [SerializeField] [Range(0.1f, 100f)] public float _acceleration = 12f;
         [SerializeField] [Range(0.1f, 100f)] public float _drop = 40f;
+		public AnimationCurve curve;
 		
 		[SerializeField] [Range(0.1f, 100f)] private float _airResistance = 20f;
 
@@ -32,28 +34,48 @@ namespace Player
 	{
 		private new GlideMovementActionSO OriginSO => (GlideMovementActionSO)base.OriginSO;
 
-		private PlayerScript _player;
+		private PlayerScript _playerScript;
 		private PlayerController pc;
+		private GameObject _playerModel;
+
         private float _speed;
         private float _acceleration;
 		private bool endGlide = false;
 		private float maxSpeed;
 		private float reduceMaxSpeed;
 
-		
+		private float _maxUpAngle = 50f;
+		private const float DROP_ANGLE = 110;
+
+		private bool _dropped = false;
+		private bool _finishedDropped = true;
+		private float _current = 0f;
+        private float _target = 1f;
+		private float _rotationAdjustment = 0f;
+		private AnimationCurve _curve;
+
+		private bool unlock = false;
 
 		public override void Awake(StateMachine stateMachine)
 		{
-			_player = stateMachine.GetComponent<PlayerScript>();
+			_playerScript = stateMachine.GetComponent<PlayerScript>();
 			pc = stateMachine.GetComponent<PlayerController>();
+			_playerModel = GameObject.FindWithTag("PlayerModel");
+			
             _speed = OriginSO._speed;
             _acceleration = OriginSO._acceleration ;
 			maxSpeed = OriginSO.MaxSpeed;
 			reduceMaxSpeed = maxSpeed /10;
+
+			_curve = OriginSO.curve;
 		}
 
 		public void ResetGlide()
 		{
+			pc.IsGliding = false;
+			endGlide = false;
+			_dropped = false;
+
 			_speed = OriginSO._speed;
             _acceleration = OriginSO._acceleration ;
 			maxSpeed = OriginSO.MaxSpeed;
@@ -62,23 +84,32 @@ namespace Player
 
 		public override void OnUpdate()
 		{
-			if(_player.interactInput)
-			{
-				pc.IsGliding = false;
-				endGlide = false;
-				ResetGlide();
-			}
+			Quaternion currRotation = _playerModel.transform.rotation;
+			Vector3 currentEulerAngles = currRotation.eulerAngles;
+
+			if(currentEulerAngles.x > 70)
+				unlock = true;
+
+			if (!unlock)
+				return;	
 
 			float airResistance = OriginSO.AirResistance;
 
 			if (endGlide)
 			{
-				ApplyAirResistance(ref _player.movementVector.x, airResistance , 10);
+				ApplyAirResistance(ref _playerScript.movementVector.x, airResistance , 10);
 				return;
 			}
 
-			Vector2 velocity = _player.movementVector;
-			Vector2 input = _player.movementInput;
+			if(_dropped && !_finishedDropped)
+			{
+				
+				DropRotatePlayer(DROP_ANGLE - _rotationAdjustment);
+			}
+				
+
+			Vector2 velocity = _playerScript.movementVector;
+			Vector2 input = _playerScript.movementInput;
             float drop = OriginSO.Drop;
 
             
@@ -91,19 +122,59 @@ namespace Player
 					endGlide = true;
 				}
                 _speed = -drop;
-                _player.movementVector.y = -10f;
+                _playerScript.movementVector.y = -10f;
+				_dropped = true;
+				_finishedDropped = false;
+				_rotationAdjustment += 5;
             }
-            
+
 
             SetVelocity(ref velocity.y, input.y, ref _speed, _acceleration);
 				
 
 			ApplyAirResistance(ref velocity.x, airResistance , _speed);
-			_player.movementVector = velocity;
+			_playerScript.movementVector = velocity;
 			
 			
 		}
 
+		private void DropRotatePlayer(float angle)
+		{
+			
+
+			Vector3 goalRotation = new Vector3( angle, 90f, 0f);
+			_current = Mathf.MoveTowards(_current, _target, 0.5f * Time.deltaTime);
+			
+			_playerModel.transform.rotation = Quaternion.Slerp(_playerModel.transform.rotation, Quaternion.Euler(goalRotation), _curve.Evaluate(_current) / 10);
+			Debug.Log(_current);
+            if(_current >= 0.6f)
+            {
+                _current = 0;
+				_finishedDropped = !_finishedDropped;
+				Debug.Log("Drop finished");
+            }
+		}
+
+		private void RotatePlayer()
+		{
+			if(!_dropped)
+			{
+				Quaternion currRotation = _playerModel.transform.rotation;
+			Vector3 currentEulerAngles = currRotation.eulerAngles;
+
+			currentEulerAngles.x -= OriginSO.rotationSpeed * Time.deltaTime;
+			if(currentEulerAngles.x < _maxUpAngle )
+				currentEulerAngles.x = _maxUpAngle;
+
+			currRotation = Quaternion.Euler(currentEulerAngles);
+			_playerModel.transform.rotation = currRotation;
+			}
+			else
+			{
+				DropRotatePlayer(DROP_ANGLE - 40 + _rotationAdjustment);
+			}
+			
+		}
 
 		private void SetVelocity(ref float currentAxisSpeed, float axisInput, ref float speed, float acceleration)
 		{
@@ -113,6 +184,9 @@ namespace Player
 				currentAxisSpeed += axisInput * speed * Time.deltaTime;
                 speed += Time.deltaTime * acceleration;
                 
+				if(_finishedDropped)
+					RotatePlayer();
+				
                 
 			}
             else

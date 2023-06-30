@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dcc16a994ed3fb47a6a38351ce8b96c, type: 3}
+  m_Name: ArmsEnable
+  m_EditorClassIdentifier: 
+  description: 
+  _moment: 0
+  objectToEnable: {fileID: 11400000, guid: 484b6acbdb68cae4fae792f3b5daa6c9, type: 2}
+  objectToDisable: {fileID: 11400000, guid: 8f9e8d8adbc7c8a488ef35b758107939, type: 2}

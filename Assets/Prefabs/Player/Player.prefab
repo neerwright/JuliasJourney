@@ -228,6 +228,7 @@ GameObject:
   - component: {fileID: 662188124845812033}
   - component: {fileID: 379904806579562738}
   - component: {fileID: 7460923686779122704}
+  - component: {fileID: 105059858363176940}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -252,7 +253,7 @@ Transform:
   - {fileID: 662188124903335990}
   - {fileID: 662188124799457677}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &662188124845812086
 MonoBehaviour:
@@ -631,6 +632,20 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &105059858363176940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662188124845812092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d99f0797e1fee4478b4d59173e56220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteArm: {fileID: 11400000, guid: 484b6acbdb68cae4fae792f3b5daa6c9, type: 2}
+  frontArm: {fileID: 11400000, guid: 8f9e8d8adbc7c8a488ef35b758107939, type: 2}
 --- !u!1 &662188124903335991
 GameObject:
   m_ObjectHideFlags: 0
@@ -1105,6 +1120,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7592008640435257742, guid: 436216c89bc406a4cb0bca3ef171668a, type: 3}
+      propertyPath: m_TagString
+      value: ArmsGlide
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 436216c89bc406a4cb0bca3ef171668a, type: 3}
@@ -1186,7 +1205,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1975367301585059605, guid: a43fdfe9391fe7d49bbf1e992a50f299, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1975367301585059605, guid: a43fdfe9391fe7d49bbf1e992a50f299, type: 3}
+      propertyPath: m_TagString
+      value: PlayerFrontArm
       objectReference: {fileID: 0}
     - target: {fileID: 5202554234687794925, guid: a43fdfe9391fe7d49bbf1e992a50f299, type: 3}
       propertyPath: m_LocalRotation.w

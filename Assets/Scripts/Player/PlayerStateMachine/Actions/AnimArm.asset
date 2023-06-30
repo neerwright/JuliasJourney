@@ -25,3 +25,4 @@ MonoBehaviour:
     _Speed: 1
     _NormalizedStartTime: NaN
   animancerObject: 1
+  loop: 0

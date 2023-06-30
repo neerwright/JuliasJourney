@@ -24,6 +24,8 @@ namespace Player
         private float _current = 0f;
         private float _target = 1f;
 
+        private bool _finished = false;
+
 		public override void Awake(StateMachine stateMachine)
 		{
 			//_playerScript = stateMachine.GetComponent<PlayerScript>();
@@ -34,14 +36,23 @@ namespace Player
 
 		public override void OnUpdate()
 		{
+            if(_finished)
+                return;
+
+
             _current = Mathf.MoveTowards(_current, _target, _originSO.lerpSpeed * Time.deltaTime);
+            if(_current >= 0.009f)
+            {
+                _current = 1;
+                _finished = true;
+            }
 
             _model.transform.rotation = Quaternion.Slerp(_model.transform.rotation, Quaternion.Euler(_originSO.goalRotation), _curve.Evaluate(_current));
-            //float input = _player.movementInput.x;
-			//delta.Time is used when the movement is applied (ApplyMovementVectorAction)
-			//_player.movementVector.x += _originSO.lerpSpeed * Time.deltaTime * input; 
-            if(_current >= 0.99)
-                _current = 0;
 		}
+
+        public override void OnStateEnter()
+		{
+            //_finished = false;
+        }
 	}
 }
