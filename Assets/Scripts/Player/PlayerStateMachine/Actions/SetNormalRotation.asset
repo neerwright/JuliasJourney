@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75a167f8f8b93204e87502db0e5df1b8, type: 3}
+  m_Name: SetNormalRotation
+  m_EditorClassIdentifier: 
+  description: when we exit the glide animation and lerp hasnt finished, force normal
+    rotation for further normal gameplay
+  _moment: 1
+  modelToRotateTag: PlayerModel
+  rotation: {x: 0, y: 90, z: 0}

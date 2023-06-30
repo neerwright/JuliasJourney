@@ -3,7 +3,7 @@ using Statemachine;
 
 namespace Player
 {
-
+//TODO REFACTOR THIS SHIT
 	/// <summary>
 	/// This Action handles horizontal movement while in the air, keeping momentum, simulating air resistance, and accelerating towards the desired speed.
 	/// </summary>
@@ -160,14 +160,14 @@ namespace Player
 			if(!_dropped)
 			{
 				Quaternion currRotation = _playerModel.transform.rotation;
-			Vector3 currentEulerAngles = currRotation.eulerAngles;
+				Vector3 currentEulerAngles = currRotation.eulerAngles;
 
-			currentEulerAngles.x -= OriginSO.rotationSpeed * Time.deltaTime;
-			if(currentEulerAngles.x < _maxUpAngle )
-				currentEulerAngles.x = _maxUpAngle;
+				currentEulerAngles.x -= OriginSO.rotationSpeed * Time.deltaTime;
+				if(currentEulerAngles.x < _maxUpAngle )
+					currentEulerAngles.x = _maxUpAngle;
 
-			currRotation = Quaternion.Euler(currentEulerAngles);
-			_playerModel.transform.rotation = currRotation;
+				currRotation = Quaternion.Euler(currentEulerAngles);
+				_playerModel.transform.rotation = currRotation;
 			}
 			else
 			{

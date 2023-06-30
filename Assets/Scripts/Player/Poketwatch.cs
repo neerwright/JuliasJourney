@@ -4,6 +4,7 @@ using Utilities;
 //using UnityEngine.Events;
 using RewindSystem;
 using Scriptables;
+using GameManager;
 
 namespace Player
 {
@@ -16,11 +17,16 @@ namespace Player
         [SerializeField] private PlayerController _playerController;
         [SerializeField] GameEvent startRewinding;
         [SerializeField] GameEvent stopRewinding;
+        [SerializeField] GameStateSO _gameState;
 
         private void StartRewind()
         {
-            startRewinding?.Raise();
-            _playerController.IsRewinding = true;
+            if(_gameState.CurrentGameState ==  GameState.Gameplay)
+            {
+                startRewinding?.Raise();
+                _playerController.IsRewinding = true;
+            }
+            
         }
         
 

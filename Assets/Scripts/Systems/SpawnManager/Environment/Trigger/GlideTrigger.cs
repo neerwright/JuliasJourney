@@ -9,6 +9,8 @@ namespace environment
     {
         [SerializeField]
         private GameStateSO _gameState;
+        [SerializeField]
+        private bool _startGlide;
         
         public void Initialize(GameObject player)
         {
@@ -17,11 +19,12 @@ namespace environment
 
         private void OnTriggerEnter2D(Collider2D Collider)
         {
-            Debug.Log("trig");
             if(Collider.gameObject.tag == "Player")
             {
-                Debug.Log("trigsdsd");
-                _gameState.UpdateGameState(GameState.Glide);
+                if(_startGlide)
+                    _gameState.UpdateGameState(GameState.Glide);
+                else
+                    _gameState.UpdateGameState(GameState.Gameplay);
             }
         }
     }

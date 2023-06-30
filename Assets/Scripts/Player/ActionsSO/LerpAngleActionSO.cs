@@ -36,12 +36,13 @@ namespace Player
 
 		public override void OnUpdate()
 		{
+            
             if(_finished)
                 return;
-
+            Debug.Log(_current);
 
             _current = Mathf.MoveTowards(_current, _target, _originSO.lerpSpeed * Time.deltaTime);
-            if(_current >= 0.009f)
+            if(_current >= 0.02f)
             {
                 _current = 1;
                 _finished = true;
@@ -52,7 +53,9 @@ namespace Player
 
         public override void OnStateEnter()
 		{
-            //_finished = false;
+            Debug.Log("enter");
+            _finished = false;
+            _current = 0;
         }
 	}
 }

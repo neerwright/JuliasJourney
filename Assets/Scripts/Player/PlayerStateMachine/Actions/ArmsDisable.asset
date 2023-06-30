@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e05a29e10d73344db86fd33d1e6e655, type: 3}
-  m_Name: NewSpeedRamp
+  m_Script: {fileID: 11500000, guid: 3dcc16a994ed3fb47a6a38351ce8b96c, type: 3}
+  m_Name: ArmsDisable
   m_EditorClassIdentifier: 
   description: 
-  gravityOnRamp: 22.55
-  speedUp: 29.18
-  speedDown: 5.52
-  initialSpeedBoost: 1.25
+  _moment: 0
+  objectToEnable: {fileID: 11400000, guid: 8f9e8d8adbc7c8a488ef35b758107939, type: 2}
+  objectToDisable: {fileID: 11400000, guid: 484b6acbdb68cae4fae792f3b5daa6c9, type: 2}

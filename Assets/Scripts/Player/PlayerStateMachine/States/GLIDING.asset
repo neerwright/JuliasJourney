@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: GLIDING
   m_EditorClassIdentifier: 
   _actions:
+  - {fileID: 11400000, guid: 6b527214c1ddf21448327e1c6a68fbd6, type: 2}
   - {fileID: 11400000, guid: a3c53079eee46e445870914b785f3dd0, type: 2}
   - {fileID: 11400000, guid: e6a92db33b596db498675fdb634830d5, type: 2}
   - {fileID: 11400000, guid: 8257397a80bc7f34db6b44eac5f80b5a, type: 2}

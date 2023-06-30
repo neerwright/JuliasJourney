@@ -425,6 +425,7 @@ MonoBehaviour:
   _playerController: {fileID: 662188124845812080}
   startRewinding: {fileID: 11400000, guid: 227c850029ea4e343b7eeabb5edb676d, type: 2}
   stopRewinding: {fileID: 11400000, guid: 7678b5f2efb2c7b4ebed76d7a6e6edfd, type: 2}
+  _gameState: {fileID: 11400000, guid: c2ccf5a952309dc409a3bc6284fa13c1, type: 2}
 --- !u!114 &662188124845812037
 MonoBehaviour:
   m_ObjectHideFlags: 0

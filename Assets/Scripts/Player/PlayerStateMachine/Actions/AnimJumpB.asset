@@ -18,4 +18,4 @@ MonoBehaviour:
   _endClip: 2.84
   _clip: {fileID: -2749901835121494608, guid: a43fdfe9391fe7d49bbf1e992a50f299, type: 3}
   _speed: 1.3
-  _transition: 0.5
+  _transition: 1.16
