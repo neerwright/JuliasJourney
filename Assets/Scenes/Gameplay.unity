@@ -132,8 +132,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 667677828944197137, guid: 58d29fe7a3b5a8149b1beff35540f037, type: 3}
+      propertyPath: OffsetX
+      value: 0.836
+      objectReference: {fileID: 0}
+    - target: {fileID: 667677828944197137, guid: 58d29fe7a3b5a8149b1beff35540f037, type: 3}
       propertyPath: CameraTargets.Array.size
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 667677828944197137, guid: 58d29fe7a3b5a8149b1beff35540f037, type: 3}
+      propertyPath: HorizontalFollowSmoothness
+      value: 0.21
       objectReference: {fileID: 0}
     - target: {fileID: 667677828944197137, guid: 58d29fe7a3b5a8149b1beff35540f037, type: 3}
       propertyPath: CameraTargets.Array.data[0].TargetOffset.x

@@ -253,7 +253,7 @@ Transform:
   - {fileID: 662188124903335990}
   - {fileID: 662188124799457677}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &662188124845812086
 MonoBehaviour:
@@ -598,6 +598,7 @@ MonoBehaviour:
   _playerModel: {fileID: 428397521365453770}
   _delay: 0.1
   _fadeIn: 0.1
+  _resetEvent: {fileID: 11400000, guid: 5d532371271fe1542839f1cde7a84917, type: 2}
   PlayerMaterials:
   - {fileID: 2100000, guid: e36678a7f517fb941bcecb47e0556a43, type: 2}
   - {fileID: 2100000, guid: b1e9e3e297fbd27489ce83fe6dd564ea, type: 2}
@@ -1195,6 +1196,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: a43fdfe9391fe7d49bbf1e992a50f299, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -259972160606440404, guid: a43fdfe9391fe7d49bbf1e992a50f299, type: 3}
+      propertyPath: m_TagString
+      value: PlayerHead
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a43fdfe9391fe7d49bbf1e992a50f299, type: 3}
       propertyPath: m_Name

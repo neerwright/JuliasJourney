@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using GameManager;
 using Com.LuisPedroFonseca.ProCamera2D;
+using Scriptables;
 
 namespace Player
 {
@@ -13,6 +14,7 @@ namespace Player
         [SerializeField] private GameObject _playerModel;
         [SerializeField] private float _delay = 0.3f;
         [SerializeField] private float _fadeIn = 0.3f;
+        [SerializeField] private GameEvent _resetEvent;
         private bool _isResetting = false;
 
         [Header("PlayerMaterials")]
@@ -20,6 +22,7 @@ namespace Player
 
 
         private PlayerScript _playerScript;
+
 
         private Vector2 _resetLocation;
         private const float ALPHA_INCREMENT = 50.0f;
@@ -43,9 +46,11 @@ namespace Player
         {
             if(_isResetting)
                 return;
-
+            
+        
             if(_gameState.CurrentGameState == GameState.Gameplay)
             {
+                _resetEvent.Raise();
                 _playerScript.DisableControls();
                 _playerModel.SetActive(false);
                 gameObject.SetActive(false);

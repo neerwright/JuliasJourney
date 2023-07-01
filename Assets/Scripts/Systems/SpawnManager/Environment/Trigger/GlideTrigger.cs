@@ -25,6 +25,8 @@ namespace environment
                     _gameState.UpdateGameState(GameState.Glide);
                 else
                     _gameState.UpdateGameState(GameState.Gameplay);
+            
+            gameObject.SetActive(false);
             }
         }
     }
