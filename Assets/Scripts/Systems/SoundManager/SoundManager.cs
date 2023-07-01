@@ -15,18 +15,21 @@ namespace Sounds
             _musicSource.loop = true;
         }
 
-        public void PlaySoundPlayer(AudioClip clip)
+        public void PlaySoundPlayer(AudioClip clip, float volume)
         {
+            _playerAudioSource.volume = volume;
             _playerAudioSource.PlayOneShot(clip);
         }
 
-        public void PlaySound(AudioClip clip)
+        public void PlaySound(AudioClip clip, float volume)
         {
+            _playerAudioSource.volume = volume;
             _effectsSource.PlayOneShot(clip);
         }
 
-        public void PlayMusic(AudioClip clip)
+        public void PlayMusic(AudioClip clip, float volume)
         {
+            _playerAudioSource.volume = volume;
             if(_musicSource.isPlaying)
                 _musicSource.Pause();
             _musicSource.clip = clip;

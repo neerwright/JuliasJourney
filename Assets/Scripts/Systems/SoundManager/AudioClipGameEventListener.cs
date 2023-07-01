@@ -8,7 +8,7 @@ namespace Sounds
     public class AudioClipGameEventListener : MonoBehaviour
     {
         public AudioClipGameEvent Event;
-        public UnityEvent<AudioClip> Response;
+        public UnityEvent<AudioClip, float> Response;
 
         private void OnEnable()
         { 
@@ -21,7 +21,7 @@ namespace Sounds
         private void OnDisable()
         { Event?.UnregisterListener(this); }
 
-        public void OnEventRaised(AudioClip value)
-        { Response.Invoke(value); }
+        public void OnEventRaised(AudioClip value, float volume)
+        { Response.Invoke(value, volume); }
     }
 }

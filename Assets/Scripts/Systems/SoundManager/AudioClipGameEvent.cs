@@ -21,10 +21,10 @@ namespace Sounds
                 listeners.Remove(listener);
         }
 
-        public void Raise(AudioClip value)
+        public void Raise(AudioClip value, float volume)
         {
             for(int i = listeners.Count -1; i >= 0; i--)
-                listeners[i]?.OnEventRaised(value);
+                listeners[i]?.OnEventRaised(value, volume);
         }
 
     }
