@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5347272124703819063}
   m_Layer: 6
   m_Name: PushBox
-  m_TagString: Untagged
+  m_TagString: PushBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -130,12 +130,12 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 6200000, guid: 36e36e1a4e791fd409565c712f9341c8, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &539176320342700597
 MonoBehaviour:
   m_ObjectHideFlags: 0
