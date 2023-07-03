@@ -44,11 +44,9 @@ namespace SceneManagement
             var persistentManagers = SceneManager.GetSceneByName("PersistentManagers");
             if (persistentManagers.IsValid())
             {
-                Debug.Log("Set Active");
                 SceneManager.SetActiveScene(persistentManagers);
                 
             } 
-            Debug.Log("unload init Scene");    
             yield return SceneManager.UnloadSceneAsync("InitScene");
             
         }
@@ -59,7 +57,6 @@ namespace SceneManagement
             {
                 yield return new WaitForSeconds(0.1f);
             }
-            print("Raise");
             _menuLoadEvent.Raise(_menuToLoad);
             StartCoroutine("SwitchActive");
             //var persistentManagers = SceneManager.GetSceneByName("PersistentManagers");

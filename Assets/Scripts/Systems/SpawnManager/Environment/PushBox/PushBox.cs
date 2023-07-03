@@ -54,7 +54,6 @@ namespace environment
             int mult = 1;
             if(!_moveRight)
                 mult = -1;
-            Debug.Log(_playerScript.movementVector.x);
             if(Collider.gameObject.tag == "Player" && (mult * _playerScript.movementVector.x > THRESHOLD) && !_hadImpact)
             {
                

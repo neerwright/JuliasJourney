@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7840419119876301478
 SpriteRenderer:
@@ -105,6 +105,17 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e1cc83c44c352c64eba98034f2ece7a5, type: 3}
   - {fileID: 21300000, guid: d9cde3f8e8ae4044ab54cf84e5dacf11, type: 3}
   _idleSpeed: 0.8
+  _upSprites:
+  - {fileID: 21300000, guid: c1b4f78473666614686ecd8df838ab33, type: 3}
+  - {fileID: 21300000, guid: 5c5792055ba2aec4ca98272140684937, type: 3}
+  - {fileID: 21300000, guid: 2242b1786d1c21a48b90cde7ba04b3ec, type: 3}
+  - {fileID: 21300000, guid: b13400890de138d44b856c4fd159e173, type: 3}
+  - {fileID: 21300000, guid: cfc1a96e36c8d8a48a219ba918f33e56, type: 3}
+  - {fileID: 21300000, guid: 526db167f76ed2d4fbb68a0e076abb85, type: 3}
+  - {fileID: 21300000, guid: 5461cc4c5adc10144b7e2c32fb27cf97, type: 3}
+  - {fileID: 21300000, guid: e844e514c7ca6394c84f4cd85d6790ba, type: 3}
+  - {fileID: 21300000, guid: 94bbbd3b251ae2940bbc9131054c8059, type: 3}
+  _upSpeed: 1
   _easeInOut:
     serializedVersion: 2
     m_Curve:

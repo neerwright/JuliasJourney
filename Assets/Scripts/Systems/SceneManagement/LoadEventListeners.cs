@@ -23,7 +23,6 @@ namespace SceneManagement
 
         public void OnEventRaised(GameSceneSO value)
         { 
-            Debug.Log(value);
             Response.Invoke((GameSceneSO) value); 
         }
     }

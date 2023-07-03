@@ -169,7 +169,6 @@ namespace SceneManagement
             Scene scene = SceneManager.GetSceneByName(gameScene.sceneName);
             while (!scene.isLoaded) 
             {
-                Debug.Log(gameScene.sceneName);
                 yield return new WaitForSeconds(0.1f);
             }
             if(_loadIsland || gameScene.sceneName == _firstIsland.sceneName)
@@ -210,9 +209,6 @@ namespace SceneManagement
                 
                 if (SceneManager.GetSceneByName(sceneToUnload.sceneName).IsValid()) 
                 {
-                    
-                    Debug.Log(sceneToUnload);
-
                     SceneManager.UnloadSceneAsync(sceneToUnload.sceneName);
                 }
                 
@@ -228,9 +224,6 @@ namespace SceneManagement
 
         private void LoadNewScene()
         {
-            
-            Debug.Log(_sceneToLoad.sceneName);
-
             Scene scene = SceneManager.GetSceneByName(_sceneToLoad.sceneName);
             SceneManager.LoadSceneAsync(_sceneToLoad.sceneName, LoadSceneMode.Additive);
             StartCoroutine(CheckIfSceneLoaded(_sceneToLoad));
@@ -244,8 +237,6 @@ namespace SceneManagement
             Scene scene = SceneManager.GetSceneByName(_currentlyLoadedScene.sceneName);
             if(scene.IsValid())
             {
-                Debug.Log("SetAktive");
-                Debug.Log(_currentlyLoadedScene.sceneName);
                 SceneManager.SetActiveScene(scene);
             }
             

@@ -23,7 +23,6 @@ namespace Scriptables
 
         public void OnEventRaised(Vector2 value)
         { 
-            Debug.Log(value);
             Response.Invoke((Vector2) value); 
         }
     }

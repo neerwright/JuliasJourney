@@ -27,8 +27,6 @@ public class SpawnManager : MonoBehaviour
         {
             SceneManager.SetActiveScene(gameplayScene);
             _playerInstance = Instantiate(_playerPrefab, new Vector3(81.30f,74.4f,-0.3f), Quaternion.identity);
-            Debug.Log("spawn Player");
-            Debug.Log(_playerInstance.transform.position);
 
             //Camera
             ProCamera2D.Instance.AddCameraTarget(_playerInstance.transform, 1f, 1f, 0f);
@@ -42,12 +40,10 @@ public class SpawnManager : MonoBehaviour
 
     public void SpawnEnvironmentObjects()
 	{
-        Debug.Log("finding Obj");
         var ObjectsToSpawn = FindObjectsOfType<EnvironmentObject>();
 
         foreach(var envObj in ObjectsToSpawn)
         {
-            Debug.Log("Insta");
             var objScript = envObj.GetComponent<EnvironmentObject>();
             var objInstance = Instantiate(objScript.prefab, objScript.locationData, Quaternion.identity);
             objInstance.GetComponent<IEnvironmentalObject>().Initialize(_playerInstance);

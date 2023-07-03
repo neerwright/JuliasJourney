@@ -26,8 +26,6 @@ namespace Player
 		{
 			ParticleSystem[] PS = stateMachine.GetComponentsInChildren<ParticleSystem>();
             _playerPS = (ParticleSystem) PS.Where(x => x.gameObject.tag == OriginSO.ParticleSystemTag).FirstOrDefault();
-            Debug.Log("particle system");
-            Debug.Log(_playerPS);
 		}
 
 		public override void OnUpdate()
