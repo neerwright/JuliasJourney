@@ -8,6 +8,11 @@ TagManager:
   - Hook
   - HookCenter
   - SpeedRamp
+  - PlayerModel
+  - Dust
+  - ArmsGlide
+  - PlayerFrontArm
+  - PlayerHead
   layers:
   - Default
   - TransparentFX
@@ -62,6 +67,9 @@ TagManager:
     locked: 0
   - name: CharHead
     uniqueID: 731668241
+    locked: 0
+  - name: CharWings
+    uniqueID: 4242612657
     locked: 0
   - name: CharFrontArm
     uniqueID: 2130936389
