@@ -246,7 +246,7 @@ namespace Player
 
         private void BoostAnim()
         {               
-                PlayAnimation(_boostSprites, _boostpSpeed, false, false, _easeOut);
+                PlayAnimation(_boostSprites, _boostpSpeed, true, false, _easeOut);
                 
                 
                 if (_index >= (_boostSprites.Length - 1))

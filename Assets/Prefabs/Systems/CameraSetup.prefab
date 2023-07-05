@@ -99,19 +99,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b8c96e2cdc154e848a3d9fe62464d42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraTargets:
-  - TargetTransform: {fileID: 0}
-    TargetInfluenceH: 1
-    TargetInfluenceV: 1
-    TargetOffset: {x: 4.06, y: 0.45}
+  CameraTargets: []
   CenterTargetOnStart: 0
   Axis: 0
   UpdateType: 1
   FollowHorizontal: 1
-  HorizontalFollowSmoothness: 0.26
+  HorizontalFollowSmoothness: 0.21
   FollowVertical: 1
   VerticalFollowSmoothness: 0.21
-  OffsetX: 0.224
+  OffsetX: 0.836
   OffsetY: 0
   IsRelativeOffset: 1
   ZoomWithFOV: 0
@@ -196,7 +192,7 @@ Transform:
   - {fileID: 667677828944197139}
   - {fileID: 667677829746907547}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &667677829746907540
 GameObject:
