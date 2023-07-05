@@ -59,6 +59,7 @@ namespace Player
 		public void OnResumeGame()
 		{
 			_playerState.UpdateGameState(GameState.Gameplay);
+			Time.timeScale = 1;
 		}
 
 		private void OnEnable()
@@ -171,6 +172,7 @@ namespace Player
 
 		private void OnPause()
 		{
+			Time.timeScale = 0;
 			_pauseEvent?.Raise();
 			_playerState.UpdateGameState(GameState.Menu);
 		}
