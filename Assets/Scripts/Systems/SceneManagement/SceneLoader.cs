@@ -252,7 +252,7 @@ namespace SceneManagement
             _onSceneReady.Raise(); //Spawn system will spawn the Player in a gameplay scene
         }
 
-        private void ExitGame()
+        public void ExitGame()
         {
             Application.Quit();
             Debug.Log("Exit!");

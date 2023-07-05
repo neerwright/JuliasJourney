@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Scriptables;
+using GameManager;
 
 namespace Player
 {
@@ -12,6 +13,8 @@ namespace Player
 		[SerializeField] private PlayerInputSO _playerInputSO;
 		[SerializeField] private GameEvent _playerPressedInteractEvent;
 		[SerializeField] private GameEvent _playerCanceledInteractEvent;
+		[SerializeField] private GameEvent _pauseEvent;
+		[SerializeField] private GameStateSO _playerState;
 		
 		private Vector2 _inputVector;
 		private float _previousSpeed;
@@ -40,13 +43,22 @@ namespace Player
 		private bool _coRoutineIsPlaying = false;
 		private IEnumerator coroutine;
 
+		private bool _inputsDisabled = false;
+
 		public void DisableControls()
 		{
 			_playerInputSO.DisableGameplayInput();
+			_inputsDisabled = true;
 		}
 		public void EnableControls()
 		{
 			_playerInputSO.EnableGameplayInput();
+			_inputsDisabled = false;
+		}
+
+		public void OnResumeGame()
+		{
+			_playerState.UpdateGameState(GameState.Gameplay);
 		}
 
 		private void OnEnable()
@@ -58,6 +70,7 @@ namespace Player
 			_playerInputSO.MoveEvent += OnMove;
 			_playerInputSO.AttackEvent += OnStartedAttack;
 			_playerInputSO.InteractEvent += OnInteract;
+			_playerInputSO.PauseEvent += OnPause;
 
 			//...
 			coroutine = WaitUntilInteractCanBePressedAgain(INPUT_BUFFER);
@@ -72,6 +85,7 @@ namespace Player
 			_playerInputSO.MoveEvent -= OnMove;
 			_playerInputSO.AttackEvent -= OnStartedAttack;
 			_playerInputSO.InteractEvent -= OnInteract;
+			_playerInputSO.PauseEvent -= OnPause;
 			//...
 		}
 
@@ -80,6 +94,25 @@ namespace Player
 		{
 			RecalculateMovement();
 			FlipSprite();
+			CheckState();
+		}
+
+		private void CheckState()
+		{
+			switch(_playerState.CurrentGameState)
+			{
+				case GameState.Gameplay:
+					if(_inputsDisabled)
+						EnableControls();
+					break;
+				case GameState.Menu:
+					if(!_inputsDisabled)
+						DisableControls();
+					break;
+				default:
+					// code block
+					break;
+			}
 		}
 
 		private void FlipSprite()
@@ -136,6 +169,11 @@ namespace Player
 			_playerCanceledInteractEvent?.Raise();
 		}	
 
+		private void OnPause()
+		{
+			_pauseEvent?.Raise();
+			_playerState.UpdateGameState(GameState.Menu);
+		}
 
 		IEnumerator WaitUntilInteractCanBePressedAgain(float seconds)
 		{			

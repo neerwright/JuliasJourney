@@ -172,6 +172,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playTrailParticles: {fileID: 0}
   _speedBoost: 5
+  _floatAnimationSpeed: 1
+  _curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &47879679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,6 +309,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playTrailParticles: {fileID: 0}
   _speedBoost: 5
+  _floatAnimationSpeed: 1
+  _curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &51407294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -529,6 +543,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playTrailParticles: {fileID: 0}
   _speedBoost: 20
+  _floatAnimationSpeed: 1
+  _curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &66491338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -620,7 +641,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5105386068091652224, guid: 0f9bbe204512b7b438b80ac163bab117, type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5105386068091652224, guid: 0f9bbe204512b7b438b80ac163bab117, type: 3}
       propertyPath: m_LocalPosition.x
@@ -718,6 +739,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playTrailParticles: {fileID: 0}
   _speedBoost: 5
+  _floatAnimationSpeed: 1
+  _curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &102449362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -799,38 +827,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &115403384
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 115403385}
-  m_Layer: 0
-  m_Name: Systems
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &115403385
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 115403384}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1529234503}
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &158472082
 GameObject:
   m_ObjectHideFlags: 0
@@ -989,37 +985,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &180721381
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 180721382}
-  m_Layer: 0
-  m_Name: -------------------------------
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &180721382
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 180721381}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &182450353
 GameObject:
   m_ObjectHideFlags: 0
@@ -1272,6 +1237,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playTrailParticles: {fileID: 0}
   _speedBoost: 5
+  _floatAnimationSpeed: 1
+  _curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &203432080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1609,7 +1581,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &278320413
 GameObject:
@@ -1660,6 +1632,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playTrailParticles: {fileID: 0}
   _speedBoost: 5
+  _floatAnimationSpeed: 1
+  _curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &278320416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1790,6 +1769,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playTrailParticles: {fileID: 0}
   _speedBoost: 5
+  _floatAnimationSpeed: 1
+  _curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &301303706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2154,7 +2140,7 @@ Transform:
   - {fileID: 1969875013}
   - {fileID: 158472085}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &458363336
 GameObject:
@@ -2776,6 +2762,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playTrailParticles: {fileID: 0}
   _speedBoost: 5
+  _floatAnimationSpeed: 1
+  _curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &590924075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2871,7 +2864,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1330300222616631271, guid: c288e4f2ed0db2c4b8fe14a3328c2807, type: 3}
       propertyPath: m_RootOrder
-      value: 22
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 1330300222616631271, guid: c288e4f2ed0db2c4b8fe14a3328c2807, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2945,7 +2938,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &639382897
 GameObject:
@@ -3028,7 +3021,7 @@ Transform:
   - {fileID: 1592984071}
   - {fileID: 711721820}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &691126068 stripped
 Transform:
@@ -3827,6 +3820,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playTrailParticles: {fileID: 0}
   _speedBoost: 5
+  _floatAnimationSpeed: 1
+  _curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &736044713
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3988,6 +3988,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playTrailParticles: {fileID: 0}
   _speedBoost: 5
+  _floatAnimationSpeed: 1
+  _curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &761001981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4153,37 +4160,6 @@ Transform:
   m_Father: {fileID: 261820915}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -5.145, y: -0.193, z: -1.416}
---- !u!1 &782039515
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 782039516}
-  m_Layer: 0
-  m_Name: Canvases
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &782039516
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 782039515}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &797910335
 GameObject:
   m_ObjectHideFlags: 0
@@ -4297,7 +4273,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &813797620
 GameObject:
@@ -4888,6 +4864,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playTrailParticles: {fileID: 0}
   _speedBoost: 5
+  _floatAnimationSpeed: 1
+  _curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &964168194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5102,6 +5085,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playTrailParticles: {fileID: 0}
   _speedBoost: 5
+  _floatAnimationSpeed: 1
+  _curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &980128685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5385,6 +5375,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playTrailParticles: {fileID: 0}
   _speedBoost: 5
+  _floatAnimationSpeed: 1
+  _curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &1041249030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5696,6 +5693,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playTrailParticles: {fileID: 0}
   _speedBoost: 5
+  _floatAnimationSpeed: 1
+  _curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &1135948494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5975,6 +5979,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playTrailParticles: {fileID: 0}
   _speedBoost: 5
+  _floatAnimationSpeed: 1
+  _curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &1188605333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6105,6 +6116,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playTrailParticles: {fileID: 0}
   _speedBoost: 5
+  _floatAnimationSpeed: 1
+  _curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &1205724809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6487,6 +6505,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playTrailParticles: {fileID: 0}
   _speedBoost: 5
+  _floatAnimationSpeed: 1
+  _curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &1264583376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7333,37 +7358,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1385534135
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1385534136}
-  m_Layer: 0
-  m_Name: GameManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1385534136
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1385534135}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2083452295}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1397679734
 GameObject:
   m_ObjectHideFlags: 0
@@ -7525,7 +7519,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8633047639190225716, guid: 29bb8b412fc027d48a7e1796aad25476, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8633047639190225716, guid: 29bb8b412fc027d48a7e1796aad25476, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7654,37 +7648,6 @@ Transform:
   m_Father: {fileID: 261820915}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -5.125, y: -0.499, z: 1.997}
---- !u!1 &1421218313
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1421218314}
-  m_Layer: 0
-  m_Name: UnitManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1421218314
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1421218313}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2083452295}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1421298234
 GameObject:
   m_ObjectHideFlags: 0
@@ -7917,6 +7880,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playTrailParticles: {fileID: 0}
   _speedBoost: 5
+  _floatAnimationSpeed: 1
+  _curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &1471592292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8047,6 +8017,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playTrailParticles: {fileID: 0}
   _speedBoost: 5
+  _floatAnimationSpeed: 1
+  _curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &1478988283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8177,6 +8154,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playTrailParticles: {fileID: 0}
   _speedBoost: 5
+  _floatAnimationSpeed: 1
+  _curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &1488236803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8307,6 +8291,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playTrailParticles: {fileID: 0}
   _speedBoost: 5
+  _floatAnimationSpeed: 1
+  _curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &1523385370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8388,37 +8379,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1529234502
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1529234503}
-  m_Layer: 0
-  m_Name: AudioSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1529234503
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1529234502}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 115403385}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1540202238
 GameObject:
   m_ObjectHideFlags: 0
@@ -69262,7 +69222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2475612774963012568, guid: 83dbb1e0ea4ff354a8dab5b3318f5691, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2475612774963012568, guid: 83dbb1e0ea4ff354a8dab5b3318f5691, type: 3}
       propertyPath: m_LocalPosition.x
@@ -69908,6 +69868,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playTrailParticles: {fileID: 0}
   _speedBoost: 5
+  _floatAnimationSpeed: 1
+  _curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &1855902681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70274,6 +70241,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playTrailParticles: {fileID: 0}
   _speedBoost: 12
+  _floatAnimationSpeed: 1
+  _curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &1938233131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70579,6 +70553,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playTrailParticles: {fileID: 0}
   _speedBoost: 5
+  _floatAnimationSpeed: 1
+  _curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &2000244120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70848,7 +70829,7 @@ Transform:
   - {fileID: 1266583647}
   - {fileID: 1723253306}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2054935800
 GameObject:
@@ -71009,7 +70990,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2475612774963012568, guid: 83dbb1e0ea4ff354a8dab5b3318f5691, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2475612774963012568, guid: 83dbb1e0ea4ff354a8dab5b3318f5691, type: 3}
       propertyPath: m_LocalPosition.x
@@ -71058,39 +71039,6 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 83dbb1e0ea4ff354a8dab5b3318f5691, type: 3}
---- !u!1 &2083452294
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2083452295}
-  m_Layer: 0
-  m_Name: Managers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2083452295
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2083452294}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1385534136}
-  - {fileID: 1421218314}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2118437279
 GameObject:
   m_ObjectHideFlags: 0
@@ -71162,7 +71110,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2145219890
 GameObject:
@@ -71213,6 +71161,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playTrailParticles: {fileID: 0}
   _speedBoost: 20
+  _floatAnimationSpeed: 1
+  _curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &2145219893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71415,7 +71370,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4251681720084052135, guid: c1a25e0c1e910194ea1f723649521d7c, type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 4251681720084052135, guid: c1a25e0c1e910194ea1f723649521d7c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -71478,7 +71433,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1330300222616631271, guid: c288e4f2ed0db2c4b8fe14a3328c2807, type: 3}
       propertyPath: m_RootOrder
-      value: 18
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 1330300222616631271, guid: c288e4f2ed0db2c4b8fe14a3328c2807, type: 3}
       propertyPath: m_LocalPosition.x
@@ -71655,7 +71610,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2475612774963012568, guid: 83dbb1e0ea4ff354a8dab5b3318f5691, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2475612774963012568, guid: 83dbb1e0ea4ff354a8dab5b3318f5691, type: 3}
       propertyPath: m_LocalPosition.x
@@ -71714,7 +71669,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3608430393602180185, guid: 8b6ae078596b72b41ac25c6a0cf00362, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3608430393602180185, guid: 8b6ae078596b72b41ac25c6a0cf00362, type: 3}
       propertyPath: m_LocalPosition.x
@@ -71833,7 +71788,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3996470262092205930, guid: 64918af6f7c88d044a919be30645835c, type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 3996470262092205930, guid: 64918af6f7c88d044a919be30645835c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -71951,7 +71906,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5105386068091652224, guid: 0f9bbe204512b7b438b80ac163bab117, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5105386068091652224, guid: 0f9bbe204512b7b438b80ac163bab117, type: 3}
       propertyPath: m_LocalPosition.x
@@ -72077,7 +72032,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6437783575765045202, guid: d869de636c09e5b4c851096316aa1db4, type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 6437783575765045202, guid: d869de636c09e5b4c851096316aa1db4, type: 3}
       propertyPath: m_LocalPosition.x

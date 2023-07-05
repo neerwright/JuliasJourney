@@ -232,6 +232,7 @@ GameObject:
   - component: {fileID: 2226076443959799474}
   - component: {fileID: 3052437028841218599}
   - component: {fileID: 1868751619562958083}
+  - component: {fileID: -837355835504167489}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -275,6 +276,8 @@ MonoBehaviour:
   _playerInputSO: {fileID: 11400000, guid: 497326490c7a920459e60f0e3f851ca2, type: 2}
   _playerPressedInteractEvent: {fileID: 11400000, guid: c10f55fbd8b5bf84c802cae2ebd1490b, type: 2}
   _playerCanceledInteractEvent: {fileID: 11400000, guid: 051f4d4d715f73343b6156883b43c027, type: 2}
+  _pauseEvent: {fileID: 11400000, guid: 17631cd9a977f9742a1d85b16f611021, type: 2}
+  _playerState: {fileID: 11400000, guid: c2ccf5a952309dc409a3bc6284fa13c1, type: 2}
 --- !u!114 &662188124845812081
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -714,6 +717,34 @@ MonoBehaviour:
       - m_Target: {fileID: 2226076443959799474}
         m_TargetAssemblyTypeName: PlayerParticles, Player
         m_MethodName: PlayTrailsParticle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &-837355835504167489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662188124845812092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7881123eb9ed30f41865049f3d528cc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 0d61414589acd1c4b9a0d7833d9aa2d1, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 662188124845812086}
+        m_TargetAssemblyTypeName: Player.PlayerScript, Player
+        m_MethodName: OnResumeGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

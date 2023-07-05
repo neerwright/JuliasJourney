@@ -23,6 +23,7 @@ namespace Player
         public event UnityAction InteractEvent = delegate{};
         public event UnityAction StoppedInteractEvent = delegate{};
         public event UnityAction ResetEvent = delegate{};
+        public event UnityAction PauseEvent = delegate{};
 
 
         private PlayerInputActions _playerInputActions;
@@ -85,7 +86,6 @@ namespace Player
 
         public void OnReset(InputAction.CallbackContext context)
         {
-            Debug.Log("Reset");
             if(context.phase == InputActionPhase.Performed)
                 ResetEvent.Invoke();
         }
@@ -100,6 +100,12 @@ namespace Player
             //_gameInput.Menus.Disable();
             //_gameInput.Dialogues.Disable();
             _playerInputActions.Gameplay.Enable();
+        }
+
+        public void OnPause(InputAction.CallbackContext context)
+        {
+            if(context.phase == InputActionPhase.Performed)
+                PauseEvent.Invoke();
         }
 
         

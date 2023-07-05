@@ -7,10 +7,10 @@ namespace GameManager
     public enum GameState
     {
         Gameplay, //regular state: player moves, attacks, can perform actions
-        Pause, //pause menu is opened, the whole game world is frozen
+        Menu, //pause menu is opened, the whole game world is frozen
         Reset, //when inventory UI or cooking UI are open
         Cutscene,
-        Glide
+        Glide,
     }
 
     [CreateAssetMenu(fileName = "GameState", menuName = "Gameplay/GameState")]
