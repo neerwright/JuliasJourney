@@ -1,9 +1,7 @@
 {
-    "name": "UI",
+    "name": "NPC",
     "rootNamespace": "",
     "references": [
-        "GUID:7162a100e6470354389f715832583aeb",
-        "GUID:a46d9d1875828c343ad0fa0ff7e7df08",
         "GUID:6055be8ebefd69e48b49212b09b47b2f"
     ],
     "includePlatforms": [],

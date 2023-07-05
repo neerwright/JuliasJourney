@@ -13,6 +13,8 @@ TagManager:
   - ArmsGlide
   - PlayerFrontArm
   - PlayerHead
+  - FinalRamp
+  - PushBox
   layers:
   - Default
   - TransparentFX
@@ -73,4 +75,7 @@ TagManager:
     locked: 0
   - name: CharFrontArm
     uniqueID: 2130936389
+    locked: 0
+  - name: Top
+    uniqueID: 3687487697
     locked: 0
