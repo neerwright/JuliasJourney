@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MoreMountains.Feedbacks;
 
 namespace Player 
 {
@@ -15,13 +16,25 @@ namespace Player
         [SerializeField] private float _upSpeed = 5f;
         [SerializeField] private float _downpSpeed = 1f;
         [SerializeField] private Transform _targetBackOfPlayer;
-        [SerializeField] private Vector3 _relativeStartPosition;
         
-        [Header("Runp")]
+
+        [Header("Boost")]
+        [SerializeField] private Sprite[] _boostSprites;
+        [SerializeField] private float _boostpSpeed = 5f;
+
+        [SerializeField] private MMFeedbacks _boostFeedback;
+        
+        [Header("Run")]
         [SerializeField] private Sprite[] _runSprites;
         [SerializeField] private float _runSpeed = 5f;
 
+        [Header("Glide")]
+        [SerializeField] private Sprite[] _glideSprites;
+        [SerializeField] private float _glideSpeed = 1f;
+
         [SerializeField] private AnimationCurve _easeInOut;
+        [SerializeField] private AnimationCurve _easeOut;
+        [SerializeField] private AnimationCurve _glideCurve;
         
 
         private WingAnimationState _state;
@@ -29,7 +42,9 @@ namespace Player
         private bool _playback = false;
         private int _index = 0;
         private float _time = 0;
+        private Vector3 _relativeStartPosition;
 
+        private bool _boostAnimationPlaying = false;
 
         
         
@@ -43,6 +58,9 @@ namespace Player
 
         public void PlayIdle()
         {
+            if(_boostAnimationPlaying)
+                return;
+
             _state = WingAnimationState.Idle;
             _playback = false;
             _index = 0;
@@ -51,6 +69,9 @@ namespace Player
 
         public void PlayUp()
         {
+            if(_boostAnimationPlaying)
+                return;
+
             _state = WingAnimationState.Up;
             _playback = false;
             _index = 0;
@@ -59,6 +80,9 @@ namespace Player
 
         public void PlayDown()
         {
+            if(_boostAnimationPlaying)
+                return;
+                
             _state = WingAnimationState.Down;
             _playback = true;
             if(_index >= _upSprites.Length)
@@ -66,11 +90,34 @@ namespace Player
             _time = 0;
         }
 
+        public void PlayBoost()
+        {
+            _boostAnimationPlaying = true;
+            _state = WingAnimationState.Boost;
+            _playback = false;
+            _index = 0;
+            _time = 0;
+
+            if(!_boostFeedback.Feedbacks[0].IsPlaying)
+                    _boostFeedback?.PlayFeedbacks();
+        }
+
         public void PlayRun()
         {
+            if(_boostAnimationPlaying)
+                return;
+
             _state = WingAnimationState.Run;
             _playback = false;
             _index = 0;
+            _time = 0;
+        }
+
+        public void PlayGlide()
+        {
+            _state = WingAnimationState.Glide;
+            _playback = false;
+            //_index = 0;
             _time = 0;
         }
 
@@ -88,7 +135,7 @@ namespace Player
 
         void Update()
         {
-            Debug.Log(_state);
+            //Debug.Log(_state);
             if(_state == WingAnimationState.Inactive)
             return;
 
@@ -103,13 +150,18 @@ namespace Player
 
             if(_state == WingAnimationState.Run)
                 RunAnim();
+            
+            if(_state == WingAnimationState.Boost)
+                BoostAnim();
 
+            if(_state == WingAnimationState.Glide)
+                GlideAnim();
             
 
         }
 
         //playback needs to be true for reverse to work
-        private void PlayAnimation(Sprite[] spriteArray, float speed, bool playback, bool reverse)
+        private void PlayAnimation(Sprite[] spriteArray, float speed, bool playback, bool reverse , AnimationCurve curve)
         {
             
             float current;
@@ -124,7 +176,7 @@ namespace Player
  
             if(_playback && playback)
             {
-                current = 1f - _easeInOut.Evaluate(_time);
+                current = 1f - curve.Evaluate(_time);
 
                 if(current < (1f + (float) _index) / (float) (spriteArray.Length))
                 {
@@ -132,7 +184,6 @@ namespace Player
                     if(_index < 0)
                         _index = 0;
                     _spriteRenderer.sprite = spriteArray[_index];
-                    Debug.Log(_index);
                 }
 
                 if(current < 0.001f)
@@ -143,7 +194,7 @@ namespace Player
             }
             else
             {
-                current = _easeInOut.Evaluate(_time);
+                current = curve.Evaluate(_time);
 
                 if(current > ((1 + (float) _index) / (float)((spriteArray.Length))))
                 {
@@ -171,36 +222,60 @@ namespace Player
 
         private void Idle()
         {
-            PlayAnimation(_idleSprites, _idleSpeed, true, false);
+            PlayAnimation(_idleSprites, _idleSpeed, true, false, _easeInOut);
+            MoveBack();
         }
         
         private void UpAnim()
         {
-            PlayAnimation(_upSprites, _upSpeed, false, false);
+            PlayAnimation(_upSprites, _upSpeed, false, false, _easeInOut);
             MoveTowardsPlayer();
         }
 
         private void DownAnim()
         {
-            PlayAnimation(_upSprites, _downpSpeed, true, true);
-            MoveBack();
+            PlayAnimation(_upSprites, _downpSpeed, true, true, _easeInOut);
+            MoveTowardsPlayer();
         }
 
         private void RunAnim()
         {
-            PlayAnimation(_runSprites, _runSpeed, true, false);
-            //MoveBack();
+            PlayAnimation(_runSprites, _runSpeed, true, false, _easeInOut);
+            MoveBack();
         }
+
+        private void BoostAnim()
+        {               
+                PlayAnimation(_boostSprites, _boostpSpeed, false, false, _easeOut);
+                
+                
+                if (_index >= (_boostSprites.Length - 1))
+                {
+                    _boostAnimationPlaying = false;
+                }
+            
+            MoveBack();
+        }
+
+        private void GlideAnim()
+        {         
+            Debug.Log(_index);      
+            PlayAnimation(_glideSprites, _glideSpeed, false, false, _glideCurve);
+
+            MoveBack();
+        }
+
+
 
         private void MoveTowardsPlayer()
         {
                 Vector3 _relativeTargetPosition = _targetBackOfPlayer.localPosition;
-                transform.localPosition = Vector3.MoveTowards(transform.localPosition, _relativeTargetPosition , Time.deltaTime);         
+                transform.localPosition = Vector3.MoveTowards(transform.localPosition, _relativeTargetPosition , Time.deltaTime * 1.5f);         
         }
 
         private void MoveBack()
         {
-                transform.localPosition = Vector3.MoveTowards(transform.localPosition, _relativeStartPosition , Time.deltaTime * 0.1f);         
+                transform.localPosition = Vector3.MoveTowards(transform.localPosition, _relativeStartPosition , Time.deltaTime * 4.5f);         
         }
 
             

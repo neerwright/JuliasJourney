@@ -39,7 +39,6 @@ namespace Player
             
             if(_finished)
                 return;
-            Debug.Log(_current);
 
             _current = Mathf.MoveTowards(_current, _target, _originSO.lerpSpeed * Time.deltaTime);
             if(_current >= 0.02f)
@@ -53,7 +52,6 @@ namespace Player
 
         public override void OnStateEnter()
 		{
-            Debug.Log("enter");
             _finished = false;
             _current = 0;
         }

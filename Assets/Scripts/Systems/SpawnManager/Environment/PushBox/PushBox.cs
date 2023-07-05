@@ -26,7 +26,7 @@ namespace environment
 
         private bool _hadImpact = false;
 
-        private const float THRESHOLD = 5f;
+        private const float THRESHOLD = 15f;
 
         public void Initialize(GameObject player)
         {

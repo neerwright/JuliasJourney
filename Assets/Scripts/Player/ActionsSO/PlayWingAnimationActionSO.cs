@@ -60,17 +60,17 @@ namespace Player
                 case WingAnimationState.Down:
                     _wingsAnimator.PlayDown();
                     break;
-                case WingAnimationState.Boost:
-                    //_wingsAnimator.PlayIdle();
-                    break;
-                    case WingAnimationState.Glide:
-                    // code block
+                case WingAnimationState.Glide:
+                    _wingsAnimator.PlayGlide();
                     break;
                 case WingAnimationState.Inactive:
                     _wingsAnimator.Deactivate();
                     break;
-                    case WingAnimationState.Run:
+                case WingAnimationState.Run:
                     _wingsAnimator.PlayRun();
+                    break;
+                case WingAnimationState.Boost:
+                    _wingsAnimator.PlayBoost();
                     break;
                 default:
                     _wingsAnimator.PlayIdle();
