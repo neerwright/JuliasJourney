@@ -278,6 +278,7 @@ MonoBehaviour:
   _playerCanceledInteractEvent: {fileID: 11400000, guid: 051f4d4d715f73343b6156883b43c027, type: 2}
   _pauseEvent: {fileID: 11400000, guid: 17631cd9a977f9742a1d85b16f611021, type: 2}
   _playerState: {fileID: 11400000, guid: c2ccf5a952309dc409a3bc6284fa13c1, type: 2}
+  _playerPosition: {fileID: 11400000, guid: b3ef5fa68a2d03a499c3278418310f2c, type: 2}
 --- !u!114 &662188124845812081
 MonoBehaviour:
   m_ObjectHideFlags: 0

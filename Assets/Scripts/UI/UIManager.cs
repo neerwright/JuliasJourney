@@ -13,7 +13,8 @@ namespace UI
         CreditsArt,
         Options,
 
-        PauseMenu
+        PauseMenu,
+        PocketwatchUI
     }
 
     public class UIManager : MonoBehaviour
@@ -27,6 +28,7 @@ namespace UI
         private List<CanvasController> _canvasControllers;
         private CanvasController _lastActiveCanvas;
         private CanvasController _pauseMenu;
+        private CanvasController _pocketwatchUI;
 
         void Awake()
         {
@@ -43,6 +45,9 @@ namespace UI
                 _canvasControllers = GetComponentsInChildren<CanvasController>().ToList();
                 _pauseMenu = _canvasControllers.Find(x => x.canvasType == CanvasType.PauseMenu);
                 _pauseMenu.gameObject.SetActive(false);
+
+                _pocketwatchUI = _canvasControllers.Find(x => x.canvasType == CanvasType.PocketwatchUI);
+                _pocketwatchUI.gameObject.SetActive(false);
             }
 
             
@@ -59,6 +64,16 @@ namespace UI
             {
                 newCanvasController.gameObject.SetActive(true);
                 _lastActiveCanvas = newCanvasController;
+            }
+        }
+
+        public void SetActice(CanvasType type, bool value)
+        {
+            CanvasController newCanvasController = _canvasControllers.Find(x => x.canvasType == type);
+            if(newCanvasController != null)
+            {
+                    newCanvasController.gameObject.SetActive(value);
+   
             }
         }
 

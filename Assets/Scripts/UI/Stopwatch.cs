@@ -23,9 +23,10 @@ namespace UI
         [SerializeField] private TextMeshProUGUI _timer3Text;
         [SerializeField] private TextMeshProUGUI _totalText;
 
-        public void SetupTimer(string stage)
+        public void ResetTimer()
         {
-            
+            _currentTime = 0f;
+            _timeSegments[_currentIsland] = 0f;
         }
 
         public void StartTimer(string islandName)

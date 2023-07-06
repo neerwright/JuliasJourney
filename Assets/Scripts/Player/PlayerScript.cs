@@ -15,6 +15,7 @@ namespace Player
 		[SerializeField] private GameEvent _playerCanceledInteractEvent;
 		[SerializeField] private GameEvent _pauseEvent;
 		[SerializeField] private GameStateSO _playerState;
+		[SerializeField] private Vector2VariableSO _playerPosition;
 		
 		private Vector2 _inputVector;
 		private float _previousSpeed;
@@ -96,6 +97,12 @@ namespace Player
 			RecalculateMovement();
 			FlipSprite();
 			CheckState();
+			WritePlayerPosition();
+		}
+
+		private void WritePlayerPosition()
+		{
+			_playerPosition.Value = transform.position;
 		}
 
 		private void CheckState()
