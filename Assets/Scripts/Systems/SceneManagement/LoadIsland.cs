@@ -9,9 +9,16 @@ namespace SceneManagement
         [SerializeField] private LoadEventSO _nextIslandEvent;
         [SerializeField] private GameSceneSO _nextIsland;
 
+        [SerializeField] private bool _triggered = false;
+
         private void OnTriggerEnter2D(Collider2D collider)
         {
-            _nextIslandEvent?.Raise(_nextIsland);
+            if(collider.gameObject.tag == "Player" && !_triggered)
+            {
+                _triggered = true;
+                _nextIslandEvent?.Raise(_nextIsland);
+            }
+            
         }
     }
 }

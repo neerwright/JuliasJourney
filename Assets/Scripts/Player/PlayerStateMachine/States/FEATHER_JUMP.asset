@@ -20,4 +20,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bf65e9f790268ca43a24f0caff58e12d, type: 2}
   - {fileID: 11400000, guid: 8bdc3f0a4e1582c45860fadb98bcb3f3, type: 2}
   - {fileID: 11400000, guid: 39bbd4514532d9c41a0e9f4d15c149e4, type: 2}
+  - {fileID: 11400000, guid: 59226bb6681ec3143bbe7dd747701d28, type: 2}
+  - {fileID: 11400000, guid: de3bff6cf6b43c44e9de660bf24d427c, type: 2}
+  - {fileID: 11400000, guid: 04b55e90ecfba454fa3fa2dae321a73e, type: 2}
   _sceneGizmoColor: {r: 0.90814805, g: 1, b: 0.17610055, a: 1}

@@ -2,18 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Player;
-//using Scriptables;
+using Sounds;
 
 namespace environment
 {
     public class PushBox : MonoBehaviour, IEnvironmentalObject
     {
+        [Header("Movement")]
         [Range(0,1)]
         [SerializeField] private float _playerSlowDownPercent = 0.7f;
-
         [Range(0,1)]
         [SerializeField] private float _boxSlowDownPercent = 0.5f;
 
+        [Header("Audio")]
+        [SerializeField] private AudioClipGameEvent _audioClipGameEvent = default;
+        [SerializeField] private AudioClip _activateClip;
+        [SerializeField] private AudioClip _driveSoundsClip;
+        [SerializeField] private float _volume = 1f;
 
         private GameObject _player;
         private PlayerScript _playerScript;
@@ -56,13 +61,16 @@ namespace environment
                 mult = -1;
             if(Collider.gameObject.tag == "Player" && (mult * _playerScript.movementVector.x > THRESHOLD) && !_hadImpact)
             {
-               
+               //play Audio
+                _audioClipGameEvent.Raise(_activateClip, _volume);
+
                 _hadImpact = true;
 
                 Vector2 playerVel = _playerScript.movementVector;
                 Vector2 relativeVelocity = playerVel + (Vector2) _rb2d.velocity;
                 
                 //squash player event
+
                 //slow down player by 10 %
                 _playerScript.movementVector = _playerScript.movementVector - (_playerScript.movementVector * _playerSlowDownPercent);
 

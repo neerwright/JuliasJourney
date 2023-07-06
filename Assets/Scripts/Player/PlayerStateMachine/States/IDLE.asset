@@ -18,4 +18,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 19cf772835012e4479951f55cfa82e7b, type: 2}
   - {fileID: 11400000, guid: 39bbd4514532d9c41a0e9f4d15c149e4, type: 2}
   - {fileID: 11400000, guid: 9f83c9914a07ed047a7d5ca4477fed10, type: 2}
+  - {fileID: 11400000, guid: 01c188d51a2be414182f9952db5500a4, type: 2}
   _sceneGizmoColor: {r: 0.93750924, g: 0.9622642, b: 0.65966535, a: 1}

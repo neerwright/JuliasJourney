@@ -9,15 +9,18 @@ namespace environment{
     public class Feather : MonoBehaviour , IEnvironmentalObject
     {
 
-        
-        [SerializeField]
-        private GameEvent _playTrailParticles;
+        [Header("Player")]
         [SerializeField]
         private float _speedBoost = 10f;
+        [SerializeField]
+        private GameEvent _playTrailParticles;
+        
+        [Header("Animation")]
         [SerializeField]
         private float _floatAnimationSpeed = 1f;
         [SerializeField]
         private AnimationCurve _curve;
+
 
         private GameObject _player;
         private PlayerScript _playerScript;

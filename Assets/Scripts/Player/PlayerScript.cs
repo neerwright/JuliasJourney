@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using Scriptables;
 using GameManager;
+using Com.LuisPedroFonseca.ProCamera2D;
 
 namespace Player
 {
@@ -99,6 +100,7 @@ namespace Player
 			CheckState();
 			WritePlayerPosition();
 		}
+
 
 		private void WritePlayerPosition()
 		{

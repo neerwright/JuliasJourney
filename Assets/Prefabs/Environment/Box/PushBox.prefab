@@ -150,6 +150,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerSlowDownPercent: 0.7
   _boxSlowDownPercent: 0.083
+  _audioClipGameEvent: {fileID: 11400000, guid: 81d4b4bbc810c884ab26605aa4d35b1a, type: 2}
+  _activateClip: {fileID: 8300000, guid: 1fe69bd7d4c3c5740a3e17437d4b2c21, type: 3}
+  _driveSoundsClip: {fileID: 0}
+  _volume: 0.7
 --- !u!114 &-9053194881964913720
 MonoBehaviour:
   m_ObjectHideFlags: 0

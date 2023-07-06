@@ -259,7 +259,6 @@ namespace Player
 
         private void GlideAnim()
         {         
-            Debug.Log(_index);      
             PlayAnimation(_glideSprites, _glideSpeed, false, false, _glideCurve);
 
             MoveBack();

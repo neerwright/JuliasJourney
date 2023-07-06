@@ -26,7 +26,7 @@ public class SpawnManager : MonoBehaviour
         if (gameplayScene.IsValid())
         {
             SceneManager.SetActiveScene(gameplayScene);
-            _playerInstance = Instantiate(_playerPrefab, new Vector3(81.30f,74.4f,-0.3f), Quaternion.identity);
+            _playerInstance = Instantiate(_playerPrefab, _spawnLocations, Quaternion.identity);
 
             //Camera
             ProCamera2D.Instance.AddCameraTarget(_playerInstance.transform, 1f, 1f, 0f);

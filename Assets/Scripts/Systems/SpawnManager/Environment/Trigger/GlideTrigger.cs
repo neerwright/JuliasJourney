@@ -5,17 +5,13 @@ using GameManager;
 
 namespace environment
 {
-    public class GlideTrigger : MonoBehaviour, IEnvironmentalObject
+    public class GlideTrigger : MonoBehaviour
     {
         [SerializeField]
         private GameStateSO _gameState;
         [SerializeField]
         private bool _startGlide;
         
-        public void Initialize(GameObject player)
-        {
-
-        }
 
         private void OnTriggerEnter2D(Collider2D Collider)
         {
