@@ -74,9 +74,9 @@ namespace Player
 			_playerController.TouchedSlope = true;
 			
 			_slopeVector = -1 * _playerController.VectorAlongSlope;
-						
-			_player.movementVector = _slopeVector * _player.movementVector.magnitude * _originSO.initialSpeedBoost;
 			
+			_player.movementVector.y = 0;
+			_player.movementVector = _slopeVector * _player.movementVector.magnitude * _originSO.initialSpeedBoost;
 				
 		}
 

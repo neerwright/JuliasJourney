@@ -66,7 +66,7 @@ namespace Player
 
 		private void OnEnable()
 		{
-			
+			_playerState.UpdateGameState(GameState.Gameplay);
 			_playerInputSO.StoppedInteractEvent += OnInteractCanceled;
 			_playerInputSO.JumpEvent += OnJumpInitiated;
 			_playerInputSO.JumpCanceledEvent += OnJumpCanceled;

@@ -22,7 +22,6 @@ namespace environment
                 else
                     _gameState.UpdateGameState(GameState.Gameplay);
             
-            gameObject.SetActive(false);
             }
         }
     }

@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: FINAL_RAMP
   m_EditorClassIdentifier: 
   _actions:
-  - {fileID: 11400000, guid: 161730ba510ec6948937bd7b0ebfb4eb, type: 2}
-  - {fileID: 11400000, guid: c9da1b1ca1f9c29449c6923921d9fb61, type: 2}
+  - {fileID: 11400000, guid: 19d888c4b79bad642a7fff12a0d25225, type: 2}
   - {fileID: 11400000, guid: 39bbd4514532d9c41a0e9f4d15c149e4, type: 2}
-  - {fileID: 11400000, guid: 9f83c9914a07ed047a7d5ca4477fed10, type: 2}
+  - {fileID: 11400000, guid: 161730ba510ec6948937bd7b0ebfb4eb, type: 2}
   - {fileID: 11400000, guid: 01c188d51a2be414182f9952db5500a4, type: 2}
   _sceneGizmoColor: {r: 0, g: 0, b: 0, a: 1}

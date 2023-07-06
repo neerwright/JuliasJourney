@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FinalRampMovement
   m_EditorClassIdentifier: 
   description: 
-  gravityOnRamp: 6.72
-  speedUp: 15
+  gravityOnRamp: 10.6
+  speedUp: 22.3
   speedDown: 6.7
-  initialSpeedBoost: 4.7
+  initialSpeedBoost: 3.58

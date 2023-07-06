@@ -23,11 +23,9 @@ namespace environment
 
         void OnTriggerStay2D(Collider2D collider)
         {
-            Debug.Log("Trig");
             if(_playerScript.jumpInput)
             {
                 _playerFlip.Raise();
-                Debug.Log("Raise");
             }
         }
     }

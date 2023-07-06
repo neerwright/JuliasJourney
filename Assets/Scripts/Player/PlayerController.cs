@@ -149,7 +149,6 @@ namespace Player
                     Bonked.Invoke(movementVector.x);
                 }
                 _isCollidingWithWall = true;
-                
                 movementVector.x = 0;  
             }
             else
@@ -220,6 +219,7 @@ namespace Player
         #region Move
         private void MoveCharacter(Vector2 move) 
         {
+            
             _debugCurMoveVector = move;
             
             _nudgingPlayer = false;

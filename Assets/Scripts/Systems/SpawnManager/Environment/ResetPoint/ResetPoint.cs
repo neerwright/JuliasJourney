@@ -9,9 +9,10 @@ namespace environment
     {
         [SerializeField] private Vec2EventSO _resetLocationEvent;
         
-        public void Start()
+        public void OnTriggerEnter2D(Collider2D collider)
         {
-            _resetLocationEvent.Raise((Vector2) gameObject.transform.position);
+            if(collider.gameObject.tag == "Player")
+                _resetLocationEvent.Raise((Vector2) gameObject.transform.position);
         }
 
 
