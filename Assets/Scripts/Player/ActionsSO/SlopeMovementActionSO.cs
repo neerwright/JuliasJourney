@@ -117,7 +117,6 @@ namespace Player
 
 		public override void OnStateEnter()
 		{
-			Debug.Log(_player.movementVector.x);
 			_playerController.TouchedSlope = true;
 			
 			_slopeVector = -1 * _playerController.VectorAlongSlope;

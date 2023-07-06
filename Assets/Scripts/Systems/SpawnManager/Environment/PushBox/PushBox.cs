@@ -31,7 +31,7 @@ namespace environment
 
         private bool _hadImpact = false;
 
-        private const float THRESHOLD = 15f;
+        private const float THRESHOLD = 12f;
 
         public void Initialize(GameObject player)
         {
@@ -45,7 +45,10 @@ namespace environment
             _startPosition = gameObject.transform.position;
             _collider = GetComponent<BoxCollider2D>();
         }
-
+        public void ReActivate()
+        {
+            _hadImpact = false;
+        }
         public void Reset()
         {
             gameObject.transform.position = _startPosition;

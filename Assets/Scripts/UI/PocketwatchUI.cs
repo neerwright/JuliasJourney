@@ -8,7 +8,7 @@ namespace UI
 {
     public class PocketwatchUI : MonoBehaviour
     {
-        [SerializeField] private float _timeToFinish = 2f;
+        [SerializeField] private float _timeToFinish = 1.5f;
         [SerializeField] UIManager _uiManager;
         [SerializeField] Image _timerImage; 
         [SerializeField] Image _backgroundImage; 

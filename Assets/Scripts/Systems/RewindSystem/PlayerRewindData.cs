@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Scriptables;
 
-namespace Animancer.Assets.Scripts.Systems.RewindSystem
+namespace RewindSystem
 {
 
     public class PlayerRewindData : MonoBehaviour , IRewindData

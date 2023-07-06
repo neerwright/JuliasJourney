@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb4f4dc1155af9a42aedfaec83c01627, type: 3}
-  m_Name: GravityGlide
+  m_Script: {fileID: 11500000, guid: f62780cfffb08b54e96eca25681271ca, type: 3}
+  m_Name: CurrentEnvironmentParentObject
   m_EditorClassIdentifier: 
-  description: 
-  verticalPull: -10
+  GObject: {fileID: 0}

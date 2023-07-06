@@ -25,7 +25,7 @@ TagManager:
   - Ground
   - Post Processing
   - No Post Processing
-  - 
+  - Background
   - 
   - 
   - 
@@ -49,11 +49,14 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
-    locked: 0
   - name: BG
     uniqueID: 880269873
+    locked: 0
+  - name: Clouds
+    uniqueID: 164273029
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0
   - name: CharBackArm
     uniqueID: 2672257729

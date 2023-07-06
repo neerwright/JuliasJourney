@@ -20,6 +20,7 @@ namespace environment
                 if(!_trigerred)
                 {
                     _startTimerEvent.Raise(_islandName);
+                    _trigerred = true;
                 }
                 else
                 {

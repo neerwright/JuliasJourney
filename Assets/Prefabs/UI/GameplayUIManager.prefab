@@ -115,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 974477f9996b64f4ea0baad9b6e9306d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeToFinish: 2
+  _timeToFinish: 1.5
   _uiManager: {fileID: 3515211251825974616}
   _timerImage: {fileID: 6882976290427964435}
   _backgroundImage: {fileID: 2581592627844849653}
@@ -725,8 +725,8 @@ RectTransform:
   m_Children:
   - {fileID: 5408774661185597247}
   - {fileID: 8411740518595058622}
-  - {fileID: 6554640110746516179}
   - {fileID: 4549126314820275158}
+  - {fileID: 6554640110746516179}
   m_Father: {fileID: 6276542543092371114}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1103,9 +1103,17 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 6276542543092371114}
     m_Modifications:
+    - target: {fileID: 4060473601297096261, guid: 9801498c187e765448d777af035e56c6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6268959863585743478, guid: 9801498c187e765448d777af035e56c6, type: 3}
       propertyPath: m_Name
       value: PocketwatchUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 6268959863585743478, guid: 9801498c187e765448d777af035e56c6, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6268959863585743479, guid: 9801498c187e765448d777af035e56c6, type: 3}
       propertyPath: m_Pivot.x
@@ -1190,6 +1198,14 @@ PrefabInstance:
     - target: {fileID: 6268959863585743479, guid: 9801498c187e765448d777af035e56c6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6268959863598903447, guid: 9801498c187e765448d777af035e56c6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8230302050715858102, guid: 9801498c187e765448d777af035e56c6, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -1331,6 +1347,78 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 73206d85d16a701478c2c2be8f8a5d36, type: 3}
+--- !u!114 &968076446683527212 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6383417268008165818, guid: 73206d85d16a701478c2c2be8f8a5d36, type: 3}
+  m_PrefabInstance: {fileID: 6195044648999115158}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968076446683527215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 064fce72f1df1584dad2e8e4615b2d1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &968076446683527215 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6383417268008165817, guid: 73206d85d16a701478c2c2be8f8a5d36, type: 3}
+  m_PrefabInstance: {fileID: 6195044648999115158}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &619638137405282390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968076446683527215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 429c43054435ab44e9b48071c8624c9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 36cd3b96c6eaf3b4889edb1f02a3c1de, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 968076446683527212}
+        m_TargetAssemblyTypeName: UI.Stopwatch, UI
+        m_MethodName: StartTimer
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6882976290325942790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968076446683527215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7881123eb9ed30f41865049f3d528cc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: f01742cdaa7aa6b4e9e20e4bdc18f7b4, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 968076446683527212}
+        m_TargetAssemblyTypeName: UI.Stopwatch, UI
+        m_MethodName: ResetTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &5742308726598342608 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1894325587313675846, guid: 73206d85d16a701478c2c2be8f8a5d36, type: 3}

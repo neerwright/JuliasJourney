@@ -4,12 +4,13 @@ using UnityEngine;
 using Com.LuisPedroFonseca.ProCamera2D;
 using UnityEngine.SceneManagement;
 using environment;
+using Scriptables;
 
 public class SpawnManager : MonoBehaviour
 {
-    [Header("Asset References")]
-	//[SerializeField] private InputReader _inputReader = default;
 	[SerializeField] private GameObject _playerPrefab = default;
+
+    [SerializeField] private GameObjectVariableSO _currentEnvironmentParentObject;
 
 	private Vector2 _spawnLocations;
 	private Transform _defaultSpawnPoint;
@@ -44,8 +45,9 @@ public class SpawnManager : MonoBehaviour
 
         foreach(var envObj in ObjectsToSpawn)
         {
+            
             var objScript = envObj.GetComponent<EnvironmentObject>();
-            var objInstance = Instantiate(objScript.prefab, objScript.locationData, Quaternion.identity);
+            var objInstance = Instantiate(objScript.prefab, objScript.locationData, Quaternion.identity, _currentEnvironmentParentObject.GObject.transform);
             objInstance.GetComponent<IEnvironmentalObject>().Initialize(_playerInstance);
 
             envObj.gameObject.SetActive(false);

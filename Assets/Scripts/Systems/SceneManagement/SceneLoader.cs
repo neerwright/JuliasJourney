@@ -30,6 +30,7 @@ namespace SceneManagement
         
         [SerializeField] private GameSceneSO _gameplayScene;
         [SerializeField] private GameSceneSO _firstIsland;
+        
         //[SerializeField] private FadeChannelSO _fadeRequestChannel = default;
 
         public event EventHandler _gamplaySceneLoaded = delegate {};
@@ -173,6 +174,7 @@ namespace SceneManagement
             }
             if(_loadIsland || gameScene.sceneName == _firstIsland.sceneName)
             {
+                Debug.Log("Raise");
                 _onIslandReady?.Raise();
                 _islandsLoaded.Enqueue(gameScene); 
             }

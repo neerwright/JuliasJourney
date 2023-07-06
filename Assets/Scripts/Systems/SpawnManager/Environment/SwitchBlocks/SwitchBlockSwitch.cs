@@ -8,18 +8,22 @@ namespace environment
     {
         [SerializeField] private GameEvent _switchEvent;
         
-        private bool _active = true;
+        private bool _triggered = false;
 
         private const string PLAYER_TAG = "Player";
         private const string PUSHBOX_TAG = "PushBox";
 
         void OnTriggerEnter2D(Collider2D collider)
         {
+            if(_triggered)
+                return;
+
             if(collider.tag == PLAYER_TAG || collider.tag == PUSHBOX_TAG)
             {
                 _switchEvent.Raise();
-                _active = false;
+                _triggered = true;
             }
+            
         }
     }
 }
