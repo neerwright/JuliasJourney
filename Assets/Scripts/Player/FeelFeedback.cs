@@ -26,6 +26,8 @@ public class FeelFeedback : MonoBehaviour
     public MMFeedbacks LandingFeedback;
     public MMFeedbacks BonkFeedback;
 
+    public MMFeedbacks FlipFeedback;
+
     //private Rigidbody _rigidbody;
     private PlayerScript _playerScript;
     private MMFeedbackSquashAndStretch SquashAndStretchLanding;
@@ -69,6 +71,12 @@ public class FeelFeedback : MonoBehaviour
 
     }
 
+    public void DoAFlip()
+    {
+        Debug.Log("Do Flip");
+        if(!FlipFeedback.Feedbacks[0].IsPlaying)
+            FlipFeedback?.PlayFeedbacks();
+    }
     private void PlayLandingFeedback()
     {
         float _velocity = _playerScript.movementVector.y;
