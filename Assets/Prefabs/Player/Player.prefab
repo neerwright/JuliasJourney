@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 662188124799457677}
   - component: {fileID: 662188124799457679}
   - component: {fileID: 662188124799457676}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BonkFeedback
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -234,7 +234,7 @@ GameObject:
   - component: {fileID: 1868751619562958083}
   - component: {fileID: -837355835504167489}
   - component: {fileID: 7079984842830365149}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -453,6 +453,7 @@ MonoBehaviour:
   _rewindMethodUser: {fileID: 662188124845812092}
   _playerVelocity: {fileID: 11400000, guid: 17c432cdeb9739142a7fbce26d37e6a3, type: 2}
   _animationData: {fileID: 11400000, guid: c574f52e49fc2a9479bbdc2dbdb31e1d, type: 2}
+  _recordPlayerData: 1
 --- !u!114 &662188124845812042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -798,7 +799,7 @@ GameObject:
   - component: {fileID: 662188124903335985}
   - component: {fileID: 662188124903335984}
   - component: {fileID: 1817070209576564050}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: LandingFeedback
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1080,7 +1081,7 @@ GameObject:
   - component: {fileID: 662188125323524650}
   - component: {fileID: 662188125323524644}
   - component: {fileID: 662188125323524647}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: JumpFeedback
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1281,7 +1282,7 @@ GameObject:
   - component: {fileID: 697076316100326500}
   - component: {fileID: 3945064809765593038}
   - component: {fileID: 333351024718627929}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TrailPS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6095,7 +6096,7 @@ GameObject:
   - component: {fileID: 4211041808524124072}
   - component: {fileID: 1883667761675759798}
   - component: {fileID: 2236202719562136594}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FlipFeedback
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6362,7 +6363,7 @@ GameObject:
   - component: {fileID: 6994860730314620227}
   - component: {fileID: 1480965737627892377}
   - component: {fileID: 2257956706745383013}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: DustPS
   m_TagString: Dust
   m_Icon: {fileID: 0}
@@ -11133,7 +11134,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1622709567
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -15700,7 +15701,7 @@ SortingGroup:
   m_GameObject: {fileID: 916338087319956727}
   m_Enabled: 1
   m_SortingLayerID: -1622709567
-  m_SortingLayer: 2
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_SortAtRoot: 0
 --- !u!4 &1061206748155941232 stripped
@@ -15742,7 +15743,7 @@ SortingGroup:
   m_GameObject: {fileID: 1322222720213993870}
   m_Enabled: 1
   m_SortingLayerID: 2130936389
-  m_SortingLayer: 8
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_SortAtRoot: 0
 --- !u!114 &1359596496
@@ -15773,7 +15774,7 @@ SortingGroup:
   m_GameObject: {fileID: 3266923752138185291}
   m_Enabled: 1
   m_SortingLayerID: 469398625
-  m_SortingLayer: 3
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_SortAtRoot: 0
 --- !u!1 &8454650843523154615 stripped
@@ -15790,7 +15791,7 @@ SortingGroup:
   m_GameObject: {fileID: 8454650843523154615}
   m_Enabled: 1
   m_SortingLayerID: 731668241
-  m_SortingLayer: 6
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_SortAtRoot: 0
 --- !u!1 &8844674556962483642 stripped
@@ -15807,7 +15808,7 @@ SortingGroup:
   m_GameObject: {fileID: 8844674556962483642}
   m_Enabled: 1
   m_SortingLayerID: -536108061
-  m_SortingLayer: 5
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_SortAtRoot: 0
 --- !u!1 &9070703389250310509 stripped
@@ -15824,7 +15825,7 @@ SortingGroup:
   m_GameObject: {fileID: 9070703389250310509}
   m_Enabled: 1
   m_SortingLayerID: -544169517
-  m_SortingLayer: 4
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_SortAtRoot: 0
 --- !u!1001 &4935331104050929500

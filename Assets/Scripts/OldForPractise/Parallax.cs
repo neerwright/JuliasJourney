@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Parallax : MonoBehaviour
+namespace environment
 {
-    [SerializeField]
+    public class Parallax : MonoBehaviour
+{
+    //[SerializeField]
     Camera cam;
-    [SerializeField]
+    //[SerializeField]
     Transform Player;
 
     Vector2 startPosition;
@@ -21,6 +23,7 @@ public class Parallax : MonoBehaviour
     
     public void Start()
     {
+        cam = Camera.main;
         startPosition = transform.position;
         startZ = transform.position.z;
     }
@@ -30,3 +33,5 @@ public class Parallax : MonoBehaviour
         transform.position = new Vector3(newPos.x, newPos.y, startZ);
     }
 }
+}
+
