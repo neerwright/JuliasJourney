@@ -77,7 +77,6 @@ namespace Player
 
         public void OnInteract(InputAction.CallbackContext context)
         {
-            Debug.Log("Interact");
             if(context.phase == InputActionPhase.Performed)
                 InteractEvent.Invoke();
             if(context.phase == InputActionPhase.Canceled )
@@ -100,6 +99,11 @@ namespace Player
             //_gameInput.Menus.Disable();
             //_gameInput.Dialogues.Disable();
             _playerInputActions.Gameplay.Enable();
+        }
+
+        public void DisableUIInput()
+        {
+            _playerInputActions.UI.Disable();
         }
 
         public void OnPause(InputAction.CallbackContext context)

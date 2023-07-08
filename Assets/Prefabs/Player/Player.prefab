@@ -6304,8 +6304,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 1
+      time: -0.020833334
+      value: 1.009434
       inSlope: -0.5190566
       outSlope: -0.5190566
       tangentMode: 0
@@ -6313,7 +6313,7 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.18189985
     - serializedVersion: 3
-      time: 1
+      time: 1.0083313
       value: 0
       inSlope: -1.7434422
       outSlope: -1.7434422
@@ -6325,7 +6325,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   AllowAdditivePlays: 0
-  DetermineRotationOnPlay: 0
+  DetermineRotationOnPlay: 1
   ToDestinationSpace: 0
   DestinationAngles: {x: 0, y: 180, z: 0}
   ToDestinationCurve:
