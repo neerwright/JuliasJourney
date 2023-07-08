@@ -65,14 +65,12 @@ namespace environment
             
         }
 
-        public void OnReset()
+        public void Reseting()
         {
-            if(!active)
-            {
                 _spriteRenderer.sprite = _inactiveSprite;   
                 _collider.enabled = false;
                 active = false;          
-            }
+            
         }
 
         public void OnTriggerEnter2D(Collider2D collider)

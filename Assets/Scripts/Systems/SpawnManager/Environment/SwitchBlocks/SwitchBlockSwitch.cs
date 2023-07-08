@@ -13,7 +13,7 @@ namespace environment
         [SerializeField] BlockType _type;
 
         private bool _triggered = false;
-        private IEnumerator  _coroutine;
+        private Coroutine  _coroutine;
 
         private const string PLAYER_TAG = "Player";
         private const string PUSHBOX_TAG = "PushBox";
@@ -22,26 +22,29 @@ namespace environment
         void Start()
         {
             _spriteRenderer.sprite = _sprites[0];
-            _coroutine = PlayAnimation();
         }
         
         void OnTriggerEnter2D(Collider2D collider)
         {
+            
             if(_triggered)
                 return;
 
             if(collider.tag == PLAYER_TAG || collider.tag == PUSHBOX_TAG)
             {
-                StartCoroutine(_coroutine);
+                _coroutine = StartCoroutine("PlayAnimation");
                 _switchEvent.Raise();
+                Debug.Log(_triggered);
                 _triggered = true;
             }
             
         }
 
-       public  void OnReset(Collider2D collider)
+       public  void Reseting()
         {
-            StopCoroutine(_coroutine);
+            if(_coroutine != null)
+                StopCoroutine(_coroutine);
+
             _triggered = false;
 
             _spriteRenderer.sprite = _sprites[0];
@@ -54,6 +57,7 @@ namespace environment
             yield return new WaitForSeconds(DELAY);
             _spriteRenderer.sprite = _sprites[2];
         }
+
     }
 }
 

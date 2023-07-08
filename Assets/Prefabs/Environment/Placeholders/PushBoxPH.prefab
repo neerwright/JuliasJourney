@@ -28,11 +28,11 @@ Transform:
   m_GameObject: {fileID: 4251681720084052139}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 148.81, y: 69.52, z: 0}
-  m_LocalScale: {x: 4.74676, y: 4.74676, z: 4.74676}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 22
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4251681720084052132
 SpriteRenderer:
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -1010588608, guid: 891e0cde288d418469e39d6d9dd37a8b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,6 +98,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51e96cae1c3549f499b44a9c59539ac4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerSlowDownPercent: 0.7
+  _boxSlowDownPercent: 0.5
+  _audioClipGameEvent: {fileID: 0}
+  _activateClip: {fileID: 0}
+  _driveSoundsClip: {fileID: 0}
+  _volume: 1
 --- !u!114 &2500082548298221862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,6 +116,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1c88898e20d2ff498909226d8c12531, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  locationData: {x: 148.81, y: 69.52}
+  locationData: {x: 0, y: 0}
   environmentType: {fileID: 0}
   prefab: {fileID: 7207917427430729095, guid: afe6232afb1988741bf9b046344d415e, type: 3}

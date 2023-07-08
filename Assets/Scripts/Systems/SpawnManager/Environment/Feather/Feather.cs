@@ -20,7 +20,9 @@ namespace environment{
         private float _floatAnimationSpeed = 1f;
         [SerializeField]
         private AnimationCurve _curve;
-
+        [SerializeField] private Sprite _upSprite;
+        [SerializeField] private Sprite _downSprite;
+        [SerializeField] private SpriteRenderer _spriteRenderer;
 
         private GameObject _player;
         private PlayerScript _playerScript;
@@ -31,6 +33,7 @@ namespace environment{
         private Vector2 _goalposition;
         private bool _floatUpwards = true;
         private const float FLOATING_ANIMATION_DISTANCE = 0.7f;
+        private const float DELAY = 0.05f;
 
         private void Awake()
         {
@@ -73,6 +76,7 @@ namespace environment{
             {
                 if(_current > 0.99)
                 {
+                    StartCoroutine("PlayAnimation");
                     _current = 1;
                     _floatUpwards = !_floatUpwards;
                     _target = 0;
@@ -82,6 +86,7 @@ namespace environment{
             {
                 if(_current < 0.01)
                 {
+                    StartCoroutine("PlayAnimation");
                     _current = 0;
                     _floatUpwards = !_floatUpwards;
                     _target = 1;
@@ -89,6 +94,13 @@ namespace environment{
             }
             
 
+        }
+
+        IEnumerator PlayAnimation()
+        {
+            _spriteRenderer.sprite = _downSprite;
+            yield return new WaitForSeconds(DELAY);
+            _spriteRenderer.sprite = _upSprite;
         }
     }
 }

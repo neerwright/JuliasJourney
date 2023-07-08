@@ -33,7 +33,7 @@ namespace environment
             _player = player;
         }
 
-        public void OnReset()
+        public void Reseting()
         {
             _spriteRenderer.sprite = _closeEyeSprites[0];
             _triggered = false;

@@ -23,7 +23,7 @@ namespace environment
             _SpriteRenderer.sprite = _onSprites;
         }
 
-        public void OnReset()
+        public void Reseting()
         {
             _SpriteRenderer.sprite = _offSprites;
         }

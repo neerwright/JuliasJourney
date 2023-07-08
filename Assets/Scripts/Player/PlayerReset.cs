@@ -106,6 +106,7 @@ namespace Player
                 }
             _isResetting = false;
             _playerScript.EnableControls();
+            
         }
 
     }

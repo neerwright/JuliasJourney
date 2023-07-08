@@ -524,7 +524,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3996470262092205935}
         m_TargetAssemblyTypeName: environment.SwitchBlockTrigger, SpawnManager
-        m_MethodName: OnReset
+        m_MethodName: Reseting
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

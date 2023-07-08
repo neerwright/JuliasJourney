@@ -16,5 +16,5 @@ MonoBehaviour:
   _moment: 0
   _audioClipGameEvent: {fileID: 11400000, guid: 81d4b4bbc810c884ab26605aa4d35b1a, type: 2}
   _audioClip: {fileID: 8300000, guid: 2d4c00291692d934bb0cdedb017b0a29, type: 3}
-  _volume: 0.4
+  _volume: 0.767
   _playOnlyWhenLanding: 0

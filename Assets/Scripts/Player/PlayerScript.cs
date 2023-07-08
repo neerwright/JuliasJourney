@@ -168,6 +168,7 @@ namespace Player
 
 			if(!_coRoutineIsPlaying)
 			{
+				Debug.Log("interact");
 				interactInput = true;
 				_playerPressedInteractEvent?.Raise();
 				coroutine = WaitUntilInteractCanBePressedAgain(INPUT_BUFFER);
