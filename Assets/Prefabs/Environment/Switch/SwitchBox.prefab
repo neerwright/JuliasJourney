@@ -33,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1330300222616631270
 SpriteRenderer:
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -1497822704, guid: 9a4ef0e7e73442f40aa184926ae659d1, type: 3}
   m_Color: {r: 0.8207547, g: 0.47748303, b: 0.47748303, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -126,10 +126,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 1330300222616631270}
-  _activeSprite: {fileID: 21300000, guid: 19370790a791d4fc99ee3830251366f8, type: 3}
-  _inactiveSprite: {fileID: 21300000, guid: 9c7af1d0200fc4bbc8276e459fa2d906, type: 3}
+  _activeSprite: {fileID: -1497822704, guid: 9a4ef0e7e73442f40aa184926ae659d1, type: 3}
+  _inactiveSprite: {fileID: -1405760407, guid: 9a4ef0e7e73442f40aa184926ae659d1, type: 3}
   _collider: {fileID: 1330300222616631266}
   active: 1
+  _rewinding: 0
 --- !u!114 &1330300222616631264
 MonoBehaviour:
   m_ObjectHideFlags: 0

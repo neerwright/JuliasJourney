@@ -4,15 +4,23 @@ using UnityEngine;
 using Scriptables;
 namespace environment 
 {
+    
     public class SwitchBlockSwitch : MonoBehaviour
     {
         [SerializeField] private GameEvent _switchEvent;
-        
+        [SerializeField] private Sprite[] _Sprites;
+        [SerializeField] BlockType _type;
+
         private bool _triggered = false;
 
         private const string PLAYER_TAG = "Player";
         private const string PUSHBOX_TAG = "PushBox";
 
+        void Update()
+        {
+
+        }
+        
         void OnTriggerEnter2D(Collider2D collider)
         {
             if(_triggered)
