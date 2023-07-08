@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8037ef97c7605394898f3a6a5101bdb9
+guid: 3eeb3758d43430147b2dc74aa862d006
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -118,13 +118,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Button_0
+      name: SwitchCrystaAnimationl_0
       rect:
         serializedVersion: 2
-        x: 13
-        y: 20
-        width: 39
-        height: 32
+        x: 0
+        y: 0
+        width: 32
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,20 +132,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: beb5a14ccd20dd04a98be151ab214343
-      internalID: 130649235
+      spriteID: f2f3653ac44ac73448aba6803832911b
+      internalID: 909409720
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Button_1
+      name: SwitchCrystaAnimationl_1
       rect:
         serializedVersion: 2
-        x: 77
-        y: 20
-        width: 39
-        height: 32
+        x: 32
+        y: 0
+        width: 32
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,20 +153,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8025100dba8a64041be4a91a2b6e8849
-      internalID: 1441831788
+      spriteID: 98cc0b9bcf3445a48a0a9c6c178bce35
+      internalID: 190406088
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Button_2
+      name: SwitchCrystaAnimationl_2
       rect:
         serializedVersion: 2
-        x: 141
-        y: 20
-        width: 39
-        height: 32
+        x: 64
+        y: 0
+        width: 32
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,8 +174,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ecfcf98083b329a419027f49d0882bfe
-      internalID: -816992074
+      spriteID: 136a40d40b6f8ac4bbd21c290dff6ffe
+      internalID: -1204924550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwitchCrystaAnimationl_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95156efa653f8fc4c89bfdebbf21be89
+      internalID: 534357636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SwitchCrystaAnimationl_4
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95f1658d84af3c54e9eb92c98b39ef94
+      internalID: -947648333
       vertices: []
       indices: 
       edges: []
@@ -191,9 +233,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Button_1: 1441831788
-      Button_2: -816992074
-      Button_0: 130649235
+      SwitchCrystaAnimationl_4: -947648333
+      SwitchCrystaAnimationl_2: -1204924550
+      SwitchCrystaAnimationl_3: 534357636
+      SwitchCrystaAnimationl_1: 190406088
+      SwitchCrystaAnimationl_0: 909409720
   spritePackingTag: 
   pSDRemoveMatte: 0
   userData: 
