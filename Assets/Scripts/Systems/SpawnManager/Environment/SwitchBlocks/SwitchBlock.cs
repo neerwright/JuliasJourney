@@ -17,7 +17,7 @@ namespace environment
         [SerializeField] private Collider2D _collider;
         [SerializeField] BlockType _type;
         
-        public bool active = false;
+        private bool active = false;
         public bool _rewinding = false;
         
         public void Switch()
@@ -60,10 +60,18 @@ namespace environment
 
         public void Start()
         {
+            _spriteRenderer.sprite = _inactiveSprite;   
+            _collider.enabled = false;          
+            
+        }
+
+        public void OnReset()
+        {
             if(!active)
             {
                 _spriteRenderer.sprite = _inactiveSprite;   
-                _collider.enabled = false;          
+                _collider.enabled = false;
+                active = false;          
             }
         }
 

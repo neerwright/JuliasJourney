@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 540738992128096551}
   - component: {fileID: 540738992128096545}
   - component: {fileID: 540738992128096544}
+  - component: {fileID: 1041927705817818416}
   m_Layer: 6
   m_Name: Button_0
   m_TagString: Untagged
@@ -131,6 +132,34 @@ MonoBehaviour:
   - {fileID: -1776076915, guid: 652d99c307450724e9aa93239a779e6f, type: 3}
   - {fileID: -45889719, guid: 652d99c307450724e9aa93239a779e6f, type: 3}
   _type: 1
+--- !u!114 &1041927705817818416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 540738992128096547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7881123eb9ed30f41865049f3d528cc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 5d532371271fe1542839f1cde7a84917, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 540738992128096544}
+        m_TargetAssemblyTypeName: environment.SwitchBlockSwitch, SpawnManager
+        m_MethodName: OnReset
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Collider2D, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &540738992490032766
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,7 +191,7 @@ Transform:
   m_Children:
   - {fileID: 540738992128096548}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &540738992490032767
 BoxCollider2D:

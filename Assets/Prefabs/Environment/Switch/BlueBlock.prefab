@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7692308801444743409}
   - component: {fileID: 7692308801444743408}
   - component: {fileID: 7692308801444743415}
+  - component: {fileID: 3563151734515248096}
   m_Layer: 6
   m_Name: BlueBlock
   m_TagString: Untagged
@@ -36,7 +37,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7692308801444743422
 SpriteRenderer:
@@ -133,7 +134,6 @@ MonoBehaviour:
   _inactiveSprite: {fileID: 408531679, guid: 9a4ef0e7e73442f40aa184926ae659d1, type: 3}
   _collider: {fileID: 7692308801444743421}
   _type: 0
-  active: 0
   _rewinding: 0
 --- !u!114 &7692308801444743410
 MonoBehaviour:
@@ -238,6 +238,34 @@ MonoBehaviour:
       - m_Target: {fileID: 7692308801444743420}
         m_TargetAssemblyTypeName: environment.SwitchBlock, SpawnManager
         m_MethodName: SetActive
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3563151734515248096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7692308801444743414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7881123eb9ed30f41865049f3d528cc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 5d532371271fe1542839f1cde7a84917, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7692308801444743420}
+        m_TargetAssemblyTypeName: environment.SwitchBlock, SpawnManager
+        m_MethodName: OnReset
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

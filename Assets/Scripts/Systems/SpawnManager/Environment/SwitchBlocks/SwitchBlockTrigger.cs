@@ -33,6 +33,13 @@ namespace environment
             _player = player;
         }
 
+        public void OnReset()
+        {
+            _spriteRenderer.sprite = _closeEyeSprites[0];
+            _triggered = false;
+        }
+
+
         void Start()
         {
             _spriteRenderer.sprite = _closeEyeSprites[0];
@@ -118,7 +125,7 @@ namespace environment
             }
             yield return new WaitForSeconds(BIG_DELAY);
 
-            
+
             for(int i = _closeEyeSprites.Length -1; i > 0 ; i--)
             {
                 _spriteRenderer.sprite = _closeEyeSprites[i];
