@@ -36,7 +36,9 @@ namespace Player
                 // when actions get triggered.
                 _playerInputActions.Gameplay.SetCallbacks(this);
             }
+            _playerInputActions.Gameplay.Disable();
             _playerInputActions.Gameplay.Enable();
+            _playerInputActions.UI.Disable();
         }
 
         public void OnJump(InputAction.CallbackContext context)
