@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5553240502566971474}
   - component: {fileID: 5553240502566971475}
   - component: {fileID: 5553240502566971484}
+  - component: {fileID: -8605323684752987387}
   m_Layer: 0
   m_Name: spash_0
   m_TagString: Untagged
@@ -187,3 +188,31 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 4.35}
   m_EdgeRadius: 0
+--- !u!114 &-8605323684752987387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5553240502566971485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7881123eb9ed30f41865049f3d528cc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 5d532371271fe1542839f1cde7a84917, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5553240502566971475}
+        m_TargetAssemblyTypeName: environment.SplashAnimationTrigger, SpawnManager
+        m_MethodName: ResetPosition
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

@@ -9,6 +9,7 @@ namespace environment
     {
         [SerializeField] private GameEvent _switchEvent;
         [SerializeField] private SpriteRenderer _spriteRenderer;
+        
         [SerializeField] private Sprite[] _sprites;
         [SerializeField] BlockType _type;
 
@@ -42,6 +43,7 @@ namespace environment
             
         }
 
+
         public  void Reseting()
         {
             if(_coroutine != null)
@@ -60,6 +62,8 @@ namespace environment
             _spriteRenderer.sprite = _sprites[1];
             yield return new WaitForSeconds(DELAY);
             _spriteRenderer.sprite = _sprites[2];
+            yield return new WaitForSeconds(1f);
+
         }
 
     }

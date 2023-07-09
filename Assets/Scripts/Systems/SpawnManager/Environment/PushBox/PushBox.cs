@@ -6,7 +6,7 @@ using Sounds;
 
 namespace environment
 {
-    public class PushBox : MonoBehaviour, IEnvironmentalObject
+    public class PushBox : MonoBehaviour , IEnvironmentalObject
     {
         [Header("Movement")]
         [Range(0,1)]
@@ -37,7 +37,7 @@ namespace environment
 
         private bool _hadImpact = false;
 
-        private const float THRESHOLD = 12f;
+        private const float THRESHOLD = 10f;
         private const float INACTIVE_THREASHOLD = 2f;
 
         public void Initialize(GameObject player)
@@ -80,6 +80,7 @@ namespace environment
 
         private void OnTriggerEnter2D(Collider2D Collider)
         {
+            Vector2 _playerImpact = _playerScript.movementVector;
             int mult = 1;
             if(!_moveRight)
                 mult = -1;
@@ -96,7 +97,7 @@ namespace environment
                 //squash player event
 
                 //slow down player by 10 %
-                _playerScript.movementVector = _playerScript.movementVector - (_playerScript.movementVector * _playerSlowDownPercent);
+                _playerScript.movementVector = _playerImpact - (_playerImpact * _playerSlowDownPercent);
 
                 //change sprite
                 Vector2 impuls = relativeVelocity -  relativeVelocity * _boxSlowDownPercent;

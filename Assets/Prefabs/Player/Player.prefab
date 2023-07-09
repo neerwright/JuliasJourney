@@ -308,8 +308,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _freeColliderIterations: 24
   _characterBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0.59, y: 1.94, z: 1}
+    m_Center: {x: 0, y: 0.02, z: 0}
+    m_Extent: {x: 0.59, y: 1.68, z: 1}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -454,6 +454,7 @@ MonoBehaviour:
   _playerVelocity: {fileID: 11400000, guid: 17c432cdeb9739142a7fbce26d37e6a3, type: 2}
   _animationData: {fileID: 11400000, guid: c574f52e49fc2a9479bbdc2dbdb31e1d, type: 2}
   _recordPlayerData: 1
+  _recordRotation: 0
 --- !u!114 &662188124845812042
 MonoBehaviour:
   m_ObjectHideFlags: 0

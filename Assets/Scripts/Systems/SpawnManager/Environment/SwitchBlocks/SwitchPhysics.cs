@@ -81,7 +81,8 @@ namespace environment
 
                 if(collider.tag == PLAYER_TAG)
                 {
-                    dir = _playerScript.movementVector;
+                    if(_playerScript != null)
+                        dir = _playerScript.movementVector;
                 }   
                 else
                 {

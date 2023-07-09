@@ -34,7 +34,7 @@ Transform:
   m_Children:
   - {fileID: 208053128950123138}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &208053128507317721
 BoxCollider2D:
@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rb: {fileID: 4909588302953394588}
+  _switchBlockSwitch: {fileID: 0}
 --- !u!114 &5470581544663822067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,6 +252,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _switchEvent: {fileID: 11400000, guid: 2c23b28af49f7f24980203586938d261, type: 2}
   _spriteRenderer: {fileID: 208053128950123137}
+  _collider: {fileID: 208053128507317721}
   _sprites:
   - {fileID: 130649235, guid: 8037ef97c7605394898f3a6a5101bdb9, type: 3}
   - {fileID: 1441831788, guid: 8037ef97c7605394898f3a6a5101bdb9, type: 3}

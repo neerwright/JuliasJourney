@@ -127,6 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _switchEvent: {fileID: 11400000, guid: 336d84c3c39dc1443b879931592c3217, type: 2}
   _spriteRenderer: {fileID: 540738992128096551}
+  _collider: {fileID: 540738992490032767}
   _sprites:
   - {fileID: 1752389874, guid: 652d99c307450724e9aa93239a779e6f, type: 3}
   - {fileID: -1776076915, guid: 652d99c307450724e9aa93239a779e6f, type: 3}

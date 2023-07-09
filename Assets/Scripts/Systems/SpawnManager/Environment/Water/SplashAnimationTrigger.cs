@@ -16,8 +16,14 @@ namespace environment
         [SerializeField] private ClipTransition _clip;
 
         [SerializeField] private GameStateSO _playerState;
+        private Vector2 _startingPos;
 
         private const float OFFSET = 0f;
+
+        void Awake()
+        {
+            _startingPos = transform.position;
+        }
 
         private void OnTriggerEnter2D(Collider2D collider)
         {
@@ -33,6 +39,13 @@ namespace environment
                 if(model != null)
                     model.gameObject.SetActive(false);
             }
+
+            
+        }
+
+        public void ResetPosition()
+        {
+            transform.position = _startingPos;
         }
 
 

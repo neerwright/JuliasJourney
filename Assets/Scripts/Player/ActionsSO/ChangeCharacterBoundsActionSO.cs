@@ -26,7 +26,7 @@ namespace Player
 		private new ChangeCharacterBoundsActionSO OriginSO => (ChangeCharacterBoundsActionSO)base.OriginSO;
 
         private bool _changedBounds = false;
-        private const float DISTANCE = 4f;
+        private const float DISTANCE = 6f;
 
         private Transform _player;
 
