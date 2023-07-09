@@ -13,14 +13,14 @@ namespace environment
     {
         [SerializeField] private float _delay = 1f;
         [SerializeField] private Transform _zoomTarget;
-        private bool _triggered = false;
+        private bool _active = false;
         
         private void OnTriggerEnter2D(Collider2D collider)
         {
-            if(collider.tag == "Player" && !_triggered)
+            if(collider.tag == "Player" && !_active)
             {  
-                _triggered = true;
-                ProCamera2D.Instance.AddCameraTarget(_zoomTarget, 1f, 1f, 0f, Vector2.zero);
+                _active = true;
+                ProCamera2D.Instance.AddCameraTarget(_zoomTarget, 0.6f, 0.6f, 0f, Vector2.zero);
                 StartCoroutine("RemoveCamTarget");
             }
         }
@@ -32,6 +32,7 @@ namespace environment
         {
             yield return new WaitForSeconds(_delay);
             ProCamera2D.Instance.RemoveCameraTarget(_zoomTarget);
+            _active = false;
 
         }
     }

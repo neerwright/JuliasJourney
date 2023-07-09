@@ -388,7 +388,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 778964242, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
       propertyPath: MaxZoomOutAmount
-      value: 6
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 778964242, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
+      propertyPath: ZoomInSmoothness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 778964242, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
+      propertyPath: ZoomOutSmoothness
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3859648976184302994, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
       propertyPath: m_RootOrder

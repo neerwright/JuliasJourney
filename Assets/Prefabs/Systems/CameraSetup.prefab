@@ -281,9 +281,9 @@ MonoBehaviour:
   ZoomOutBorder: 0.8
   ZoomInBorder: 0.4
   ZoomInSmoothness: 2
-  ZoomOutSmoothness: 1
+  ZoomOutSmoothness: 3
   MaxZoomInAmount: 2
-  MaxZoomOutAmount: 4
+  MaxZoomOutAmount: 6
   DisableWhenOneTarget: 1
   CompensateForCameraPosition: 0
 --- !u!1 &3859648976161867072
