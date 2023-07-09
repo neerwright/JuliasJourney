@@ -16,10 +16,15 @@ namespace environment
 
         [SerializeField] private GameStateSO _playerState;
 
+        private const float OFFSET = 0f;
+
         private void OnTriggerEnter2D(Collider2D collider)
         {
             if(collider.tag == "Player")
             {
+                Vector2 pos = collider.gameObject.transform.position;
+                pos.y += OFFSET;
+                gameObject.transform.position = pos; 
                 _animancer.Play(_clip);
                 _playerState.UpdateGameState(GameState.Water);
 
