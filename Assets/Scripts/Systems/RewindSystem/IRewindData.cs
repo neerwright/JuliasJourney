@@ -14,4 +14,6 @@ public struct RecordedData
 
             public double time;
             public AnimationClip clip;
+
+            public Quaternion rot;
         }

@@ -15,6 +15,7 @@ namespace RewindSystem
         [SerializeField] private Vector2VariableSO _playerVelocity;
         [SerializeField] private AnimationTrackerSO _animationData;
         [SerializeField] private bool _recordPlayerData = true;
+        [SerializeField] private bool _recordRotation = false;
         
         //[SerializeField] private bool _useArray = false;
 
@@ -26,7 +27,7 @@ namespace RewindSystem
 
         private List<RecordedData> _recordedData;
         private const int MAX_REWIND_DATA = 2000;
-        private const float MAX_REWIND_TIME = 1.1f;
+        private const float MAX_REWIND_TIME = 1.7f;
         private int index = 0;
 
         private RecordedData[,] _recordedDataArray;
@@ -96,7 +97,10 @@ namespace RewindSystem
                     data.time = _animationData.Time;
                     data.clip = _animationData.Clip;
                 }
-                
+                if(_recordRotation)
+                {
+                    data.rot = transform.rotation;
+                }
                 _rewindDataManager.Enqueue(data);
 
                 //int size = _rewindDataManager.Size();

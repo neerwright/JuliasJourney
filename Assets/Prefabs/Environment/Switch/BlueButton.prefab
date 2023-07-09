@@ -173,6 +173,10 @@ GameObject:
   - component: {fileID: 5072757951897484115}
   - component: {fileID: 3435169965182325388}
   - component: {fileID: 8875276108329735437}
+  - component: {fileID: -4461265678322090488}
+  - component: {fileID: -2723283513301314617}
+  - component: {fileID: 191263525751960647}
+  - component: {fileID: 5146825294212010132}
   m_Layer: 6
   m_Name: BlueButton
   m_TagString: Untagged
@@ -194,7 +198,7 @@ Transform:
   m_Children:
   - {fileID: 540738992128096548}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &540738992490032767
 BoxCollider2D:
@@ -256,6 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rb: {fileID: 5072757951897484115}
+  _switchBlockSwitch: {fileID: 540738992128096544}
 --- !u!114 &8875276108329735437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,6 +280,115 @@ MonoBehaviour:
       - m_Target: {fileID: 3435169965182325388}
         m_TargetAssemblyTypeName: environment.SwitchPhysics, SpawnManager
         m_MethodName: Reset
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &-4461265678322090488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 540738992490032766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28fe27b011e09cf42b97e85c133a09ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rewindMethodUser: {fileID: 540738992490032766}
+  _playerVelocity: {fileID: 0}
+  _animationData: {fileID: 0}
+  _recordPlayerData: 0
+  _recordRotation: 1
+--- !u!114 &-2723283513301314617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 540738992490032766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa1921eb1f80c864ab38d7ddfcc2c219, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &191263525751960647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 540738992490032766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7881123eb9ed30f41865049f3d528cc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 227c850029ea4e343b7eeabb5edb676d, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -4461265678322090488}
+        m_TargetAssemblyTypeName: RewindSystem.RecordRewindData, RewindSystem
+        m_MethodName: StartRewind
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3435169965182325388}
+        m_TargetAssemblyTypeName: environment.SwitchPhysics, SpawnManager
+        m_MethodName: StartRewinding
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5146825294212010132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 540738992490032766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7881123eb9ed30f41865049f3d528cc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 7678b5f2efb2c7b4ebed76d7a6e6edfd, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -4461265678322090488}
+        m_TargetAssemblyTypeName: RewindSystem.RecordRewindData, RewindSystem
+        m_MethodName: StopRewind
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3435169965182325388}
+        m_TargetAssemblyTypeName: environment.SwitchPhysics, SpawnManager
+        m_MethodName: StopRewinding
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

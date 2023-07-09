@@ -23,6 +23,8 @@ namespace environment
         {
             _spriteRenderer.sprite = _sprites[0];
         }
+
+        
         
         void OnTriggerEnter2D(Collider2D collider)
         {
@@ -40,7 +42,7 @@ namespace environment
             
         }
 
-       public  void Reseting()
+        public  void Reseting()
         {
             if(_coroutine != null)
                 StopCoroutine(_coroutine);
@@ -50,6 +52,8 @@ namespace environment
             _spriteRenderer.sprite = _sprites[0];
             
         }
+
+        
 
         private IEnumerator PlayAnimation()
         {

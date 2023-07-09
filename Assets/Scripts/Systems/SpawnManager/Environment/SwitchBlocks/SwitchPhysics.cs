@@ -11,12 +11,18 @@ namespace environment
     {
 
         [SerializeField] private Rigidbody2D _rb;
+        [SerializeField] private SwitchBlockSwitch _switchBlockSwitch;
+
         private GameObject _player;
         private PlayerScript _playerScript;
         private Vector2 _startPosition;
         private Quaternion _startRotation;
         private const string PLAYER_TAG = "Player";
         private const string PUSHBOX_TAG = "PushBox";
+
+        private bool _rewinding = false;
+        private const float REWIND_RESET_THREASHOLD = 16f;
+
 
         
 
@@ -32,12 +38,38 @@ namespace environment
             _startRotation = transform.rotation;
         }
 
+        void Update()
+        {
+            if(_rewinding)
+            {
+                Debug.Log("checkcheck");
+                Debug.Log(Mathf.Abs(transform.position.x - _startRotation.x));
+                if(Mathf.Abs(transform.position.x - _startRotation.x) < REWIND_RESET_THREASHOLD)
+                {
+                    
+                    _switchBlockSwitch.Reseting();
+                }
+            }
+        }
+
         public void Reset()
         {
             transform.position = _startPosition;
             _rb.velocity = Vector2.zero;
             _rb.angularVelocity = 0f;
             transform.rotation = _startRotation;
+            
+        }
+
+        public  void StartRewinding()
+        {
+            _rewinding = true;
+            _rb.velocity = Vector2.zero;
+            
+        }
+        public  void StopRewinding()
+        {
+            _rewinding = false;
             
         }
 
