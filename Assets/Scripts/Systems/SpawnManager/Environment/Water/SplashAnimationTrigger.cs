@@ -4,6 +4,7 @@ using UnityEngine;
 using Animancer;
 using Player;
 using GameManager;
+using Com.LuisPedroFonseca.ProCamera2D;
 
 namespace environment 
 {

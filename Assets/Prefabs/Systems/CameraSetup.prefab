@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3859648974809770692}
   - component: {fileID: 4383175864366652616}
   - component: {fileID: 4383175864366652623}
+  - component: {fileID: 778964242}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -263,6 +264,28 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &778964242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3859648974809770555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60d259ae680f345ccb8abad710dd1263, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pc2D: {fileID: 3859648974809770693}
+  _serializedAxis: 0
+  ZoomOutBorder: 0.8
+  ZoomInBorder: 0.4
+  ZoomInSmoothness: 2
+  ZoomOutSmoothness: 1
+  MaxZoomInAmount: 2
+  MaxZoomOutAmount: 4
+  DisableWhenOneTarget: 1
+  CompensateForCameraPosition: 0
 --- !u!1 &3859648976161867072
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,6 +436,7 @@ GameObject:
   - component: {fileID: 4383175865012777079}
   - component: {fileID: 4383175865012777077}
   - component: {fileID: 4383175865012777078}
+  - component: {fileID: 9151683575254455926}
   m_Layer: 0
   m_Name: NoPostCam
   m_TagString: Untagged
@@ -486,6 +510,19 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4383175865012777072}
   m_Enabled: 0
+--- !u!114 &9151683575254455926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4383175865012777072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 423a302a2cf239d4b8084e4d0aac7c43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _noPostPlayerCam: {fileID: 4383175865012777077}
 --- !u!1 &4383175865085432631
 GameObject:
   m_ObjectHideFlags: 0
