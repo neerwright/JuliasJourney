@@ -20,7 +20,7 @@ namespace environment
             if(collider.tag == "Player" && !_triggered)
             {  
                 _triggered = true;
-                ProCamera2D.Instance.AddCameraTarget(_zoomTarget, 0.5f, 0.5f, 0.05f, Vector2.zero);
+                ProCamera2D.Instance.AddCameraTarget(_zoomTarget, 1f, 1f, 0f, Vector2.zero);
                 StartCoroutine("RemoveCamTarget");
             }
         }

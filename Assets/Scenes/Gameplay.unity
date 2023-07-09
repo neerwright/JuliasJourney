@@ -386,6 +386,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 778964242, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
+      propertyPath: MaxZoomOutAmount
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3859648976184302994, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
       propertyPath: m_RootOrder
       value: 2

@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 8496884275309351559}
   - component: {fileID: 8496884275309351552}
   - component: {fileID: 8496884275309351553}
-  m_Layer: 0
+  - component: {fileID: 8143030065618150526}
+  m_Layer: 8
   m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8496884275309351559
 MeshFilter:
@@ -103,3 +104,15 @@ MonoBehaviour:
   - {fileID: 2100000, guid: a84f6efe49eb58b4c9219af3eb8e1bf6, type: 2}
   - {fileID: 2100000, guid: a60f7fbd71e5bd6438c99df10031d131, type: 2}
   - {fileID: 2100000, guid: 967acdecd5a289a4c9e3192967c75f93, type: 2}
+--- !u!210 &8143030065618150526
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8496884275309351554}
+  m_Enabled: 1
+  m_SortingLayerID: -607479599
+  m_SortingLayer: 8
+  m_SortingOrder: 10
+  m_SortAtRoot: 0
