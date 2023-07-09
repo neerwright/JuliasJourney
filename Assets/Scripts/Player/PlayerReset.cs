@@ -22,7 +22,7 @@ namespace Player
 
 
         private PlayerScript _playerScript;
-
+        private GameObject _player;
 
         private Vector2 _resetLocation;
         private const float ALPHA_INCREMENT = 50.0f;
@@ -30,11 +30,20 @@ namespace Player
         void Awake()
         {
             _playerScript = GetComponent<PlayerScript>();
+            _player = gameObject;
         }
 
         private void OnEnable()
         {
             _inputs.ResetEvent += OnPlayerReset;
+
+            foreach(var material in PlayerMaterials)
+                {
+                    Color tmp = material.color;
+                    tmp.a = 1;
+                    material.color = tmp;
+                }
+                
         }
 
         private void OnDisable()
@@ -47,9 +56,12 @@ namespace Player
             if(_isResetting)
                 return;
             
-        
+            if(_gameState.CurrentGameState == GameState.Water)
+                _gameState.UpdateGameState(GameState.Gameplay);
+
             if(_gameState.CurrentGameState == GameState.Gameplay)
             {
+
                 _resetEvent.Raise();
                 _playerScript.DisableControls();
                 _playerModel.SetActive(false);

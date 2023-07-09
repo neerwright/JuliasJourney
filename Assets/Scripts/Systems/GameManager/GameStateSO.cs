@@ -11,6 +11,7 @@ namespace GameManager
         Reset, //when inventory UI or cooking UI are open
         Cutscene,
         Glide,
+        Water
     }
 
     [CreateAssetMenu(fileName = "GameState", menuName = "Gameplay/GameState")]

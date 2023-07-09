@@ -92,11 +92,13 @@ namespace Player
 
         public void DisableGameplayInput()
         {
+            Debug.Log("Disable");
             _playerInputActions.Gameplay.Disable();
         }
 
         public void EnableGameplayInput()
         {
+            Debug.Log("Enable");
             _playerInputActions.Gameplay.Enable();
         }
 

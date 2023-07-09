@@ -52,6 +52,8 @@ namespace Player
 			_playerInputSO.DisableGameplayInput();
 			_inputsDisabled = true;
 		}
+
+
 		public void EnableControls()
 		{
 			_playerInputSO.EnableGameplayInput();
@@ -63,6 +65,7 @@ namespace Player
 			_playerState.UpdateGameState(GameState.Gameplay);
 			Time.timeScale = 1;
 		}
+
 
 		private void OnEnable()
 		{
@@ -99,7 +102,7 @@ namespace Player
 		{
 			RecalculateMovement();
 			FlipSprite();
-			CheckState();
+			//CheckState();
 			WritePlayerPosition();
 		}
 
@@ -147,17 +150,18 @@ namespace Player
 
 		private void OnMove(Vector2 movement)
 		{
-
 			_inputVector = movement;
 		}
 
 		private void OnJumpInitiated()
 		{
+
 			jumpInput = true;
 		}
 
 		private void OnJumpCanceled()
 		{
+
 			jumpInput = false;
 		}
 
@@ -165,6 +169,7 @@ namespace Player
 		
 		private void OnInteract()
 		{
+
 
 			if(!_coRoutineIsPlaying)
 			{
@@ -179,6 +184,7 @@ namespace Player
 		
 		private void OnInteractCanceled()
 		{
+
 			_playerCanceledInteractEvent?.Raise();
 		}	
 

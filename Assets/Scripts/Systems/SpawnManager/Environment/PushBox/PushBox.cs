@@ -20,6 +20,12 @@ namespace environment
         [SerializeField] private AudioClip _driveSoundsClip;
         [SerializeField] private float _volume = 1f;
 
+        [Header("Animation")]
+        [SerializeField] private SpriteRenderer _spriteRenderer;
+        [SerializeField] private Sprite _standingReadySprites;
+        [SerializeField] private Sprite _activeReadySprites;
+        [SerializeField] private Sprite _inactiveReadySprites;
+
         private GameObject _player;
         private PlayerScript _playerScript;
         private BoxCollider2D _collider;
@@ -32,6 +38,7 @@ namespace environment
         private bool _hadImpact = false;
 
         private const float THRESHOLD = 12f;
+        private const float INACTIVE_THREASHOLD = 2f;
 
         public void Initialize(GameObject player)
         {
@@ -44,13 +51,27 @@ namespace environment
             _rb2d = GetComponent<Rigidbody2D>();
             _startPosition = gameObject.transform.position;
             _collider = GetComponent<BoxCollider2D>();
+            if(_spriteRenderer != null)
+                _spriteRenderer.sprite =_standingReadySprites;
         }
+
+        void Update()
+        {
+            if(_hadImpact)
+            {
+                if(Mathf.Abs(_rb2d.velocity.x) < INACTIVE_THREASHOLD)
+                    _spriteRenderer.sprite =_inactiveReadySprites;
+            }
+        }
+
         public void ReActivate()
         {
+            _spriteRenderer.sprite =_standingReadySprites;
             _hadImpact = false;
         }
         public void Reset()
         {
+            _spriteRenderer.sprite =_standingReadySprites;
             gameObject.transform.position = _startPosition;
             gameObject.transform.rotation = Quaternion.identity;
             _rb2d.velocity = Vector2.zero;
@@ -66,7 +87,7 @@ namespace environment
             {
                //play Audio
                 _audioClipGameEvent.Raise(_activateClip, _volume);
-
+                _spriteRenderer.sprite = _activeReadySprites;
                 _hadImpact = true;
 
                 Vector2 playerVel = _playerScript.movementVector;
