@@ -24,18 +24,17 @@ namespace environment
         }
 
 
-        private void OnTriggerStay2D(Collider2D Collider)
+        public void SpeedUpPlayer()
         {
-            if(Collider.gameObject.tag == "Player")
-            {    
+               
                 if(_playerScript != null)
                 {
                     float dir = speedRight? 1 : -1;    
                     _playerScript.movementVector.x += dir * Time.deltaTime * speedBoost;
                 }
                 
-            }
         }
+        
 
 
     }

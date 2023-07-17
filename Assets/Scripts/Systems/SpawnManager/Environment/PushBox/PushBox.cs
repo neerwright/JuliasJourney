@@ -19,6 +19,7 @@ namespace environment
         [SerializeField] private AudioClip _activateClip;
         [SerializeField] private AudioClip _driveSoundsClip;
         [SerializeField] private float _volume = 1f;
+        [SerializeField] private float VerticalImpactBonus = 1f;
 
         [Header("Animation")]
         [SerializeField] private SpriteRenderer _spriteRenderer;
@@ -39,6 +40,7 @@ namespace environment
 
         private const float THRESHOLD = 10f;
         private const float INACTIVE_THREASHOLD = 2f;
+        
 
         public void Initialize(GameObject player)
         {
@@ -101,7 +103,7 @@ namespace environment
 
                 //change sprite
                 Vector2 impuls = relativeVelocity -  relativeVelocity * _boxSlowDownPercent;
-                impuls.y = 0;
+                impuls.y = VerticalImpactBonus;
                 _rb2d.AddForce(impuls, ForceMode2D.Impulse);
 
             }

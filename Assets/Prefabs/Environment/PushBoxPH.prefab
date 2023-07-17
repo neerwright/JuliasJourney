@@ -99,4 +99,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   locationData: {x: 18.98, y: 0.07}
   environmentType: {fileID: 0}
-  prefab: {fileID: 7587345584657197974, guid: 46d505827cb11774980c3f08a5028335, type: 3}
+  prefab: {fileID: 7207917427430729095, guid: afe6232afb1988741bf9b046344d415e, type: 3}
