@@ -83,17 +83,21 @@ namespace Player
 
         private bool _isCollidingWithWall = false;
         
-
-        private float _rayOffsetY = 0f;
-        private float _verticalSlopeCheckOffset = 0.0f;
+        //for nudging the player, set in enable
+        private float _rayOffsetY;
+        private float _verticalSlopeCheckOffset;
 
         private Vector2 _debugCurMoveVector;
 
         private const float MIN_MOVE_DISTANCE = 0.001f;
         private const float NUDGE_MULT = 4f;
         private const float NUDGE_RAY_DIST = 0.4f;
-        private const float RAYS_DOWN_RANGE_BONUS = 0.0f;
         private const float NUDGING_SPEED_THRESHOLD = 8f;
+
+        // fine tuning collision with ground/head 
+        private const float RAYS_DOWN_RANGE_BONUS = 0.2f;
+        private const float RAYS_DOWN_POSITION_OFFSET = 0.1f;
+        private const float RAYS_UP_RANGE_BONUS = 0.4f;
         
     
 
@@ -429,7 +433,7 @@ namespace Player
             _colDown = groundedCheck;
 
             // The rest
-            _colUp = RunDetection(_raysUp, RAYS_DOWN_RANGE_BONUS);
+            _colUp = RunDetection(_raysUp, RAYS_UP_RANGE_BONUS);
             _colLeft = RunDetection(_raysLeft);
             _colRight = RunDetection(_raysRight);
 
@@ -442,7 +446,7 @@ namespace Player
         {
             var b = new Bounds(transform.position, _characterBounds.size);
 
-            _raysDown = new RayRange(b.min.x + _rayBufferOffset - 0.2f, b.min.y, b.max.x - _rayBufferOffset + 0.2f, b.min.y, Vector2.down);
+            _raysDown = new RayRange(b.min.x + _rayBufferOffset - 0.2f, b.min.y + RAYS_DOWN_POSITION_OFFSET, b.max.x - _rayBufferOffset + 0.2f, b.min.y + RAYS_DOWN_POSITION_OFFSET, Vector2.down);
             _raysUp = new RayRange(b.min.x + _rayBufferOffset, b.max.y, b.max.x - _rayBufferOffset, b.max.y, Vector2.up);
             _raysLeft = new RayRange(b.min.x, b.min.y + _rayBufferOffset, b.min.x, b.max.y - _rayBufferOffset, Vector2.left);
             _raysRight = new RayRange(b.max.x, b.min.y + _rayBufferOffset, b.max.x, b.max.y - _rayBufferOffset, Vector2.right);
@@ -486,7 +490,7 @@ namespace Player
                         Gizmos.DrawRay(point, _raysDown.Dir * (_detectionRayLength + RAYS_DOWN_RANGE_BONUS));
                     } 
                 foreach (var point in EvaluateRayPositions(_raysUp)) {
-                        Gizmos.DrawRay(point, _raysDown.Dir * (_detectionRayLength + RAYS_DOWN_RANGE_BONUS));
+                        Gizmos.DrawRay(point, _raysUp.Dir * (_detectionRayLength + RAYS_UP_RANGE_BONUS));
                     } 
             }
 
