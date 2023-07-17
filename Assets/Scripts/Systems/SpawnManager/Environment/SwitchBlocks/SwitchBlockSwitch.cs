@@ -37,7 +37,6 @@ namespace environment
             {
                 _coroutine = StartCoroutine("PlayAnimation");
                 _switchEvent.Raise();
-                Debug.Log(_triggered);
                 _triggered = true;
             }
             

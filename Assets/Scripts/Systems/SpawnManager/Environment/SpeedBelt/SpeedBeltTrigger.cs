@@ -16,7 +16,6 @@ namespace environment
                     if(Collider.gameObject.tag == "Player")
                     {    
                         _speedBelt.SpeedUpPlayer();
-                        Debug.Log("trig");
                         
                     }
                 }

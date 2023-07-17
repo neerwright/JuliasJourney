@@ -12,6 +12,7 @@ namespace environment
 
         [SerializeField] private Rigidbody2D _rb;
         [SerializeField] private SwitchBlockSwitch _switchBlockSwitch;
+        [SerializeField] bool _immovable = false;
 
         private GameObject _player;
         private PlayerScript _playerScript;
@@ -28,6 +29,7 @@ namespace environment
 
         public void Initialize(GameObject player)
         {
+            
             _player = player;
             _playerScript = _player.GetComponent<PlayerScript>();
         }
@@ -36,17 +38,17 @@ namespace environment
         {
             _startPosition = transform.position;
             _startRotation = transform.rotation;
+
+            if(_immovable)
+                _rb.bodyType = RigidbodyType2D.Static;
         }
 
         void Update()
         {
             if(_rewinding)
             {
-                Debug.Log("checkcheck");
-                Debug.Log(Mathf.Abs(transform.position.x - _startRotation.x));
                 if(Mathf.Abs(transform.position.x - _startRotation.x) < REWIND_RESET_THREASHOLD)
                 {
-                    
                     _switchBlockSwitch.Reseting();
                 }
             }
@@ -75,6 +77,9 @@ namespace environment
 
         private void OnTriggerEnter2D(Collider2D collider)
         {
+            if(_immovable)
+                return;
+
             if(collider.tag == PLAYER_TAG || collider.tag == PUSHBOX_TAG)
             {
                 Vector2 dir = Vector2.zero;

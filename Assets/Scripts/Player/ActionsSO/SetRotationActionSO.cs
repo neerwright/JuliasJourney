@@ -42,7 +42,6 @@ namespace Player
 
 		public override void OnStateExit()
 		{
-            Debug.Log("exit");
 			if (OriginSO.Moment == SpecificMoment.OnStateExit)
 				_toRotate.transform.rotation = Quaternion.Euler(OriginSO.rotation);
 		}

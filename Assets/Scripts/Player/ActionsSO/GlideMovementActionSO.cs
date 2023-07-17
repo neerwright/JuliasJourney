@@ -151,7 +151,6 @@ namespace Player
             {
                 _current = 0;
 				_finishedDropped = !_finishedDropped;
-				Debug.Log("Drop finished");
             }
 		}
 

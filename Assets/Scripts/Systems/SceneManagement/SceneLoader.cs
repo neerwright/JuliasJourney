@@ -48,7 +48,7 @@ namespace SceneManagement
         private bool _loadIsland = false;
         
         private Queue<GameSceneSO> _islandsLoaded;
-        private const int MAX_ISLAND_ACTIVE = 2;
+        private const int MAX_ISLAND_ACTIVE = 3;
 
         private void OnEnable()
         {
