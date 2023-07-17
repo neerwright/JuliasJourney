@@ -13,7 +13,6 @@ namespace environment
         [SerializeField]
         private bool speedRight;
 
-        [SerializeField]
         private GameObject _player;
 
         private PlayerScript _playerScript; 
@@ -29,17 +28,15 @@ namespace environment
         {
             if(Collider.gameObject.tag == "Player")
             {    
-                float dir = speedRight? 1 : -1;    
-                _playerScript.movementVector.x += dir * Time.deltaTime * speedBoost;
+                if(_playerScript != null)
+                {
+                    float dir = speedRight? 1 : -1;    
+                    _playerScript.movementVector.x += dir * Time.deltaTime * speedBoost;
+                }
+                
             }
         }
 
-        private void OnTriggerEnter2D(Collider2D Collider)
-        {
-            if(Collider.gameObject.tag == "Player")
-            {                    
-                _playerScript.movementVector.y += 0;
-            }
-        }
+
     }
 }
