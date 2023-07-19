@@ -386,22 +386,6 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 778964242, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
-      propertyPath: MaxZoomOutAmount
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 778964242, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
-      propertyPath: ZoomInSmoothness
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 778964242, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
-      propertyPath: ZoomOutSmoothness
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3859648974809770693, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
-      propertyPath: OffsetX
-      value: 0.022
-      objectReference: {fileID: 0}
     - target: {fileID: 3859648976184302994, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -449,22 +433,6 @@ PrefabInstance:
     - target: {fileID: 3859648976184302995, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
       propertyPath: m_Name
       value: CameraSetup
-      objectReference: {fileID: 0}
-    - target: {fileID: 4383175864366652616, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
-      propertyPath: RightFocus
-      value: 0.467
-      objectReference: {fileID: 0}
-    - target: {fileID: 4383175864366652616, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
-      propertyPath: BottomFocus
-      value: 0.185
-      objectReference: {fileID: 0}
-    - target: {fileID: 4383175864366652616, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
-      propertyPath: SpeedMultiplier
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 4383175864366652616, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
-      propertyPath: MaintainInfluenceOnStop
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

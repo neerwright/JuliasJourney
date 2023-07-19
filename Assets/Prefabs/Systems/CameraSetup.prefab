@@ -113,7 +113,7 @@ MonoBehaviour:
   HorizontalFollowSmoothness: 0.21
   FollowVertical: 1
   VerticalFollowSmoothness: 0.21
-  OffsetX: 0.036
+  OffsetX: 0.161
   OffsetY: 0
   IsRelativeOffset: 1
   ZoomWithFOV: 0
@@ -196,14 +196,14 @@ MonoBehaviour:
   _pc2D: {fileID: 3859648974809770693}
   _serializedAxis: 0
   Progressive: 1
-  SpeedMultiplier: 1
+  SpeedMultiplier: 60
   TransitionSmoothness: 0.5
-  MaintainInfluenceOnStop: 1
+  MaintainInfluenceOnStop: 0
   MovementThreshold: {x: 0, y: 0}
   LeftFocus: 0.218
-  RightFocus: 0.383
+  RightFocus: 0.467
   TopFocus: 0.277
-  BottomFocus: 0.219
+  BottomFocus: 0.185
 --- !u!114 &4383175864366652623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,10 +280,10 @@ MonoBehaviour:
   _serializedAxis: 0
   ZoomOutBorder: 0.8
   ZoomInBorder: 0.4
-  ZoomInSmoothness: 2
-  ZoomOutSmoothness: 3
+  ZoomInSmoothness: 1
+  ZoomOutSmoothness: 0.5
   MaxZoomInAmount: 2
-  MaxZoomOutAmount: 6
+  MaxZoomOutAmount: 10
   DisableWhenOneTarget: 1
   CompensateForCameraPosition: 0
 --- !u!1 &3859648976161867072

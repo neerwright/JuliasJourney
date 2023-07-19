@@ -199,7 +199,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   AllowAdditivePlays: 0
-  DetermineScaleOnPlay: 0
+  DetermineScaleOnPlay: 1
   DestinationScale: 2
 --- !u!1 &662188124845812092
 GameObject:
@@ -261,7 +261,7 @@ Transform:
   - {fileID: 697076316100326500}
   - {fileID: 4211041808524124072}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &662188124845812086
 MonoBehaviour:
@@ -989,7 +989,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   AllowAdditivePlays: 0
-  DetermineScaleOnPlay: 0
+  DetermineScaleOnPlay: 1
   DestinationScale: 2
 --- !u!114 &1817070209576564050
 MonoBehaviour:
@@ -1270,7 +1270,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   AllowAdditivePlays: 0
-  DetermineScaleOnPlay: 0
+  DetermineScaleOnPlay: 1
   DestinationScale: 2
 --- !u!1 &2057604470085195501
 GameObject:
@@ -6955,7 +6955,7 @@ ParticleSystem:
         m_RotationOrder: 4
     randomizeRotationDirection: 0
     gravitySource: 0
-    maxNumParticles: 1000
+    maxNumParticles: 3000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -15844,6 +15844,18 @@ PrefabInstance:
     - target: {fileID: 6444649177174913870, guid: f0bf89625a7e39447b1143f1659d4cb0, type: 3}
       propertyPath: m_Layer
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7840419119876301478, guid: f0bf89625a7e39447b1143f1659d4cb0, type: 3}
+      propertyPath: m_Color.b
+      value: 0.68553454
+      objectReference: {fileID: 0}
+    - target: {fileID: 7840419119876301478, guid: f0bf89625a7e39447b1143f1659d4cb0, type: 3}
+      propertyPath: m_Color.g
+      value: 0.74342537
+      objectReference: {fileID: 0}
+    - target: {fileID: 7840419119876301478, guid: f0bf89625a7e39447b1143f1659d4cb0, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7840419119876301479, guid: f0bf89625a7e39447b1143f1659d4cb0, type: 3}
       propertyPath: m_RootOrder
