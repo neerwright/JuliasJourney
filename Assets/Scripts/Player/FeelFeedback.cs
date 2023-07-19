@@ -8,6 +8,7 @@ using Com.LuisPedroFonseca.ProCamera2D;
 public class FeelFeedback : MonoBehaviour
 {
     [SerializeField] private PlayerInputSO _playerInputSO;
+    [SerializeField] private GameObject _playerModel;
     [SerializeField] private PlayerController _playerController;
     [Range(1f, 6f)]
     [SerializeField] private float _landingSquashPower = 2f;
@@ -35,6 +36,8 @@ public class FeelFeedback : MonoBehaviour
     private float BIG_SHAKE = 3f;
     private float _velocityLastFrame; 
 
+    private bool _flipping = false;
+
     private void OnEnable()
 	{
         _playerInputSO.JumpEvent += PlayJumpFeedback;
@@ -61,6 +64,14 @@ public class FeelFeedback : MonoBehaviour
 
     void Update()
     {
+        if(!_flipping)
+            return;
+
+        if(!FlipFeedback.Feedbacks[0].IsPlaying)
+        {
+            _playerModel.transform.rotation = Quaternion.Euler(0f,90f,0f);
+            _flipping = false;
+        }
         
     }
 
@@ -77,6 +88,7 @@ public class FeelFeedback : MonoBehaviour
         Debug.Log("Do Flip");
         if(!FlipFeedback.Feedbacks[0].IsPlaying)
             FlipFeedback?.PlayFeedbacks();
+            _flipping = true;
     }
     private void PlayLandingFeedback()
     {

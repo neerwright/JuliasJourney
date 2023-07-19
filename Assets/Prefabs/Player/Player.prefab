@@ -261,7 +261,7 @@ Transform:
   - {fileID: 697076316100326500}
   - {fileID: 4211041808524124072}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &662188124845812086
 MonoBehaviour:
@@ -396,6 +396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerInputSO: {fileID: 11400000, guid: 497326490c7a920459e60f0e3f851ca2, type: 2}
+  _playerModel: {fileID: 428397521365453770}
   _playerController: {fileID: 662188124845812080}
   _landingSquashPower: 2
   _shakePower: 10.8
