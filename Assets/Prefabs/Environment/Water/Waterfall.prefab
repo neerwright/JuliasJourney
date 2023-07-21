@@ -32,7 +32,7 @@ Transform:
   m_Children:
   - {fileID: 6772985067434562124}
   m_Father: {fileID: 0}
-  m_RootOrder: 26
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &7585807072850593848
 LineRenderer:
@@ -81,13 +81,13 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 10
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.5084038
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -129,8 +129,8 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
-    textureScale: {x: 1, y: 1}
+    textureMode: 1
+    textureScale: {x: -0.24, y: 2.66}
     shadowBias: 0.5
     generateLightingData: 0
   m_MaskInteraction: 0
@@ -154,7 +154,7 @@ MonoBehaviour:
   lineRenderer: {fileID: 7585807072850593848}
   obstacleLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4160
   splashEffectObject: {fileID: 6663591231693939028}
 --- !u!1 &6663591231693939028
 GameObject:

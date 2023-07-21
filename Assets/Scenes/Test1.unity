@@ -9040,24 +9040,12 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 305665757155323430, guid: 066d06266651c76408ab705d25c4343c, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 305665757155323430, guid: 066d06266651c76408ab705d25c4343c, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 305665757155323430, guid: 066d06266651c76408ab705d25c4343c, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 305665757155323430, guid: 066d06266651c76408ab705d25c4343c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.34758234
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 305665757155323430, guid: 066d06266651c76408ab705d25c4343c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.92
+      value: 3.09
       objectReference: {fileID: 0}
     - target: {fileID: 305665757155323430, guid: 066d06266651c76408ab705d25c4343c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9091,21 +9079,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 881178610331648952, guid: 066d06266651c76408ab705d25c4343c, type: 3}
-      propertyPath: fallSpeed
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 881178610331648952, guid: 066d06266651c76408ab705d25c4343c, type: 3}
-      propertyPath: obstacleLayerMask.m_Bits
-      value: 4160
-      objectReference: {fileID: 0}
     - target: {fileID: 5524747131180792206, guid: 066d06266651c76408ab705d25c4343c, type: 3}
       propertyPath: m_Name
       value: Waterfall
-      objectReference: {fileID: 0}
-    - target: {fileID: 7585807072850593848, guid: 066d06266651c76408ab705d25c4343c, type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

@@ -37,7 +37,7 @@ Shader "Custom/FlowingWater"
         UNITY_INSTANCING_BUFFER_END(Props)
 
             float2 TillAndOffset(float2 uv, float value) {
-            return uv * float2(_Length, 1) + float2(value * _WaterSpeed * -1, 0);
+            return uv * float2(_Length, 1) + float2(value * _WaterSpeed, 0);
         }
 
         void surf (Input IN, inout SurfaceOutputStandard o)

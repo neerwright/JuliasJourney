@@ -30,7 +30,7 @@ public class Waterfall : MonoBehaviour
         CalculateActualLength(currentMaxLength, out float currentLength);
         ResizeLine(currentLength);
         //RescaleCollider(currentLength);
-        CheckForSplashEffect(currentLength, currentMaxLength);
+        //CheckForSplashEffect(currentLength, currentMaxLength);
     }
 
     private void GetCurrentLength(out float currentMaxLength) {
