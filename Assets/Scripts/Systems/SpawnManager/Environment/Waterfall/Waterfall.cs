@@ -21,6 +21,9 @@ public class Waterfall : MonoBehaviour
         for (int i = 0; i < 2; i++) {
             lineRenderer.SetPosition(i, transform.position);
         }
+        //Vector3 tempVec = gameObject.transform.localPosition;
+        //tempVec.z = -1.28f;
+        //gameObject.transform.localPosition = tempVec;
     }
 
     // Update is called once per frame

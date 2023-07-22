@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using Player;
 using Scriptables;
+using MoreMountains.Feedbacks;
 
 namespace environment
 {
     public class JumpPad : MonoBehaviour, IEnvironmentalObject
     {
+        public MMFeedbacks WobbleFeedback;
         [SerializeField]
         private BoolVariableSO _touchedJumpPad;
 
@@ -21,6 +23,8 @@ namespace environment
             {
                 _touchedJumpPad.Value = true;
                 
+                if(!WobbleFeedback.Feedbacks[0].IsPlaying)
+                    WobbleFeedback?.PlayFeedbacks();
             }
         }
 
