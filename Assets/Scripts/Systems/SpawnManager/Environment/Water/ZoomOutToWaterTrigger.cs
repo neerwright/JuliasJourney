@@ -12,6 +12,7 @@ namespace environment
     public class ZoomOutToWaterTrigger : MonoBehaviour
     {
         [SerializeField] private float _delay = 1f;
+        [SerializeField] private float _influence = 0.6f;
         [SerializeField] private Transform _zoomTarget;
         private bool _active = false;
         
@@ -20,7 +21,7 @@ namespace environment
             if(collider.tag == "Player" && !_active)
             {  
                 _active = true;
-                ProCamera2D.Instance.AddCameraTarget(_zoomTarget, 0.6f, 0.6f, 0f, Vector2.zero);
+                ProCamera2D.Instance.AddCameraTarget(_zoomTarget, _influence, _influence, 0f, Vector2.zero);
                 StartCoroutine("RemoveCamTarget");
             }
         }

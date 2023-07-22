@@ -69,7 +69,7 @@ Camera:
   far clip plane: 50
   field of view: 60
   orthographic: 1
-  orthographic size: 9.79
+  orthographic size: 15
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -201,9 +201,9 @@ MonoBehaviour:
   MaintainInfluenceOnStop: 0
   MovementThreshold: {x: 0, y: 0}
   LeftFocus: 0.218
-  RightFocus: 0.467
-  TopFocus: 0.277
-  BottomFocus: 0.185
+  RightFocus: 0.422
+  TopFocus: 0.155
+  BottomFocus: 0.293
 --- !u!114 &4383175864366652623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,14 +278,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pc2D: {fileID: 3859648974809770693}
   _serializedAxis: 0
-  ZoomOutBorder: 0.8
+  ZoomOutBorder: 0.93
   ZoomInBorder: 0.4
   ZoomInSmoothness: 1
-  ZoomOutSmoothness: 0.5
-  MaxZoomInAmount: 2
-  MaxZoomOutAmount: 10
+  ZoomOutSmoothness: 0.4
+  MaxZoomInAmount: 4
+  MaxZoomOutAmount: 200.24
   DisableWhenOneTarget: 1
-  CompensateForCameraPosition: 0
+  CompensateForCameraPosition: 1
 --- !u!1 &3859648976161867072
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,7 +409,7 @@ Camera:
   far clip plane: 50
   field of view: 60
   orthographic: 1
-  orthographic size: 9.79
+  orthographic size: 15
   m_Depth: -2
   m_CullingMask:
     serializedVersion: 2
@@ -582,7 +582,7 @@ Camera:
   far clip plane: 50
   field of view: 60
   orthographic: 1
-  orthographic size: 9.79
+  orthographic size: 15
   m_Depth: -3
   m_CullingMask:
     serializedVersion: 2

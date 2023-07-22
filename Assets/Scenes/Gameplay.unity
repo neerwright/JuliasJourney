@@ -386,6 +386,34 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 778964242, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
+      propertyPath: ZoomOutBorder
+      value: 0.93
+      objectReference: {fileID: 0}
+    - target: {fileID: 778964242, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
+      propertyPath: MaxZoomInAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 778964242, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
+      propertyPath: MaxZoomOutAmount
+      value: 200.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 778964242, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
+      propertyPath: ZoomOutSmoothness
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 778964242, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
+      propertyPath: DisableWhenOneTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 778964242, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
+      propertyPath: CompensateForCameraPosition
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3859648974809770552, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
+      propertyPath: orthographic size
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3859648976184302994, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -433,6 +461,26 @@ PrefabInstance:
     - target: {fileID: 3859648976184302995, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
       propertyPath: m_Name
       value: CameraSetup
+      objectReference: {fileID: 0}
+    - target: {fileID: 4383175863640021906, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
+      propertyPath: orthographic size
+      value: 10.9883
+      objectReference: {fileID: 0}
+    - target: {fileID: 4383175864366652616, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
+      propertyPath: TopFocus
+      value: 0.155
+      objectReference: {fileID: 0}
+    - target: {fileID: 4383175864366652616, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
+      propertyPath: RightFocus
+      value: 0.422
+      objectReference: {fileID: 0}
+    - target: {fileID: 4383175864366652616, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
+      propertyPath: BottomFocus
+      value: 0.293
+      objectReference: {fileID: 0}
+    - target: {fileID: 4383175865085432629, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
+      propertyPath: orthographic size
+      value: 10.3631
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
