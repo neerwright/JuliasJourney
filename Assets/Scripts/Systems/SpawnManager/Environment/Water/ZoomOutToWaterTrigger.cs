@@ -15,7 +15,11 @@ namespace environment
         [SerializeField] private float _influence = 0.6f;
         [SerializeField] private Transform _zoomTarget;
         private bool _active = false;
-        
+        void Awake()
+        {
+            print("OG cam smoothness ");
+            print(ProCamera2D.Instance.VerticalFollowSmoothness);
+        }
         private void OnTriggerEnter2D(Collider2D collider)
         {
             if(collider.tag == "Player" && !_active)

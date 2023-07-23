@@ -33,7 +33,6 @@ namespace Player
 		{
 			if (OriginSO.Moment == SpecificMoment.OnUpdate)
             {
-                Debug.Log(_instance);
                 if(_instance != null)
 				    _instance.DisableWhenOneTarget = OriginSO.DisableWhenOneTarget;
             }
@@ -44,7 +43,6 @@ namespace Player
 		{
 			if (OriginSO.Moment == SpecificMoment.OnStateEnter)
             {
-                Debug.Log(_instance);
                 if(_instance != null)
 				    _instance.DisableWhenOneTarget = OriginSO.DisableWhenOneTarget;
             }
@@ -54,7 +52,6 @@ namespace Player
 		{
 			if (OriginSO.Moment == SpecificMoment.OnStateExit)
             {
-                Debug.Log(_instance);
                 if(_instance != null)
 				    _instance.DisableWhenOneTarget = OriginSO.DisableWhenOneTarget;
             }
