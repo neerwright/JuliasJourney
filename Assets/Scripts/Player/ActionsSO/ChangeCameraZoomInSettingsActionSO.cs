@@ -14,6 +14,9 @@ namespace Player
         [SerializeField] private bool _disableWhenOneTarget = true;
 		public bool DisableWhenOneTarget => _disableWhenOneTarget;
 
+		[SerializeField] private float _delay = 2f;
+		public float Delay => _delay;
+
 		protected override StateAction CreateAction() => new ChangeCameraZoomInSettings();
 	}
 
@@ -23,38 +26,56 @@ namespace Player
         private ProCamera2DZoomToFitTargets _instance;
 		private new ChangeCameraZoomInSettingsActionSO OriginSO => (ChangeCameraZoomInSettingsActionSO)base.OriginSO;
 
+		private float _time = 0f;
+		private bool _startDelay = false;
+
 		public override void Awake(StateMachine stateMachine)
 		{
+			 _time = 0f;
 			_player = stateMachine.GetComponent<PlayerScript>();
             _instance = (ProCamera2DZoomToFitTargets) GameObject.FindObjectOfType(typeof(ProCamera2DZoomToFitTargets));
 		}
 
 		public override void OnUpdate()
 		{
-			if (OriginSO.Moment == SpecificMoment.OnUpdate)
-            {
-                if(_instance != null)
-				    _instance.DisableWhenOneTarget = OriginSO.DisableWhenOneTarget;
-            }
+
+			if(_startDelay)
+			{
+				_time += Time.deltaTime;
+				if(_time > OriginSO.Delay)
+				{
+					if(_instance != null)
+					{
+						_instance.DisableWhenOneTarget = OriginSO.DisableWhenOneTarget;
+					}
+				    	
+
+					_startDelay = false;
+				}
+			}
 		}
 
 
-			public override void OnStateEnter()
+		public override void OnStateEnter()
 		{
+			
 			if (OriginSO.Moment == SpecificMoment.OnStateEnter)
             {
-                if(_instance != null)
-				    _instance.DisableWhenOneTarget = OriginSO.DisableWhenOneTarget;
+				_time = 0f;
+                _startDelay = true;
+
             }
 		}
 
 		public override void OnStateExit()
 		{
+			
 			if (OriginSO.Moment == SpecificMoment.OnStateExit)
             {
-                if(_instance != null)
-				    _instance.DisableWhenOneTarget = OriginSO.DisableWhenOneTarget;
+				if(_instance != null)
+					_instance.DisableWhenOneTarget = OriginSO.DisableWhenOneTarget;
             }
+			
             
 		}
 	}

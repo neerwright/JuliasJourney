@@ -12,6 +12,7 @@ namespace NPC
 
         private SpriteRenderer _backgroundSpriteRenderer;
         private SpriteRenderer _iconSpriteRenderer;
+        private SpriteRenderer _icon2SpriteRenderer;
         private TextMeshPro _text;
 
         private Vector2 _padding = new Vector2(0f,0f);
@@ -24,6 +25,7 @@ namespace NPC
         {
             _backgroundSpriteRenderer = transform.Find("Background").GetComponent<SpriteRenderer>();
             _iconSpriteRenderer = transform.Find("Icon").GetComponent<SpriteRenderer>();
+            _icon2SpriteRenderer = transform.Find("Icon2").GetComponent<SpriteRenderer>();
             _text = transform.Find("Text").GetComponent<TextMeshPro>();
         }
 
