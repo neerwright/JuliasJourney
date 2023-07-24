@@ -15,6 +15,7 @@ namespace Player
         [SerializeField] private float _delay = 0.3f;
         [SerializeField] private float _fadeIn = 0.3f;
         [SerializeField] private GameEvent _resetEvent;
+        [SerializeField] private Vector2 _defaultResetPoint;
         private bool _isResetting = false;
 
         [Header("PlayerMaterials")]
@@ -31,6 +32,12 @@ namespace Player
         {
             _playerScript = GetComponent<PlayerScript>();
             _player = gameObject;
+
+        }
+
+        void Start()
+        {
+            SetNewResetLocation(_defaultResetPoint);
         }
 
         private void OnEnable()

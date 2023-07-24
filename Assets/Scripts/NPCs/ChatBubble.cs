@@ -15,8 +15,13 @@ namespace NPC
         private SpriteRenderer _icon2SpriteRenderer;
         private TextMeshPro _text;
 
+        private float _icon1Delay;
+        private float _icon2Delay;
+
         private Vector2 _padding = new Vector2(0f,0f);
         private const float TIME_PER_CHAR = 0.1f;
+
+        private float _time = 0f;
 
         private bool _active = false;
 
@@ -31,6 +36,11 @@ namespace NPC
 
         void Start()
         {
+            _time = 0f;
+            if(_iconSpriteRenderer != null)
+                _iconSpriteRenderer.enabled = (false);
+            if(_icon2SpriteRenderer != null)
+                _icon2SpriteRenderer.enabled = (false);
         }
 
         // Update is called once per frame
@@ -40,11 +50,27 @@ namespace NPC
             {
                 _backgroundSpriteRenderer.transform.localPosition = new Vector3(_backgroundSpriteRenderer.size.x / 2f, 0f);
                 Resize();
+
+                _time += Time.deltaTime;
+                if(_time > _icon1Delay)
+                {
+                    if(_iconSpriteRenderer != null)
+                        _iconSpriteRenderer.enabled = (true);
+                }
+                    
+
+                if(_time > _icon2Delay)
+                {
+                    if(_icon2SpriteRenderer != null)
+                        _icon2SpriteRenderer.enabled = (true);
+                }
             }
         }
 
-        public void Setup(string textToWrite)
+        public void Setup(string textToWrite, float delay1, float delay2)
         {
+            _icon1Delay = delay1;
+            _icon2Delay = delay2;
             
             Resize();
             _backgroundSpriteRenderer.transform.localPosition = new Vector3(_backgroundSpriteRenderer.size.x / 2f, 0f);

@@ -15,20 +15,25 @@ namespace NPC
     {
         [SerializeField] GameObject _bubblePrefab;
         [SerializeField] TurorialType _tutorialType = TurorialType.AtoJump;
-        
+
+        [SerializeField] float _delayIcon1 = 1f;
+        [SerializeField] float _delayIcon2 = 2f;
+
+        [SerializeField]
+        private float OFFSET_X = -6f;
+        [SerializeField]
+        private float OFFSET_Y = 4f;
+
         private bool _isDisplayingText = false;
-
-        private const float OFFSET_X = -3f;
-        private const float OFFSET_Y = 2f;
-
 
         public void CreateBubble(Transform parent, Vector3 localPosition, string text)
         {
             GameObject chatBubble = Instantiate(_bubblePrefab, parent );
+
             Transform chatBubbleTransform = chatBubble.transform;
             
             chatBubbleTransform.localPosition = localPosition;
-            chatBubbleTransform.GetComponent<ChatBubble>().Setup(text);
+            chatBubbleTransform.GetComponent<ChatBubble>().Setup(text, _delayIcon1, _delayIcon2);
             StartCoroutine(DestroyABubbleAfterSeconds(4f, chatBubble));
             
         }
@@ -55,6 +60,10 @@ namespace NPC
             if(_tutorialType == TurorialType.AtoJump)
             {
                 text = "Press        /SPACE on a         to double jump";
+            }
+            if(_tutorialType == TurorialType.YtoReset)
+            {
+                text = "Press        /F to reset";
             }
             return text;
         }

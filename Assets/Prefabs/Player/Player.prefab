@@ -614,6 +614,7 @@ MonoBehaviour:
   _delay: 0.1
   _fadeIn: 0.1
   _resetEvent: {fileID: 11400000, guid: 5d532371271fe1542839f1cde7a84917, type: 2}
+  _defaultResetPoint: {x: -126.6, y: 12.5}
   PlayerMaterials:
   - {fileID: 2100000, guid: e36678a7f517fb941bcecb47e0556a43, type: 2}
   - {fileID: 2100000, guid: b1e9e3e297fbd27489ce83fe6dd564ea, type: 2}

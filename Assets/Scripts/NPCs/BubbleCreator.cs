@@ -13,7 +13,7 @@ namespace NPC
             GameObject chatBubble = Instantiate(_bubblePrefab, parent );
             Transform chatBubbleTransform = chatBubble.transform;
             chatBubbleTransform.localPosition = localPosition;
-            chatBubbleTransform.GetComponent<ChatBubble>().Setup(text);
+            chatBubbleTransform.GetComponent<ChatBubble>().Setup(text, 1f, 1f);
 
             //Destroy(chatBubble, 4f);
         }
