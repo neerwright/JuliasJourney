@@ -77,7 +77,8 @@ public class FeelFeedback : MonoBehaviour
 
     private void PlayJumpFeedback()
     {
-        gameObject.transform.localScale = Vector3.one;
+        //gameObject.transform.localScale = Vector3.one;
+        _playerModel.transform.localScale = Vector3.one;
         JumpFeedback?.PlayFeedbacks();
                 
 
@@ -101,6 +102,7 @@ public class FeelFeedback : MonoBehaviour
 
         }
         gameObject.transform.localScale = Vector3.one;
+        _playerModel.transform.localScale = Vector3.one;
         LandingFeedback?.PlayFeedbacks();
         
         float bigShake = fallingRatio > _bigShakeThreshold ? BIG_SHAKE : 1f;
@@ -115,7 +117,7 @@ public class FeelFeedback : MonoBehaviour
             SquashAndStretchBonk.RemapCurveOne = (velocity / 2) + 1f;
 
         }
-        gameObject.transform.localScale = Vector3.one;
+        //gameObject.transform.localScale = Vector3.one;
         BonkFeedback?.PlayFeedbacks();
         ProCamera2DShake.Instance.Shake(0.2f , new Vector2 ( _shakePowerBonk , _shakePowerBonk ) * velocity  , 1, 1, 10, new Vector3(0,0,0), 0.1f);
     }

@@ -5,6 +5,7 @@ using Utilities;
 using RewindSystem;
 using Scriptables;
 using GameManager;
+using Com.LuisPedroFonseca.ProCamera2D;
 
 namespace Player
 {
@@ -19,10 +20,13 @@ namespace Player
         [SerializeField] GameEvent stopRewinding;
         [SerializeField] GameStateSO _gameState;
 
+        [SerializeField] private Transform _secondaryPlayerTransform;
+
         private void StartRewind()
         {
             if(_gameState.CurrentGameState ==  GameState.Gameplay)
             {
+                ProCamera2D.Instance.AddCameraTarget(_secondaryPlayerTransform,0.2f, 0.2f, 0.3f);
                 startRewinding?.Raise();
                 _playerController.IsRewinding = true;
             }
@@ -32,6 +36,7 @@ namespace Player
 
         public void StopRewind()
         {
+            ProCamera2D.Instance.RemoveCameraTarget(_secondaryPlayerTransform);
             stopRewinding?.Raise();
             _playerController.IsRewinding = false;
         }
