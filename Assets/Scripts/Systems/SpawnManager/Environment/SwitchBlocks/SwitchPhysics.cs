@@ -57,8 +57,12 @@ namespace environment
         public void Reset()
         {
             transform.position = _startPosition;
-            _rb.velocity = Vector2.zero;
-            _rb.angularVelocity = 0f;
+            if(!_immovable)
+            {
+                _rb.velocity = Vector2.zero;
+                _rb.angularVelocity = 0f;
+            }
+            
             transform.rotation = _startRotation;
             
         }
