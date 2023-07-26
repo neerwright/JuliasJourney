@@ -45,13 +45,7 @@ namespace environment
 
         void Update()
         {
-            if(_rewinding)
-            {
-                if(Mathf.Abs(transform.position.x - _startRotation.x) < REWIND_RESET_THREASHOLD)
-                {
-                    _switchBlockSwitch.Reseting();
-                }
-            }
+
         }
 
         public void Reset()
