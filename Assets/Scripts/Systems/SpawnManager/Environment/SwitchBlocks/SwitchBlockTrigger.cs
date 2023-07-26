@@ -25,6 +25,7 @@ namespace environment
         private GameObject _player;
         private bool _triggered = false;
 
+
         private Vector2 _pos;
         
 
@@ -140,7 +141,7 @@ namespace environment
             
             
             
-            _triggered = false;
+            //_triggered = false;
         }
     }
 
