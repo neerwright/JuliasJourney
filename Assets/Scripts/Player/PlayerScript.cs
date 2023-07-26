@@ -31,6 +31,7 @@ namespace Player
 		[NonSerialized] public Vector2 movementVector; //Final movement vector, manipulated by the StateMachine actions
 		[NonSerialized]	public Rigidbody2D rb2d;
 
+		public bool PreventJumping { get; set; }
 
 		public const float GRAVITY_MULTIPLIER = 3f;
 		public const float MAX_SPEED = 3f;
@@ -82,6 +83,7 @@ namespace Player
 
 			//...
 			coroutine = WaitUntilInteractCanBePressedAgain(INPUT_BUFFER);
+			PreventJumping = false;
 		}
 
 		//Removes all listeners to the events coming from the InputReader script

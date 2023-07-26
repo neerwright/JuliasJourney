@@ -62,6 +62,9 @@ namespace Player
         {
             if(_isResetting)
                 return;
+
+            if(_playerScript.interactInput)
+                return;
             
             if(_gameState.CurrentGameState == GameState.Water)
                 _gameState.UpdateGameState(GameState.Gameplay);

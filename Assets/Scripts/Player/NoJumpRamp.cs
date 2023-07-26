@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class RampForCar : MonoBehaviour
+    public class NoJumpRamp : MonoBehaviour
     {
         [SerializeField] Vector2 Angle;
         [SerializeField] float _speedForPushBox;
