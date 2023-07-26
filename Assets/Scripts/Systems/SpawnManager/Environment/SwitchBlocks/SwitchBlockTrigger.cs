@@ -20,6 +20,8 @@ namespace environment
         private const float LOOK_VERTICAL_OFFSET = 3f;
         private const float LOOK_UP_OFFSET = 1f;
 
+        private const float INFLUENCE_RADIUS = 60f;
+
         private GameObject _player;
         private bool _triggered = false;
 
@@ -57,13 +59,15 @@ namespace environment
         {
             if(_triggered)
                     return;
-
+                    
+            if(Vector2.Distance(_player.transform.position , gameObject.transform.position) >  INFLUENCE_RADIUS)
+                return;
+            
             if(collider.tag == PLAYER_TAG || collider.tag == PUSHBOX_TAG)
             {
                 _triggered = true;
                 _switchBlocksEvent?.Raise();
                 StartCoroutine(PlayEyeAnimation());
-                Debug.Log("triggered");
             }
         }
 

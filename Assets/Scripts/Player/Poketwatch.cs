@@ -26,6 +26,7 @@ namespace Player
         {
             if(_gameState.CurrentGameState ==  GameState.Gameplay)
             {
+                Time.timeScale = 1f;
                 ProCamera2D.Instance.AddCameraTarget(_secondaryPlayerTransform,0.2f, 0.2f, 0.3f);
                 startRewinding?.Raise();
                 _playerController.IsRewinding = true;

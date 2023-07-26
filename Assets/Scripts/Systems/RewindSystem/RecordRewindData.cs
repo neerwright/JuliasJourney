@@ -20,6 +20,7 @@ namespace RewindSystem
         //[SerializeField] private bool _useArray = false;
 
         [HideInInspector] public int RecordIndex {get;set;}
+        [HideInInspector] public bool SlowingDown {get;set;}
         
         private IRewindData _rewindMethod;
         private bool _rewind = false;
@@ -39,10 +40,13 @@ namespace RewindSystem
 
 			var coroutine = RewindTimer(MAX_REWIND_TIME);
         	StartCoroutine(coroutine);
-			
+			SlowingDown = false;
         }
 
-        
+        public void StartSlowDown()
+        {
+            SlowingDown = true;
+        }
 
         private void Awake()
         {
@@ -61,6 +65,9 @@ namespace RewindSystem
 
         void Update()
         {
+            if(SlowingDown)
+                return;
+
             if(_rewind)
             {
                 
@@ -88,7 +95,8 @@ namespace RewindSystem
             else
             {                                
                 //capture data
-                    
+                Debug.Log("Recording")  ; 
+
                 RecordedData data = new RecordedData();
                 data.pos = gameObject.transform.position;
                 if(_recordPlayerData)

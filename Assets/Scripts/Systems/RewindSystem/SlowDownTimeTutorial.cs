@@ -1,22 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Scriptables;
 
-
-namespace NPC
+namespace RewindSystem
 {
     public class SlowDownTimeTutorial : MonoBehaviour
     {
         //[SerializeField] TutorialNPC _NPC;
         [SerializeField] private AnimationCurve _easeOut;
-        [SerializeField] float _slowDownSpeed = 2f;
+        [SerializeField] float _slowDownSpeed = 1f;
+        [SerializeField] GameEvent startSlowDown;
         
         float _slowDownFactor = 1f;
         float _time = 0f;
         float _originalFixedDeltaTime;
 
         bool _slowDown = false;
-        bool _triggered = false;
+        bool _raisedEvent = false;
+        [SerializeField] bool _triggered = false;
 
         public void StopSlowDownTime()
         {
@@ -46,14 +48,21 @@ namespace NPC
             {
                 _slowDown = true;
                 _triggered= true;
+                
             }
                 
         }
 
         private void SlowDownTime()
         {
-            if(_slowDownFactor < 0.01f)
+            if(_slowDownFactor < 0.5f && !_raisedEvent)
             {
+                startSlowDown?.Raise();
+                _raisedEvent = true;
+            }
+            if(_slowDownFactor < 0.1f)
+            {
+                
                 _slowDown = false;
                 Time.fixedDeltaTime = 0f;
                 Time.timeScale = 0f;

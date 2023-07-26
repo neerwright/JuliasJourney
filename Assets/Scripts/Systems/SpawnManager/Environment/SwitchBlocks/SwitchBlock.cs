@@ -75,13 +75,18 @@ namespace environment
 
         public void OnTriggerEnter2D(Collider2D collider)
         {
-            if(_rewinding)
+            if(collider.gameObject.tag == "Player")
             {
-                if(active)
+                if(_rewinding)
                 {
-                    Switch();
-                }       
+                    if(active)
+                    {
+                        Debug.Log("switching");
+                        Switch();
+                    }       
+                }
             }
+            
         }
 
     }
