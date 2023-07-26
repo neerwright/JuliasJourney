@@ -51,7 +51,7 @@ namespace NPC
                 _backgroundSpriteRenderer.transform.localPosition = new Vector3(_backgroundSpriteRenderer.size.x / 2f, 0f);
                 Resize();
 
-                _time += Time.deltaTime;
+                _time += Time.unscaledDeltaTime;
                 if(_time > _icon1Delay)
                 {
                     if(_iconSpriteRenderer != null)

@@ -95,8 +95,6 @@ namespace RewindSystem
             else
             {                                
                 //capture data
-                Debug.Log("Recording")  ; 
-
                 RecordedData data = new RecordedData();
                 data.pos = gameObject.transform.position;
                 if(_recordPlayerData)

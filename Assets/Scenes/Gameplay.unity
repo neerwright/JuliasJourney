@@ -509,7 +509,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 164273029
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 70a001e70f4bda0418b3e5ca661d1f4b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -545,6 +545,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3859648974809770693, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
+      propertyPath: UpdateType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3859648974809770694, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
       propertyPath: ParallaxLayers.Array.size
       value: 6

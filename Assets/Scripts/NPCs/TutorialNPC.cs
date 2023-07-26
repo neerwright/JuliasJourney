@@ -40,17 +40,21 @@ namespace NPC
 
         void OnTriggerEnter2D(Collider2D collider)
         {
-            if(!_isDisplayingText)
+            if(collider.gameObject.tag == "Player")
             {
-                _isDisplayingText = true;
-                Vector2 spawnPoint = Vector3.zero;
-                spawnPoint.x += OFFSET_X;
-                spawnPoint.y += OFFSET_Y;
-                string text =  _decideText();
-                
-                
-                CreateBubble(gameObject.transform , spawnPoint , text);
+                if(!_isDisplayingText)
+                {
+                    _isDisplayingText = true;
+                    Vector2 spawnPoint = Vector3.zero;
+                    spawnPoint.x += OFFSET_X;
+                    spawnPoint.y += OFFSET_Y;
+                    string text =  _decideText();
+                    
+                    
+                    CreateBubble(gameObject.transform , spawnPoint , text);
+                }
             }
+            
                 
         }
 
@@ -59,11 +63,15 @@ namespace NPC
             string text = "";
             if(_tutorialType == TurorialType.AtoJump)
             {
-                text = "Press        /SPACE on a         to double jump";
+                text = "Press        / SPACE on a         to double jump";
             }
             if(_tutorialType == TurorialType.YtoReset)
             {
-                text = "Press        /F/ENTER to reset";
+                text = "Press        / F or ENTER to reset";
+            }
+            if(_tutorialType == TurorialType.BtoRewind)
+            {
+                text = "Hold         / SHIFT to rewind time";
             }
             return text;
         }

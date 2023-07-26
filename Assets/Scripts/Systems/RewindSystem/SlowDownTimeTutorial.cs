@@ -46,6 +46,7 @@ namespace RewindSystem
         {
             if(collider.gameObject.tag == "Player" && !_triggered)
             {
+                Time.fixedDeltaTime = _originalFixedDeltaTime;
                 _slowDown = true;
                 _triggered= true;
                 
@@ -55,7 +56,7 @@ namespace RewindSystem
 
         private void SlowDownTime()
         {
-            if(_slowDownFactor < 0.5f && !_raisedEvent)
+            if(_slowDownFactor < 0.6f && !_raisedEvent)
             {
                 startSlowDown?.Raise();
                 _raisedEvent = true;
@@ -64,7 +65,7 @@ namespace RewindSystem
             {
                 
                 _slowDown = false;
-                Time.fixedDeltaTime = 0f;
+                //Time.fixedDeltaTime = 0f;
                 Time.timeScale = 0f;
                 return;
             }
@@ -72,8 +73,8 @@ namespace RewindSystem
             _slowDownFactor = _easeOut.Evaluate(_time);
 
             Time.timeScale = _slowDownFactor;
-            Time.fixedDeltaTime = Time.timeScale *  Time.fixedDeltaTime;
-
+            Time.fixedDeltaTime = Time.timeScale *  _originalFixedDeltaTime;
+            Mathf.Max(Time.fixedDeltaTime, _originalFixedDeltaTime / 2);
             
 
             _time += Time.deltaTime * _slowDownSpeed;

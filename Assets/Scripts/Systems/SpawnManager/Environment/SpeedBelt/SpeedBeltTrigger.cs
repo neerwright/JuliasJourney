@@ -9,7 +9,7 @@ namespace environment
     public class SpeedBeltTrigger : MonoBehaviour
     {
         public SpeedBelt _speedBelt;
-        public float _speedForPushBox = 10;
+        public float _speedForPushBox = 2;
 
         private const string PLAYER_TAG = "Player";
         private const string PUSHBOX_TAG = "PushBox";
