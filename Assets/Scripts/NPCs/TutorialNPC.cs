@@ -63,7 +63,7 @@ namespace NPC
             }
             if(_tutorialType == TurorialType.YtoReset)
             {
-                text = "Press        /F to reset";
+                text = "Press        /F/ENTER to reset";
             }
             return text;
         }
