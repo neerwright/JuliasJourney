@@ -16,7 +16,9 @@ namespace GameManager
 
         void StartGame()
         {
-            _gameState.UpdateGameState(GameState.Gameplay);
+            _gameState.UpdateGameState(GameState.Cutscene);
+            //load level 2
+            
         }
     }
 }

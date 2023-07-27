@@ -30,7 +30,7 @@ public class SpawnManager : MonoBehaviour
             _playerInstance = Instantiate(_playerPrefab, _spawnLocations, Quaternion.identity);
 
             //Camera
-            ProCamera2D.Instance.AddCameraTarget(_playerInstance.transform, 1f, 1f, 0f);
+            //ProCamera2D.Instance.AddCameraTarget(_playerInstance.transform, 1f, 1f, 0f);
             
         } 
 		

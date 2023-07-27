@@ -27,7 +27,7 @@ namespace RewindSystem
         private bool _stepedBack = false;
 
         private List<RecordedData> _recordedData;
-        private const int MAX_REWIND_DATA = 2000;
+        private const int MAX_REWIND_DATA = 200;
         private const float MAX_REWIND_TIME = 1.7f;
         private int index = 0;
 
