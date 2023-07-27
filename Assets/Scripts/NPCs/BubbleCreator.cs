@@ -15,12 +15,12 @@ namespace NPC
             chatBubbleTransform.localPosition = localPosition;
             chatBubbleTransform.GetComponent<ChatBubble>().Setup(text, 1f, 1f);
 
-            //Destroy(chatBubble, 4f);
+            Destroy(chatBubble, 4.2f);
         }
 
         private void Start()
         {
-            CreateBubble(gameObject.transform, Vector3.zero, "Hellooooo");
+            //CreateBubble(gameObject.transform, Vector3.zero, "Hellooooo");
         }
 
     } 

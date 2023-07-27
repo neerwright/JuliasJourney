@@ -13,7 +13,7 @@ namespace Player
     {
         [SerializeField] private GameObject _playerModel;
         // Start is called before the first frame update
-        void Start()
+        public void TurnRenderesOff()
         {
             //turn off
             _playerModel.SetActive(false);

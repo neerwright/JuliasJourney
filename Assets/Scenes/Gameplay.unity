@@ -768,6 +768,7 @@ GameObject:
   - component: {fileID: 1495011209}
   - component: {fileID: 1495011208}
   - component: {fileID: 1495011210}
+  - component: {fileID: 1495011211}
   m_Layer: 0
   m_Name: Cutscene
   m_TagString: Cutscene
@@ -788,8 +789,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camSetup: {fileID: 778964241}
+  _gameState: {fileID: 11400000, guid: c2ccf5a952309dc409a3bc6284fa13c1, type: 2}
   _camCutsceneStartPoint: {fileID: 844398810}
   _playerPoint: {fileID: 1990172257}
+  _textPoint: {fileID: 2108830572}
   _easeInOut:
     serializedVersion: 2
     m_Curve:
@@ -815,6 +818,16 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _speed: 0.1
+  _delay: 0.2
+  _clip:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 7400000, guid: d9fe0b0413b3bc54a8b426542b4c9481, type: 2}
+    _Speed: 0.1
+    _NormalizedStartTime: NaN
 --- !u!4 &1495011209
 Transform:
   m_ObjectHideFlags: 0
@@ -858,6 +871,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1495011211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495011207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bccb518e7275a794dbf1f03d94114d6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bubblePrefab: {fileID: 2570993474022814582, guid: 8e8bb95e78db76b44829133a2449ec90, type: 3}
 --- !u!1 &1561400618
 GameObject:
   m_ObjectHideFlags: 0
@@ -1197,6 +1223,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2108830571
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2108830572}
+  m_Layer: 0
+  m_Name: CutsceneTextPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2108830572
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2108830571}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -133.21, y: 20.06, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &621492659046161576 stripped
 RectTransform:

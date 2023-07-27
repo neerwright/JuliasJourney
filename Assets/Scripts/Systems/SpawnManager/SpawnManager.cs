@@ -7,6 +7,7 @@ using environment;
 using Scriptables;
 using Player;
 
+
 public class SpawnManager : MonoBehaviour
 {
 	[SerializeField] private GameObject _playerPrefab = default;
