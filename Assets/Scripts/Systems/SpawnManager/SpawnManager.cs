@@ -5,6 +5,7 @@ using Com.LuisPedroFonseca.ProCamera2D;
 using UnityEngine.SceneManagement;
 using environment;
 using Scriptables;
+using Player;
 
 public class SpawnManager : MonoBehaviour
 {
@@ -29,14 +30,12 @@ public class SpawnManager : MonoBehaviour
             SceneManager.SetActiveScene(gameplayScene);
             _playerInstance = Instantiate(_playerPrefab, _spawnLocations, Quaternion.identity);
 
-            //Camera
-            ProCamera2D.Instance.AddCameraTarget(_playerInstance.transform, 1f, 1f, 0f);
-            //_playerInstance.GetComponent<PlayerRendererController>().
+            
+            _playerInstance.GetComponent<PlayerScript>().DisableControls();
+            //ProCamera2D.Instance.AddCameraTarget(_playerInstance.transform, 1f, 1f, 0f);
         } 
 		
-        
-		//TODO: Probably move this to the GameManager once it's up and running
-		//_inputReader.EnableGameplayInput();
+
 	}
 
     public void SpawnEnvironmentObjects()

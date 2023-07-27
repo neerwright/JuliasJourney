@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SceneManagement;
 
 namespace GameManager
 {
@@ -8,16 +9,26 @@ namespace GameManager
     {
         [SerializeField] private GameStateSO _gameState = default;
 
+        [SerializeField] private LoadEventSO _nextIslandEvent;
+        [SerializeField] private GameSceneSO _nextIsland;
+        private bool _startedGame = false;
 
         private void Start()
         {
-            StartGame();
+            //StartGame();
         }
 
-        void StartGame()
+        public void StartGame()
         {
-            _gameState.UpdateGameState(GameState.Cutscene);
-            //load level 2
+            if(!_startedGame)
+            {   
+                Debug.Log("starting...");
+                _gameState.UpdateGameState(GameState.Cutscene);
+                //load level 2, where the object for the cutscene gets spawned
+                _nextIslandEvent?.Raise(_nextIsland);
+                _startedGame = true;
+            }
+            
             
         }
     }

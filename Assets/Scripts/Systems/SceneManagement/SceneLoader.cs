@@ -49,7 +49,7 @@ namespace SceneManagement
         
         private Queue<GameSceneSO> _islandsLoaded;
         private const int MAX_ISLAND_ACTIVE = 3;
-
+        private bool waiting = false;
         private void OnEnable()
         {
             _islandsLoaded = new Queue<GameSceneSO>();
@@ -67,8 +67,15 @@ namespace SceneManagement
         
         public void LoadNextIsland(GameSceneSO locationToLoad)
         {
-            if(_isLoading)
+            //
+            Debug.Log("looooooooaaaaaaaaaaaaaddd");
+            Debug.Log(locationToLoad.sceneName);
+            if(_isLoading && !waiting)
+            {
+                StartCoroutine(WaitToLoadIslandNext(locationToLoad));
                 return;
+            }
+                
             _loadIsland = true;
             LoadLocation(locationToLoad);
         }
@@ -122,8 +129,10 @@ namespace SceneManagement
 
         private IEnumerator WaitToLoadIslandNext(GameSceneSO locationToLoad)
         {
+            waiting = true;
             while (_isLoading) 
             {
+                Debug.Log("waiting...");
                 yield return new WaitForSeconds(0.1f);
             }
             LoadNextIsland(locationToLoad);

@@ -10,6 +10,14 @@ namespace SceneManagement
         [SerializeField] private GameSceneSO _nextIsland;
 
         [SerializeField] private bool _triggered = false;
+        [SerializeField] private bool _autoLoad = false;
+        private void Start()
+        {
+            if(_autoLoad)
+            {
+                _nextIslandEvent?.Raise(_nextIsland);
+            }
+        }
 
         private void OnTriggerEnter2D(Collider2D collider)
         {
