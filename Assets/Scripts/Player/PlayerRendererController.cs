@@ -11,11 +11,17 @@ namespace Player
 
     public class PlayerRendererController : MonoBehaviour
     {
-        [SerializeField] private List<Renderer> _renderers;
+        [SerializeField] private GameObject _playerModel;
         // Start is called before the first frame update
         void Start()
         {
             //turn off
+            _playerModel.SetActive(false);
+        }
+
+        public void TurnRenderesOn()
+        {
+            _playerModel.SetActive(true);
         }
 
         
