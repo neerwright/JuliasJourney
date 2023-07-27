@@ -16034,7 +16034,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7840419119876301478, guid: f0bf89625a7e39447b1143f1659d4cb0, type: 3}
       propertyPath: m_SortingLayer
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7840419119876301478, guid: f0bf89625a7e39447b1143f1659d4cb0, type: 3}
       propertyPath: m_SortingOrder
@@ -16042,7 +16042,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7840419119876301478, guid: f0bf89625a7e39447b1143f1659d4cb0, type: 3}
       propertyPath: m_SortingLayerID
-      value: -1359347799
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7840419119876301479, guid: f0bf89625a7e39447b1143f1659d4cb0, type: 3}
       propertyPath: m_RootOrder
@@ -16066,7 +16066,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7840419119876301479, guid: f0bf89625a7e39447b1143f1659d4cb0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0020752326
+      value: 0.85
       objectReference: {fileID: 0}
     - target: {fileID: 7840419119876301479, guid: f0bf89625a7e39447b1143f1659d4cb0, type: 3}
       propertyPath: m_LocalRotation.w

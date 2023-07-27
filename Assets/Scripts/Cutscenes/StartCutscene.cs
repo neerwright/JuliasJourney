@@ -51,6 +51,9 @@ public class StartCutscene : MonoBehaviour
 
     void Update()
     {
+        if(state == StartCutsceneState.ending)
+            return;
+
         if( state == StartCutsceneState.moveToPlayer)
             ZoomToPlayer();
 
@@ -62,6 +65,8 @@ public class StartCutscene : MonoBehaviour
     
     public void StartTheCutscene()
     {
+        if(state == StartCutsceneState.ending)
+            return;
         _player = GameObject.FindWithTag("Player");
         StartCoroutine("WaitBeforeStarting");
         
@@ -81,7 +86,7 @@ public class StartCutscene : MonoBehaviour
         PlayerRendererController _rendController = player.GetComponent<PlayerRendererController>();
         yield return new WaitForSeconds(_delay);
         _rendController.TurnRenderesOff();
-        yield return new WaitForSeconds(13f);
+        yield return new WaitForSeconds(15f);
         Debug.Log("Remove target");
         ProCamera2D.Instance.RemoveCameraTarget(_camCutsceneStartPoint);
     }
@@ -111,7 +116,7 @@ public class StartCutscene : MonoBehaviour
 
         GameObject player = GameObject.FindWithTag("Player");
         ProCamera2D.Instance.AddCameraTarget(player.transform, 1f, 1f, 0f);
-        
+        ProCamera2D.Instance.OffsetX = 0.7f;
         PlayerRendererController _rendController = player.GetComponent<PlayerRendererController>();
         _rendController.TurnRenderesOn();
         PlayerScript _playerScript = player.GetComponent<PlayerScript>();
