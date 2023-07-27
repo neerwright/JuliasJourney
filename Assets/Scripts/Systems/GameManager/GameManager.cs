@@ -22,7 +22,6 @@ namespace GameManager
         {
             if(!_startedGame)
             {   
-                Debug.Log("starting...");
                 _gameState.UpdateGameState(GameState.Cutscene);
                 //load level 2, where the object for the cutscene gets spawned
                 _nextIslandEvent?.Raise(_nextIsland);
