@@ -35,7 +35,7 @@ namespace Player
                 Debug.Log("Start Rewind Gameplay");
                 Time.fixedDeltaTime = _originalFixedDeltaTime;
                 Time.timeScale = 1f;
-                ProCamera2D.Instance.AddCameraTarget(_secondaryPlayerTransform,0.2f, 0.2f, 0.3f);
+                //ProCamera2D.Instance.AddCameraTarget(_secondaryPlayerTransform,0.2f, 0.2f, 0.3f);
                 startRewinding?.Raise();
                 _playerController.IsRewinding = true;
             }

@@ -19,7 +19,7 @@ namespace NPC
         private float _icon2Delay;
 
         private Vector2 _padding = new Vector2(0f,0f);
-        private const float TIME_PER_CHAR = 0.1f;
+        private const float TIME_PER_CHAR = 0.06f;
 
         private float _time = 0f;
 
