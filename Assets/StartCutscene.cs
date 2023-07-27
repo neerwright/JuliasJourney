@@ -19,6 +19,7 @@ public class StartCutscene : MonoBehaviour
 
     [SerializeField] private AnimationCurve _easeInOut;
     [SerializeField] private float _speed = 0.1f;
+    [SerializeField] private float _delay = 0.2f;
 
     private float current = 0;
 
@@ -42,13 +43,22 @@ public class StartCutscene : MonoBehaviour
         if( state == StartCutsceneState.moveToPlayer)
             ZoomToPlayer();
     }
+
+    
     public void StartTheCutscene()
     {
         _player = GameObject.FindWithTag("Player");
-        Debug.Log("StartCutscene");
-        _camSetup.SetActive(true);
+        StartCoroutine("WaitBeforeStarting");
+        
+    }
+
+    private IEnumerator WaitBeforeStarting()
+    {
+        yield return new WaitForSeconds(_delay);
         //Camera
+        _camSetup.SetActive(true);
         ProCamera2D.Instance.AddCameraTarget(_camCutsceneStartPoint, 1f, 1f, 0f);
+        yield return new WaitForSeconds(_delay);
         state = StartCutsceneState.moveToPlayer;
     }
 
