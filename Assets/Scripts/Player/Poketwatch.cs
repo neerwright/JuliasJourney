@@ -45,7 +45,7 @@ namespace Player
 
         public void StopRewind()
         {
-            ProCamera2D.Instance.RemoveCameraTarget(_secondaryPlayerTransform);
+            //ProCamera2D.Instance.RemoveCameraTarget(_secondaryPlayerTransform);
             stopRewinding?.Raise();
             _playerController.IsRewinding = false;
         }
