@@ -17,9 +17,10 @@ namespace RewindSystem
         {
             gameObject.transform.position = data.pos;
             _playerVelocity.Value = data.vel;
-
+            //_playerScript.movementVector = data.vel;
             _animationData.Time = data.time;
             _animationData.Clip = data.clip;
+            Debug.Log(_playerVelocity);
         }
     }
 }

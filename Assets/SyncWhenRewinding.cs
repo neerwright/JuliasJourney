@@ -26,7 +26,6 @@ public class SyncWhenRewinding : MonoBehaviour
         {
             if(_player != null)
             {
-                Debug.Log(Vector2.Distance(_mainCam.position, _player.transform.position));
                 //Vector2 posi = _player.transform.position;
                 //posi.x += 10f;
                 //_mainCam.position = posi ;
@@ -44,15 +43,15 @@ public class SyncWhenRewinding : MonoBehaviour
 
     public void OnRewindSync()
     {
-        _instance = (ProCamera2DZoomToFitTargets) GameObject.FindObjectOfType(typeof(ProCamera2DZoomToFitTargets));
+        //_instance = (ProCamera2DZoomToFitTargets) GameObject.FindObjectOfType(typeof(ProCamera2DZoomToFitTargets));
         if(_player == null)
         {
             _player = GameObject.FindWithTag("Player");
         }
         _time = 0f;
-        beforRewindPosition = transform.position;
-        camBeforRewindPosition = _mainCam.position;
-        sizeBeforeRewind = Camera.main.orthographicSize;
+        //beforRewindPosition = transform.position;
+        //camBeforRewindPosition = _mainCam.position;
+        //sizeBeforeRewind = Camera.main.orthographicSize;
         sync = true;
         //ProCamera2D.Instance.MoveCameraInstantlyToPosition(_player.transform.position);
         //ProCamera2D.Instance.RemoveCameraTarget(_player.transform);

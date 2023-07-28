@@ -29,8 +29,8 @@ namespace Player
         }
         private void StartRewind()
         {
-            GameObject _player = GameObject.FindWithTag("Player");
-            ProCamera2D.Instance.MoveCameraInstantlyToPosition(_player.transform.position);
+            //GameObject _player = GameObject.FindWithTag("Player");
+            //ProCamera2D.Instance.MoveCameraInstantlyToPosition(_player.transform.position);
             Debug.Log("Start Rewind");
             if(_gameState.CurrentGameState ==  GameState.Gameplay)
             {

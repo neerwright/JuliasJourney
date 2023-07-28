@@ -11,9 +11,28 @@ namespace Player
         
         [SerializeField] private PlayerScript _playerScript;
         // Update is called once per frame
+
+        private bool _rewinding = false;
+
         void Update()
         {
-            _velocitySO.Value = _playerScript.movementVector;
+            if(!_rewinding)
+                _velocitySO.Value = _playerScript.movementVector;
+            else
+            {
+                if(_velocitySO.Value != null)
+                    _playerScript.movementVector = _velocitySO.Value;
+            }
+                
+        }
+
+        public void StartRewind()
+        {
+            _rewinding = true;
+        }
+        public void StopRewind()
+        {
+            _rewinding = false;
         }
     }
 }
