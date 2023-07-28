@@ -26,11 +26,12 @@ public class SyncWhenRewinding : MonoBehaviour
         {
             if(_player != null)
             {
-                Debug.Log("not null");
+                Debug.Log(Vector2.Distance(_mainCam.position, _player.transform.position));
                 //Vector2 posi = _player.transform.position;
                 //posi.x += 10f;
                 //_mainCam.position = posi ;
-                ProCamera2D.Instance.MoveCameraInstantlyToPosition(_player.transform.position);
+                if(Vector2.Distance(_mainCam.position, _player.transform.position) > 530f)
+                    ProCamera2D.Instance.MoveCameraInstantlyToPosition(_player.transform.position);
             }
             //_mainCam.position = camBeforRewindPosition;
             //transform.position = beforRewindPosition;
