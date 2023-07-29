@@ -53,6 +53,11 @@ namespace RewindSystem
             }
                 
         }
+        public void OnReset()
+        {
+            _raisedEvent = false;
+            _time = 0f;
+        }
 
         private void SlowDownTime()
         {
