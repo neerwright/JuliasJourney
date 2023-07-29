@@ -10691,14 +10691,6 @@ PrefabInstance:
       value: 62
       objectReference: {fileID: 0}
     - target: {fileID: 6986648212052475483, guid: 926d6601e6f480949baa74fe85bba704, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 8.29
-      objectReference: {fileID: 0}
-    - target: {fileID: 6986648212052475483, guid: 926d6601e6f480949baa74fe85bba704, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 14.76
-      objectReference: {fileID: 0}
-    - target: {fileID: 6986648212052475483, guid: 926d6601e6f480949baa74fe85bba704, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2469.59
       objectReference: {fileID: 0}
@@ -10738,14 +10730,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6986648212052475484, guid: 926d6601e6f480949baa74fe85bba704, type: 3}
-      propertyPath: m_Size.x
-      value: 0.95
-      objectReference: {fileID: 0}
-    - target: {fileID: 6986648212052475484, guid: 926d6601e6f480949baa74fe85bba704, type: 3}
-      propertyPath: m_Size.y
-      value: 0.52
-      objectReference: {fileID: 0}
     - target: {fileID: 6986648212052475486, guid: 926d6601e6f480949baa74fe85bba704, type: 3}
       propertyPath: m_Name
       value: SlowDownTimeTrigger (1)
@@ -10753,50 +10737,6 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 926d6601e6f480949baa74fe85bba704, type: 3}
---- !u!1 &1179556528 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6986648212052475486, guid: 926d6601e6f480949baa74fe85bba704, type: 3}
-  m_PrefabInstance: {fileID: 1179556527}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1179556529 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6986648212052475485, guid: 926d6601e6f480949baa74fe85bba704, type: 3}
-  m_PrefabInstance: {fileID: 1179556527}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1179556528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eceb65d58daf5c84a9a23a54156938b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1179556530
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1179556528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7881123eb9ed30f41865049f3d528cc0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: {fileID: 11400000, guid: 5d532371271fe1542839f1cde7a84917, type: 2}
-  Response:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1179556529}
-        m_TargetAssemblyTypeName: RewindSystem.SlowDownTimeTutorial, RewindSystem
-        m_MethodName: OnReset
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1001 &1194433793
 PrefabInstance:
   m_ObjectHideFlags: 0

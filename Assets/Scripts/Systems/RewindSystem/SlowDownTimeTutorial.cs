@@ -56,6 +56,7 @@ namespace RewindSystem
         public void OnReset()
         {
             _raisedEvent = false;
+            _triggered = false;
             _time = 0f;
         }
 
