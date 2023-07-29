@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2637004492396355834}
   - component: {fileID: 2123692646192237726}
   - component: {fileID: 2123692646192237727}
+  - component: {fileID: 1091362764970465215}
   m_Layer: 0
   m_Name: TutorialCrystalB
   m_TagString: Untagged
@@ -34,7 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2637004492396355832
 SpriteRenderer:
@@ -184,3 +185,29 @@ MonoBehaviour:
   - {fileID: -1204924550, guid: 3eeb3758d43430147b2dc74aa862d006, type: 3}
   - {fileID: 534357636, guid: 3eeb3758d43430147b2dc74aa862d006, type: 3}
   - {fileID: -947648333, guid: 3eeb3758d43430147b2dc74aa862d006, type: 3}
+--- !u!61 &1091362764970465215
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3884175334450417091}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 2.6, y: -7.08}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2, y: 4}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2, y: 4}
+  m_EdgeRadius: 0
