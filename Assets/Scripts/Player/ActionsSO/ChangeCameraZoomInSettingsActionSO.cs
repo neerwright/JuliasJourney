@@ -47,6 +47,7 @@ namespace Player
 					if(_instance != null)
 					{
 						_instance.DisableWhenOneTarget = OriginSO.DisableWhenOneTarget;
+						Debug.Log("Disable");
 					}
 				    	
 
@@ -63,7 +64,9 @@ namespace Player
             {
 				_time = 0f;
                 _startDelay = true;
-
+				if(_instance == null)
+					_instance = (ProCamera2DZoomToFitTargets) GameObject.FindObjectOfType(typeof(ProCamera2DZoomToFitTargets));
+					Debug.Log(_instance);
             }
 		}
 
@@ -72,6 +75,9 @@ namespace Player
 			
 			if (OriginSO.Moment == SpecificMoment.OnStateExit)
             {
+				if(_instance == null)
+					_instance = (ProCamera2DZoomToFitTargets) GameObject.FindObjectOfType(typeof(ProCamera2DZoomToFitTargets));
+
 				if(_instance != null)
 					_instance.DisableWhenOneTarget = OriginSO.DisableWhenOneTarget;
             }

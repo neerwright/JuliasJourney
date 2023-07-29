@@ -68,6 +68,7 @@ public class StartCutscene : MonoBehaviour
         if(state == StartCutsceneState.ending)
             return;
         _player = GameObject.FindWithTag("Player");
+        
         StartCoroutine("WaitBeforeStarting");
         
     }
@@ -104,6 +105,8 @@ public class StartCutscene : MonoBehaviour
         yield return new WaitForSeconds(2f);
         state = StartCutsceneState.ending;
         GivePlayerControl();
+        yield return new WaitForSeconds(1f);
+        ProCamera2D.Instance.Reset(false, false, true);
 
     }
     private void GivePlayerControl()
@@ -116,13 +119,16 @@ public class StartCutscene : MonoBehaviour
 
         GameObject player = GameObject.FindWithTag("Player");
         ProCamera2D.Instance.AddCameraTarget(player.transform, 1f, 1f, 0f);
-        ProCamera2D.Instance.OffsetX = 0.7f;
+        ProCamera2D.Instance.OffsetX = 0.15f;
+        
         PlayerRendererController _rendController = player.GetComponent<PlayerRendererController>();
         _rendController.TurnRenderesOn();
         PlayerScript _playerScript = player.GetComponent<PlayerScript>();
         _playerScript.EnableControls();
 
         _gameState.UpdateGameState(GameState.Gameplay);
+
+        
         
     }
     private void ZoomToPlayer()
