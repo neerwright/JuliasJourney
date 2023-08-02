@@ -15,6 +15,8 @@ public enum StartCutsceneState
     playAnimation,
     ending
 }
+
+
 public class StartCutscene : MonoBehaviour
 {
     [SerializeField] private GameObject _camSetup;

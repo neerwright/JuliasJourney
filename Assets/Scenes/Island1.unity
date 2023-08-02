@@ -14334,6 +14334,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: FeatherPH 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2835455089241976143, guid: 23aed937e7749fb42841159cc6c01749, type: 3}
+      propertyPath: prefab
+      value: 
+      objectReference: {fileID: 3933331447850035238, guid: 94b7e21c5523c79418bec7a380e558c9, type: 3}
+    - target: {fileID: 2835455089241976143, guid: 23aed937e7749fb42841159cc6c01749, type: 3}
+      propertyPath: locationData.x
+      value: -68.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2835455089241976143, guid: 23aed937e7749fb42841159cc6c01749, type: 3}
+      propertyPath: locationData.y
+      value: 9.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 23aed937e7749fb42841159cc6c01749, type: 3}
