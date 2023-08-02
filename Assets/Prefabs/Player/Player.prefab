@@ -265,7 +265,7 @@ Transform:
   - {fileID: 4211041808524124072}
   - {fileID: 4129534464549732351}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &662188124845812086
 MonoBehaviour:
@@ -14492,6 +14492,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 3984013150013686060, guid: a43fdfe9391fe7d49bbf1e992a50f299, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: f522e3fdf97c8384db3ac20d5d824a17, type: 2}
     - target: {fileID: 4023873959363476318, guid: a43fdfe9391fe7d49bbf1e992a50f299, type: 3}
       propertyPath: m_Layer
       value: 8

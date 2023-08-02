@@ -65,6 +65,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: ec2e77625ca96fc498ad218ebd87cbe2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: TorsoTexture
     second: {fileID: 2100000, guid: ede7caacb4b0b3743aaa766b5a718ab4, type: 2}
   materials:
