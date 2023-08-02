@@ -1344,7 +1344,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -607479599
   m_SortingLayer: 8
-  m_SortingOrder: 0
+  m_SortingOrder: -2
   m_Sprite: {fileID: 21300000, guid: 9d5af91071c3d0946a7bce6190c95449, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5365,7 +5365,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -607479599
   m_SortingLayer: 8
-  m_SortingOrder: 5
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 9f73450a6635c9149a6bf65546c34842, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -5830,7 +5830,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7460469726558069861, guid: 57cf36ba0f0de42408910cc23130c374, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8708611595164787406, guid: 57cf36ba0f0de42408910cc23130c374, type: 3}
       propertyPath: m_Name
@@ -5859,6 +5859,49 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7207990063489217995, guid: 57cf36ba0f0de42408910cc23130c374, type: 3}
   m_PrefabInstance: {fileID: 969262426}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &969262428 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7460469726558069861, guid: 57cf36ba0f0de42408910cc23130c374, type: 3}
+  m_PrefabInstance: {fileID: 969262426}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &969262429
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 969262428}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 7.03, y: 4.43}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 72.54408, y: 28.125}
+    newSize: {x: 46.42821, y: 18}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2.2, y: 27.1}
+  m_EdgeRadius: 0
+--- !u!114 &969262430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 969262428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 337b463c9db24c242980012169439301, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &981464583
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11247,7 +11290,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -607479599
   m_SortingLayer: 8
-  m_SortingOrder: 14
+  m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 509ac330f8af3e642b202e094398ba7c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -12935,6 +12978,7 @@ MonoBehaviour:
   _tablePoint: {fileID: 1003173476}
   _audioClipGameEvent: {fileID: 11400000, guid: 81d4b4bbc810c884ab26605aa4d35b1a, type: 2}
   _squeackClip: {fileID: 8300000, guid: c1424134c3a6f1d48ba5a25367a0aecc, type: 3}
+  _winkSoundClip: {fileID: 8300000, guid: 37ecfc374d38b7e4e87b23b1f461b781, type: 3}
   _winkClip:
     _FadeDuration: 0.25
     _Events:

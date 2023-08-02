@@ -34,6 +34,7 @@ public class EndCutscene : MonoBehaviour
     [Header("Audio")]
     [SerializeField] private AudioClipGameEvent _audioClipGameEvent = default;
     [SerializeField] private AudioClip _squeackClip;
+    [SerializeField] private AudioClip _winkSoundClip;
 
     [Header("Animation")]
     [SerializeField] private ClipTransition _winkClip;
@@ -92,6 +93,10 @@ public class EndCutscene : MonoBehaviour
         
         ProCamera2D.Instance.RemoveCameraTarget(go.transform);
         ProCamera2D.Instance.AddCameraTarget(_endPlayerModel.transform, 1f, 1f, 0f);
+        ProCamera2DForwardFocus ff = ProCamera2D.Instance.GetComponent<ProCamera2DForwardFocus>();
+        ff.enabled = false;
+        ProCamera2DZoomToFitTargets _instance = (ProCamera2DZoomToFitTargets) GameObject.FindObjectOfType(typeof(ProCamera2DZoomToFitTargets));
+        _instance.DisableWhenOneTarget = false;
 
         PlayerScript _playerScript = go.GetComponent<PlayerScript>();
         _playerScript.DisableControls();
@@ -116,19 +121,21 @@ public class EndCutscene : MonoBehaviour
 
     private IEnumerator PlayAnims()
     {
-        Debug.Log("PlayAnimas1");
+
         _startedPlayingAnim = true;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.0f);
 
         if(_playerAnimancer != null)
             _playerAnimancer.Play(_winkClip);
-Debug.Log("PlayAnimas2");
-        yield return new WaitForSeconds(2f);
+
+        _audioClipGameEvent.Raise(_winkSoundClip, 0.4f);
+
+        yield return new WaitForSeconds(1.15f);
 
         _blueAnimancer = _blue.GetComponent<AnimancerComponent>();
         if(_blueAnimancer != null)
             _blueAnimancer.Play(_blushClip);
-Debug.Log("PlayAnimas3");
+
 
         yield return new WaitForSeconds(1f);
 
