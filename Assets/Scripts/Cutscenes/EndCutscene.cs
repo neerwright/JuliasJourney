@@ -114,7 +114,6 @@ public class EndCutscene : MonoBehaviour
         {
             state = EndCutsceneState.playAnimations;
             StartCoroutine("PlayAnims");
-            Debug.Log("PlayAnimations");
         }
         
     }
