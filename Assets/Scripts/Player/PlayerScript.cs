@@ -48,6 +48,8 @@ namespace Player
 		private IEnumerator coroutine;
 
 		private bool _inputsDisabled = false;
+		private bool _pausedGame = false;
+		private bool _PausecoRoutineIsPlaying = false;
 
 		public void DisableControls()
 		{
@@ -64,8 +66,13 @@ namespace Player
 
 		public void OnResumeGame()
 		{
+			Debug.Log("ResumeGame");
 			_playerState.UpdateGameState(GameState.Gameplay);
 			Time.timeScale = 1;
+			if(!_PausecoRoutineIsPlaying)
+				StartCoroutine("WaitToPauseAgain");
+			
+			
 		}
 
 
@@ -195,10 +202,16 @@ namespace Player
 
 		private void OnPause()
 		{
-			Time.timeScale = 0;
 			_pauseEvent?.Raise();
+			Debug.Log(_pausedGame);
+			if(_pausedGame)
+				return;
+			Time.timeScale = 0;
+			
 			_playerState.UpdateGameState(GameState.Menu);
+			_pausedGame = true;
 		}
+
 
 		private void OnTimer()
 		{
@@ -215,6 +228,14 @@ namespace Player
 			yield return new WaitForSeconds(seconds);
 			_coRoutineIsPlaying = false;
 			interactInput = false;
+		}
+
+		IEnumerator WaitToPauseAgain()
+		{			
+			_PausecoRoutineIsPlaying = true;
+			yield return new WaitForSeconds(1f);
+			_PausecoRoutineIsPlaying = false;
+			_pausedGame = false;
 		}
 
 	}

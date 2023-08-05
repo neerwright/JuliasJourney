@@ -30,6 +30,8 @@ namespace UI
         private CanvasController _pauseMenu;
         private CanvasController _pocketwatchUI;
 
+        private bool _pauseMenueActive = false;
+
         void Awake()
         {
             if(_mainMenu)
@@ -89,19 +91,30 @@ namespace UI
 
         public void PauseGame()
         {
+            if(_pauseMenueActive)
+            {
+                ResumeGame();
+                return;
+            }
+                
+            Debug.Log("_pauseMenu");
             if(_pauseMenu)
             {
                 _pauseMenu.gameObject.SetActive(true);
             }
+            _pauseMenueActive = !_pauseMenueActive;
         }
 
         public void ResumeGame()
         {
+                Debug.Log("Resume");
             if(_pauseMenu)
             {
                 _resumeGameEvent.Raise();
                 _pauseMenu.gameObject.SetActive(false);
             }
+
+            _pauseMenueActive = !_pauseMenueActive;
         }
 
 
