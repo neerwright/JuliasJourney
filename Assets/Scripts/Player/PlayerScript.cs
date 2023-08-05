@@ -16,6 +16,8 @@ namespace Player
 		[SerializeField] private GameEvent _pauseEvent;
 		[SerializeField] private GameStateSO _playerState;
 		[SerializeField] private Vector2VariableSO _playerPosition;
+
+		[SerializeField] private GameEvent _toggleTimerEvent;
 		
 		private Vector2 _inputVector;
 		private float _previousSpeed;
@@ -79,6 +81,7 @@ namespace Player
 			_playerInputSO.AttackEvent += OnStartedAttack;
 			_playerInputSO.InteractEvent += OnInteract;
 			_playerInputSO.PauseEvent += OnPause;
+			_playerInputSO.TimerEvent += OnTimer;
 
 			//...
 			coroutine = WaitUntilInteractCanBePressedAgain(INPUT_BUFFER);
@@ -95,6 +98,7 @@ namespace Player
 			_playerInputSO.AttackEvent -= OnStartedAttack;
 			_playerInputSO.InteractEvent -= OnInteract;
 			_playerInputSO.PauseEvent -= OnPause;
+			_playerInputSO.TimerEvent -= OnTimer;
 			//...
 		}
 
@@ -194,6 +198,15 @@ namespace Player
 			Time.timeScale = 0;
 			_pauseEvent?.Raise();
 			_playerState.UpdateGameState(GameState.Menu);
+		}
+
+		private void OnTimer()
+		{
+			Debug.Log("PlayerScript");
+			if(_playerState.CurrentGameState == GameState.Menu);
+			{
+				_toggleTimerEvent?.Raise();
+			}
 		}
 
 		IEnumerator WaitUntilInteractCanBePressedAgain(float seconds)

@@ -247,6 +247,11 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &211846994 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 968076446683527215, guid: 8b28362b8c90d2249944d40b2f768bc4, type: 3}
+  m_PrefabInstance: {fileID: 6882976290325942786}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &543602489
 GameObject:
   m_ObjectHideFlags: 0
@@ -1403,6 +1408,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameplayUIManager
       objectReference: {fileID: 0}
+    - target: {fileID: 619638137405282390, guid: 8b28362b8c90d2249944d40b2f768bc4, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 854355494091036293, guid: 8b28362b8c90d2249944d40b2f768bc4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1426,6 +1435,14 @@ PrefabInstance:
     - target: {fileID: 854355494091036293, guid: 8b28362b8c90d2249944d40b2f768bc4, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 968076446683527212, guid: 8b28362b8c90d2249944d40b2f768bc4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 968076446683527215, guid: 8b28362b8c90d2249944d40b2f768bc4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5431852657054583329, guid: 8b28362b8c90d2249944d40b2f768bc4, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1599,6 +1616,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6882976289601220582, guid: 8b28362b8c90d2249944d40b2f768bc4, type: 3}
+      propertyPath: m_text
+      value: Timer - select
+      objectReference: {fileID: 0}
     - target: {fileID: 6882976289799792347, guid: 8b28362b8c90d2249944d40b2f768bc4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1639,6 +1660,175 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6882976290325942790, guid: 8b28362b8c90d2249944d40b2f768bc4, type: 3}
+      propertyPath: Response.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 968076446683527212, guid: 8b28362b8c90d2249944d40b2f768bc4, type: 3}
+    - {fileID: 619638137405282390, guid: 8b28362b8c90d2249944d40b2f768bc4, type: 3}
+    - {fileID: 6882976290325942790, guid: 8b28362b8c90d2249944d40b2f768bc4, type: 3}
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b28362b8c90d2249944d40b2f768bc4, type: 3}
+--- !u!114 &6882976290325942787 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6882976290299817040, guid: 8b28362b8c90d2249944d40b2f768bc4, type: 3}
+  m_PrefabInstance: {fileID: 6882976290325942786}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6882976290325942788 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6882976288614639287, guid: 8b28362b8c90d2249944d40b2f768bc4, type: 3}
+  m_PrefabInstance: {fileID: 6882976290325942786}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6882976290325942789 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6882976289140249836, guid: 8b28362b8c90d2249944d40b2f768bc4, type: 3}
+  m_PrefabInstance: {fileID: 6882976290325942786}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6882976290325942790 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6882976289799792344, guid: 8b28362b8c90d2249944d40b2f768bc4, type: 3}
+  m_PrefabInstance: {fileID: 6882976290325942786}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6882976290325942791 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6882976289601220582, guid: 8b28362b8c90d2249944d40b2f768bc4, type: 3}
+  m_PrefabInstance: {fileID: 6882976290325942786}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &6882976290325942792 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 111391229462910938, guid: 8b28362b8c90d2249944d40b2f768bc4, type: 3}
+  m_PrefabInstance: {fileID: 6882976290325942786}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6882976290325942793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6882976290325942792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 429c43054435ab44e9b48071c8624c9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 36cd3b96c6eaf3b4889edb1f02a3c1de, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6882976290325942795}
+        m_TargetAssemblyTypeName: UI.Stopwatch, UI
+        m_MethodName: StartTimer
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6882976290325942794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6882976290325942792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7881123eb9ed30f41865049f3d528cc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: f01742cdaa7aa6b4e9e20e4bdc18f7b4, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6882976290325942795}
+        m_TargetAssemblyTypeName: UI.Stopwatch, UI
+        m_MethodName: ResetTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6882976290325942795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6882976290325942792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 064fce72f1df1584dad2e8e4615b2d1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stageText: {fileID: 6882976290325942791}
+  _timer1Text: {fileID: 6882976290325942790}
+  _timer2Text: {fileID: 6882976290325942789}
+  _timer3Text: {fileID: 6882976290325942788}
+  _totalText: {fileID: 6882976290325942787}
+  _stopWatch: {fileID: 211846994}
+--- !u!114 &6882976290325942796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6882976290325942792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7881123eb9ed30f41865049f3d528cc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 51011b49300bfac448e00489fbdbdfd3, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6882976290325942795}
+        m_TargetAssemblyTypeName: UI.Stopwatch, UI
+        m_MethodName: OnToggleTimer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

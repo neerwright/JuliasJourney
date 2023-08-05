@@ -24,6 +24,7 @@ namespace Player
         public event UnityAction StoppedInteractEvent = delegate{};
         public event UnityAction ResetEvent = delegate{};
         public event UnityAction PauseEvent = delegate{};
+        public event UnityAction TimerEvent = delegate{};
 
 
         private PlayerInputActions _playerInputActions;
@@ -111,6 +112,13 @@ namespace Player
         {
             if(context.phase == InputActionPhase.Performed)
                 PauseEvent.Invoke();
+        }
+
+        public void OnTimer(InputAction.CallbackContext context)
+        {
+            Debug.Log("inoutAction");
+            if(context.phase == InputActionPhase.Performed)
+                TimerEvent.Invoke();
         }
 
         

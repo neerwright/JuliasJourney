@@ -23,10 +23,27 @@ namespace UI
         [SerializeField] private TextMeshProUGUI _timer3Text;
         [SerializeField] private TextMeshProUGUI _totalText;
 
+        [SerializeField] private GameObject _stopWatch;
+        private bool _active = false;
+
         public void ResetTimer()
         {
             _currentTime = 0f;
             _timeSegments[_currentIsland] = 0f;
+        }
+
+        public void OnToggleTimer()
+        {
+            Debug.Log(_active);
+            if(_active)
+            {
+                _stopWatch.SetActive(false);
+            }
+            else
+            {
+                _stopWatch.SetActive(true);
+            }
+            _active = !_active;
         }
 
         public void StartTimer(string islandName)
@@ -77,7 +94,7 @@ namespace UI
             _timeSegments = new Dictionary<string, float>();
             _last3Islands = new Queue<string>();
             _islandTexts = new List<TextMeshProUGUI>();
-          
+            
             
             
 
@@ -88,6 +105,7 @@ namespace UI
             _islandTexts.Add(_timer1Text);
             _islandTexts.Add(_timer2Text);
             _islandTexts.Add(_timer3Text);
+            _stopWatch.SetActive(false);
         }
 
         private void WriteText()

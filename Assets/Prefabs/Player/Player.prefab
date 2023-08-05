@@ -265,7 +265,7 @@ Transform:
   - {fileID: 4211041808524124072}
   - {fileID: 4129534464549732351}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &662188124845812086
 MonoBehaviour:
@@ -285,6 +285,7 @@ MonoBehaviour:
   _pauseEvent: {fileID: 11400000, guid: 17631cd9a977f9742a1d85b16f611021, type: 2}
   _playerState: {fileID: 11400000, guid: c2ccf5a952309dc409a3bc6284fa13c1, type: 2}
   _playerPosition: {fileID: 11400000, guid: b3ef5fa68a2d03a499c3278418310f2c, type: 2}
+  _toggleTimerEvent: {fileID: 11400000, guid: 51011b49300bfac448e00489fbdbdfd3, type: 2}
 --- !u!114 &662188124845812081
 MonoBehaviour:
   m_ObjectHideFlags: 0
