@@ -1,19 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Scriptables;
 
 namespace Sounds
 {
     public class PlayMusicOnLoad : MonoBehaviour
     {
-        [SerializeField] private AudioClip _clip;
-        [Range(0,1)]
-        [SerializeField] private float _volume = 1;
-        [SerializeField] private AudioClipGameEvent _playMusicEvent;
+        [SerializeField] private GameEvent _playNextSongPart;
+        [SerializeField] private bool  _playOnAwake;
 
-        void Start()
+        private bool _triggered = false;
+
+        private void Start()
         {
-            _playMusicEvent.Raise(_clip, _volume);
+            if(_playOnAwake)
+                _playNextSongPart.Raise();
+        }
+        private void OnTriggerEnter2D(Collider2D col)
+        {
+            if(_triggered)
+                return;
+
+            if(col.gameObject.tag == "Player")
+            {
+                Debug.Log("triiiigg");
+                _triggered = true;
+                _playNextSongPart.Raise();
+            }
+            
         }
 
     }

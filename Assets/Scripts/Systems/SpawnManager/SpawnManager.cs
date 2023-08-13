@@ -48,7 +48,6 @@ public class SpawnManager : MonoBehaviour
             
             var objScript = envObj.GetComponent<EnvironmentObject>();
             var objInstance = Instantiate(objScript.prefab, objScript.locationData, Quaternion.identity, _currentEnvironmentParentObject.GObject.transform);
-            Debug.Log(objInstance);
             if(objInstance != null)
                 objInstance.GetComponent<IEnvironmentalObject>().Initialize(_playerInstance);
 

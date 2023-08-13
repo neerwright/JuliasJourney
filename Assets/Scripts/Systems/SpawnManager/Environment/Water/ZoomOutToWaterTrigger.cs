@@ -17,8 +17,6 @@ namespace environment
         private bool _active = false;
         void Awake()
         {
-            print("OG cam smoothness ");
-            print(ProCamera2D.Instance.VerticalFollowSmoothness);
         }
         private void OnTriggerEnter2D(Collider2D collider)
         {

@@ -47,7 +47,6 @@ namespace Player
 					if(_instance != null)
 					{
 						_instance.DisableWhenOneTarget = OriginSO.DisableWhenOneTarget;
-						Debug.Log("Disable");
 					}
 				    	
 
@@ -66,7 +65,6 @@ namespace Player
                 _startDelay = true;
 				if(_instance == null)
 					_instance = (ProCamera2DZoomToFitTargets) GameObject.FindObjectOfType(typeof(ProCamera2DZoomToFitTargets));
-					Debug.Log(_instance);
             }
 		}
 

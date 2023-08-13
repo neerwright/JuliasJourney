@@ -90,12 +90,10 @@ public class StartCutscene : MonoBehaviour
         yield return new WaitForSeconds(_delay);
         _rendController.TurnRenderesOff();
         yield return new WaitForSeconds(13.5f);
-        Debug.Log("Remove target");
         ProCamera2D.Instance.RemoveCameraTarget(_camCutsceneStartPoint);
     }
     private IEnumerator TalkAndPlayAnim()
     {
-        Debug.Log("textttt");
         _startedPlayingAnim = true;
         gameObject.GetComponent<BubbleCreator>().CreateBubble(_textPoint, Vector2.zero, "I have to get over there!");
         yield return new WaitForSeconds(2f);

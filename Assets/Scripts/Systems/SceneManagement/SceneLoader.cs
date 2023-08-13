@@ -68,8 +68,6 @@ namespace SceneManagement
         public void LoadNextIsland(GameSceneSO locationToLoad)
         {
             //
-            Debug.Log("looooooooaaaaaaaaaaaaaddd");
-            Debug.Log(locationToLoad.sceneName);
             if(_isLoading && !waiting)
             {
                 StartCoroutine(WaitToLoadIslandNext(locationToLoad));
@@ -132,7 +130,6 @@ namespace SceneManagement
             waiting = true;
             while (_isLoading) 
             {
-                Debug.Log("waiting...");
                 yield return new WaitForSeconds(0.1f);
             }
             LoadNextIsland(locationToLoad);

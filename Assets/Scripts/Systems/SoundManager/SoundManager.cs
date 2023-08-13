@@ -10,7 +10,7 @@ namespace Sounds
     {
         [SerializeField] private AudioSource _playerAudioSource, _effectsSource, _musicSource, _ambienceSource;
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
             _musicSource.loop = true;
             _ambienceSource.loop = true;
@@ -30,6 +30,8 @@ namespace Sounds
 
         public void PlayMusic(AudioClip clip, float volume)
         {
+            Debug.Log("PlayMusic");
+            Debug.Log(clip);
             _musicSource.volume = volume;
             if(_musicSource.isPlaying)
                 _musicSource.Pause();
@@ -45,7 +47,7 @@ namespace Sounds
 
         public void PlayAmbience(AudioClip clip, float volume)
         {
-            Debug.Log("Play");
+            
             _ambienceSource.volume = volume;
             if(_ambienceSource.isPlaying)
                 _ambienceSource.Pause();

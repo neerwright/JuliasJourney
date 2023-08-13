@@ -34,7 +34,6 @@ namespace NPC
                 _timer -= Time.unscaledDeltaTime;
                 if(_timer <= 0f)
                 {
-                    Debug.Log("writing next char");
                     _timer += _timePerChar;
                     _charIndex++;
                     _text.SetText(_textToWrite.Substring(0, _charIndex));
