@@ -20,7 +20,6 @@ namespace RewindSystem
             //_playerScript.movementVector = data.vel;
             _animationData.Time = data.time;
             _animationData.Clip = data.clip;
-            Debug.Log(_playerVelocity);
         }
     }
 }

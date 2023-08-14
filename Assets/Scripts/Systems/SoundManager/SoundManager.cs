@@ -30,6 +30,13 @@ namespace Sounds
 
         public void PlayMusic(AudioClip clip, float volume)
         {
+            if(volume <= 0f)
+            {
+                _musicSource.Stop();
+                Debug.Log("SILENCE!!!");
+                _musicSource.PlayOneShot(clip);
+                return;
+            }
             Debug.Log("PlayMusic");
             Debug.Log(clip);
             _musicSource.volume = volume;

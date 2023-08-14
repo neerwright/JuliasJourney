@@ -22,6 +22,7 @@ namespace GameManager
         {
             if(!_startedGame)
             {   
+                Application.targetFrameRate = 60;
                 _gameState.UpdateGameState(GameState.Cutscene);
                 //load level 2, where the object for the cutscene gets spawned
                 _nextIslandEvent?.Raise(_nextIsland);
