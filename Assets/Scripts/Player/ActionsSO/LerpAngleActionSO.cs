@@ -41,7 +41,7 @@ namespace Player
                 return;
 
             _current = Mathf.MoveTowards(_current, _target, _originSO.lerpSpeed * Time.deltaTime);
-            if(_current >= 0.02f)
+            if(_current >= 0.9f)
             {
                 _current = 1;
                 _finished = true;
