@@ -89,7 +89,7 @@ namespace Sounds
                     break;
 
                 case MusicState.SadSax:
-                    _nextPartCounter = 2;
+                    _nextPartCounter = 1;
 
                     break;
 
