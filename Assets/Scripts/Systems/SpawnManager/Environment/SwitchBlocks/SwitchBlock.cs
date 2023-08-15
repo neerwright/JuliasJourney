@@ -82,7 +82,6 @@ namespace environment
                 {
                     if(active)
                     {
-                        Debug.Log("switching");
                         Switch();
                     }       
                 }

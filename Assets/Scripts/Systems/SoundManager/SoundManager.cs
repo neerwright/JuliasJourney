@@ -49,7 +49,7 @@ namespace Sounds
 
         public void StopMusic()
         {
-            _musicSource.Pause();
+            _musicSource.Stop();
         }
 
         public void PlayAmbience(AudioClip clip, float volume)

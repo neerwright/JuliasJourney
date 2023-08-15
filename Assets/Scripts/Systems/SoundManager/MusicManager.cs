@@ -93,12 +93,18 @@ namespace Sounds
 
                     break;
 
+                case MusicState.FinalTransition:
+                    _stopMusicEvent.Raise();
+                    _state = MusicState.Finale;
+                    _playMusicEvent.Raise(_musicClips[(int) _state], 0);
+                    _time = 0f;
+                    break;
+
 
                 case MusicState.notPlaying:
                     _state = MusicState.Intro;
                     _playMusicEvent.Raise(_musicClips[(int) _state], _volume);
                     _time = 0f;
-                    Debug.Log("intro");
                     break;
                 default:
                     _nextPartCounter = 1;
@@ -122,10 +128,10 @@ namespace Sounds
 
         void Update()
         {
-            if(_state == MusicState.notPlaying)
+            if(_state == MusicState.notPlaying || _state == MusicState.Finale)
                 return;
             
-            _time += Time.deltaTime;
+            _time += Time.unscaledDeltaTime;
 
             //at end of current clip, start the neext one
             float trackLength = _musicClips[(int) _state].length;
@@ -279,6 +285,9 @@ namespace Sounds
             {
                 yield return new WaitForSeconds(0.5f);
             }
+            Debug.Log("COOOOOOOOOOOOOOOOOOOOOOOOO");
+            Debug.Log(_state);
+
             PlayNextPart();
             
         }
