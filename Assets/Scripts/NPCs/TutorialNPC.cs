@@ -71,7 +71,7 @@ namespace NPC
             }
             if(_tutorialType == TurorialType.BtoRewind)
             {
-                text = "Hold          / SHIFT to rewind time";
+                text = "Hold          / SHIFT to rewind time and break         ";
             }
             return text;
         }

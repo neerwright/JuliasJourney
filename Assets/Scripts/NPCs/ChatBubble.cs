@@ -9,8 +9,10 @@ namespace NPC
     {
         [SerializeField] private GameObject _bubblePrefab;
         [SerializeField] TextWriter _textWriter;
+        [SerializeField] float _fixOffset = 2f;
 
         private SpriteRenderer _backgroundSpriteRenderer;
+        private SpriteRenderer _backgroundFixSpriteRenderer;
         private SpriteRenderer _iconSpriteRenderer;
         private SpriteRenderer _icon2SpriteRenderer;
         private TextMeshPro _text;
@@ -29,6 +31,7 @@ namespace NPC
         private void Awake()
         {
             _backgroundSpriteRenderer = transform.Find("Background").GetComponent<SpriteRenderer>();
+            _backgroundFixSpriteRenderer = transform.Find("BackgroundFix").GetComponent<SpriteRenderer>();
             _iconSpriteRenderer = transform.Find("Icon").GetComponent<SpriteRenderer>();
             _icon2SpriteRenderer = transform.Find("Icon2").GetComponent<SpriteRenderer>();
             _text = transform.Find("Text").GetComponent<TextMeshPro>();
@@ -79,7 +82,8 @@ namespace NPC
 
             _textWriter.AddWriter(_text, textToWrite, TIME_PER_CHAR);
 
-
+            _backgroundFixSpriteRenderer.size = _backgroundSpriteRenderer.size;
+            _backgroundFixSpriteRenderer.transform.localPosition = new Vector3((_backgroundSpriteRenderer.size.x / 2f) - _fixOffset, 0f);
             _active = true;
         }
 
