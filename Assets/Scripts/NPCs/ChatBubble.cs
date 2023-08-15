@@ -18,7 +18,7 @@ namespace NPC
         private float _icon1Delay;
         private float _icon2Delay;
 
-        private Vector2 _padding = new Vector2(0f,0f);
+        private Vector2 _padding = new Vector2(4f,0.8f);
         private const float TIME_PER_CHAR = 0.06f;
 
         private float _time = 0f;
@@ -41,6 +41,8 @@ namespace NPC
                 _iconSpriteRenderer.enabled = (false);
             if(_icon2SpriteRenderer != null)
                 _icon2SpriteRenderer.enabled = (false);
+
+            
         }
 
         // Update is called once per frame
@@ -48,7 +50,7 @@ namespace NPC
         {
             if(_active)
             {
-                _backgroundSpriteRenderer.transform.localPosition = new Vector3(_backgroundSpriteRenderer.size.x / 2f, 0f);
+                _backgroundSpriteRenderer.transform.localPosition = new Vector3((_backgroundSpriteRenderer.size.x / 2f) - 1.5f, 0f);
                 Resize();
 
                 _time += Time.unscaledDeltaTime;
@@ -73,7 +75,7 @@ namespace NPC
             _icon2Delay = delay2;
             
             Resize();
-            _backgroundSpriteRenderer.transform.localPosition = new Vector3(_backgroundSpriteRenderer.size.x / 2f, 0f);
+            _backgroundSpriteRenderer.transform.localPosition = new Vector3((_backgroundSpriteRenderer.size.x / 2f) - 1.5f, 0f);
 
             _textWriter.AddWriter(_text, textToWrite, TIME_PER_CHAR);
 
@@ -85,8 +87,8 @@ namespace NPC
         {
             _text.ForceMeshUpdate();
             Vector2  textSize = _text.GetRenderedValues(false);
-            
             _backgroundSpriteRenderer.size = textSize + _padding;
+            
         }
     }
 }
