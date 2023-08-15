@@ -38,6 +38,7 @@ namespace environment
 
         public void Reseting()
         {
+            _spriteRenderer.enabled = true;
             _spriteRenderer.sprite = _closeEyeSprites[0];
             _triggered = false;
         }
@@ -45,6 +46,7 @@ namespace environment
 
         void Start()
         {
+            _spriteRenderer.enabled = true;
             _spriteRenderer.sprite = _closeEyeSprites[0];
             _pos = transform.position;
         }
@@ -137,8 +139,9 @@ namespace environment
                 yield return new WaitForSeconds(DELAY);
                 
             }
+            _spriteRenderer.enabled = false;
             yield return new WaitForSeconds(BIG_DELAY);
-            
+             
             
             
             //_triggered = false;
