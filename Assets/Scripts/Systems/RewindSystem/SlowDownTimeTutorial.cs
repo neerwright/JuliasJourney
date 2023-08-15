@@ -72,7 +72,7 @@ namespace RewindSystem
                 
                 _slowDown = false;
                 //Time.fixedDeltaTime = 0f;
-                Time.timeScale = 0f;
+                Time.timeScale = 0.001f;
                 return;
             }
 

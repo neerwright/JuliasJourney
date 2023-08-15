@@ -20,11 +20,10 @@ namespace Sounds
         MainLoop = 10,
         SadTransition = 11,
         SadSax = 12,
-        ShortSadSax = 13,
-        End = 14,
-        FinalTransition = 15,
-        Finale = 16,
-        notPlaying = 17
+        End = 13,
+        FinalTransition = 14,
+        Finale = 15,
+        notPlaying = 16
     }
 
     public class MusicManager : MonoBehaviour
@@ -50,6 +49,7 @@ namespace Sounds
         {
             if(_nextPartCounter > 0)
             {
+                Debug.Log("COROUTINE");
                 StartCoroutine("WaitUntilLastTransitionFinished");
             }
 
@@ -88,10 +88,11 @@ namespace Sounds
 
                     break;
 
-                case MusicState.ShortSadSax:
+                case MusicState.SadSax:
                     _nextPartCounter = 2;
 
                     break;
+
 
                 case MusicState.notPlaying:
                     _state = MusicState.Intro;
@@ -159,6 +160,9 @@ namespace Sounds
 
             if(_time  >= trackLength)
             {
+                Debug.Log("TIMER OVEEEER");
+                Debug.Log(_nextPartCounter);
+
                 if(_nextPartCounter > 0)
                 {
                     //_stopMusicEvent.Raise();
@@ -244,7 +248,7 @@ namespace Sounds
                         {
                             Debug.Log("state");
                             Debug.Log(_state);
-                            _playMusicEvent.Raise(_musicClips[(int) _state], _volume);
+                            _playMusicEvent.Raise(_musicClips[12], _volume);
                         }
                         else
                         {
