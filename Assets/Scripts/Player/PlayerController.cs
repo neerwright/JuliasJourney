@@ -136,7 +136,7 @@ namespace Player
                 HandleMovingPlatform();
                 MoveCharacter(movementVector);
             }
-            
+            Debug.Log(IsOnSlopeVertical);
         }
 
         #region WallAndSlopeCheck

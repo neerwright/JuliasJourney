@@ -324,7 +324,7 @@ MonoBehaviour:
   _nudgeDetectionDistance: 0.4
   _slopeCheckDistanceVertical: 1.7
   _slopeCheckDistanceHorizontal: 0.7
-  _maxSlopeAngle: 60
+  _maxSlopeAngle: 48
   _bonkedThreashold: 0.362
   _coyoteTimeThreshold: 0.05
 --- !u!50 &662188124845812083
