@@ -56,7 +56,7 @@ namespace RewindSystem
         public void OnReset()
         {
             _raisedEvent = false;
-            _triggered = false;
+            //_triggered = false;
             _time = 0f;
         }
 
@@ -72,7 +72,7 @@ namespace RewindSystem
                 
                 _slowDown = false;
                 //Time.fixedDeltaTime = 0f;
-                Time.timeScale = 0.001f;
+                Time.timeScale = 0.0001f;
                 return;
             }
 
