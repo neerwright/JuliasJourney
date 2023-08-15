@@ -13,6 +13,8 @@ namespace environment
         [SerializeField] private Sprite[] _lookDirectionSprites;
         [SerializeField] private Sprite[] _closeEyeSprites;
 
+        [SerializeField] private ParticleSystem _shockwavePS;
+
         private const string PLAYER_TAG = "Player";
         private const string PUSHBOX_TAG = "PushBox";
         private const float DELAY = 0.05f;
@@ -46,6 +48,7 @@ namespace environment
 
         void Start()
         {
+            _shockwavePS.Stop();
             _spriteRenderer.enabled = true;
             _spriteRenderer.sprite = _closeEyeSprites[0];
             _pos = transform.position;
@@ -68,6 +71,7 @@ namespace environment
             
             if(collider.tag == PLAYER_TAG || collider.tag == PUSHBOX_TAG)
             {
+                 _shockwavePS.Play();
                 _triggered = true;
                 _switchBlocksEvent?.Raise();
                 StartCoroutine(PlayEyeAnimation());
@@ -130,6 +134,7 @@ namespace environment
                 yield return new WaitForSeconds(DELAY);
                 
             }
+            
             yield return new WaitForSeconds(BIG_DELAY);
 
 
@@ -139,6 +144,7 @@ namespace environment
                 yield return new WaitForSeconds(DELAY);
                 
             }
+            _shockwavePS.Stop();
             _spriteRenderer.enabled = false;
             yield return new WaitForSeconds(BIG_DELAY);
              

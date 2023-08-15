@@ -18,7 +18,7 @@ public class Rain : MonoBehaviour
 
     private void FollowPlayer()
     {
-        Debug.Log("Follow");
+        Debug.Log("Trig");
         float y =_rainPS.transform.position.y;
         float x =Player.transform.position.x;
         _rainPS.transform.position = new Vector2(x, y);
