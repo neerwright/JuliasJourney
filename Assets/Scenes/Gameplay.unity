@@ -550,6 +550,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3859648974809770552, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 4343
+      objectReference: {fileID: 0}
     - target: {fileID: 3859648974809770693, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
       propertyPath: OffsetX
       value: 0.161

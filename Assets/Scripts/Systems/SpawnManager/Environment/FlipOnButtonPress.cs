@@ -23,10 +23,14 @@ namespace environment
 
         void OnTriggerStay2D(Collider2D collider)
         {
-            if(_playerScript.jumpInput)
+            if(collider.gameObject.tag == "Player")
             {
-                _playerFlip.Raise();
+                if(_playerScript.jumpInput)
+                {
+                    _playerFlip.Raise();
+                }
             }
+            
         }
     }
 }
