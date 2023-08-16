@@ -311,7 +311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd34394d871b5164f8123dda712817f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _freeColliderIterations: 24
+  _freeColliderIterations: 8
   _characterBounds:
     m_Center: {x: 0, y: 0.44, z: 0}
     m_Extent: {x: 0.59, y: 1.98, z: 1}
