@@ -16,8 +16,8 @@ namespace NPC
         [SerializeField] GameObject _bubblePrefab;
         [SerializeField] TurorialType _tutorialType = TurorialType.AtoJump;
 
-        [SerializeField] float _delayIcon1 = 0.7f;
-        [SerializeField] float _delayIcon2 = 1.0f;
+        [SerializeField] float _delayIcon1 = 0.45f;
+        [SerializeField] float _delayIcon2 = 0.5f;
 
         [SerializeField]
         private float OFFSET_X = -6f;
