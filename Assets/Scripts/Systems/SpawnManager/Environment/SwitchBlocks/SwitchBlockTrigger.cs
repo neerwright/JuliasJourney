@@ -45,7 +45,11 @@ namespace environment
             _triggered = false;
         }
 
-
+        void OnEnable()
+        {
+            _shockwavePS.Stop();
+        }
+        
         void Start()
         {
             _shockwavePS.Stop();

@@ -46,12 +46,10 @@ namespace Player
 		{
 			_objectToEnable = OriginSO.objectToEnable.GObject;
 			_objectToDisable = OriginSO.objectToDisable.GObject;
-			Debug.Log(_objectToEnable);
 			if (OriginSO.Moment == SpecificMoment.OnStateEnter)
 			{
 				if(_objectToEnable)
 				{
-					//Debug.Log(_objectToEnable);
 					_objectToEnable.SetActive(true);
 				}
 				if(_objectToEnable)

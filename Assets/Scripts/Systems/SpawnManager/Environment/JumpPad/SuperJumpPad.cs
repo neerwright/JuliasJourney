@@ -21,7 +21,6 @@ namespace environment
                 var playerScript = Collider.gameObject.GetComponent<PlayerScript>();
                 if(playerScript)
                 {
-                    print("got it");
                     _touchedJumpPad.Value = true;
                     playerScript.movementVector.y = speed;
                 }

@@ -59,42 +59,9 @@ namespace SceneManagement
             }
             _menuLoadEvent.Raise(_menuToLoad);
             StartCoroutine("SwitchActive");
-            //var persistentManagers = SceneManager.GetSceneByName("PersistentManagers");
-            //if (persistentManagers.IsValid())
-            //{
-            //    Debug.Log("Set Active");
-            //    SceneManager.SetActiveScene(persistentManagers);
-            //    
-            //}
+
         }
 
-
-
-
-
-
-
-
-
-
-
-
-/*
-            var initScene = SceneManager.GetSceneByName("InitScene");
-            
-            SceneManager.sceneLoaded -= LoadMainMenu;
-            
-            _menuLoadEvent.Raise(_menuToLoad);
-            
-            SceneManager.SetActiveScene(initScene);
-            if (initScene.IsValid()) 
-            {
-                //yield return SceneManager.UnloadSceneAsync(initScene);
-            
-                SceneManager.UnloadSceneAsync("InitScene"); //Initialization is the only scene in BuildSettings, thus it has index 0
-            }
-        }
-        */
         
     }
 }

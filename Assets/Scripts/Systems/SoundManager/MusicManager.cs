@@ -166,8 +166,6 @@ namespace Sounds
             if(_time  >= trackLength)
             {
 
-                Debug.Log(_nextPartCounter);
-
                 if(_nextPartCounter > 0)
                 {
                     //_stopMusicEvent.Raise();
@@ -178,15 +176,10 @@ namespace Sounds
                         stateNumber = _musicClips.Length - 1;
                     _state = (MusicState)stateNumber;
                     
-                    Debug.Log(_silenceAfterPlaying);
                     if(_silenceAfterPlaying)
                         _playMusicEvent.Raise(_musicClips[(int) _state], 0);
                     else
                         _playMusicEvent.Raise(_musicClips[(int) _state], _volume);
-
-
-
-                    Debug.Log(_musicClips[(int) _state]);
 
                     
                 }

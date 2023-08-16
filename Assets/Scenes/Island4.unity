@@ -4049,7 +4049,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80590d0ec993424691bc514db0a66c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxDistance: 200
+  _maxDistance: 300
   _gameObject: {fileID: 1350248916}
 --- !u!4 &756304085
 Transform:

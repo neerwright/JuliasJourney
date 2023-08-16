@@ -48,6 +48,11 @@ namespace environment
             _playerScript = _player.GetComponent<PlayerScript>();
         }
 
+        void OnEnable()
+        {
+           Reset(); 
+        }
+
         private void Awake()
         {
             _rb2d = GetComponent<Rigidbody2D>();

@@ -153,7 +153,6 @@ namespace RewindSystem
             if(!_useArray)
             {
                 _recordedData.Add(data);
-                Debug.Log(_recordedData[_recordedData.Count -1].pos);
             }
             else
             {

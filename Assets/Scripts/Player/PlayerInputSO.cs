@@ -116,7 +116,6 @@ namespace Player
 
         public void OnTimer(InputAction.CallbackContext context)
         {
-            Debug.Log("inoutAction");
             if(context.phase == InputActionPhase.Performed)
                 TimerEvent.Invoke();
         }

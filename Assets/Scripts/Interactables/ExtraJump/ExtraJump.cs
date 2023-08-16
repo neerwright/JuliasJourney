@@ -19,7 +19,6 @@ namespace Environment{
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            Debug.Log("trig ");
             if(other.gameObject.tag == "Player")
             {
                 if (_isInsideCollider)

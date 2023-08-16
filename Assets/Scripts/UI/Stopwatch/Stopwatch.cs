@@ -34,7 +34,6 @@ namespace UI
 
         public void OnToggleTimer()
         {
-            Debug.Log(_active);
             if(_active)
             {
                 _stopWatch.SetActive(false);

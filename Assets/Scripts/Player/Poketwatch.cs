@@ -31,10 +31,8 @@ namespace Player
         {
             //GameObject _player = GameObject.FindWithTag("Player");
             //ProCamera2D.Instance.MoveCameraInstantlyToPosition(_player.transform.position);
-            Debug.Log("Start Rewind");
             if(_gameState.CurrentGameState ==  GameState.Gameplay)
             {
-                Debug.Log("Start Rewind Gameplay");
                 Time.fixedDeltaTime = _originalFixedDeltaTime;
                 Time.timeScale = 1f;
                 //ProCamera2D.Instance.AddCameraTarget(_secondaryPlayerTransform,0.2f, 0.2f, 0.3f);

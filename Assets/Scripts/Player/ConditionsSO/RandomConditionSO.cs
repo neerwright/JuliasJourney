@@ -42,7 +42,6 @@ namespace Player
         {
             if (Random.Range(1, 100) > i)
             {
-                Debug.Log("decision made");
                 return true;
             }
             return false;

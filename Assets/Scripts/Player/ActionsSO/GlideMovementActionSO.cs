@@ -142,31 +142,13 @@ namespace Player
 		{
 			
 
-			//Vector3 goalRotation = new Vector3( angle, 90f, 0f);
-			//_current = Mathf.MoveTowards(_current, _target, 0.5f * Time.deltaTime);
-			
-			//_playerModel.transform.rotation = Quaternion.Slerp(_playerModel.transform.rotation, Quaternion.Euler(goalRotation), _curve.Evaluate(_current) / 10);
-			//Debug.Log(_current);
-            //if(_current >= 0.6f)
-            //{
-            //    _current = 0;
-			//	_finishedDropped = !_finishedDropped;
-            //}
 		}
 
 		private void RotatePlayer()
 		{
 			if(!_dropped)
 			{
-				//Quaternion currRotation = _playerModel.transform.rotation;
-				//Vector3 currentEulerAngles = currRotation.eulerAngles;
 
-				//currentEulerAngles.x -= OriginSO.rotationSpeed * Time.deltaTime;
-				//if(currentEulerAngles.x < _maxUpAngle )
-				//	currentEulerAngles.x = _maxUpAngle;
-
-				//currRotation = Quaternion.Euler(currentEulerAngles);
-				//_playerModel.transform.rotation = currRotation;
 			}
 			else
 			{

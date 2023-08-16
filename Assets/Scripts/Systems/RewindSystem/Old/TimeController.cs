@@ -69,9 +69,7 @@ namespace RewindSystem
                     data.pos = timeObject.transform.position;
                     //data.vel = PlayerVelocity.Value;
                     _recordedData[objectIndex, recordCount] = data;
-                    //Debug.Log(_recordedData[objectIndex, recordCount].pos);
                     timeObjectsIndexDict[timeObjects.Items[objectIndex].ItemTwo] = objectIndex;
-                    Debug.Log(objectIndex);
                 }
                 recordCount++;
                 if(recordCount >= recordMax)

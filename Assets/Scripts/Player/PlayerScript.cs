@@ -66,7 +66,6 @@ namespace Player
 
 		public void OnResumeGame()
 		{
-			Debug.Log("ResumeGame");
 			_playerState.UpdateGameState(GameState.Gameplay);
 			Time.timeScale = 1;
 			if(!_PausecoRoutineIsPlaying)
@@ -203,7 +202,6 @@ namespace Player
 		private void OnPause()
 		{
 			_pauseEvent?.Raise();
-			Debug.Log(_pausedGame);
 			if(_pausedGame)
 				return;
 			Time.timeScale = 0;
@@ -215,7 +213,6 @@ namespace Player
 
 		private void OnTimer()
 		{
-			Debug.Log("PlayerScript");
 			if(_playerState.CurrentGameState == GameState.Menu);
 			{
 				_toggleTimerEvent?.Raise();

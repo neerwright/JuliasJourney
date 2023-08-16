@@ -97,7 +97,6 @@ namespace UI
                 return;
             }
                 
-            Debug.Log("_pauseMenu");
             if(_pauseMenu)
             {
                 _pauseMenu.gameObject.SetActive(true);
@@ -107,7 +106,6 @@ namespace UI
 
         public void ResumeGame()
         {
-                Debug.Log("Resume");
             if(_pauseMenu)
             {
                 _resumeGameEvent.Raise();

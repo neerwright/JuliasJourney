@@ -138,7 +138,6 @@ namespace SceneManagement
 
         public void LoadMenu(GameSceneSO menuToLoad)
         {
-            Debug.Log("LoadMenue");
             //Prevent a double-loading, for situations where the player falls in two Exit colliders in one frame
             if (_isLoading)
             {
@@ -181,7 +180,6 @@ namespace SceneManagement
             }
             if(_loadIsland || gameScene.sceneName == _firstIsland.sceneName)
             {
-                Debug.Log("Raise");
                 _onIslandReady?.Raise();
                 _islandsLoaded.Enqueue(gameScene); 
             }

@@ -24,7 +24,6 @@ namespace Sounds
 
             if(col.gameObject.tag == "Player")
             {
-                Debug.Log("triiiigg");
                 _triggered = true;
                 _playNextSongPart.Raise();
             }
