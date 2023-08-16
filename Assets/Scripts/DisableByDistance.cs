@@ -19,8 +19,18 @@ public class DisableByDistance : MonoBehaviour
     {
         while(true)
         {
-            float dist = (transform.position - Player.transform.position).sqrMagnitude;
+            if(Player == null)
+            {
+                Player = GameObject.FindWithTag("Player");
+                if(Player == null)
+                {
+                    yield return new WaitForSeconds(1);
+                    continue;
+                }
+            }
 
+            float dist = (transform.position - Player.transform.position).sqrMagnitude;
+            Debug.Log(dist);
             if(dist < _maxDistance * _maxDistance) 
             {
                 _gameObject.SetActive(true); 
