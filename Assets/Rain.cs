@@ -18,7 +18,6 @@ public class Rain : MonoBehaviour
 
     private void FollowPlayer()
     {
-        Debug.Log("Trig");
         float y =_rainPS.transform.position.y;
         float x =Player.transform.position.x;
         _rainPS.transform.position = new Vector2(x, y);
@@ -28,7 +27,6 @@ public class Rain : MonoBehaviour
     {
         if(col.gameObject.tag == "Player")
         {
-            Debug.Log("Trigggg");
             _rainPS.Play();
             //_followPlayer = true;
             InvokeRepeating("FollowPlayer", 0.0f, 0.3f);

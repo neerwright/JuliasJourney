@@ -33,12 +33,10 @@ namespace Sounds
             if(volume <= 0f)
             {
                 _musicSource.Stop();
-                Debug.Log("SILENCE!!!");
                 _musicSource.PlayOneShot(clip);
                 return;
             }
-            Debug.Log("PlayMusic");
-            Debug.Log(clip);
+
             _musicSource.volume = volume;
             if(_musicSource.isPlaying)
                 _musicSource.Pause();

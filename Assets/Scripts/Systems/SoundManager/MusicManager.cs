@@ -49,7 +49,6 @@ namespace Sounds
         {
             if(_nextPartCounter > 0)
             {
-                Debug.Log("COROUTINE");
                 StartCoroutine("WaitUntilLastTransitionFinished");
             }
 
@@ -166,7 +165,7 @@ namespace Sounds
 
             if(_time  >= trackLength)
             {
-                Debug.Log("TIMER OVEEEER");
+
                 Debug.Log(_nextPartCounter);
 
                 if(_nextPartCounter > 0)
@@ -186,7 +185,7 @@ namespace Sounds
                         _playMusicEvent.Raise(_musicClips[(int) _state], _volume);
 
 
-                    Debug.Log("PLAYYYYYYYYYYYYYY NEXT");
+
                     Debug.Log(_musicClips[(int) _state]);
 
                     
@@ -194,7 +193,7 @@ namespace Sounds
 
                 //loop current clip, reset time
                 _time = 0f;
-                Debug.Log("Reset");
+
                 if(!_silenceAfterPlaying)
                     SwitchAlternatives();
 
@@ -249,19 +248,17 @@ namespace Sounds
 
 
                     case MusicState.SadSax:
-                        Debug.Log("SadSax alt");
+
                         if(_altToggledOn)
                         {
-                            Debug.Log("state");
-                            Debug.Log(_state);
+
                             _playMusicEvent.Raise(_musicClips[12], _volume);
                         }
                         else
                         {
                             Random.seed = System.DateTime.Now.Millisecond;
                             _saxAltNumber = Random.Range(3, 5);
-                            Debug.Log("SadSax altttttt");
-                            Debug.Log(_saxAltNumber);
+
                             _playMusicEvent.Raise(_altMusicClips[_saxAltNumber], _volume);
                         }
                            
@@ -285,8 +282,7 @@ namespace Sounds
             {
                 yield return new WaitForSeconds(0.5f);
             }
-            Debug.Log("COOOOOOOOOOOOOOOOOOOOOOOOO");
-            Debug.Log(_state);
+
 
             PlayNextPart();
             

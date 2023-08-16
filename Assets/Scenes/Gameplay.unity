@@ -247,6 +247,22 @@ Camera:
   m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &139087279 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3859648974809770555, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
+  m_PrefabInstance: {fileID: 778964239}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &139087280 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3859648974809770693, guid: 34c7781b5b737d549b46ca731f1c7d18, type: 3}
+  m_PrefabInstance: {fileID: 778964239}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139087279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b8c96e2cdc154e848a3d9fe62464d42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &211846994 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 968076446683527215, guid: 8b28362b8c90d2249944d40b2f768bc4, type: 3}
@@ -807,6 +823,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0a6bb6b2b1853c49ad8afb34c6e69f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &778964245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 139087279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1eca57db7d394266ae024997acf4456, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pc2D: {fileID: 139087280}
+  _serializedAxis: 0
+  TransitionShaderEnter: 0
+  DurationEnter: 0.5
+  DelayEnter: 0
+  EaseTypeEnter: 1
+  BackgroundColorEnter: {r: 0, g: 0, b: 0, a: 1}
+  SideEnter: 0
+  DirectionEnter: 0
+  BlindsEnter: 16
+  TextureEnter: {fileID: 0}
+  TextureSmoothingEnter: 0.2
+  TransitionShaderExit: 1
+  DurationExit: 1.5
+  DelayExit: 0
+  EaseTypeExit: 1
+  BackgroundColorExit: {r: 0, g: 0, b: 0, a: 1}
+  SideExit: 0
+  DirectionExit: 0
+  BlindsExit: 16
+  TextureExit: {fileID: 0}
+  TextureSmoothingExit: 0.2
+  StartSceneOnEnterState: 0
 --- !u!1 &844398809
 GameObject:
   m_ObjectHideFlags: 0
@@ -1679,7 +1730,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6276542543092371114, guid: 8b28362b8c90d2249944d40b2f768bc4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -15.242981
+      value: -15.24295
       objectReference: {fileID: 0}
     - target: {fileID: 6276542543092371114, guid: 8b28362b8c90d2249944d40b2f768bc4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

@@ -8,6 +8,7 @@ using Animancer;
 using Player;
 using GameManager;
 using Sounds;
+using SceneManagement;
 
 public enum EndCutsceneState
 {
@@ -19,6 +20,9 @@ public enum EndCutsceneState
 
 public class EndCutscene : MonoBehaviour
 {
+    [SerializeField] private GameSceneSO _menuToLoad;
+    [SerializeField] private LoadEventSO _menuLoadEvent;
+
     //[SerializeField] private GameObject _player;
     [SerializeField] private GameObject _endPlayerModel;
     [SerializeField] private GameObject _blue;
@@ -139,7 +143,42 @@ public class EndCutscene : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         state = EndCutsceneState.ending;
+        StartCoroutine("fadeCamAndGoToMainMenu");
 
 
     }
+
+    private IEnumerator fadeCamAndGoToMainMenu()
+    {
+        ProCamera2DTransitionsFX.Instance.TransitionExit();
+        yield return new WaitForSeconds(1.5f);
+
+        //unload
+        
+
+        Scene Gameplay = SceneManager.GetSceneByName("Gameplay");
+        if (Gameplay.isLoaded)
+            SceneManager.UnloadSceneAsync(Gameplay);
+
+        Scene Island5 = SceneManager.GetSceneByName("Island5");
+                        if (Island5.isLoaded)
+                            SceneManager.UnloadSceneAsync(Island5);
+        
+
+        
+
+        //load main Menu
+        //Scene Menu = SceneManager.GetSceneByName("MainMenu");
+        SceneManager.LoadScene("MainMenue", LoadSceneMode.Additive);
+
+        yield return new WaitForSeconds(0.2f);
+
+        Scene SkyIsland = SceneManager.GetSceneByName("SkyTemple1");
+                        if (SkyIsland.isLoaded)
+                            SceneManager.UnloadSceneAsync(SkyIsland);
+
+
+
+    }
+
 }

@@ -138,6 +138,7 @@ namespace SceneManagement
 
         public void LoadMenu(GameSceneSO menuToLoad)
         {
+            Debug.Log("LoadMenue");
             //Prevent a double-loading, for situations where the player falls in two Exit colliders in one frame
             if (_isLoading)
             {
