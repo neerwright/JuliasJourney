@@ -11,11 +11,9 @@ public class Water : MonoBehaviour
     //[SerializeField] private Material waterMaterial;
     [SerializeField] private Sprite[] waterTextures;
 
-    private float _timer = 0f;
     private int _index = 0;
     private const float START_ANIMATION_THREASHOLD = 1.2f;
     private const float CHANGE_TEX_SPEED = 0.9f;
-    private float _animationTimer = 0f;
     private bool forward = true;
 
     void Start()

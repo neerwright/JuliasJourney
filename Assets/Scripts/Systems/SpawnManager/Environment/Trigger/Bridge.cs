@@ -9,7 +9,6 @@ public class Bridge : MonoBehaviour
     [SerializeField] private Collider2D _bridgeCollider;
 
     private const float ALPHA_INCREMENT = 25.0f;
-    private float _fadeIn = 0.1f;
 
     private bool isInvis = true;
     // Start is called before the first frame update

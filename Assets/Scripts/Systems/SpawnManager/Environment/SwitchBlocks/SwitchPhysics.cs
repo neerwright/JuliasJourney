@@ -21,9 +21,6 @@ namespace environment
         private const string PLAYER_TAG = "Player";
         private const string PUSHBOX_TAG = "PushBox";
 
-        private bool _rewinding = false;
-        private const float REWIND_RESET_THREASHOLD = 16f;
-
 
         
 
@@ -63,13 +60,11 @@ namespace environment
 
         public  void StartRewinding()
         {
-            _rewinding = true;
             _rb.velocity = Vector2.zero;
             
         }
         public  void StopRewinding()
         {
-            _rewinding = false;
             
         }
 
