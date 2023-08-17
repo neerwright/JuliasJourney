@@ -817,6 +817,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 0.7
       objectReference: {fileID: 0}
+    - target: {fileID: 4168362756660723432, guid: 0d1312d1a87d7d34fb55fdc11923437f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4168362756660723435, guid: 0d1312d1a87d7d34fb55fdc11923437f, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
